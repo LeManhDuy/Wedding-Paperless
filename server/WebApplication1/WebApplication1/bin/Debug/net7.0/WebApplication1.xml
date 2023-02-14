@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication1</name>
+    </assembly>
+    <members>
+        <member name="M:WebApplication1.Controllers.AuthController.RegisterAsync(WebApplication1.Dto.AccountDto)">
+            <summary>
+            Register Account.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                POST api/auth
+                {        
+                  "UserName": "admin",
+                  "Password": "123",
+                  "Role": "Admin"        
+                }
+            </remarks>
+            <param name="accountDto"></param>       
+        </member>
+    </members>
+</doc>
