@@ -6,9 +6,9 @@ using WebApplication1.Dto;
 
 namespace WebApplication1.Interfaces
 {
-  public interface IAuthRepository
-  {
-    Task<AccountDto> LoginAsync(AccountDto authAccountDto);
-    Task<AccountDto> RegisterAsync(AccountDto authAccountDto);
-  }
+    public interface IAuthRepository
+    {
+        Task<AccountDto> LoginAsync(AccountDto authAccountDto);
+        Task<AuthDto> RegisterAsync(AuthDto authDto);
+    }
 }

@@ -26,24 +26,13 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Register Account.
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        /// 
-        ///     POST api/auth
-        ///     {        
-        ///       "UserName": "admin",
-        ///       "Password": "123",
-        ///       "Role": "Admin"        
-        ///     }
-        /// </remarks>
-        /// <param name="accountDto"></param>       
         [HttpPost("register")]
         [AllowAnonymous]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<AccountDto>> RegisterAsync([FromBody] AccountDto accountDto)
+        public async Task<ActionResult<AccountDto>> RegisterAsync([FromBody] AuthDto authDto)
         {
-            if (accountDto == null)
+            if (authDto == null)
                 return BadRequest();
 
             if (!ModelState.IsValid)
@@ -51,8 +40,8 @@ namespace WebApplication1.Controllers
 
             try
             {
-                await _authRepository.RegisterAsync(accountDto);
-                return Ok(accountDto);
+                await _authRepository.RegisterAsync(authDto);
+                return Ok(authDto);
             }
             catch (Exception e)
             {
