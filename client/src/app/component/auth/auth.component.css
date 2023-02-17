@@ -1,8 +1,22 @@
+@media screen and (max-width: 800px) {
+    
+    .content_Login{
+        margin: 20px 40px;
 
+    }
+    
+  }
+  @media screen and (min-width: 801px) {
+    
+    .content_Login {
+      width: 30%; /* Th1e width is 100%, when the viewport is 800px or smaller */
+      margin: 80px auto;
+
+    }
+  }
 .content_Login{
     background-color: #FFFFFF;
     font-family: 'Source Sans Pro';
-    margin: 20px 40px;;
 }
 .slogan{
     width: 100%;
@@ -57,6 +71,8 @@ margin: 30px 0px 0px 0px;
     width: 100%;
     font-size: 16px;
     margin-bottom: 16px;
+    border: 1.5px solid #333;
+    border-radius: 5px;
 }
 
 
@@ -66,11 +82,16 @@ margin: 30px 0px 0px 0px;
     height: 50px;
     width: 100%;
     font-size: 16px;
+    margin-top: 50px;
     margin-bottom: 16px;
     border: var(--lightPink_color) 3px solid;
     background-color: var(--lightPink_color);
     border-radius: 5px;
     color: var(--white_color);
+}
+
+.submit_Login :active{
+    background-color: var(--lightGreen_color);
 }
 
 .other_Login{
