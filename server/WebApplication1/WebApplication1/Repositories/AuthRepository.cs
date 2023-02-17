@@ -83,7 +83,7 @@ namespace WebApplication1.Repositories
                 {
                     To = person.Email,
                     Subject = "Confirm Link",
-                    Body = "<a href='https://localhost:44328/api/email/confirm-email/" + person.Email + "'>cac</a>"
+                    Body = "<a href='https://localhost:44328/api/email/confirm-email/" + person.Email + "'></a>"
                 };
 
                 await _emailRepository.SendEmail(content);

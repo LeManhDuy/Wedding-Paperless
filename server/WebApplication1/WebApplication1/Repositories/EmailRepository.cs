@@ -32,6 +32,7 @@ namespace WebApplication1.Repositories
             if (person == null)
                 throw new Exception("Person not found!");
 
+
             person.EmailConfirmed = true;
             _context.Persons.Update(person);
             await _context.SaveChangesAsync();

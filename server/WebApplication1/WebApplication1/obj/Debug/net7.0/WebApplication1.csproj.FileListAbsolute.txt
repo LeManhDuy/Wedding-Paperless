@@ -113,3 +113,16 @@ C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1
 C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\NETCore.MailKit.dll
 C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\BouncyCastle.Crypto.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\HtmlAgilityPack.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\FirebaseAdmin.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Firebase.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Firebase.Storage.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Api.Gax.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Api.Gax.Rest.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Apis.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Apis.Auth.PlatformServices.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Apis.Auth.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\Google.Apis.Core.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\LiteDB.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\System.Reactive.dll
+C:\Users\Marine\Desktop\Wedding-Paperless\server\WebApplication1\WebApplication1\bin\Debug\net7.0\System.Runtime.InteropServices.WindowsRuntime.dll
