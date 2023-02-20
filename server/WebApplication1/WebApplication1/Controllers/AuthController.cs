@@ -28,8 +28,8 @@ namespace WebApplication1.Controllers
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AccountDto>> RegisterAsync([FromBody] AuthDto authDto)
         {
             if (authDto == null)
