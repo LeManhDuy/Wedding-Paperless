@@ -31,41 +31,5 @@
         <member name="M:WebApplication1.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:WebApplication1.Migrations.Update">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.Update.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.Update.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.Update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:WebApplication1.Migrations.EmailVerifiedAt">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:WebApplication1.Migrations.ChangeDateTimeToString">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
     </members>
 </doc>
