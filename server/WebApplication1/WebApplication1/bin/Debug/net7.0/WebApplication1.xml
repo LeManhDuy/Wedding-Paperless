@@ -6,6 +6,7 @@
     <members>
         <member name="M:WebApplication1.Controllers.AuthController.LoginAsync(WebApplication1.Dto.AccountDto)">
             <summary>
+            Register Accountt.
             Login Account.
             </summary>
         </member>
@@ -16,7 +17,7 @@
         </member>
         <member name="M:WebApplication1.Controllers.AuthController.LogoutAsync">
             <summary>
-            logout
+            Logout
             </summary>
         </member>
         <member name="M:WebApplication1.Controllers.EmailController.ConfirmEmail(System.String)">
@@ -53,18 +54,6 @@
             <summary>
             Delete Register Song.
             </summary>
-        </member>
-        <member name="T:WebApplication1.Migrations.InitialCreate">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
         </member>
     </members>
 </doc>

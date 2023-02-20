@@ -83,7 +83,6 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-<<<<<<< HEAD
 builder.Services.Configure<IdentityOptions>(opt => opt.SignIn.RequireConfirmedEmail = true);
 builder.Services.AddSingleton(builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
@@ -91,8 +90,6 @@ builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 builder.Services.AddScoped<IRegisterSongRepository, RegisterSongRepository>();
 
 
-=======
->>>>>>> main
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -24,9 +24,6 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
-<<<<<<< HEAD
-        /// Register Accountt.
-=======
         /// Login Account.
         /// </summary>
         [HttpPost("login")]
@@ -67,7 +64,6 @@ namespace WebApplication1.Controllers
         }
         /// <summary>
         /// Register Account.
->>>>>>> main
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
@@ -91,7 +87,7 @@ namespace WebApplication1.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
-        
+
         /// <summary>
         /// Logout
         /// </summary>
