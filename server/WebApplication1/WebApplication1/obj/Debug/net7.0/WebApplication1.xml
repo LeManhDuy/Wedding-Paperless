@@ -4,6 +4,7 @@
         <name>WebApplication1</name>
     </assembly>
     <members>
+<<<<<<< HEAD
         <member name="M:WebApplication1.Controllers.AlbumnController.GetAlbumns">
             <summary>
             Get albumns.
@@ -27,11 +28,22 @@
         <member name="M:WebApplication1.Controllers.AlbumnController.DeleteAlbumns(System.Int32)">
             <summary>
             Delete albumn by Id.
+=======
+        <member name="M:WebApplication1.Controllers.AuthController.LoginAsync(WebApplication1.Dto.AccountDto)">
+            <summary>
+            Register Accountt.
+            Login Account.
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
             </summary>
         </member>
         <member name="M:WebApplication1.Controllers.AuthController.RegisterAsync(WebApplication1.Dto.AuthDto)">
             <summary>
             Register Account.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.AuthController.LogoutAsync">
+            <summary>
+            Logout
             </summary>
         </member>
         <member name="M:WebApplication1.Controllers.EmailController.ConfirmEmail(System.String)">
@@ -44,18 +56,27 @@
             Test Convert HTML.
             </summary>
         </member>
-        <member name="T:WebApplication1.Migrations.InitialCreate">
-            <inheritdoc />
+        <member name="M:WebApplication1.Controllers.RegisterSongController.GetSongsAsync">
+            <summary>
+            Get Register Song.
+            </summary>
         </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
+        <member name="M:WebApplication1.Controllers.RegisterSongController.GetSongAsync(System.Int32)">
+            <summary>
+            Get Register Song By Id.
+            </summary>
         </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
+        <member name="M:WebApplication1.Controllers.RegisterSongController.CreateAsync(WebApplication1.Dto.RegisterSongDto,System.Int32)">
+            <summary>
+            Create Register Song.
+            </summary>
         </member>
-        <member name="M:WebApplication1.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
+        <member name="M:WebApplication1.Controllers.RegisterSongController.UpdateAsync(System.Int32,WebApplication1.Dto.RegisterSongDto)">
+            <summary>
+            Update Register Song.
+            </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:WebApplication1.Migrations.update">
             <inheritdoc />
         </member>
@@ -67,6 +88,12 @@
         </member>
         <member name="M:WebApplication1.Migrations.update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+=======
+        <member name="M:WebApplication1.Controllers.RegisterSongController.DeleteAsync(System.Int32)">
+            <summary>
+            Delete Register Song.
+            </summary>
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
         </member>
     </members>
 </doc>

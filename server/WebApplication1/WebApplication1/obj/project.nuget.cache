@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "W2AyO1BrhRLHoyKGXJa7x4/a/Tb/3jvTWMYvcVhDriQXaP651RzPxVj2kiUijOuS6jh3813zIMDZuA7l3lZ+vg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Jarvis\\Desktop\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+=======
+  "dgSpecHash": "1N83Q/UA7DNHh76KBfXj/kQVExiPt+Oye6hTn1BsYpLkbBxbfAl3ijetc7kQQ7ZS7PhWHGn5JA+FzFc1fFbtnQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Marine\\Desktop\\finish\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
   "expectedPackageFiles": [
     "C:\\Users\\Jarvis\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Jarvis\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

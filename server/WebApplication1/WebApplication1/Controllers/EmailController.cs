@@ -26,8 +26,8 @@ namespace WebApplication1.Controllers
         /// Verify Email.
         /// </summary>
         [HttpGet("confirm/{email}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ConfirmEmail([FromRoute] string email)
         {
             await _emailRepository.ConfirmEmail(email);
@@ -38,8 +38,8 @@ namespace WebApplication1.Controllers
         /// Test Convert HTML.
         /// </summary>
         [HttpPut("convert")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> ConvertHtml([FromBody] string htmlPageString)
         {
             try
@@ -82,24 +82,5 @@ namespace WebApplication1.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-        //[HttpGet("ConfirmEmail")]
-        //public async Task<IActionResult> ConfirmEmail(string token, string email)
-        //{
-        //    var user = await _emailRepository.FindByEmailAsync(email);
-
-        //    if (user != null)
-        //    {
-        //        var result = await _emailRepository.ConfirmEmailAsync(user, token);
-        //        if (result.Succeeded)
-        //        {
-        //            return Ok();
-        //        }
-        //    }
-
-        //    return BadRequest();
-        //}
-
     }
 }

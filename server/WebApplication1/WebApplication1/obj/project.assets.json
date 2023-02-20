@@ -9839,11 +9839,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Jarvis\\Desktop\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
       "projectPath": "C:\\Users\\Jarvis\\Desktop\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\Jarvis\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jarvis\\Desktop\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\Marine\\Desktop\\finish\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "projectName": "WebApplication1",
+      "projectPath": "C:\\Users\\Marine\\Desktop\\finish\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "C:\\Users\\Marine\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Marine\\Desktop\\finish\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\obj\\",
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

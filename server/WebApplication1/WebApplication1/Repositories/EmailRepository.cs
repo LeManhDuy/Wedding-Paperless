@@ -17,12 +17,9 @@ namespace WebApplication1.Repositories
     {
         private readonly EmailConfiguration _emailConfiguration;
         private readonly DataContext _context;
-        private readonly ILogger<EmailRepository> logger;
-        public EmailRepository(EmailConfiguration emailConfiguration, ILogger<EmailRepository> _logger, DataContext context)
+        public EmailRepository(EmailConfiguration emailConfiguration, DataContext context)
         {
             _emailConfiguration = emailConfiguration;
-            logger = _logger;
-            logger.LogInformation("Create SendMailService");
             _context = context;
         }
 
@@ -76,6 +73,7 @@ namespace WebApplication1.Repositories
                 }
 
                 var plainTextBytes = Encoding.UTF8.GetBytes(person.Email + "&" + person.EmailVerifiedAt);
+
                 return Convert.ToBase64String(plainTextBytes);
             }
             catch (Exception ex)
@@ -93,7 +91,6 @@ namespace WebApplication1.Repositories
             email.To.Add(MailboxAddress.Parse(message.To));
             email.Subject = message.Subject;
 
-
             var builder = new BodyBuilder();
             builder.HtmlBody = message.Body;
             email.Body = builder.ToMessageBody();
@@ -105,57 +102,12 @@ namespace WebApplication1.Repositories
                     smtp.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.Port, true);
                     smtp.Authenticate(_emailConfiguration.From, _emailConfiguration.Password);
                     await smtp.SendAsync(email);
-
-                    // Log successful email sending
-                    logger.LogInformation($"Email sent to {message.To}: {message.Subject}");
                 }
                 catch (Exception ex)
                 {
-                    // Log error and save email to disk
-                    logger.LogError(ex, $"Failed to send email to {message.To}: {message.Subject}");
-                    System.IO.Directory.CreateDirectory("mailssave");
-                    var emailsavefile = string.Format(@"mailssave/{0}.eml", Guid.NewGuid());
-                    await email.WriteToAsync(emailsavefile);
-                    logger.LogInformation($"Email saved to {emailsavefile}");
+                    throw new ArgumentException("Can't send email!", ex);
                 }
             }
         }
-
-        //public void SendEmail(Message message)
-        //{
-        //    var emailMessage = CreateEmailMessage(message);
-        //    Send(emailMessage);
-        //}
-
-        //private MimeMessage CreateEmailMessage(Message message)
-        //{
-        //    var emailMessage = new MimeMessage();
-        //    emailMessage.From.Add(new MailboxAddress("email", _emailConfiguration.From));
-        //    emailMessage.To.AddRange(message.To);
-        //    emailMessage.Subject = message.Subject;
-        //    emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
-        //    emailMessage.Sender = new MailboxAddress("email", _emailConfiguration.From);
-
-        //    return emailMessage;
-        //}
-        //private void Send(MimeMessage mailMessage)
-        //{
-        //    using var client = new MailKit.Net.Smtp.SmtpClient();
-        //    try
-        //    {
-        //        client.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.Port, true);
-        //        client.AuthenticationMechanisms.Remove("XOAUTH2");
-        //        client.Authenticate(_emailConfiguration.UserName, _emailConfiguration.Password);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Message: " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        client.Disconnect(true);
-        //        client.Dispose();
-        //    }
-        //}
     }
 }
