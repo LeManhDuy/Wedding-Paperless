@@ -39,23 +39,25 @@ namespace WebApplication1.Repositories
         {
             try
             {
-                authDto.UserName = authDto.UserName.ToLower();
+                authDto.UserName = authDto.UserName.Trim().ToLower();
 
-                var currentUser = await _context.Accounts.Where(p => p.UserName.ToLower() == authDto.UserName.ToLower()).FirstOrDefaultAsync();
+                // Check if username already exists
+                var currentUser = await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName);
                 if (currentUser != null)
                 {
-                    throw new Exception("Username is already exist!");
+                    throw new Exception("Username is already taken!");
                 }
 
-                var currentPerson = await _context.Persons.Where(p => p.Email == authDto.Email && p.EmailConfirmed == false).FirstOrDefaultAsync();
+                // Check if email already exists and not yet confirmed
+                var currentPerson = await _context.Persons.FirstOrDefaultAsync(p => p.Email == authDto.Email && p.EmailConfirmed == false);
                 if (currentPerson != null)
                 {
-                    throw new Exception("Email is already exist!");
+                    throw new Exception("Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
                 }
 
+                // Hash the password and create new account
                 using var hmac = new HMACSHA512();
                 var passwordBytes = Encoding.UTF8.GetBytes(authDto.PassWord);
-
                 var user = new Account
                 {
                     UserName = authDto.UserName,
@@ -65,33 +67,34 @@ namespace WebApplication1.Repositories
                 };
                 await _context.Accounts.AddAsync(user);
 
+                // Create new person and associate with the account
                 var person = new Person
                 {
                     FullName = authDto.FullName,
-                    Email = authDto.Email,
+                    Email = authDto.Email.Trim(),
                     EmailConfirmed = false,
+                    EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     Account = user,
                 };
                 await _context.Persons.AddAsync(person);
                 await _context.SaveChangesAsync();
 
-                var token = _emailRepository.GenerateEmailConfirmToken(person);
-                //var confirmationLink = _linkGenerator.GetUriByAction(new { token, email = person.Email });
-                //var message = new Message(new string[] { person.Email }, "Confirm", "a");
-
-                Message content = new Message
+                // Generate email confirmation token and send email
+                var emailToken = _emailRepository.GenerateEmailConfirmToken(person);
+                var confirmationLink = "https://localhost:44328/api/email/confirm/" + emailToken;
+                var content = new Message
                 {
                     To = person.Email,
-                    Subject = "Confirm Link",
-                    Body = "<a href='https://localhost:44328/api/email/confirm-email/" + person.Email + "'></a>"
+                    Subject = "Confirm your email address",
+                    Body = $"<p>Hello {person.FullName},</p><p>Please click the link below to confirm your email address:</p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
                 };
-
                 await _emailRepository.SendEmail(content);
+
                 return authDto;
             }
             catch (Exception ex)
             {
-                throw new Exception("Message: " + ex.Message);
+                throw new Exception("Failed to register user. " + ex.Message);
             }
         }
     }

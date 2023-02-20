@@ -6,10 +6,7 @@ namespace WebApplication1.Interfaces
     public interface IEmailRepository
     {
         string GenerateEmailConfirmToken(Person person);
-        Task ConfirmEmail(string email);
-        Task<Account> FindByEmailAsync(string email);
+        Task ConfirmEmail(string emailToken);
         Task SendEmail(Message message);
-
-        Task SendEmailAsync(string email, string subject, string htmlMessage);
     }
 }
