@@ -67,8 +67,8 @@ namespace WebApplication1.Controllers
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<AccountDto>> RegisterAsync([FromBody] AuthDto authDto)
         {
             if (authDto == null)
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
         
