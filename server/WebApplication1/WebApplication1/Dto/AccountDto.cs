@@ -12,7 +12,13 @@ namespace WebApplication1.Dto
         [Required]
         public string PassWord { get; set; }
 
-        [Required]
         public string Role { get; set; }
     }
+    
+    public class TokenAccountDto
+    {
+        public string Token { get; set; }
+        public AccountDto AccountDto { get; set; }
+    }
+
 }

@@ -24,6 +24,45 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+        /// Login Account.
+        /// </summary>
+        [HttpPost("login")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> LoginAsync([FromBody] AccountDto accountDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (accountDto == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var token = await _authRepository.LoginAsync(accountDto);
+                if (token.AccountDto == null)
+                {
+                    BadRequest();
+                }
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.Now.AddMinutes(2)
+                };
+                Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
+                return Ok(token!.Token);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+        /// <summary>
         /// Register Account.
         /// </summary>
         [HttpPost("register")]
@@ -47,6 +86,19 @@ namespace WebApplication1.Controllers
             {
                 return StatusCode(500, e.Message);
             }
+        }
+        
+        /// <summary>
+        /// Logout
+        /// </summary>
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            // Lấy ra jwt token trong request header
+            // Huỷ token trong bộ nhớ cache hoặc trong cơ sở dữ liệu
+            var token = _authRepository.GetCurrentToken();
+            return Ok(token);
         }
     }
 }
