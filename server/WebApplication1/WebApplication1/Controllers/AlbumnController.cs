@@ -18,7 +18,7 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
-        /// Get albumns.
+        /// Get albumnss.
         /// </summary>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
