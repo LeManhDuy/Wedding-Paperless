@@ -20,5 +20,17 @@
             </remarks>
             <param name="accountDto"></param>       
         </member>
+        <member name="T:WebApplication1.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>
