@@ -25,6 +25,12 @@ namespace WebApplication1.Repositories
     {
         private readonly DataContext _context;
         private readonly IEmailRepository _emailRepository;
+<<<<<<< HEAD
+        public AuthRepository(DataContext context, IEmailRepository emailRepository)
+        {
+            _context = context;
+            _emailRepository = emailRepository;
+=======
         private readonly LinkGenerator _linkGenerator;
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -37,6 +43,7 @@ namespace WebApplication1.Repositories
             _linkGenerator = linkGenerator;
             _config = config;
             _httpContextAccessor = httpContextAccessor;
+>>>>>>> main
         }
 
 
@@ -142,8 +149,12 @@ namespace WebApplication1.Repositories
                 {
                     To = person.Email,
                     Subject = "Confirm your email address",
+<<<<<<< HEAD
+                    Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+=======
                     Body =
                         $"<p>Hello {person.FullName},</p><p>Please click the link below to confirm your email address:</p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+>>>>>>> main
                 };
                 await _emailRepository.SendEmail(content);
 

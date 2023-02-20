@@ -29,6 +29,31 @@
             Test Convert HTML.
             </summary>
         </member>
+        <member name="M:WebApplication1.Controllers.RegisterSongController.GetSongsAsync">
+            <summary>
+            Get Register Song.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.RegisterSongController.GetSongAsync(System.Int32)">
+            <summary>
+            Get Register Song By Id.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.RegisterSongController.CreateAsync(WebApplication1.Dto.RegisterSongDto,System.Int32)">
+            <summary>
+            Create Register Song.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.RegisterSongController.UpdateAsync(System.Int32,WebApplication1.Dto.RegisterSongDto)">
+            <summary>
+            Update Register Song.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.RegisterSongController.DeleteAsync(System.Int32)">
+            <summary>
+            Delete Register Song.
+            </summary>
+        </member>
         <member name="T:WebApplication1.Migrations.InitialCreate">
             <inheritdoc />
         </member>

@@ -24,6 +24,9 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+<<<<<<< HEAD
+        /// Register Accountt.
+=======
         /// Login Account.
         /// </summary>
         [HttpPost("login")]
@@ -64,6 +67,7 @@ namespace WebApplication1.Controllers
         }
         /// <summary>
         /// Register Account.
+>>>>>>> main
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
