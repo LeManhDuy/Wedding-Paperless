@@ -2,11 +2,14 @@
 
 namespace WebApplication1.Dto
 {
-  public class AlbumnDto
-  {
-    public int Id { get; set; }
+    public class AlbumnDto
+    {
+        public int Id { get; set; }
 
-    [Required]
-    public string ImageLink { get; set; }
-  }
+        [Required]
+        public string ImageLink { get; set; }
+
+        [Required]
+        public string Position { get; set; }
+    }
 }

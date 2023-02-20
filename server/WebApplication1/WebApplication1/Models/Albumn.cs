@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-  public class Albumn
-  {
-    [Key]
-    public int Id { get; set; }
+    public class Albumn
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public string ImageLink { get; set; }
+        [Required]
+        public string ImageLink { get; set; }
 
-    [Required]
-    public Content Content { get; set; }
-  }
+        [Required]
+        public int Row { get; set; }
+
+        [Required]
+        public int Column { get; set; }
+
+        [Required]
+        public Content Content { get; set; }
+    }
 }
