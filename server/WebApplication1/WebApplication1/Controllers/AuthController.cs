@@ -24,6 +24,34 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+        /// Login Account.
+        /// </summary>
+        [HttpPost("login")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> LoginAsync([FromBody] AccountDto accountDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (accountDto == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return await _authRepository.LoginAsync(accountDto) != null ? Ok("Success") : BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+        /// <summary>
         /// Register Account.
         /// </summary>
         [HttpPost("register")]

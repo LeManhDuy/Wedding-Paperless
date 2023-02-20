@@ -12,7 +12,6 @@ namespace WebApplication1.Dto
         [Required]
         public string PassWord { get; set; }
 
-        [Required]
         public string Role { get; set; }
     }
 }

@@ -32,7 +32,39 @@ namespace WebApplication1.Repositories
 
         public async Task<AccountDto> LoginAsync(AccountDto authAccountDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Account currentUser = null;
+                authAccountDto.UserName = authAccountDto.UserName.ToLower();
+                currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>
+                    a.UserName == authAccountDto.UserName || a.Email == authAccountDto.UserName);
+                if (currentUser == null)
+                {
+                    var checkAccount = await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
+                    currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
+                    if (currentUser == null)
+                    {
+                        throw new Exception("User not found");
+                    }
+                }
+                using var hmac = new HMACSHA512(currentUser.PasswordSalt);
+                var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
+                for (int i = 0; i < currentUser.PasswordHash.Length; i++)
+                {
+                    if (currentUser.PasswordHash[i] != passwordBytes[i])
+                    {
+                        return null;
+                    }
+                }
+
+                return authAccountDto;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception();
+            }
         }
 
         public async Task<AuthDto> RegisterAsync(AuthDto authDto)
