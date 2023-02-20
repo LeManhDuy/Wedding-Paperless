@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,7 @@ using WebApplication1.Interfaces;
 using WebApplication1.Models;
 using Microsoft.AspNetCore.Routing;
 using Duende.IdentityServer.Models;
+using Microsoft.IdentityModel.Tokens;
 using WebApplication1.Services;
 
 namespace WebApplication1.Repositories
@@ -22,15 +25,73 @@ namespace WebApplication1.Repositories
     {
         private readonly DataContext _context;
         private readonly IEmailRepository _emailRepository;
+<<<<<<< HEAD
         public AuthRepository(DataContext context, IEmailRepository emailRepository)
         {
             _context = context;
             _emailRepository = emailRepository;
+=======
+        private readonly LinkGenerator _linkGenerator;
+        private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+
+        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+        {
+            _context = context;
+            _emailRepository = emailRepository;
+            _linkGenerator = linkGenerator;
+            _config = config;
+            _httpContextAccessor = httpContextAccessor;
+>>>>>>> main
         }
 
-        public async Task<AccountDto> LoginAsync(AccountDto authAccountDto)
+
+        public async Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Account currentUser;
+                authAccountDto.UserName = authAccountDto.UserName.ToLower();
+                currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>
+                    a.UserName == authAccountDto.UserName || a.Email == authAccountDto.UserName);
+                if (currentUser == null)
+                {
+                    var checkAccount =
+                        await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
+                    currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
+                    if (currentUser == null)
+                    {
+                        Console.WriteLine("User not found");
+                        return null;
+                    }
+                }
+
+                using var hmac = new HMACSHA512(currentUser.PasswordSalt);
+                var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
+                for (int i = 0; i < currentUser.PasswordHash.Length; i++)
+                {
+                    if (currentUser.PasswordHash[i] != passwordBytes[i])
+                    {
+                        return null;
+                    }
+                }
+
+                var token = GenerateToken(currentUser);
+
+                var result = new TokenAccountDto()
+                {
+                    Token = token,
+                    AccountDto = authAccountDto
+                };
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception();
+            }
         }
 
         public async Task<AuthDto> RegisterAsync(AuthDto authDto)
@@ -40,17 +101,21 @@ namespace WebApplication1.Repositories
                 authDto.UserName = authDto.UserName.Trim().ToLower();
 
                 // Check if username already exists
-                var currentUser = await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName);
+                var currentUser =
+                    await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName);
                 if (currentUser != null)
                 {
                     throw new Exception("Username is already taken!");
                 }
 
                 // Check if email already exists and not yet confirmed
-                var currentPerson = await _context.Persons.FirstOrDefaultAsync(p => p.Email == authDto.Email && p.EmailConfirmed == false);
+                var currentPerson =
+                    await _context.Persons.FirstOrDefaultAsync(p =>
+                        p.Email == authDto.Email && p.EmailConfirmed == false);
                 if (currentPerson != null)
                 {
-                    throw new Exception("Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
+                    throw new Exception(
+                        "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
                 }
 
                 // Hash the password and create new account
@@ -84,7 +149,12 @@ namespace WebApplication1.Repositories
                 {
                     To = person.Email,
                     Subject = "Confirm your email address",
+<<<<<<< HEAD
                     Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+=======
+                    Body =
+                        $"<p>Hello {person.FullName},</p><p>Please click the link below to confirm your email address:</p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+>>>>>>> main
                 };
                 await _emailRepository.SendEmail(content);
 
@@ -94,6 +164,53 @@ namespace WebApplication1.Repositories
             {
                 throw new Exception("Failed to register user. " + ex.Message);
             }
+        }
+
+        public string GenerateToken(Account account)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Role, account.Role),
+                new Claim(ClaimTypes.Name, account.UserName),
+            };
+
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                _config["JWT:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(2),
+                signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public Task<AuthDto> LogoutAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetCurrentToken()
+        {
+            string token = string.Empty;
+
+            // Lấy token từ header hoặc cookie của request
+            var authorizationHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authorizationHeader))
+            {
+                token = authorizationHeader.ToString()!.Replace("Bearer ", string.Empty);
+            }
+            else
+            {
+                var cookie = _httpContextAccessor.HttpContext?.Request.Cookies["token"];
+                if (cookie != null)
+                {
+                    token = cookie;
+                    // _httpContextAccessor.HttpContext?.Response.Cookies.Delete();
+                }
+            }
+            Console.WriteLine(token);
+            return token;
         }
     }
 }
