@@ -4,21 +4,68 @@
         <name>WebApplication1</name>
     </assembly>
     <members>
-        <member name="M:WebApplication1.Controllers.AuthController.RegisterAsync(WebApplication1.Dto.AccountDto)">
+        <member name="M:WebApplication1.Controllers.AuthController.RegisterAsync(WebApplication1.Dto.AuthDto)">
             <summary>
             Register Account.
             </summary>
-            <remarks>
-            Sample request:
-            
-                POST api/auth
-                {        
-                  "UserName": "admin",
-                  "Password": "123",
-                  "Role": "Admin"        
-                }
-            </remarks>
-            <param name="accountDto"></param>       
+        </member>
+        <member name="M:WebApplication1.Controllers.EmailController.ConfirmEmail(System.String)">
+            <summary>
+            Verify Email.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.EmailController.ConvertHtml(System.String)">
+            <summary>
+            Test Convert HTML.
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApplication1.Migrations.Update">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.Update.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.Update.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.Update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApplication1.Migrations.EmailVerifiedAt">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.EmailVerifiedAt.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApplication1.Migrations.ChangeDateTimeToString">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.ChangeDateTimeToString.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
         </member>
     </members>
 </doc>
