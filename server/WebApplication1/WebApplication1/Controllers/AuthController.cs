@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
-        /// Register Account.
+        /// Register Accountt.
         /// </summary>
         [HttpPost("register")]
         [AllowAnonymous]
