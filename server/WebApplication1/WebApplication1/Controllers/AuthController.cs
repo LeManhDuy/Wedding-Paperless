@@ -44,7 +44,18 @@ namespace WebApplication1.Controllers
 
             try
             {
-                return await _authRepository.LoginAsync(accountDto) != null ? Ok("Success") : BadRequest();
+                var token = await _authRepository.LoginAsync(accountDto);
+                if (token.AccountDto == null)
+                {
+                    BadRequest();
+                }
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.Now.AddMinutes(2)
+                };
+                Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
+                return Ok(token!.Token);
             }
             catch (Exception e)
             {

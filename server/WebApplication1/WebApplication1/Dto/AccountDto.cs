@@ -14,4 +14,11 @@ namespace WebApplication1.Dto
 
         public string Role { get; set; }
     }
+    
+    public class TokenAccountDto
+    {
+        public string Token { get; set; }
+        public AccountDto AccountDto { get; set; }
+    }
+
 }
