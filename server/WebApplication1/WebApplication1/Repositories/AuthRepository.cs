@@ -27,13 +27,16 @@ namespace WebApplication1.Repositories
         private readonly IEmailRepository _emailRepository;
         private readonly LinkGenerator _linkGenerator;
         private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config)
+
+        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _emailRepository = emailRepository;
             _linkGenerator = linkGenerator;
             _config = config;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -169,6 +172,34 @@ namespace WebApplication1.Repositories
                 expires: DateTime.Now.AddMinutes(2),
                 signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public Task<AuthDto> LogoutAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetCurrentToken()
+        {
+            string token = string.Empty;
+
+            // Lấy token từ header hoặc cookie của request
+            var authorizationHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authorizationHeader))
+            {
+                token = authorizationHeader.ToString()!.Replace("Bearer ", string.Empty);
+            }
+            else
+            {
+                var cookie = _httpContextAccessor.HttpContext?.Request.Cookies["token"];
+                if (cookie != null)
+                {
+                    token = cookie;
+                    // _httpContextAccessor.HttpContext?.Response.Cookies.Delete();
+                }
+            }
+            Console.WriteLine(token);
+            return token;
         }
     }
 }

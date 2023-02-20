@@ -87,5 +87,18 @@ namespace WebApplication1.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
+        /// <summary>
+        /// Logout
+        /// </summary>
+        [HttpPost("logout")]
+        [Authorize]
+        public async Task<IActionResult> LogoutAsync()
+        {
+            // Lấy ra jwt token trong request header
+            // Huỷ token trong bộ nhớ cache hoặc trong cơ sở dữ liệu
+            var token = _authRepository.GetCurrentToken();
+            return Ok(token);
+        }
     }
 }

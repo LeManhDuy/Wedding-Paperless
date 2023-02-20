@@ -12,6 +12,9 @@ namespace WebApplication1.Interfaces
         Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto);
         Task<AuthDto> RegisterAsync(AuthDto authDto);
         string GenerateToken(Account account);
-        
+
+        Task<AuthDto> LogoutAsync();
+        string GetCurrentToken();
+
     }
 }

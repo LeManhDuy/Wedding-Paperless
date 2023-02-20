@@ -14,6 +14,11 @@
             Register Account.
             </summary>
         </member>
+        <member name="M:WebApplication1.Controllers.AuthController.LogoutAsync">
+            <summary>
+            logout
+            </summary>
+        </member>
         <member name="M:WebApplication1.Controllers.EmailController.ConfirmEmail(System.String)">
             <summary>
             Verify Email.
