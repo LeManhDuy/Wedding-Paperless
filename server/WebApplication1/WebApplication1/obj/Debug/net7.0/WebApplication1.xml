@@ -4,10 +4,36 @@
         <name>WebApplication1</name>
     </assembly>
     <members>
+<<<<<<< HEAD
+        <member name="M:WebApplication1.Controllers.AlbumnController.GetAlbumns">
+            <summary>
+            Get albumns.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.AlbumnController.GetAlbumns(System.Int32)">
+            <summary>
+            Get albumn by Id.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.AlbumnController.CreateAlbumn(System.Int32,WebApplication1.Dto.AlbumnDto)">
+            <summary>
+            Create albumn.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.AlbumnController.UpdateAlbumn(System.Int32,WebApplication1.Dto.AlbumnDto)">
+            <summary>
+            Update albumn.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Controllers.AlbumnController.DeleteAlbumns(System.Int32)">
+            <summary>
+            Delete albumn by Id.
+=======
         <member name="M:WebApplication1.Controllers.AuthController.LoginAsync(WebApplication1.Dto.AccountDto)">
             <summary>
             Register Accountt.
             Login Account.
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
             </summary>
         </member>
         <member name="M:WebApplication1.Controllers.AuthController.RegisterAsync(WebApplication1.Dto.AuthDto)">
@@ -50,10 +76,24 @@
             Update Register Song.
             </summary>
         </member>
+<<<<<<< HEAD
+        <member name="T:WebApplication1.Migrations.update">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.update.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.update.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApplication1.Migrations.update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+=======
         <member name="M:WebApplication1.Controllers.RegisterSongController.DeleteAsync(System.Int32)">
             <summary>
             Delete Register Song.
             </summary>
+>>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
         </member>
     </members>
 </doc>

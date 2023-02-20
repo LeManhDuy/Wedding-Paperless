@@ -87,7 +87,8 @@ builder.Services.Configure<IdentityOptions>(opt => opt.SignIn.RequireConfirmedEm
 builder.Services.AddSingleton(builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
-builder.Services.AddScoped<IRegisterSongRepository, RegisterSongRepository>();
+builder.Services.AddScoped<IAlbumnRepository, AlbumnRepository>();
+
 
 
 var app = builder.Build();

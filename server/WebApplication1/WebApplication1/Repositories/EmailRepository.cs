@@ -84,6 +84,7 @@ namespace WebApplication1.Repositories
 
         public async Task SendEmail(Message message)
         {
+            //test comment
             var email = new MimeMessage();
             email.Sender = new MailboxAddress(_emailConfiguration.UserName, _emailConfiguration.From);
             email.From.Add(new MailboxAddress(_emailConfiguration.UserName, _emailConfiguration.UserName));
