@@ -82,24 +82,5 @@ namespace WebApplication1.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-        //[HttpGet("ConfirmEmail")]
-        //public async Task<IActionResult> ConfirmEmail(string token, string email)
-        //{
-        //    var user = await _emailRepository.FindByEmailAsync(email);
-
-        //    if (user != null)
-        //    {
-        //        var result = await _emailRepository.ConfirmEmailAsync(user, token);
-        //        if (result.Succeeded)
-        //        {
-        //            return Ok();
-        //        }
-        //    }
-
-        //    return BadRequest();
-        //}
-
     }
 }

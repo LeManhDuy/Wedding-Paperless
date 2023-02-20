@@ -22,12 +22,10 @@ namespace WebApplication1.Repositories
     {
         private readonly DataContext _context;
         private readonly IEmailRepository _emailRepository;
-        private readonly LinkGenerator _linkGenerator;
-        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator)
+        public AuthRepository(DataContext context, IEmailRepository emailRepository)
         {
             _context = context;
             _emailRepository = emailRepository;
-            _linkGenerator = linkGenerator;
         }
 
         public async Task<AccountDto> LoginAsync(AccountDto authAccountDto)
@@ -86,7 +84,7 @@ namespace WebApplication1.Repositories
                 {
                     To = person.Email,
                     Subject = "Confirm your email address",
-                    Body = $"<p>Hello {person.FullName},</p><p>Please click the link below to confirm your email address:</p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+                    Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
                 };
                 await _emailRepository.SendEmail(content);
 
