@@ -88,6 +88,7 @@ builder.Services.AddSingleton(builder.Configuration.GetSection("EmailConfigurati
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 builder.Services.AddScoped<IAlbumnRepository, AlbumnRepository>();
+builder.Services.AddScoped<IRegisterSongRepository, RegisterSongRepository>();
 
 
 
