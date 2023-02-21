@@ -55,7 +55,7 @@ namespace WebApplication1.Controllers
                     Expires = DateTime.Now.AddMinutes(2)
                 };
                 Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
-                return Ok(token!.Token);
+                return Ok("abc " + token!.Token);
             }
             catch (Exception e)
             {

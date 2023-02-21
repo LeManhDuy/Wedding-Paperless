@@ -1,4 +1,6 @@
-﻿using WebApplication1.Dto;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebApplication1.Dto;
 using WebApplication1.Models;
 
 namespace WebApplication1.Interfaces
