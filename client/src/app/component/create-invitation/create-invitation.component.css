@@ -1,0 +1,21 @@
+@media screen and (max-width: 800px) {
+    
+    .create_Invitation_Content{
+        margin: 20px 40px;
+
+    }
+    
+  }
+  @media screen and (min-width: 801px) {
+    
+    .create_Invitation_Content {
+      width: 30%; /* Th1e width is 100%, when the viewport is 800px or smaller */
+      margin: 80px auto;
+
+    }
+  }
+.logo_navbar{
+    font-style: italic;
+    font-size: 20px;
+    color: var(--lightGreen_color);
+}
