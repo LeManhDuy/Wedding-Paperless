@@ -17,6 +17,10 @@ namespace WebApplication1.Models
         [Required]
         public byte[] PasswordSalt { get; set; }
 
+        public string Code { get; set; }
+
+        public DateTime CodeExpries { get; set; }
+
         [Required]
         public string Role { get; set; }
 
