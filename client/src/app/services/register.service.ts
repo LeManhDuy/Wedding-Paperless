@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { RegisterUser, UserToken } from '../model/app-user';
+import { RegisterUser, UserToken } from '../models/app-user';
 
 @Injectable({
   providedIn: 'root'

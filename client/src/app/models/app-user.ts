@@ -1,16 +1,17 @@
-export class AuthUser {
+export class LoginUser {
   username: string = "";
   password: string = "";
 }
 
 export class RegisterUser {
-  email: string = "";
+  fullname: string = "";
   username: string = "";
+  email: string = "";
   password: string = "";
-  confirmPassword: string = "";
+  role: string = "User";
 }
 
 export class UserToken {
-  username: string = "";
-  token: string = "";
+  role: string = "";
+  name: string = "";
 }

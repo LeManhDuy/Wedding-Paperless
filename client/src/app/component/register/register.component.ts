@@ -1,6 +1,6 @@
 import { RegisterService } from './../../services/register.service';
 import { Component, OnInit } from '@angular/core';
-import { RegisterUser } from 'src/app/model/app-user';
+import { RegisterUser } from 'src/app/models/app-user';
 
 @Component({
   selector: 'app-register',

@@ -1,7 +1,7 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
-import {AuthUser, RegisterUser, UserToken} from '../models/app-user';
+import {BehaviorSubject, catchError, map, Observable, of} from 'rxjs';
+import {LoginUser, RegisterUser, UserToken} from '../models/app-user';
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +10,7 @@ export class LoginService {
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
-  baseUrl = 'https://localhost:44328/api/auth/';
+  baseUrl = 'http://127.0.0.1:5001'+'/api/auth/';
   private currentUser = new BehaviorSubject<UserToken | null>(null);
 
   currentUser$ = this.currentUser.asObservable();
@@ -18,18 +18,31 @@ export class LoginService {
   constructor(private _http: HttpClient) {
   }
 
-  login(authUser: AuthUser): Observable<any> {
-    return this._http.post(`${this.baseUrl}login`, authUser, {
+  login(loginUser: LoginUser): Observable<any> {
+    return this._http.post(`${this.baseUrl}login`, loginUser, {
       responseType: "text",
       headers: this.headers
     })
       .pipe(
         map((token) => {
           if (token) {
-            const userToken: UserToken = {username: authUser.username, token}
-            localStorage.setItem('userToken', JSON.stringify(userToken));
-            this.currentUser.next(userToken);
+            const payloadBase64 = token.split('.')[1];
+            const payloadJson = atob(payloadBase64);
+            const payloadObject = JSON.parse(payloadJson);
+            console.log(token)
+            console.log(payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
+
+            return token
+            // const userToken: UserToken = {}
+            // localStorage.setItem('userToken', JSON.stringify(userToken));
+            // this.currentUser.next(userToken);
+          } else {
+            throw new Error("Login failed");
           }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.log(error)
+          return of(null);
         })
       );
   }
