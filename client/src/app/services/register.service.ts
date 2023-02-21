@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, catchError, map } from 'rxjs';
 import { RegisterUser, UserToken } from '../model/app-user';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class RegisterService {
     'Content-Type': 'application/json'
   })
 
-  baseUrl = 'http://127.0.0.1:5001/'+'api/auth/register'
+  baseUrl = 'http://127.0.0.1:5001/' + 'api/auth/register'
 
   private currentUser = new BehaviorSubject<UserToken | null>(null)
 
@@ -26,15 +26,17 @@ export class RegisterService {
         responseType: 'text',
         headers: this.headers
       })
-    // .pipe(
-    //   map((token) => {
-    //     if (token) {
-    //       const userToken: UserToken = { username: registerUser.username, token }
-    //       localStorage.setItem('userToken', JSON.stringify(userToken));
-    //       this.currentUser.next(userToken);
-    //     }
-    //   })
-    // );
+      // .pipe(
+      //   map((response) => {
+      //     console.log("Registration successful");
+      //     // Do something with the response if needed
+      //   }),
+      //   catchError((error) => {
+      //     console.log("Error registering user", error.error);
+      //     return error;
+      //   })
+      // );
   }
+  
 
 }

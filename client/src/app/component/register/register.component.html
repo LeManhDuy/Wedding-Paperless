@@ -19,20 +19,26 @@
     </div>
     <br>
     <form>
+        <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
         <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="Full Name" type="text" name="fullname"
-                [(ngModel)]="registerUser.fullname">
+                [(ngModel)]="registerUser.fullname" required>
         </div>
         <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="User Name" type="text" name="username"
-                [(ngModel)]="registerUser.username">
+                [(ngModel)]="registerUser.username" required>
         </div>
         <div class="input-group mb-3">
-            <input class="form-control" placeholder="Email" type="email" name="email" [(ngModel)]="registerUser.email">
+            <div *ngIf="errorMessage">*</div>
+            <input class="form-control" placeholder="Email" type="email" name="email" [(ngModel)]="registerUser.email"
+                required>
         </div>
         <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="Password" type="password" name="password"
-                [(ngModel)]="registerUser.password">
+                [(ngModel)]="registerUser.password" required>
         </div>
         <!-- <div class="input-group mb-3">
             <input class="form-control" placeholder="Confirm Password" type="password" name="confirmpassword">
