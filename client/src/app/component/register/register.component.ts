@@ -1,4 +1,4 @@
-import { Message } from './../../model/message';
+import { Message } from './../../models/message';
 import { RegisterService } from './../../services/register.service';
 import { Component, OnInit } from '@angular/core';
 import { RegisterUser } from 'src/app/models/app-user';
