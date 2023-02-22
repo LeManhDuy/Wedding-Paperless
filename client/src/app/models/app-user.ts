@@ -4,10 +4,11 @@ export class LoginUser {
 }
 
 export class RegisterUser {
-  fullname: string = "";
-  username: string = "";
-  email: string = "";
-  password: string = "";
+  fullname: string | undefined;
+  username: string | undefined;
+  email: string | undefined;
+  password: string | undefined;
+  confirmpassword: string | undefined;
   role: string = "User";
 }
 

@@ -1,7 +1,8 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, map, Observable, of} from 'rxjs';
-import {LoginUser, RegisterUser, UserToken} from '../models/app-user';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { LoginUser, RegisterUser, UserToken } from '../models/app-user';
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +11,9 @@ export class LoginService {
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
-  baseUrl = 'http://127.0.0.1:5001'+'/api/auth/';
+
+  prefixUrl: string = environment.apiURL;
+  baseUrl = this.prefixUrl + '/api/auth/';
   private currentUser = new BehaviorSubject<UserToken | null>(null);
 
   currentUser$ = this.currentUser.asObservable();
