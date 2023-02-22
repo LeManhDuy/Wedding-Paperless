@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
@@ -11,8 +12,9 @@ export class RegisterService {
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   })
-
-  baseUrl = 'https://localhost:44328/' + 'api/auth/register'
+  
+  prefixUrl: string = environment.apiURL;
+  baseUrl = this.prefixUrl + 'api/auth/register'
 
   private currentUser = new BehaviorSubject<UserToken | null>(null)
 
