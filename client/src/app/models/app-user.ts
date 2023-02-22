@@ -1,3 +1,8 @@
+export class LoginUser {
+  username: string = "";
+  password: string = "";
+}
+
 export class RegisterUser {
   fullname: string = "";
   username: string = "";
@@ -7,6 +12,6 @@ export class RegisterUser {
 }
 
 export class UserToken {
-  username: string = "";
-  token: string = "";
+  role: string = "";
+  name: string = "";
 }

@@ -57,6 +57,11 @@ namespace WebApplication1.Repositories
         {
           var checkAccount =
               await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
+          if (checkAccount == null)
+          {
+            Console.WriteLine("User not found");
+            return null;
+          }
           currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
           if (currentUser == null)
           {
