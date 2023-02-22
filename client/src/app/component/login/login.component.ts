@@ -3,6 +3,7 @@ import {LoginService} from "../../services/login.service";
 import {LoginUser} from "../../models/app-user";
 import { MatDialog } from '@angular/material/dialog';
 import {LoginSuccessDialogComponent} from "../login-success-dialog/login-success-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   apiData: any = "";
   loginUser: LoginUser = new LoginUser()
   loginSuccess = false;
-  constructor(public loginService: LoginService, private dialog: MatDialog) {
+  constructor(public loginService: LoginService, private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
           console.log(response);
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
+          if (this.loginSuccess) {
+            this.router.navigate(['/not-found']);
+          }
         } else {
           this.apiData = "*Credential Invalid"
           console.log("Login failed");
