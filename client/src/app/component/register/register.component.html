@@ -18,30 +18,114 @@
         <a class="link_To_Login" routerLink="/login">Login</a>
     </div>
     <br>
-    <form>
+
+    <form #registerForm="ngForm" novalidate>
+        <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
         <div class="input-group mb-3">
+            <input class="form-control" placeholder="Full Name" type="text" id="fullname" name="fullname"
+                [(ngModel)]="registerUser.fullname" [required]="true" [minlength]="5">
+            <div
+                *ngIf="registerForm.controls['fullname'].invalid && (registerForm.controls['fullname'].dirty || registerForm.controls['fullname'].touched)">
+                <small class="text-danger" *ngIf="registerForm.controls['fullname']?.errors?.['required']">Full Name is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerForm.controls['fullname']?.errors?.['minlength']">Full Name
+                    must be
+                    at least 5 characters long.</small>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input class="form-control" placeholder="Email" type="email" id="email" name="email"
+                [(ngModel)]="registerUser.email" [required]="true" email>
+            <div
+                *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)">
+                <small class="text-danger" *ngIf="registerForm.controls['email']?.errors?.['required']">Email is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerForm.controls['email']?.errors?.['email']">Please enter a
+                    valid
+                    email address.</small>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" placeholder="User Name" class="form-control" id="username" name="username"
+                [(ngModel)]="registerUser.username" [required]="true" [minlength]="5">
+            <div
+                *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
+                <small class="text-danger" *ngIf="registerForm.controls['username']?.errors?.['required']">Username is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerForm.controls['username']?.errors?.['minlength']">Username
+                    must be
+                    at least 5 characters long.</small>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input class="form-control" placeholder="Password" type="password" id="password" name="password"
+                [(ngModel)]="registerUser.password" [required]="true" [minlength]="5">
+            <div
+                *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                <small class="text-danger" *ngIf="registerForm.controls['password']?.errors?.['required']">Password is
+                    required.</small>
+                <small class="text-danger" *ngIf="registerForm.controls['password']?.errors?.['minlength']">Password
+                    must be
+                    at least 5 characters long.</small>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="password" placeholder="Confirm Password" class="form-control" id="confirmpassword"
+                name="confirmpassword" [(ngModel)]="registerUser.confirmpassword" [required]="true" [minlength]="5">
+            <div
+                *ngIf="registerForm.controls['confirmpassword'].invalid && (registerForm.controls['confirmpassword'].dirty || registerForm.controls['confirmpassword'].touched)">
+                <small class="text-danger"
+                    *ngIf="registerForm.controls['confirmpassword']?.errors?.['required']">Confirm
+                    Password is
+                    required.</small>
+                <small class="text-danger"
+                    *ngIf="registerForm.controls['confirmpassword']?.errors?.['minlength']">Confirm
+                    Password
+                    must
+                    be at least 8 characters long.</small>
+            </div>
+        </div>
+
+        <button type="submit" (click)="register()" class="submit_Register"
+            [disabled]="registerForm.invalid">Register</button>
+    </form>
+
+    <!-- <form>
+        <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="Full Name" type="text" name="fullname"
-                [(ngModel)]="registerUser.fullname">
+                [(ngModel)]="registerUser.fullname" required>
         </div>
         <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="User Name" type="text" name="username"
-                [(ngModel)]="registerUser.username">
+                [(ngModel)]="registerUser.username" required>
         </div>
         <div class="input-group mb-3">
-            <input class="form-control" placeholder="Email" type="email" name="email" [(ngModel)]="registerUser.email">
+            <div *ngIf="errorMessage">*</div>
+            <input class="form-control" placeholder="Email" type="email" name="email" [(ngModel)]="registerUser.email"
+                required>
         </div>
         <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
             <input class="form-control" placeholder="Password" type="password" name="password"
-                [(ngModel)]="registerUser.password">
+                [(ngModel)]="registerUser.password" required>
         </div>
-        <!-- <div class="input-group mb-3">
-            <input class="form-control" placeholder="Confirm Password" type="password" name="confirmpassword">
-        </div> -->
+        <div class="input-group mb-3">
+            <div *ngIf="errorMessage">*</div>
+            <input class="form-control" placeholder="Confirm Password" type="password" name="confirmpassword"
+                [(ngModel)]="registerUser.confirmpassword" required>
+        </div>
         <div class="input-group mb-3" hidden>
             <input class="form-control" [(ngModel)]="registerUser.role" type="text" id="role" name="role" value="User">
         </div>
         <input class="submit_Register" (click)="register()" type="button" value="Submit">
-    </form>
+    </form> -->
     <!-- <h3 class="other_Login">or</h3>
     <div class="login_By">
         <div class="login_By_Google">
