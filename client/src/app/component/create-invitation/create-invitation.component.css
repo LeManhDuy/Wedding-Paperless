@@ -19,3 +19,35 @@
     font-size: 20px;
     color: var(--lightGreen_color);
 }
+.slogan{
+    width: 100%;
+    font-style: italic;
+    background: var(--lightGreen_color);
+    /* background:linear-gradient(271.15deg, #FA4BFE 7.64%, #FB724C 90.68%), #EE5757; */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.container_CreatePage{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+}
+.create_New{
+  width: 40%;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+}
+.content_CreatePage{
+  width: 100%;
+  justify-content: center;
+}
+.content_Create{
+  border: 3px solid var(--lightPink_color);
+  border-radius: 5px;
+  width: 200px;
+  height: 150px;
+}
