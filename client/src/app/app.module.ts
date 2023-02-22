@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './component/auth/auth.component';
 import { RegisterComponent } from './component/register/register.component';
 import { CreateInvitationComponent } from './component/create-invitation/create-invitation.component';
+import { CreateFormComponent } from './component/create-form/create-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     RegisterComponent,
-    CreateInvitationComponent
+    CreateInvitationComponent,
+    CreateFormComponent
   ],
   imports: [
     BrowserModule,

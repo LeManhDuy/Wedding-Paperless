@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="./create-form.component.css">
+<link rel="stylesheet" href="/client/src/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<div class="create_Form_Content">
+        <form class="create_Form_Container" action="" method="post">
+            <div class="host_Name">
+                <h4 class="title">
+                    <input  placeholder="Oliver & Sarrah" type="text" name="host_Name">
+                </h4>
+                
+                's wedding ceremony
+            </div>
+            <div class="time_And_Place">
+                <div class="time">
+                    <input type="datetime-local" name="" id="">
+                </div>
+                <div class="place">
+                    <input placeholder="ForU, 23 2/9 street, Danang" type="text" name="place">
+                </div>
+            </div>
+            <div class="image_Center" app-create-form>
+                <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Center">
+                <h3>Drag and drop file here</h3>
+                <label for="fileDropRef">Browse for file</label>
+            </div>
+            <div class="our_Stories">
+                <h4 class="title">
+                    <input placeholder="Our Stories" type="text" name="our_Stories">
+                </h4>
+                <textarea name="our_Stories_Text" id="" cols="30" rows="10" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
+I implement user interface design and solve user problems with HTML, CSS AND Javascript.
+                "></textarea>
+                <div class="image_Center" app-create-form>
+                    <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
+                    <h3>Drag and drop file here</h3>
+                    <label for="fileDropRef">Browse for file</label>
+                </div>
+            </div>
+            <div class="schedule">
+                <h4 class="title">
+                    <input placeholder="Schedule" type="text" name="schedule">
+                </h4>
+                <div class="time_Map">
+                    <ul class="time_Stamp">
+                        <li>
+                            <div class="time"><input placeholder="09:00 AM" type="time"></div>
+                            <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
+                        </li>
+                        <li>
+                            <div class="time"><input placeholder="09:05 AM" type="time"></div>
+                            <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
+                        </li>
+                        <li>
+                            <div class="time"><input placeholder="09:00 AM" type="time"></div>
+                            <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
+                        </li>
+                        <li>
+                            <div class="time"><input placeholder="09:05 AM" type="time"></div>
+                            <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
+                        </li>
+                    </ul>
+                        <input placeholder="Wanna sing a song ?" type="text">
+                </div>
+            </div>
+            <div class="restaurant_Map">
+                <h4 class="title">
+                    <input placeholder="Restaurant Map" type="text" name="restaurant_Map">
+                </h4>
+                <div class="time_Map">
+                    <div class="image_Center" app-create-form>
+                        <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
+                        <h3>Drag and drop file here</h3>
+                        <label for="fileDropRef">Browse for file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="our_Memory">
+                <div class="our_Memory_Title">
+                    <h4 class="title">
+                        <input placeholder="Our memory" type="text" name="our_Memory">
+                    </h4>
+                    We 'll save our ceremony at here 
+                </div>
+                <div class="time_Map">
+                    <div class="image_Center" app-create-form>
+                        <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
+                        <h3>Drag and drop file here</h3>
+                        <label for="fileDropRef">Browse for file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="see_You">
+                <div class="see_You_Title">
+                    <h4 class="title">
+                        <input placeholder="See you at the party" type="text" name="our_Memory">
+                    </h4>
+                </div>
+                <div class="time_Map">
+                    <div class="image_Center" app-create-form>
+                        <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
+                        <h3>Drag and drop file here</h3>
+                        <label for="fileDropRef">Browse for file</label>
+                    </div>
+                </div>
+                <div class="hope_Join">
+                    <input class="hope_Join_Date" placeholder="12-Feb-2023" type="date" name="hope_Join_Date">
+                    <input class="hope_Join_Content" placeholder="Hope you join us" type="text" name="hope_Join_Content">
+                    <input class="hope_Join_Sign" placeholder="Oliver and Sarrah" type="text" name="hope_Join_Sign">
+                </div>
+            </div>
+        </form>
+</div>
