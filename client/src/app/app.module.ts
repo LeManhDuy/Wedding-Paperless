@@ -7,6 +7,9 @@ import {RegisterComponent} from './component/register/register.component';
 import {LoginComponent} from './component/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
+import { LoginSuccessDialogComponent } from './component/login-success-dialog/login-success-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 
 @NgModule({
@@ -14,13 +17,16 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     AuthComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    LoginSuccessDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
