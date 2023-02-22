@@ -1,8 +1,8 @@
+import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { RegisterUser, UserToken } from '../models/app-user';
-import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
