@@ -73,8 +73,6 @@ e2e/*.map
 # System Files
 .DS_Store/
 
-/enviroments
-appsettings.json
 /src/environments
 
 appsettings.json
