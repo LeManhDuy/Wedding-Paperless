@@ -8,7 +8,7 @@ import {LoginComponent} from './component/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
 import { LoginSuccessDialogComponent } from './component/login-success-dialog/login-success-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
+// import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { CreateInvitationComponent } from './component/create-invitation/create-invitation.component';
 import { CreateFormComponent } from './component/create-form/create-form.component';
@@ -30,7 +30,7 @@ import { CreateFormComponent } from './component/create-form/create-form.compone
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatDialogModule,
+    // MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

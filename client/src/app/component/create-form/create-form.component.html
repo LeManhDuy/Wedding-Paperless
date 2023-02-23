@@ -8,7 +8,6 @@
                 <h4 class="title">
                     <input  placeholder="Oliver & Sarrah" type="text" name="host_Name">
                 </h4>
-                
                 's wedding ceremony
             </div>
             <div class="time_And_Place">
@@ -21,7 +20,7 @@
             </div>
             <div class="image_Center" app-create-form>
                 <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Center">
-                <h3>Drag and drop file here</h3>
+                <h3>Drag and drop photo here</h3>
                 <label for="fileDropRef">Browse for file</label>
             </div>
             <div class="our_Stories">
@@ -33,7 +32,7 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                 "></textarea>
                 <div class="image_Center" app-create-form>
                     <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
-                    <h3>Drag and drop file here</h3>
+                    <h3>Drag and drop photo here</h3>
                     <label for="fileDropRef">Browse for file</label>
                 </div>
             </div>
@@ -44,8 +43,8 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                 <div class="time_Map">
                     <ul class="time_Stamp">
                         <li>
-                            <div class="time"><input placeholder="09:00 AM" type="time"></div>
-                            <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
+                            <div class="time"><input placeholder="05:30 PM" type="time"></div>
+                            <p><input placeholder=" " type="text"></p>
                         </li>
                         <li>
                             <div class="time"><input placeholder="09:05 AM" type="time"></div>
@@ -60,17 +59,18 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                             <p><input placeholder=" How is it already 9:00? Just how??? 🤯🤯" type="text"></p>
                         </li>
                     </ul>
-                        <input placeholder="Wanna sing a song ?" type="text">
                 </div>
+                <input placeholder="Wanna sing a song ?" type="text">
+
             </div>
             <div class="restaurant_Map">
                 <h4 class="title">
                     <input placeholder="Restaurant Map" type="text" name="restaurant_Map">
                 </h4>
-                <div class="time_Map">
+                <div class="image_Drop">
                     <div class="image_Center" app-create-form>
                         <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
-                        <h3>Drag and drop file here</h3>
+                        <h3>Drag and drop photos here</h3>
                         <label for="fileDropRef">Browse for file</label>
                     </div>
                 </div>
@@ -82,10 +82,10 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                     </h4>
                     We 'll save our ceremony at here 
                 </div>
-                <div class="time_Map">
+                <div class="image_Drop">
                     <div class="image_Center" app-create-form>
                         <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
-                        <h3>Drag and drop file here</h3>
+                        <h3>Drag and drop photo here</h3>
                         <label for="fileDropRef">Browse for file</label>
                     </div>
                 </div>
@@ -96,10 +96,10 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                         <input placeholder="See you at the party" type="text" name="our_Memory">
                     </h4>
                 </div>
-                <div class="time_Map">
+                <div class="image_Drop">
                     <div class="image_Center" app-create-form>
                         <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrownseHandler($event.target.files)" name="image_Our_Stories">
-                        <h3>Drag and drop file here</h3>
+                        <h3>Drag and drop photo here</h3>
                         <label for="fileDropRef">Browse for file</label>
                     </div>
                 </div>
