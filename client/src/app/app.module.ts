@@ -10,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoginSuccessDialogComponent } from './component/login-success-dialog/login-success-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { AlbumnComponent } from './component/albumn/albumn.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     RegisterComponent,
     LoginComponent,
     LoginSuccessDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlbumnComponent
   ],
   imports: [
     BrowserModule,

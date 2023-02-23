@@ -12,7 +12,7 @@ export class RegisterService {
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   })
-  
+
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/auth/register'
 
@@ -23,8 +23,6 @@ export class RegisterService {
   constructor(private httpClient: HttpClient) { }
 
   register(registerUser: RegisterUser) {
-    console.log("2", registerUser);
-
     return this.httpClient
       .post(`${this.baseUrl}`, registerUser, {
         responseType: 'text',
