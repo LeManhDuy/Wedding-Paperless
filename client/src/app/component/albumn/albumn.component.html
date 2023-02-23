@@ -30,14 +30,26 @@
         </ul>
       </div>
       <br>
-      <div class="input-group mb-3">
-        <!-- (change)="selectFile($event)" -->
-        <input type="file" accept="image/*" />
-      </div>
-      <br>
-      <button class="btn btn-success btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">
-        Upload
-      </button>
+
+      <form #form="ngForm" (ngSubmit)="addImage()">
+
+        <div class="input-group mb-3">
+          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+            [(ngModel)]="imageHandler.imageLink" name="imageLink">
+
+          <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.position">
+        </div>
+        <br>
+        <button class="btn btn-success btn-sm float-right" type="submit">
+          Upload
+        </button>
+
+      </form>
+
+
+
+
+
     </div>
   </div>
 </div>

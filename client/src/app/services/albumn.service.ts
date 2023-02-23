@@ -18,4 +18,8 @@ export class AlbumnService {
     return this.http.get<Albumn[]>(`${this.baseUrl}`)
   }
 
+  addAlbumn(imageHandler: Albumn): Observable<Albumn> {
+    return this.http.post<Albumn>(this.baseUrl + '/1', imageHandler);
+  }
+
 }
