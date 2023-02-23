@@ -1,6 +1,6 @@
 import { UploadImageService } from './../../services/upload-image.service';
 import { AlbumnService } from './../../services/albumn.service';
-import { Albumn } from './../../models/albumn';
+import {Albumn, AlbumnDelete} from './../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -11,6 +11,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./albumn.component.css']
 })
 export class AlbumnComponent implements OnInit {
+  albumnDelete : AlbumnDelete[] = []
   albumns: Albumn[] = [];
   selectedFiles?: FileList;
   currentFile?: File;
@@ -35,28 +36,38 @@ export class AlbumnComponent implements OnInit {
     //this.imageInfos = this.uploadImage.getFiles();
   }
 
-  // selectFile(event: any): void {
-  //   this.message = '';
-  //   this.preview = '';
-  //   this.progress = 0;
-  //   this.selectedFiles = event.target.files;
+  selectFile(event: any): void {
+    this.message = '';
+    this.preview = '';
+    this.progress = 0;
+    this.selectedFiles = event.target.files;
 
-  //   if (this.selectedFiles) {
-  //     const file: File | null = this.selectedFiles.item(0);
+    if (this.selectedFiles) {
+      const file: File | null = this.selectedFiles.item(0);
 
-  //     if (file) {
-  //       this.preview = '';
-  //       this.currentFile = file;
+      if (file) {
+        this.preview = '';
+        this.currentFile = file;
 
-  //       const reader = new FileReader();
+        const reader = new FileReader();
 
-  //       reader.onload = (e: any) => {
-  //         this.preview = e.target.result;
-  //       };
+        reader.onload = (e: any) => {
+          this.preview = e.target.result;
+        };
 
-  //       reader.readAsDataURL(this.currentFile);
-  //     }
-  //   }
+        reader.readAsDataURL(this.currentFile);
+      }
+    }
+  }
+
+  // deleteSelected(): void {
+  //   const selectedAlbumns = this.albumns.filter(albumnDelete => albumnDelete.selected);
+  //   selectedAlbumns.forEach(albumnDelete => {
+  //     this.albumnService.deleteSelected(albumnDelete)
+  //       .subscribe(() => {
+  //         this.albumns = this.albumns.filter(a => a !== albumn);
+  //       });
+  //   });
   // }
 
   upload(): void {

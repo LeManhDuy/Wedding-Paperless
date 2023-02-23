@@ -3,25 +3,27 @@
     <div class="col order-first">
       <table class="table">
         <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Image</th>
-            <th scope="col">Host's Name</th>
-          </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Host's Name</th>
+          <th scope="col">Delete</th> <!-- Add Delete column -->
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let albumn of albumns; let i = index">
-            <th scope="row">{{i + 1}}</th>
-            <td><img class="card-img-top" src="{{ albumn?.imageLink }}" alt="Card image cap"></td>
-            <td>@mdo</td>
-          </tr>
+        <tr *ngFor="let albumn of albumns; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td><img class="card-img-top" src="{{ albumn?.imageLink }}" alt="Card image cap"></td>
+          <td>@mdo</td>
+<!--          <td><input type="checkbox" [(ngModel)]="albumn.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
+        </tr>
         </tbody>
       </table>
     </div>
     <div class="col">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-          data-bs-toggle="dropdown" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-expanded="false">
           Content
         </button>
         <br>
@@ -38,6 +40,7 @@
       <button class="btn btn-success btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">
         Upload
       </button>
+      <button class="btn btn-danger btn-sm float-right mr-2" (click)="deleteSelected()">Delete Selected</button> <!-- Add Delete button -->
     </div>
   </div>
 </div>
