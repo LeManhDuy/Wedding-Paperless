@@ -1,9 +1,12 @@
-import { UploadImageService } from './../../services/upload-image.service';
-import { AlbumnService } from './../../services/albumn.service';
+import {UploadImageService} from './../../services/upload-image.service';
+import {AlbumnService} from './../../services/albumn.service';
 import {Albumn, AlbumnDelete} from './../../models/albumn';
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HttpEventType, HttpResponse} from "@angular/common/http";
+
 class ImageSnippet {
-  constructor(public src: string, public file: File) { }
+  constructor(public src: string, public file: File) {
+  }
 }
 
 @Component({
@@ -12,7 +15,7 @@ class ImageSnippet {
   styleUrls: ['./albumn.component.css']
 })
 export class AlbumnComponent implements OnInit {
-  albumnDelete : AlbumnDelete[] = []
+  albumnDelete: AlbumnDelete[] = []
   albumns: Albumn[] = [];
   selectedFiles?: FileList;
   currentFile?: File;
@@ -27,7 +30,8 @@ export class AlbumnComponent implements OnInit {
 
   selectedFile: ImageSnippet | undefined;
 
-  constructor(private albumnService: AlbumnService, private uploadImage: UploadImageService) { }
+  constructor(private albumnService: AlbumnService, private uploadImage: UploadImageService) {
+  }
 
   ngOnInit(): void {
     this.albumnService.getAllAlbumns().subscribe({
@@ -83,7 +87,7 @@ export class AlbumnComponent implements OnInit {
 
       if (file) {
         this.currentFile = file;
-        console.log("ab",this.currentFile);
+        console.log("ab", this.currentFile);
         this.uploadImage.upload(this.currentFile).subscribe({
           next: (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
@@ -96,26 +100,31 @@ export class AlbumnComponent implements OnInit {
           error: (err: any) => {
             console.log("1", err);
             this.progress = 0;
+          },
+          processFile(imageInput: any
+          ) {
+            const file: File = imageInput.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', (event: any) => {
+              this.selectedFile = new ImageSnippet(event.target.result, file);
+              this.imageHandler.imageLink = this.selectedFile.src;
+            });
+            reader.readAsDataURL(file);
+          },
 
-  processFile(imageInput: any) {
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.imageHandler.imageLink = this.selectedFile.src;
-    });
-    reader.readAsDataURL(file);
-  }
+          addImage() {
+            this.albumnService.addAlbumn(this.imageHandler).subscribe({
+              next: (imageHandler : Albumn) => {
+              }
+            })
+          }
 
-  addImage() {
-    this.albumnService.addAlbumn(this.imageHandler).subscribe({
-      next: (imageHandler) => {
+          // onFileSelected(event: any) {
+          //   const file: File = event.target.files[0];
+          //   this.uploadFile(file);
+          // }
+        })
       }
-    })
+    }
   }
-
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   this.uploadFile(file);
-  // }
 }
