@@ -21,8 +21,20 @@
         margin: 0px auto;
     }
   }
-body{
+/* body{
     background-color: #ffffff;
+} */
+.navbar{
+    width: 100vw;
+    background-color: var(--lightPink_color);
+    padding: 5px 40px;
+}
+.logo_navbar{
+    font-style: italic;
+    font-size: 40px;
+    color: white;
+    /* color: var(--lightGreen_color); */
+    text-decoration: none;
 }
 .create_Form_Container{
     background-color: var(--MW-background_color);
@@ -110,7 +122,7 @@ textarea{
     padding: 40px 10px;
     background-color: #7F7167;
     border-radius: 10px;
-    width: 50%;
+    width: 60%;
     margin: 0px auto;
 }
 li{
