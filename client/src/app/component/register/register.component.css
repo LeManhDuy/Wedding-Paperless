@@ -1,29 +1,27 @@
 @media screen and (max-width: 800px) {
-    
-    .content_Login{
+
+    .content_Login {
         margin: 20px 40px;
 
     }
-    
-  }
-  @media screen and (min-width: 801px) {
-    
+
+}
+
+@media screen and (min-width: 801px) {
+
     .content_Login {
-      width: 30%; /* Th1e width is 100%, when the viewport is 800px or smaller */
-      margin: 80px auto;
+        width: 30%;
+        /* Th1e width is 100%, when the viewport is 800px or smaller */
+        margin: 80px auto;
 
     }
   }
-
-.create_Form_Content{
-    background-color: #FFFFFF;
-    font-family: 'Source Sans Pro';
-}
 .content_Login{
     background-color: #FFFFFF;
     font-family: 'Source Sans Pro';
 }
-.slogan{
+
+.slogan {
     width: 100%;
     font-style: italic;
     background: var(--lightGreen_color);
@@ -34,38 +32,38 @@
     text-align: right;
 }
 
-.slogan_Brand{
+.slogan_Brand {
     font-weight: 700;
     font-size: 20px;
 }
 
-.slogan_Content{
+.slogan_Content {
     font-weight: 300;
     font-size: 14px;
 }
 
-.login{
-font-weight: 700;
-font-size: 30px;
-color: var(--lightPink_color);
-margin: 30px 0px 0px 0px;
+.login {
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--lightPink_color);
+    margin: 30px 0px 0px 0px;
 }
 
-.login_Content{
+.login_Content {
     font-weight: 200;
     font-size: 16px;
     color: var(--lightPink_color);
 }
 
-.link_To_Login{
+.link_To_Login {
     color: var(--darkPink_color);
 }
 
-.input_Login{
+.input_Login {
     margin-top: 30px;
 }
 
-.input_auth input{
+.input_auth input {
     align-items: center;
     height: 50px;
     width: 100%;
@@ -73,7 +71,7 @@ margin: 30px 0px 0px 0px;
     margin-bottom: 16px;
 }
 
-.submit_Register{
+.submit_Register {
     align-items: center;
     height: 50px;
     width: 100%;
@@ -87,19 +85,19 @@ margin: 30px 0px 0px 0px;
 }
 
 
-.other_Login{
+.other_Login {
     text-align: center;
     margin-bottom: 12px;
     font-weight: 300;
     color: #666;
 }
 
-.login_By{
+.login_By {
     width: 100%;
 
 }
 
-.login_By_Google a button{
+.login_By_Google a button {
     align-items: center;
     height: 50px;
     width: 100%;
