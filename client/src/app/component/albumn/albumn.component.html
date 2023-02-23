@@ -23,7 +23,7 @@
     <div class="col">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
+          data-bs-toggle="dropdown" aria-expanded="false">
           Content
         </button>
         <br>
@@ -41,6 +41,26 @@
         Upload
       </button>
       <button class="btn btn-danger btn-sm float-right mr-2" (click)="deleteSelected()">Delete Selected</button> <!-- Add Delete button -->
+
+      <form #form="ngForm" (ngSubmit)="addImage()">
+
+        <div class="input-group mb-3">
+          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+            [(ngModel)]="imageHandler.imageLink" name="imageLink">
+
+          <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.position">
+        </div>
+        <br>
+        <button class="btn btn-success btn-sm float-right" type="submit">
+          Upload
+        </button>
+
+      </form>
+
+
+
+
+
     </div>
   </div>
 </div>

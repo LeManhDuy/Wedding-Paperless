@@ -2,8 +2,9 @@ import { UploadImageService } from './../../services/upload-image.service';
 import { AlbumnService } from './../../services/albumn.service';
 import {Albumn, AlbumnDelete} from './../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-albumn',
@@ -19,7 +20,12 @@ export class AlbumnComponent implements OnInit {
   message = '';
   preview = '';
 
-  imageInfos?: Observable<any>;
+  imageHandler: Albumn = {
+    imageLink: '',
+    position: '',
+  };
+
+  selectedFile: ImageSnippet | undefined;
 
   constructor(private albumnService: AlbumnService, private uploadImage: UploadImageService) { }
 
@@ -27,13 +33,12 @@ export class AlbumnComponent implements OnInit {
     this.albumnService.getAllAlbumns().subscribe({
       next: (response) => {
         this.albumns = response;
+        console.log(this.albumns);
       },
       error: (error) => {
         console.log(error);
       }
     });
-
-    //this.imageInfos = this.uploadImage.getFiles();
   }
 
   selectFile(event: any): void {
@@ -92,18 +97,25 @@ export class AlbumnComponent implements OnInit {
             console.log("1", err);
             this.progress = 0;
 
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = 'Could not upload the image!';
-            }
-
-            this.currentFile = undefined;
-          },
-        });
-      }
-
-      this.selectedFiles = undefined;
-    }
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.imageHandler.imageLink = this.selectedFile.src;
+    });
+    reader.readAsDataURL(file);
   }
+
+  addImage() {
+    this.albumnService.addAlbumn(this.imageHandler).subscribe({
+      next: (imageHandler) => {
+      }
+    })
+  }
+
+  // onFileSelected(event: any) {
+  //   const file: File = event.target.files[0];
+  //   this.uploadFile(file);
+  // }
 }

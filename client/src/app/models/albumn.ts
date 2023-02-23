@@ -1,6 +1,6 @@
 export class Albumn {
   imageLink: string | undefined;
-  selected : boolean = false;
+  position: string | undefined;
   //personname: string = "";
 }
 
