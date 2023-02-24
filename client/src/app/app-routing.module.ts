@@ -1,3 +1,4 @@
+import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,6 +15,7 @@ const routes: Routes = [];
     { path: 'register', component: RegisterComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'albumn', component: AlbumnComponent },
+    { path: 'albumn/edit/:id', component: EditAlbumnComponent },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]

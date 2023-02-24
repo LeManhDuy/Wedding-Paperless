@@ -80,20 +80,28 @@ namespace WebApplication1.Repositories
 
         public async Task<AlbumnDto> GetAlbumnById(int id)
         {
-            return await _context.Albumns.Where(a => a.Id == id).Select(a => new AlbumnDto
-            {
-                Id = a.Id,
-                ImageLink = a.ImageLink
-            }).FirstOrDefaultAsync();
+            return await _context.Albumns.Where(a => a.Id == id)
+                .Include(a => a.Content)
+                .ThenInclude(c => c.Person)
+                .Select(a => new AlbumnDto
+                {
+                    Id = a.Id,
+                    ImageLink = a.ImageLink,
+                    PersonName = a.Content.Person.FullName
+                }).FirstOrDefaultAsync();
         }
 
         public async Task<List<AlbumnDto>> GetAlbumns()
         {
-            return await _context.Albumns.OrderBy(a => a.Id).Select(a => new AlbumnDto
-            {
-                Id = a.Id,
-                ImageLink = a.ImageLink,
-            }).ToListAsync();
+            return await _context.Albumns.OrderBy(a => a.Id)
+                .Include(a => a.Content)
+                .ThenInclude(c => c.Person)
+                .Select(a => new AlbumnDto
+                {
+                    Id = a.Id,
+                    ImageLink = a.ImageLink,
+                    PersonName = a.Content.Person.FullName
+                }).ToListAsync();
         }
 
         public async Task<bool> Save()

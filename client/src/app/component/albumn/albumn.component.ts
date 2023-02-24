@@ -1,6 +1,6 @@
 import { UploadImageService } from './../../services/upload-image.service';
 import { AlbumnService } from './../../services/albumn.service';
-import { Albumn } from './../../models/albumn';
+import { Albumn, ImageHandler } from './../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -14,7 +14,7 @@ class ImageSnippet {
 export class AlbumnComponent implements OnInit {
   albumns: Albumn[] = [];
 
-  imageHandler: Albumn = {
+  imageHandler: ImageHandler = {
     imageLink: '',
     position: '',
   };
@@ -40,7 +40,7 @@ export class AlbumnComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-      this.imageHandler.imageLink = this.selectedFile.src;
+     this.imageHandler.imageLink = this.selectedFile.src;
     });
     reader.readAsDataURL(file);
   }
