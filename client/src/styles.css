@@ -12,8 +12,10 @@
 
 *{
     margin: 0;
+    list-style: none;
 }
 body{
     
     margin: 0px;
+    padding: 0px;
 }
