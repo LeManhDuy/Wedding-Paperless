@@ -10,11 +10,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let albumn of albumns; let i = index">
-            <th>{{ albumn?.id }}</th>
-            <td><img class="card-img-top" src="{{ albumn?.imageLink }}" alt="Card image cap"></td>
-            <td>{{ albumn?.personName }}</td>
-          </tr>
+          <th>{{ albumnDetails?.id }}</th>
+          <td><img class="card-img-top" src="{{ albumnDetails?.imageLink }}" alt="Card image cap"></td>
+          <td>{{ albumnDetails?.personName }}</td>
+          <td>{{ albumnDetails?.contentId }}</td>
         </tbody>
       </table>
     </div>
@@ -31,12 +30,12 @@
       </div>
       <br>
 
-      <form #form="ngForm" (ngSubmit)="addImage()">
+      <form #form="ngForm" (ngSubmit)="updateImage()">
         <div class="input-group mb-3">
           <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-            [(ngModel)]="imageHandler.imageLink" name="imageLink">
+            [(ngModel)]="albumnDetails.imageLink" name="imageLink">
 
-          <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.position">
+          <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="albumnDetails.position">
         </div>
         <br>
         <button class="btn btn-success btn-sm float-right" type="submit">

@@ -8,6 +8,7 @@ export class Albumn {
   imageLink: string | undefined;
   position: string | undefined;
   personName: string = "";
+  contentId: string | undefined;
 }
 
 export class AlbumnDelete {
