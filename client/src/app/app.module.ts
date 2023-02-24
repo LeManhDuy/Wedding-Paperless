@@ -8,7 +8,7 @@ import {LoginComponent} from './component/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 // import {LoginComponent} from './component/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
-import { LoginSuccessDialogComponent } from './component/login/login-success-dialog/login-success-dialog.component';
+import { LoginSuccessDialogComponent } from './component/login-success-dialog/login-success-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
