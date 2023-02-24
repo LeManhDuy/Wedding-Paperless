@@ -71,10 +71,10 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Update albumn.
         /// </summary>
-        [HttpPut("edit/{contentId}")]
+        [HttpPut("{contentId}&{albumnId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
+        public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromRoute] int albumnId, [FromBody] AlbumnDto albumnDto)
         {
             if (albumnDto == null)
             {
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!await _albumnRepository.AlbumnExist(albumnDto.Id))
+            if (await _albumnRepository.AlbumnExist(albumnDto.Id))
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace WebApplication1.Controllers
             try
             {
                 int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
-                await _albumnRepository.UpdateAlbumn(contentId, matrix, albumnDto.ImageLink);
+                await _albumnRepository.UpdateAlbumn(contentId, albumnId, matrix, albumnDto.ImageLink);
                 return Ok();
             }
             catch (Exception ex)
