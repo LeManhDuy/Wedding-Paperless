@@ -5,11 +5,13 @@ import {AppComponent} from './app.component';
 import {AuthComponent} from './component/auth/auth.component';
 import {RegisterComponent} from './component/register/register.component';
 import {LoginComponent} from './component/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
-import { LoginSuccessDialogComponent } from './component/login-success-dialog/login-success-dialog.component';
+import { LoginSuccessDialogComponent } from './component/login/login-success-dialog/login-success-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import { AlbumnComponent } from './component/albumn/albumn.component';
+import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     RegisterComponent,
     LoginComponent,
     LoginSuccessDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AlbumnComponent,
+    EditAlbumnComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +31,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
     FormsModule,
     HttpClientModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

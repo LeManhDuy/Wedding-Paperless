@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col order-first">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Host's Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <th>{{ albumnDetails?.id }}</th>
+          <td><img class="card-img-top" src="{{ albumnDetails?.imageLink }}" alt="Card image cap"></td>
+          <td>{{ albumnDetails?.personName }}</td>
+          <td>{{ albumnDetails?.contentId }}</td>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Content
+        </button>
+        <br>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+        </ul>
+      </div>
+      <br>
+
+      <form #form="ngForm" (ngSubmit)="updateImage()">
+        <div class="input-group mb-3">
+          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+            [(ngModel)]="albumnDetails.imageLink" name="imageLink">
+
+          <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="albumnDetails.position">
+        </div>
+        <br>
+        <button class="btn btn-success btn-sm float-right" type="submit">
+          Upload
+        </button>
+        <button class="btn btn-danger btn-sm float-right" type="button" (click)="deleteImage(albumnDetails.id)">
+          Delete
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
