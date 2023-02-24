@@ -12,7 +12,7 @@ const routes: Routes = [];
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'login', loadChildren: () => import('./component/login/login.module').then(m=>m.LoginModule)},
     { path: 'register', component: RegisterComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'albumn', component: AlbumnComponent },

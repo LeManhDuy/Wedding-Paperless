@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("component")
     if (this.loginSuccess) {
       const dialogRef = this.dialog.open(LoginSuccessDialogComponent);
     }
