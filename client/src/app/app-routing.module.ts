@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './component/register/register.component'
 import { LoginComponent } from "./component/login/login.component";
 import { NotFoundComponent } from './component/not-found/not-found.component';
+import {EditAlbumnComponent} from "./component/albumn/edit-albumn/edit-albumn.component";
 
 const routes: Routes = [];
 
@@ -15,7 +16,7 @@ const routes: Routes = [];
     { path: 'register', component: RegisterComponent },
     { path: 'not-found', component: NotFoundComponent },
     { path: 'albumn', component: AlbumnComponent },
-    // { path: 'albumn/edit/:id', component: EditAlbumnComponent },
+    { path: 'albumn/edit/:id', component: EditAlbumnComponent },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]
