@@ -1,8 +1,8 @@
-import {Albumn, AlbumnDelete} from './../models/albumn';
-import {environment} from './../../environments/environment';
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Albumn, ImageHandler, AlbumnDelete } from './../models/albumn';
+import { environment } from './../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,8 @@ export class AlbumnService {
     return this.http.get<Albumn[]>(`${this.baseUrl}`)
   }
 
-  addAlbumn(imageHandler: Albumn): Observable<Albumn> {
-    return this.http.post<Albumn>(this.baseUrl + '/1', imageHandler);
+  addAlbumn(imageHandler: ImageHandler): Observable<ImageHandler> {
+    return this.http.post<ImageHandler>(this.baseUrl + '/1', imageHandler);
   }
 
   deleteSelected(albumn: AlbumnDelete): void {

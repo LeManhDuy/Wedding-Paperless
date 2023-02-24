@@ -1,10 +1,18 @@
-export class Albumn {
+export class ImageHandler {
   imageLink: string | undefined;
   position: string | undefined;
-  //personname: string = "";
+}
+
+export class Albumn {
+  id: string | undefined;
+  imageLink: string | undefined;
+  position: string | undefined;
+  personName: string = "";
 }
 
 export class AlbumnDelete {
   id : number | undefined;
   selected : boolean = false;
 }
+
+
