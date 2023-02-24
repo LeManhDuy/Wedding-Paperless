@@ -1,4 +1,4 @@
-// import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
+import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
