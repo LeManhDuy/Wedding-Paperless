@@ -12,7 +12,8 @@ export class RegisterService {
     'Content-Type': 'application/json'
   })
 
-  baseUrl = 'https://localhost:44328/' + 'api/auth/register'
+  prefixUrl: string = environment.apiURL;
+  baseUrl = this.prefixUrl + 'api/auth/register'
 
   private currentUser = new BehaviorSubject<UserToken | null>(null)
 
@@ -21,8 +22,6 @@ export class RegisterService {
   constructor(private httpClient: HttpClient) { }
 
   register(registerUser: RegisterUser) {
-    console.log("2", registerUser);
-
     return this.httpClient
       .post(`${this.baseUrl}`, registerUser, {
         responseType: 'text',

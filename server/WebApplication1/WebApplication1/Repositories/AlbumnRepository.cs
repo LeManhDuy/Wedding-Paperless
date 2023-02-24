@@ -80,20 +80,30 @@ namespace WebApplication1.Repositories
 
         public async Task<AlbumnDto> GetAlbumnById(int id)
         {
-            return await _context.Albumns.Where(a => a.Id == id).Select(a => new AlbumnDto
-            {
-                Id = a.Id,
-                ImageLink = a.ImageLink
-            }).FirstOrDefaultAsync();
+            return await _context.Albumns.Where(a => a.Id == id)
+                .Include(a => a.Content)
+                .ThenInclude(c => c.Person)
+                .Select(a => new AlbumnDto
+                {
+                    Id = a.Id,
+                    ImageLink = a.ImageLink,
+                    PersonName = a.Content.Person.FullName,
+                    ContentId = a.Content.Id,
+                }).FirstOrDefaultAsync();
         }
 
         public async Task<List<AlbumnDto>> GetAlbumns()
         {
-            return await _context.Albumns.OrderBy(a => a.Id).Select(a => new AlbumnDto
-            {
-                Id = a.Id,
-                ImageLink = a.ImageLink,
-            }).ToListAsync();
+            return await _context.Albumns.OrderBy(a => a.Id)
+                .Include(a => a.Content)
+                .ThenInclude(c => c.Person)
+                .Select(a => new AlbumnDto
+                {
+                    Id = a.Id,
+                    ImageLink = a.ImageLink,
+                    PersonName = a.Content.Person.FullName,
+                    ContentId = a.Content.Id,
+                }).ToListAsync();
         }
 
         public async Task<bool> Save()
@@ -102,7 +112,7 @@ namespace WebApplication1.Repositories
             return Saved > 0 ? true : false;
         }
 
-        public async Task<bool> UpdateAlbumn(int contentId, int[] matrix, string imageLink)
+        public async Task<bool> UpdateAlbumn(int contentId, int albumnId, int[] matrix, string imageLink)
         {
             try
             {
@@ -112,7 +122,7 @@ namespace WebApplication1.Repositories
                     throw new Exception("Content not found !!!");
                 }
 
-
+                var albumn = await _context.Albumns.FirstOrDefaultAsync(a => a.Id == albumnId);
 
                 var base64String = imageLink.Split("base64,")[1];
                 byte[] bytesImage = Convert.FromBase64String(base64String);
@@ -128,13 +138,11 @@ namespace WebApplication1.Repositories
 
                 imageLink = await storage.Child("images_by_months/" + DateTime.Now.Month + "/img" + "_" + id).PutAsync(stream);
 
-                var albumn = new Albumn()
-                {
-                    ImageLink = imageLink,
-                    Content = content,
-                    Row = matrix[0],
-                    Column = matrix[1]
-                };
+                albumn.ImageLink = imageLink;
+                albumn.Row = matrix[0];
+                albumn.Column = matrix[1];
+
+
                 _context.Albumns.Update(albumn);
                 await _context.SaveChangesAsync();
                 return await Save();
