@@ -1,6 +1,5 @@
-import { UploadImageService } from './../../services/upload-image.service';
-import { AlbumnService } from './../../services/albumn.service';
-import {Albumn, AlbumnDelete, ImageHandler} from './../../models/albumn';
+import { AlbumnService } from '../../services/albumn.service';
+import {Albumn, AlbumnDelete, ImageHandler} from '../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 class ImageSnippet {
@@ -19,10 +18,6 @@ export class AlbumnComponent implements OnInit {
     imageLink: '',
     position: '',
   };
-
-  albumnDelete: AlbumnDelete = {
-    id: undefined, selected: false
-  }
 
   selectedFile: ImageSnippet | undefined;
 
@@ -53,16 +48,6 @@ export class AlbumnComponent implements OnInit {
     this.albumnService.addAlbumn(this.imageHandler).subscribe({
       next: (imageHandler) => {
         this.router.navigate(['albumn']);
-
-
-      }
-    })
-  }
-
-  deleteSelected() {
-    this.albumnService.deleteSelected(this.albumnDelete).subscribe({
-      next: (albumnDelete) => {
-        console.log(albumnDelete);
       }
     })
   }

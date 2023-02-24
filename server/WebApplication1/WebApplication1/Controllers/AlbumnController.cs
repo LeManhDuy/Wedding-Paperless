@@ -113,7 +113,7 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> DeleteAlbumns([FromBody] int albumnId)
+        public async Task<IActionResult> DeleteAlbumns([FromRoute] int albumnId)
         {
             if (!ModelState.IsValid)
             {

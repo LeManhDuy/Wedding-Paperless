@@ -1,10 +1,11 @@
-import { AlbumnService } from './../../../services/albumn.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Albumn, ImageHandler } from 'src/app/models/albumn';
+import {AlbumnService} from '../../../services/albumn.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Albumn, ImageHandler} from 'src/app/models/albumn';
 
 class ImageSnippet {
-  constructor(public src: string, public file: File) { }
+  constructor(public src: string, public file: File) {
+  }
 }
 
 @Component({
@@ -24,7 +25,8 @@ export class EditAlbumnComponent implements OnInit {
 
   selectedFile: ImageSnippet | undefined;
 
-  constructor(private router: Router, private route: ActivatedRoute, private albumnService: AlbumnService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private albumnService: AlbumnService) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -58,6 +60,17 @@ export class EditAlbumnComponent implements OnInit {
           this.router.navigate(['albumn']);
         }
       });
+    }
+  }
+
+  deleteImage(id: string | undefined) {
+    if (id) {
+      console.log(id);
+      this.albumnService.deleteSelected(id).subscribe({
+        next: () => {
+          this.router.navigate(['albumn'])
+        }
+      })
     }
   }
 }
