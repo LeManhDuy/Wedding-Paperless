@@ -112,7 +112,7 @@ namespace WebApplication1.Repositories
                     throw new Exception("Content not found !!!");
                 }
 
-
+                var albumn = await _context.Albumns.FirstOrDefaultAsync(a => a.Content.Id == contentId);
 
                 var base64String = imageLink.Split("base64,")[1];
                 byte[] bytesImage = Convert.FromBase64String(base64String);
@@ -128,13 +128,11 @@ namespace WebApplication1.Repositories
 
                 imageLink = await storage.Child("images_by_months/" + DateTime.Now.Month + "/img" + "_" + id).PutAsync(stream);
 
-                var albumn = new Albumn()
-                {
-                    ImageLink = imageLink,
-                    Content = content,
-                    Row = matrix[0],
-                    Column = matrix[1]
-                };
+                albumn.ImageLink = imageLink;
+                albumn.Row = matrix[0];
+                albumn.Column = matrix[1];
+
+
                 _context.Albumns.Update(albumn);
                 await _context.SaveChangesAsync();
                 return await Save();
