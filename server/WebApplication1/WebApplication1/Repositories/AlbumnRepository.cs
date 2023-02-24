@@ -128,6 +128,7 @@ namespace WebApplication1.Repositories
                 albumn.Row = matrix[0];
                 albumn.Column = matrix[1];
 
+
                 _context.Albumns.Update(albumn);
                 await _context.SaveChangesAsync();
                 return await Save();
