@@ -1,0 +1,121 @@
+@media screen and (max-width: 800px) {
+    
+    .create_Invitation_Content{
+        margin: 20px 40px;
+
+    }
+    
+  }
+  @media screen and (min-width: 801px) {
+    
+    .create_Invitation_Content {
+      width: 100%; /* Th1e width is 100%, when the viewport is 800px or smaller */
+
+      display: flex;
+    }
+  }
+
+.create_Invitation_Content{
+    height: 100%;
+}
+.logo_navbar{
+    font-style: italic;
+    font-size: 20px;
+    color: var(--lightGreen_color);
+}
+.slogan{
+    width: 100%;
+    background: var(--lightGreen_color);
+    /* background:linear-gradient(271.15deg, #FA4BFE 7.64%, #FB724C 90.68%), #EE5757; */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 30px;
+    border-bottom: 1px solid #c3c3c3;
+    padding: 6px 20px;
+}
+
+.slogan h1{
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+.content-center{
+    width: 100%;
+}
+
+.container_CreatePage{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.create_New{
+  width: 20%;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.create_New button{
+    background-color: white;
+}
+
+.content_CreatePage{
+  width: 100%;
+  justify-content: center;
+}
+.content_Create{
+  /* border: 3px solid var(--lightPink_color); */
+  border-radius: 5px;
+  width: 200px;
+  height: 150px;
+}
+
+.sidebar {
+    
+    width: 250px;
+    height: 100%;
+    background: #042331;
+    transition: all .5s ease;
+  }
+  .sidebar header {
+    font-size: 22px;
+    line-height: 50px;
+    /* font-weight: 300; */
+    text-align: center;
+    background: #fefefe;
+    user-select: none;
+    font-style: italic;
+    color: var(--lightGreen_color);
+  }
+  .sidebar ul a{
+    display: block;
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    color: white;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+    border-top: 1px solid rgba(255,255,255,.1);
+    transition: .4s;
+
+  }
+
+  .sidebar li{
+    list-style: none;
+  }
+
+  ul li:hover a{
+    padding-left: 50px;
+  }
+  .sidebar ul a i{
+    margin-right: 16px;
+  }
+  header{
+     font-style: italic;
+    font-size: 20px;
+    color: var(--lightGreen_color);
+  }
