@@ -87,7 +87,8 @@ namespace WebApplication1.Repositories
                 {
                     Id = a.Id,
                     ImageLink = a.ImageLink,
-                    PersonName = a.Content.Person.FullName
+                    PersonName = a.Content.Person.FullName,
+                    ContentId = a.Content.Id,
                 }).FirstOrDefaultAsync();
         }
 
@@ -100,7 +101,8 @@ namespace WebApplication1.Repositories
                 {
                     Id = a.Id,
                     ImageLink = a.ImageLink,
-                    PersonName = a.Content.Person.FullName
+                    PersonName = a.Content.Person.FullName,
+                    ContentId = a.Content.Id,
                 }).ToListAsync();
         }
 
@@ -119,8 +121,6 @@ namespace WebApplication1.Repositories
                 {
                     throw new Exception("Content not found !!!");
                 }
-
-
 
                 var base64String = imageLink.Split("base64,")[1];
                 byte[] bytesImage = Convert.FromBase64String(base64String);

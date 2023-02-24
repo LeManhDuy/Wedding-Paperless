@@ -2,6 +2,7 @@ import { UploadImageService } from './../../services/upload-image.service';
 import { AlbumnService } from './../../services/albumn.service';
 import { Albumn, ImageHandler } from './../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
 }
@@ -21,13 +22,12 @@ export class AlbumnComponent implements OnInit {
 
   selectedFile: ImageSnippet | undefined;
 
-  constructor(private albumnService: AlbumnService, private uploadImage: UploadImageService) { }
+  constructor(private albumnService: AlbumnService, private router: Router) { }
 
   ngOnInit(): void {
     this.albumnService.getAllAlbumns().subscribe({
       next: (response) => {
         this.albumns = response;
-        console.log(this.albumns);
       },
       error: (error) => {
         console.log(error);
@@ -40,7 +40,7 @@ export class AlbumnComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-     this.imageHandler.imageLink = this.selectedFile.src;
+      this.imageHandler.imageLink = this.selectedFile.src;
     });
     reader.readAsDataURL(file);
   }
@@ -48,6 +48,7 @@ export class AlbumnComponent implements OnInit {
   addImage() {
     this.albumnService.addAlbumn(this.imageHandler).subscribe({
       next: (imageHandler) => {
+        this.router.navigate(['albumn']);
       }
     })
   }

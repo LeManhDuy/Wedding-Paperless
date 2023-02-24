@@ -12,5 +12,6 @@ namespace WebApplication1.Dto
         [Required]
         public string Position { get; set; }
         public string PersonName { get; set; }
+        public int ContentId { get; set; }
     }
 }
