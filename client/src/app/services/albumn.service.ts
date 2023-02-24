@@ -19,13 +19,11 @@ export class AlbumnService {
   }
 
   addAlbumn(imageHandler: ImageHandler): Observable<ImageHandler> {
-    return this.http.post<ImageHandler>(this.baseUrl + '/1', imageHandler);
+    return this.http.post<ImageHandler>(this.baseUrl + '/3', imageHandler);
   }
 
-  deleteSelected(albumn: AlbumnDelete): void {
+  deleteSelected(albumn: AlbumnDelete): Observable<AlbumnDelete> {
     const id = albumn.id;
-
-    this.http.delete(`${this.baseUrl}${id}`).subscribe(() => {
-    });
+    return this.http.delete<AlbumnDelete>(`${this.baseUrl}${id}`)
   }
 }

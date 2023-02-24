@@ -1,10 +1,9 @@
 import { UploadImageService } from './../../services/upload-image.service';
 import { AlbumnService } from './../../services/albumn.service';
-import { Albumn, ImageHandler } from './../../models/albumn';
+import {Albumn, AlbumnDelete, ImageHandler} from './../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 class ImageSnippet {
-  constructor(public src: string, public file: File) {
-  }
+  constructor(public src: string, public file: File) { }
 }
 
 @Component({
@@ -13,18 +12,16 @@ class ImageSnippet {
   styleUrls: ['./albumn.component.css']
 })
 export class AlbumnComponent implements OnInit {
-  albumnDelete: AlbumnDelete[] = []
   albumns: Albumn[] = [];
-  selectedFiles?: FileList;
-  currentFile?: File;
-  progress = 0;
-  message = '';
-  preview = '';
 
   imageHandler: ImageHandler = {
     imageLink: '',
     position: '',
   };
+
+  albumnDelete: AlbumnDelete = {
+    id: undefined, selected: false
+  }
 
   selectedFile: ImageSnippet | undefined;
 
@@ -47,17 +44,26 @@ export class AlbumnComponent implements OnInit {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
-     this.imageHandler.imageLink = this.selectedFile.src;
+      this.imageHandler.imageLink = this.selectedFile.src;
     });
     reader.readAsDataURL(file);
   }
 
-          addImage() {
-            this.albumnService.addAlbumn(this.imageHandler).subscribe({
-              next: (imageHandler : Albumn) => {
-              }
-            })
-          }
+  addImage() {
+    this.albumnService.addAlbumn(this.imageHandler).subscribe({
+      next: (imageHandler) => {
+
+      }
+    })
+  }
+
+  deleteSelected() {
+    this.albumnService.deleteSelected(this.albumnDelete).subscribe({
+      next: (albumnDelete) => {
+        console.log(albumnDelete);
+      }
+    })
+  }
 
   // onFileSelected(event: any) {
   //   const file: File = event.target.files[0];
