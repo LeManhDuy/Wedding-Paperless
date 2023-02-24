@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
-        /// Create albumn.
+        /// Create albumns.
         /// </summary>
         [HttpPost("{contentId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
