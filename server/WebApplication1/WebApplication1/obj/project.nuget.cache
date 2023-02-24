@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "W2AyO1BrhRLHoyKGXJa7x4/a/Tb/3jvTWMYvcVhDriQXaP651RzPxVj2kiUijOuS6jh3813zIMDZuA7l3lZ+vg==",
+  "dgSpecHash": "sm7h1dqFGkf5kwi10k4cZDf8ytg5DYEBaJBTkcQDDPIsP17iDS/GobuOXb4OTd5CsT6d8KJxBpxv27evK6/UMQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jarvis\\Desktop\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-=======
-  "dgSpecHash": "1N83Q/UA7DNHh76KBfXj/kQVExiPt+Oye6hTn1BsYpLkbBxbfAl3ijetc7kQQ7ZS7PhWHGn5JA+FzFc1fFbtnQ==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Marine\\Desktop\\finish\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
->>>>>>> 7ecb3a862555d0e5d387247a819093498e923fa7
+  "projectFilePath": "C:\\Users\\Jarvis\\source\\repos\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jarvis\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Jarvis\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
@@ -201,6 +195,12 @@
     "C:\\Users\\Jarvis\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Jarvis\\source\\repos\\Wedding-Paperless\\server\\WebApplication1\\WebApplication1\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1608",
       "level": "Warning",
