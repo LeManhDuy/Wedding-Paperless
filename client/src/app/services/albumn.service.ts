@@ -32,6 +32,6 @@ export class AlbumnService {
   }
   updateAlbumn(id: string, imageHandler: ImageHandler): Observable<ImageHandler> {
     console.log("service", id, imageHandler);
-    return this.http.put<ImageHandler>(this.baseUrl + 'edit/' + id, imageHandler)
+    return this.http.put<ImageHandler>(this.baseUrl + id, imageHandler)
   }
 }

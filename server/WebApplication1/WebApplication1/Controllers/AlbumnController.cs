@@ -71,7 +71,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Update albumn.
         /// </summary>
-        [HttpPut("edit/{contentId}")]
+        [HttpPut("{contentId}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
