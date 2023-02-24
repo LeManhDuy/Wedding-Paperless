@@ -52,11 +52,10 @@ export class EditAlbumnComponent implements OnInit {
   }
 
   updateImage() {
-    if (this.albumnDetails.contentId) {
-      console.log(this.albumnDetails);
-      this.albumnService.updateAlbumn(this.albumnDetails.contentId, this.albumnDetails).subscribe({
+    if (this.albumnDetails.contentId && this.albumnDetails.id) {
+      this.albumnService.updateAlbumn(this.albumnDetails.contentId, this.albumnDetails.id, this.albumnDetails).subscribe({
         next: (albumn) => {
-          this.router.navigate(['albumn'])
+          this.router.navigate(['albumn']);
         }
       });
     }
