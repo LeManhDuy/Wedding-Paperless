@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (!await _albumnRepository.AlbumnExist(albumnDto.Id))
+            if (await _albumnRepository.AlbumnExist(albumnDto.Id))
             {
                 return BadRequest();
             }
