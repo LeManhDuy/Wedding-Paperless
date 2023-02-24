@@ -102,7 +102,7 @@ namespace WebApplication1.Repositories
             return Saved > 0 ? true : false;
         }
 
-        public async Task<bool> UpdateAlbumn(int contentId, int[] matrix, string imageLink)
+        public async Task<bool> UpdateAlbumn(int contentId, int albumnId, int[] matrix, string imageLink)
         {
             try
             {
@@ -112,7 +112,7 @@ namespace WebApplication1.Repositories
                     throw new Exception("Content not found !!!");
                 }
 
-                var albumn = await _context.Albumns.FirstOrDefaultAsync(a => a.Content.Id == contentId);
+                var albumn = await _context.Albumns.FirstOrDefaultAsync(a => a.Id == albumnId);
 
                 var base64String = imageLink.Split("base64,")[1];
                 byte[] bytesImage = Convert.FromBase64String(base64String);
