@@ -1,0 +1,173 @@
+@media screen and (max-width: 800px) {
+    
+    .create_Form_Container{
+        margin: 0px;
+
+    }
+    .create_Form_Content{
+
+    }
+    
+  }
+  @media screen and (min-width: 801px) {
+    
+    .create_Form_Container {
+      /* width: 30%; Th1e width is 100%, when the viewport is 800px or smaller */
+      margin: 0px auto;
+      width: 50%;
+    }
+    .create_Form_Content{
+        width: 50%;
+        margin: 0px auto;
+    }
+  }
+/* body{
+    background-color: #ffffff;
+} */
+.create_Form_Container{
+    background-color: var(--MW-background_color);
+    /* margin-top: 80px; */
+    padding: 80px 0px;
+    width: 100%;
+}
+
+.create_Form_Content{
+    /* background-color: var(--MW-background_color); */
+    font-family: 'Source Sans Pro';
+    align-items: center;
+    /* width: 100%; */
+}
+.image_Center {
+    width: 80%;
+    height: 200px;
+    padding: 10px;
+    text-align: center;
+    border: dashed 1px var(--lightGreen_color);
+    position: relative;
+    margin: 0 auto;
+}
+.image_Center input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+}
+label {
+    color: white;
+    width: 183px;
+    height: 44px;
+    border-radius: 21.5px ;
+    background-color: var(--lightGreen_color);
+    padding: 8px 16px;
+}
+h4{
+    color: black;
+}
+h3{
+    font-size:  20px;
+    font-weight: 600;
+    color:var(--lightGreen_color);
+    margin-bottom: 20px;
+}
+.schedule ul, li{
+    list-style: none;
+    padding: 0;
+}
+.create_Form_Content input{
+    border: none;
+    background-color: transparent;
+    color: #000000;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    height: auto;
+    padding: 10px 5px;
+}
+
+.title input{
+    font-size: 35px;
+    color: var(--MW-pinkNeon_color);
+}
+
+textarea{
+    border: none;
+    background-color: var(--MW-background_color);
+    color: #FFFFFF;
+    width: 100%;
+    text-align: center;
+    height: auto;
+    padding: 20px;
+}
+.schedule{
+    width: 100%;
+}
+
+.time_Map{
+    width: 100%;
+    text-align: center;
+}
+.time_Stamp{
+    padding: 40px 10px;
+    background-color: #7F7167;
+    border-radius: 10px;
+    width: 60%;
+    margin: 0px auto;
+}
+.schedule li{
+    padding-bottom: 1.5rem;
+    border-left: 1px solid #abaaed;
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+.schedule li:last-child{
+    border: 0px;
+    padding-bottom: 0;
+}
+
+.schedule li:before{
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: var(--lightPink_color);
+      border: 1px solid var(--darkPink_color);
+      box-shadow: 3px 3px 0px #bab5f8;
+      box-shadow: 3px 3px 0px #bab5f8;
+      border-radius: 50%;
+      position: absolute;
+      left: -10px;
+      top: 0px;
+} 
+
+
+.schedule input::placeholder{
+    font-size: 16px;
+    /* color: antiquewhite; */
+}
+
+
+
+.title input::placeholder{
+    color: var(--MW-pinkNeon_color);
+    font-size: 2rem;
+    
+}
+
+.host_Name{
+    color: #000000;
+    text-align: center;
+    font-size: 20px;
+}
+
+.our_Memory_Title{
+    color: #FFF;
+    text-align: center;
+    font-size: 20px;
+}
+
+.hope_Join{
+    text-align:right ;
+}
