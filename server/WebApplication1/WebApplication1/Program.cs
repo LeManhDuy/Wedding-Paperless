@@ -96,14 +96,18 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.Configure<IdentityOptions>(opt => opt.SignIn.RequireConfirmedEmail = true);
 builder.Services.AddSingleton(builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+//Repository Scope
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 builder.Services.AddScoped<IAlbumnRepository, AlbumnRepository>();
 builder.Services.AddScoped<IRegisterSongRepository, RegisterSongRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IContentRepository, ContentRepository>();
 
+//Service Scope
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IContentService, ContentService>();
 
 
 builder.WebHost.ConfigureKestrel(kestrelServerOptions =>

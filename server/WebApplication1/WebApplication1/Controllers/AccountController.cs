@@ -53,7 +53,7 @@ namespace WebApplication1.Controller
         }
 
         /// <summary>
-        /// Register Account.
+        /// Delete Account.
         /// </summary>
         /// <param name="accountId">account id</param>     
         [HttpDelete("{accountId}")]
@@ -138,7 +138,6 @@ namespace WebApplication1.Controller
             return Ok("Update success");
         }
 
-
         /// <summary>
         /// Update patch json.
         /// </summary>
@@ -188,7 +187,6 @@ namespace WebApplication1.Controller
             }
 
             return BadRequest(ModelState);
-
         } 
     }
 }
