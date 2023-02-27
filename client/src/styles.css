@@ -13,7 +13,39 @@
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
 }
-body{
-    
-    margin: 0px;
+
+@media screen and (max-width: 1400px){
+    body{
+        max-width: 1320px;
+    }
+}
+
+@media screen and ((max-width: 1200px)){
+    body{
+        max-width: 1140px;
+    }
+}
+
+@media screen and ((max-width: 992px)){
+    body{
+        max-width: 960px;
+    }
+}
+
+@media screen and ((max-width: 768px)){
+    body{
+        max-width: 720px;
+    }
+}
+
+@media screen and ((max-width: 576px)){
+    body{
+        max-width: 540px;
+    }
+}
+
+.form-search{
+    height: 100%;
+    display: flex;
+    align-items: center;
 }

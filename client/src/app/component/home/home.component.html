@@ -6,62 +6,74 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,100;1,300&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<div class="create_Invitation_Content">
-    <div class="left-bar">
-        <div class="sidebar">
-            <header>MyWedding</header>
-            <ul>
-             <li><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></li>
-             <li><a href="#"><i class="fas fa-link"></i>Shortcuts</a></li>
-             <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
-             <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
-             <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
-             <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
-             <li><a href="#"><i class="far fa-envelope"></i>Contact</a></li>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container d-flex justify-content-between">
+      <a class="navbar-brand" href="#">MyWedding</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav row d-flex justify-content-end">
+          <!-- me-auto mb-2 mb-lg-0 -->
+          <form class="form-search col-md-auto">  
+            <input class="form-control" type="search" placeholder="Search" aria-label="">
+            <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+          </form>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li> -->
+          <li class="nav-item dropdown col col-lg-2">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-           </div>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        
+      </div>
     </div>
-    <div class="content-center">
-
-    
-        <!-- <div class="navbar">
-            <a class="logo_navbar" href="/">MyWedding</a>
-        </div> -->
-        <!-- <div class="slogan">
-            <h1 >Create your wedding invitation card</h1>
-        </div> -->
-        <nav class="slogan navbar bg-light">
-            <div class="container-fluid">
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </nav>
-        <div class="container_CreatePage">
-            <div class="create_New">
-                <button class="content_Create_Page">
-                        <div class="content_Create">
-                            Blank
-                        </div>
-                </button>
-            </div>
-            <div class="create_New">
-                <button class="content_Create_Page">
-                        <div class="content_Create">
-                            MyWedding
-                        </div>
-                </button>
+  </nav>
+  <div class="container_CreatePage">
+    <div class="create_New">
+        
+            <button class="content_Create_Page" href="">
+                <div class="content_Create">
+                    Blank
+                </div>
+                Create new...
+            </button>
+        
+    </div>
+    <div class="create_New">
+            <button class="content_Create_Page" href="">
+              <a href="../form/form.component.html">
+                <div class="content_Create">
+                  MyWedding
+              </div>
+              Template by MyWedding
+              </a>
                 
-            </div>
-            <div class="create_New">
-                <button class="content_Create_Page">
-                        <div class="content_Create">
-                            Explore more design...
-                        </div>
-                </button>
-            </div>
-        </div>
+            </button>
+        
+        
+    </div>
+    <div class="create_New">
+        
+            <button class="content_Create_Page"  href="">
+                <div class="content_Create">
+                    Explore more design...
+                </div>
+                Community
+            </button>
     </div>
 </div>
 
