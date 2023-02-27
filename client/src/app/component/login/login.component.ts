@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../../services/login.service";
+import {LoginService} from "../../_services/login.service";
 import {LoginUser} from "../../models/app-user";
 import {MatDialog} from '@angular/material/dialog';
 import {LoginSuccessDialogComponent} from "./login-success-dialog/login-success-dialog.component";

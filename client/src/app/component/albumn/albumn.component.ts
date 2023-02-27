@@ -1,4 +1,4 @@
-import { AlbumnService } from '../../services/albumn.service';
+import { AlbumnService } from '../../_services/albumn.service';
 import {Albumn, AlbumnDelete, ImageHandler} from '../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
