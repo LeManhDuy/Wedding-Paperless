@@ -31,8 +31,7 @@ export class AlbumnService {
       return this.http.delete<AlbumnDelete>(`${this.baseUrl}${id}`)
     throw new Error()
   }
-  updateAlbumn(id: string, imageHandler: ImageHandler): Observable<ImageHandler> {
-    console.log("service", id, imageHandler);
-    return this.http.put<ImageHandler>(this.baseUrl + 'edit/' + id, imageHandler)
+  updateAlbumn(contentId: string, albumnId: string, imageHandler: ImageHandler): Observable<ImageHandler> {
+    return this.http.put<ImageHandler>(this.baseUrl + contentId + "&" + albumnId, imageHandler)
   }
 }

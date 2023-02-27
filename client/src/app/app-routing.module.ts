@@ -1,3 +1,4 @@
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 // import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,7 @@ const routes: Routes = [];
     { path: 'not-found', component: NotFoundComponent },
     { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
+    { path: 'dashboard', component: DashboardComponent },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]
