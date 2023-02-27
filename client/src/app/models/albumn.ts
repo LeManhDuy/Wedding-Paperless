@@ -1,6 +1,7 @@
 export class ImageHandler {
   imageLink: string | undefined;
   position: string | undefined;
+  contentId: string | undefined;
 }
 
 export class Albumn {
@@ -12,8 +13,8 @@ export class Albumn {
 }
 
 export class AlbumnDelete {
-  id : number | undefined;
-  selected : boolean = false;
+  id: number | undefined;
+  selected: boolean = false;
 }
 
 

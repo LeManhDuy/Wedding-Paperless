@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
         /// Get all content.
         /// </summary>
         /// <returns>A list content</returns>
-        [HttpGet("content")]
+        [HttpGet()]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
@@ -56,7 +56,8 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult<ICollection<ContentDto>>> GetContentById(int contentId)
         {
             var content = await _contentRepository.GetContentByIdAsync(contentId);
-            if(content == null){
+            if (content == null)
+            {
                 return NotFound();
             }
 
@@ -78,15 +79,18 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(404)]
         public async Task<ActionResult<ICollection<ContentDto>>> DeleteContent(int contentId)
         {
-            if(!await _contentRepository.ContentExistAsync(contentId)){
+            if (!await _contentRepository.ContentExistAsync(contentId))
+            {
                 return NotFound();
             }
 
-            if(!ModelState.IsValid){
+            if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
             }
 
-            if(!await _contentRepository.DeleteContentAsync(contentId)){
+            if (!await _contentRepository.DeleteContentAsync(contentId))
+            {
                 ModelState.AddModelError("", "Something went wrong deleting content");
             }
 
@@ -99,7 +103,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> CreateContent(int idPerson,[FromBody]CreateUpdateContentDto createUpdateContentDto) 
+        public async Task<IActionResult> CreateContent(int idPerson, [FromBody] CreateUpdateContentDto createUpdateContentDto)
         {
             if (createUpdateContentDto == null)
             {
@@ -111,12 +115,14 @@ namespace WebApplication1.Controllers
                 return BadRequest(ModelState);
             }
 
-            if(!await _personRepository.PersonIsExistsAsync(idPerson)){
+            if (!await _personRepository.PersonIsExistsAsync(idPerson))
+            {
                 return NotFound();
             }
 
-            if(!await _contentService.CreateContentAsync(idPerson, createUpdateContentDto)){
-               ModelState.AddModelError("", "Something went wrong when creating content"); 
+            if (!await _contentService.CreateContentAsync(idPerson, createUpdateContentDto))
+            {
+                ModelState.AddModelError("", "Something went wrong when creating content");
             };
 
             return Ok();
@@ -160,15 +166,16 @@ namespace WebApplication1.Controllers
                     return BadRequest(ModelState);
                 }
 
-                if(!await _contentRepository.UpdateContentAsync(content)){
-                    ModelState.AddModelError("", "Something went wrong updating content");                    
-                } 
-                   
+                if (!await _contentRepository.UpdateContentAsync(content))
+                {
+                    ModelState.AddModelError("", "Something went wrong updating content");
+                }
+
                 return Ok();
             }
 
             return BadRequest(ModelState);
-        } 
+        }
 
     }
 }

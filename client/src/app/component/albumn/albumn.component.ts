@@ -1,7 +1,9 @@
+import { ContentService } from './../../services/content.service';
 import { AlbumnService } from '../../services/albumn.service';
-import {Albumn, AlbumnDelete, ImageHandler} from '../../models/albumn';
+import { Albumn, AlbumnDelete, ImageHandler } from '../../models/albumn';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Content } from 'src/app/models/content';
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
 }
@@ -17,11 +19,14 @@ export class AlbumnComponent implements OnInit {
   imageHandler: ImageHandler = {
     imageLink: '',
     position: '',
+    contentId: '',
   };
+
+  contents: Content[] = [];
 
   selectedFile: ImageSnippet | undefined;
 
-  constructor(private albumnService: AlbumnService, private router: Router) { }
+  constructor(private albumnService: AlbumnService, private router: Router, private contentService: ContentService) { }
 
   ngOnInit(): void {
     this.albumnService.getAllAlbumns().subscribe({
@@ -32,6 +37,16 @@ export class AlbumnComponent implements OnInit {
         console.log(error);
       }
     });
+
+    this.contentService.getAllContents().subscribe({
+      next: (response) => {
+        this.contents = response;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+
   }
 
   processFile(imageInput: any) {
@@ -44,12 +59,19 @@ export class AlbumnComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  onContentSelected(value: any) {
+    this.imageHandler.contentId = value.target.value;
+    console.log(this.imageHandler.contentId);
+  }
+
   addImage() {
-    this.albumnService.addAlbumn(this.imageHandler).subscribe({
-      next: (imageHandler) => {
-        this.router.navigate(['albumn']);
-      }
-    })
+    if (this.imageHandler.contentId) {
+      this.albumnService.addAlbumn(this.imageHandler.contentId, this.imageHandler).subscribe({
+        next: (imageHandler) => {
+          this.router.navigate(['albumn']);
+        }
+      })
+    }
   }
 
   // onFileSelected(event: any) {
