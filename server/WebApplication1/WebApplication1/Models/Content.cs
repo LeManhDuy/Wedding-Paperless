@@ -25,10 +25,8 @@ namespace WebApplication1.Models
     public int PersonId { get; set; }
     public Person Person { get; set; }
 
-    [Required]
     public List<Albumn> Albumns { get; set; }
 
-    [Required]
     public List<RegisterSong> RegisterSongs { get; set; }
   }
 }

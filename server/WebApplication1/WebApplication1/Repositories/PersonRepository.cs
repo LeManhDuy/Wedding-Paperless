@@ -18,6 +18,16 @@ namespace WebApplication1.Repositories
             return await _context.Persons.Where(p => p.Email == email).Include(c => c.Account).FirstOrDefaultAsync();
         }
 
+        public async Task<Person> GetPersonByIdAsync(int id)
+        {
+            return await _context.Persons.Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> PersonIsExistsAsync(int id)
+        {
+            return await _context.Persons.AnyAsync(p => p.Id == id);
+        }
+
         public async Task<bool> SaveChanges()
         {
            return await _context.SaveChangesAsync() > 0;
