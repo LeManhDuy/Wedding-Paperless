@@ -24,6 +24,17 @@
 /* body{
     background-color: #ffffff;
 } */
+
+.form-search{
+    align-items: center;
+}
+
+.navbar-nav{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 .create_Form_Container{
     background-color: var(--MW-background_color);
     /* margin-top: 80px; */
@@ -180,6 +191,6 @@ textarea{
     font-size: 20px;
 }
 
-.hope_Join input::placeholder{
+.hope_Join input::placeholder,text{
     text-align:right ;
 }
