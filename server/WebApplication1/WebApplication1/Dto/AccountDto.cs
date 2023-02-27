@@ -18,7 +18,7 @@ namespace WebApplication1.Dto
     public class TokenAccountDto
     {
         public string Token { get; set; }
-        public AccountDto AccountDto { get; set; }
+        public string Username { get; set; }
     }
 
 }

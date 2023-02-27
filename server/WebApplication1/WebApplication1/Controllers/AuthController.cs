@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
             try
             {
                 var token = await _authRepository.LoginAsync(accountDto);
-                if (token.AccountDto == null)
+                if (token.Username == null)
                 {
                     BadRequest();
                 }
@@ -55,7 +55,7 @@ namespace WebApplication1.Controllers
                     Expires = DateTime.Now.AddMinutes(2)
                 };
                 Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
-                return Ok("abc " + token!.Token);
+                return Ok(token!);
             }
             catch (Exception e)
             {
