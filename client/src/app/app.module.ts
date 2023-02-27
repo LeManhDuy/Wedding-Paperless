@@ -11,6 +11,7 @@ import { LoginSuccessDialogComponent } from './component/login/login-success-dia
 import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
+import {RouterModule} from "@angular/router";
 // import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 import { HomeComponent } from './component/home/home.component';
@@ -26,6 +27,7 @@ import { HomeComponent } from './component/home/home.component';
     AlbumnComponent,
     EditAlbumnComponent,
     HomeComponent,
+    // LoginComponent
   ],
   imports: [
     BrowserModule,
