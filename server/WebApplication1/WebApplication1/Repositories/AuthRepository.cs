@@ -80,12 +80,14 @@ namespace WebApplication1.Repositories
           }
         }
 
+        Console.WriteLine(authAccountDto.Role);
+
         var token = GenerateToken(currentUser);
 
         var result = new TokenAccountDto()
         {
           Token = token,
-          AccountDto = authAccountDto
+          Username = authAccountDto.UserName,
         };
 
         return result;
