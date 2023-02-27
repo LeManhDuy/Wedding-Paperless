@@ -4,11 +4,11 @@ export class ImageHandler {
 }
 
 export class Albumn {
-  id: string | undefined;
+  id?: string | undefined;
   imageLink: string | undefined;
   position: string | undefined;
   personName: string = "";
-  contentId: string | undefined;
+  contentId?: string;
 }
 
 export class AlbumnDelete {

@@ -19,7 +19,7 @@ export class AlbumnComponent implements OnInit {
     position: '',
   };
 
-  selectedFile: ImageSnippet | undefined;
+  selectedFile?: ImageSnippet;
 
   constructor(private albumnService: AlbumnService, private router: Router) { }
 

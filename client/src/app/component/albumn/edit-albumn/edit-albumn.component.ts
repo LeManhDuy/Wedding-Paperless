@@ -23,7 +23,7 @@ export class EditAlbumnComponent implements OnInit {
     contentId: ''
   }
 
-  selectedFile: ImageSnippet | undefined;
+  selectedFile?: ImageSnippet;
 
   constructor(private router: Router, private route: ActivatedRoute, private albumnService: AlbumnService) {
   }
@@ -64,7 +64,7 @@ export class EditAlbumnComponent implements OnInit {
     }
   }
 
-  deleteImage(id: string | undefined) {
+  deleteImage(id?: string) {
     if (id) {
       console.log(id);
       this.albumnService.deleteSelected(id).subscribe({
