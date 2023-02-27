@@ -9,7 +9,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">MyWedding</a>
+      <a class="navbar-brand" href="../home/home.component.html">MyWedding</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -58,25 +58,28 @@
                     <input placeholder="ForU, 23 2/9 street, Danang" type="text" name="place">
                 </div>
             </div>
-            <div class="image_Center" app-create-form>
+            <div class="container-content image_Center" app-create-form>
                 <input type="file" #fileDropRef id="fileDropRef"  name="image_Center">
                 <h3>Drag and drop photo here</h3>
                 <label for="fileDropRef">Browse for file</label>
             </div>
-            <div class="our_Stories">
+            <div class="container-content our_Stories">
                 <h4 class="title">
                     <input placeholder="Our Stories" type="text" name="our_Stories">
                 </h4>
-                <textarea name="our_Stories_Text" id="" cols="30" rows="10" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
-I implement user interface design and solve user problems with HTML, CSS AND Javascript.
-                "></textarea>
-                <div class="image_Center" app-create-form>
+                <div class="text-area">
+                    <textarea name="our_Stories_Text" id="" cols="30" rows="10" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
+                    I implement user interface design and solve user problems with HTML, CSS AND Javascript.
+                                    "></textarea>
+                </div>
+                
+                <div class="container-content image_Center" app-create-form>
                     <input type="file" #fileDropRef id="fileDropRef"  name="image_Our_Stories">
                     <h3>Drag and drop photo here</h3>
                     <label for="fileDropRef">Browse for file</label>
                 </div>
             </div>
-            <div class="schedule">
+            <div class="container-content schedule">
                 <h4 class="title">
                     <input placeholder="Schedule" type="text" name="schedule">
                 </h4>
@@ -107,7 +110,7 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                 <input placeholder="Wanna sing a song ?" type="text">
 
             </div>
-            <div class="restaurant_Map">
+            <div class="container-content restaurant_Map">
                 <h4 class="title">
                     <input placeholder="Restaurant Map" type="text" name="restaurant_Map">
                 </h4>
@@ -119,7 +122,7 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                     </div>
                 </div>
             </div>
-            <div class="our_Memory">
+            <div class="container-content our_Memory">
                 <div class="our_Memory_Title">
                     <h4 class="title">
                         <input placeholder="Our memory" type="text" name="our_Memory">
@@ -134,7 +137,7 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                     </div>
                 </div>
             </div>
-            <div class="see_You">
+            <div class="container-content see_You">
                 <div class="see_You_Title">
                     <h4 class="title">
                         <input placeholder="See you at the party" type="text" name="our_Memory">
@@ -147,7 +150,7 @@ I implement user interface design and solve user problems with HTML, CSS AND Jav
                         <label for="fileDropRef">Browse for file</label>
                     </div>
                 </div>
-                <div class="hope_Join">
+                <div class="container-content hope_Join">
                     <input class="hope_Join_Date" placeholder="12-Feb-2023" type="date" name="hope_Join_Date">
                     <input class="hope_Join_Content" placeholder="Hope you join us" type="text" name="hope_Join_Content">
                     <input class="hope_Join_Sign" placeholder="Oliver and Sarrah" type="text" name="hope_Join_Sign">

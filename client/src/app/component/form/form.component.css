@@ -28,7 +28,7 @@
     background-color: var(--MW-background_color);
     /* margin-top: 80px; */
     padding: 80px 0px;
-    width: 100%;
+    width: 80%;
 }
 
 .create_Form_Content{
@@ -38,11 +38,11 @@
     /* width: 100%; */
 }
 .image_Center {
-    width: 80%;
+    width: 100%;
     height: 200px;
     padding: 10px;
     text-align: center;
-    border: dashed 1px var(--lightGreen_color);
+    border: dashed 1px black;
     position: relative;
     margin: 0 auto;
 }
@@ -72,10 +72,6 @@ h3{
     color:var(--lightGreen_color);
     margin-bottom: 20px;
 }
-.schedule ul, li{
-    list-style: none;
-    padding: 0;
-}
 .create_Form_Content input{
     border: none;
     background-color: transparent;
@@ -87,9 +83,24 @@ h3{
     padding: 10px 5px;
 }
 
+.container-content{
+    margin-bottom: 40px;
+}
+
 .title input{
     font-size: 35px;
     color: var(--MW-pinkNeon_color);
+
+}
+
+.our_Stories{
+    width: 100%;
+    margin: auto;
+}
+
+.text-area{
+    width: 80%;
+    margin: auto;
 }
 
 textarea{
@@ -99,7 +110,7 @@ textarea{
     width: 100%;
     text-align: center;
     height: auto;
-    padding: 20px;
+    /* padding: 20px; */
 }
 .schedule{
     width: 100%;
@@ -122,6 +133,7 @@ textarea{
     position: relative;
     width: 80%;
     margin: auto;
+    list-style: none;
 }
 .schedule li:last-child{
     border: 0px;
@@ -132,8 +144,8 @@ textarea{
       content: '';
       width: 15px;
       height: 15px;
-      background: var(--lightPink_color);
-      border: 1px solid var(--darkPink_color);
+      background: black;
+      border: 1px solid black;
       box-shadow: 3px 3px 0px #bab5f8;
       box-shadow: 3px 3px 0px #bab5f8;
       border-radius: 50%;
@@ -168,6 +180,6 @@ textarea{
     font-size: 20px;
 }
 
-.hope_Join{
+.hope_Join input::placeholder{
     text-align:right ;
 }
