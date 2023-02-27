@@ -4,16 +4,17 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Image</th>
             <th scope="col">Host's Name</th>
           </tr>
         </thead>
         <tbody>
-          <th>{{ albumnDetails?.id }}</th>
-          <td><img class="card-img-top" src="{{ albumnDetails?.imageLink }}" alt="Card image cap"></td>
-          <td>{{ albumnDetails?.personName }}</td>
-          <td>{{ albumnDetails?.contentId }}</td>
+          <td>
+            <a target="_blank" href="{{ albumnDetails.imageLink }}" id="bottle">
+              <img class="card-img-top" src="{{ albumnDetails.imageLink }}" alt="Card image cap">
+            </a>
+          </td>
+          <td>{{ albumnDetails.personName }}</td>
         </tbody>
       </table>
     </div>

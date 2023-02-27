@@ -1,23 +1,25 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {AuthComponent} from './component/auth/auth.component';
-import {RegisterComponent} from './component/register/register.component';
-import {LoginComponent} from './component/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from '@angular/common/http';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthComponent } from './component/auth/auth.component';
+import { RegisterComponent } from './component/register/register.component';
+import { LoginComponent } from './component/login/login.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 import { LoginSuccessDialogComponent } from './component/login/login-success-dialog/login-success-dialog.component';
-import {MatDialogModule} from "@angular/material/dialog";
+import { MatDialogModule } from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
-import {RouterModule} from "@angular/router";
+import { RouterModule } from "@angular/router";
 // import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 import { HomeComponent } from './component/home/home.component';
 import { FormComponent } from './component/form/form.component';
 import { InvitationComponent } from './component/invitation/invitation.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -32,7 +34,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     HomeComponent,
     FormComponent,
     InvitationComponent
-    
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MatDialogModule,
     ReactiveFormsModule,
     NgImageSliderModule,
+    CommonModule,
+    RouterModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

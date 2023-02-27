@@ -3,30 +3,34 @@
     <div class="col order-first">
       <table class="table">
         <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Image</th>
-          <th scope="col">Host's Name</th>
-          <th scope="col">Delete</th>
-          <th scope="col">View</th>
-        </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Image</th>
+            <th scope="col">Host's Name</th>
+            <th scope="col">Action</th>
+          </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let albumn of albumns; let i = index">
-          <th>{{ albumn?.id }}</th>
-          <!-- <th scope="row">{{i + 1}}</th> -->
-<!--          <td><input type="checkbox" [(ngModel)]="albumnDelete.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
-          <td><img class="card-img-top" src="{{ albumn?.imageLink }}" alt="Card image cap"></td>
-          <td>{{ albumn?.personName }}</td>
-          <td><a [routerLink]="['/albumn/edit',albumn.id]" routerLinkActive="router-link-active">View</a></td>
-        </tr>
+          <tr *ngFor="let albumn of albumns; let i = index">
+            <th hidden>{{ albumn?.id }}</th>
+            <th scope="row">{{i + 1}}</th>
+            <!--          <td><input type="checkbox" [(ngModel)]="albumnDelete.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
+            <td>
+              <a target="_blank" href="{{ albumn?.imageLink }}" id="bottle">
+                <img class="card-img-top" src="{{ albumn?.imageLink }}" alt="Card image cap">
+              </a>
+            </td>
+            <td>{{ albumn?.personName }}</td>
+            <td><a [routerLink]="['/albumn/edit',albumn.id]" routerLinkActive="router-link-active">Update/Delete</a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
     <div class="col">
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
+          data-bs-toggle="dropdown" aria-expanded="false">
           Content
         </button>
         <br>
@@ -35,21 +39,21 @@
         </ul>
       </div>
       <br>
-<!--      <div class="input-group mb-3">-->
-<!--        &lt;!&ndash; (change)="selectFile($event)" &ndash;&gt;-->
-<!--        <input type="file" accept="image/*"/>-->
-<!--      </div>-->
+      <!--      <div class="input-group mb-3">-->
+      <!--        &lt;!&ndash; (change)="selectFile($event)" &ndash;&gt;-->
+      <!--        <input type="file" accept="image/*"/>-->
+      <!--      </div>-->
       <br>
-<!--      <button class="btn btn-success btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">-->
-<!--        Upload-->
-<!--      </button>-->
-<!--      <button class="btn btn-danger btn-sm float-right mr-2" (click)="deleteSelected()">Delete Selected</button>-->
+      <!--      <button class="btn btn-success btn-sm float-right" [disabled]="!selectedFiles" (click)="upload()">-->
+      <!--        Upload-->
+      <!--      </button>-->
+      <!--      <button class="btn btn-danger btn-sm float-right mr-2" (click)="deleteSelected()">Delete Selected</button>-->
       <!-- Add Delete button -->
 
       <form #form="ngForm" (ngSubmit)="addImage()">
         <div class="input-group mb-3">
           <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-                 [(ngModel)]="imageHandler.imageLink" name="imageLink">
+            [(ngModel)]="imageHandler.imageLink" name="imageLink">
 
           <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.position">
         </div>
