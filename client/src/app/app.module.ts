@@ -16,6 +16,8 @@ import {RouterModule} from "@angular/router";
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 import { HomeComponent } from './component/home/home.component';
 import { FormComponent } from './component/form/form.component';
+import { InvitationComponent } from './component/invitation/invitation.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { FormComponent } from './component/form/form.component';
     AlbumnComponent,
     EditAlbumnComponent,
     HomeComponent,
-    FormComponent
+    FormComponent,
+    InvitationComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { FormComponent } from './component/form/form.component';
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
+    NgImageSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import { RegisterComponent } from './component/register/register.component'
 import { LoginComponent } from "./component/login/login.component";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {EditAlbumnComponent} from "./component/albumn/edit-albumn/edit-albumn.component";
+import { InvitationComponent } from './component/invitation/invitation.component';
 
 const routes: Routes = [];
 
@@ -17,6 +18,7 @@ const routes: Routes = [];
     { path: 'not-found', component: NotFoundComponent },
     { path: 'albumn', component: AlbumnComponent },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent },
+    { path: 'invitation', component: InvitationComponent },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]
