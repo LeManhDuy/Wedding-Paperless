@@ -8,6 +8,10 @@ namespace WebApplication1.Interfaces
 
         Task<bool> UpdatePersonAsync(Person person);
 
+        Task<Person> GetPersonByIdAsync(int id);
+
+        Task<bool> PersonIsExistsAsync(int id);
+
         Task<bool> SaveChanges();
     }
 }

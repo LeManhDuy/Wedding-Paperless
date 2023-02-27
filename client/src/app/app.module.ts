@@ -11,8 +11,12 @@ import { LoginSuccessDialogComponent } from './component/login/login-success-dia
 import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
+import {RouterModule} from "@angular/router";
+// import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { HomeComponent } from './component/home/home.component';
+import { FormComponent } from './component/form/form.component';
 
 
 @NgModule({
@@ -20,12 +24,12 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     AppComponent,
     AuthComponent,
     RegisterComponent,
-    LoginComponent,
     LoginSuccessDialogComponent,
     NotFoundComponent,
     AlbumnComponent,
-    EditAlbumnComponent,
     DashboardComponent,
+    HomeComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
