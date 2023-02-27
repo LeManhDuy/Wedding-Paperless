@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../services/login.service";
 import {LoginUser} from "../../models/app-user";
@@ -11,7 +12,8 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   standalone: true
 })
