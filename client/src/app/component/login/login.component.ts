@@ -4,11 +4,16 @@ import {LoginUser} from "../../models/app-user";
 import {MatDialog} from '@angular/material/dialog';
 import {LoginSuccessDialogComponent} from "./login-success-dialog/login-success-dialog.component";
 import {Router} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [
+    FormsModule
+  ],
+  standalone: true
 })
 export class LoginComponent implements OnInit {
   apiData: any = "";

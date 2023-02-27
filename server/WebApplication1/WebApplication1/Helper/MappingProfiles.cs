@@ -28,6 +28,11 @@ namespace WebApplication1.Helper
 
       CreateMap<RegisterSong, RegisterSongDto>();
       CreateMap<RegisterSongDto, RegisterSong>();
+
+      CreateMap<Content, ContentDto>();
+      CreateMap<ContentDto, Content>();
+      CreateMap<CreateUpdateContentDto, Content>();
+      CreateMap<Content, CreateUpdateContentDto>();
     }
   }
 }

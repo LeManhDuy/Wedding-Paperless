@@ -1,0 +1,35 @@
+
+
+.create_Invitation_Content{
+    height: 100%;
+}
+
+
+.container_CreatePage{
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.create_New{
+  width: 20%;
+  height: 50%;
+  text-align: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.create_New button{
+    background-color: white;
+}
+
+.content_CreatePage{
+  width: 100%;
+  justify-content: center;
+}
+.content_Create{
+  /* border: 3px solid var(--lightPink_color); */
+  border-radius: 5px;
+  width: 200px;
+}
+
