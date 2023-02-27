@@ -12,6 +12,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import { AlbumnComponent } from './component/albumn/albumn.component';
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-a
     NotFoundComponent,
     AlbumnComponent,
     EditAlbumnComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
