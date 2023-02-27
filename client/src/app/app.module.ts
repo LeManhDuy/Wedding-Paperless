@@ -40,7 +40,8 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    RouterModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
