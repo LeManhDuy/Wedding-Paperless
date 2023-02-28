@@ -1,12 +1,11 @@
-import { CommonModule } from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../../services/login.service";
+import {LoginService} from "../../_services/login.service";
 import {LoginUser} from "../../models/app-user";
 import {MatDialog} from '@angular/material/dialog';
 import {LoginSuccessDialogComponent} from "./login-success-dialog/login-success-dialog.component";
-import {Router, RouterModule} from "@angular/router";
-import {FormsModule} from "@angular/forms";
-import { CommonModule } from '@angular/common';
+import {ActivatedRoute, Router, RouterModule} from "@angular/router";
+import {FormBuilder, FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +25,16 @@ export class LoginComponent implements OnInit {
   loginUser: LoginUser = new LoginUser()
   loginSuccess = false;
 
-  constructor(public loginService: LoginService, private dialog: MatDialog, private router: Router) {
+  constructor(
+    public loginService: LoginService,
+    private dialog: MatDialog,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+  ) {
+    if (this.loginService.currentUserValue) {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnInit() {
@@ -34,6 +42,7 @@ export class LoginComponent implements OnInit {
       const dialogRef = this.dialog.open(LoginSuccessDialogComponent);
     }
   }
+
 
   openLoginSuccessDialog(): void {
     const dialogRef = this.dialog.open(LoginSuccessDialogComponent, {
@@ -45,13 +54,12 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginService.login(this.loginUser)
       .subscribe(response => {
-        console.log(this.loginUser)
         if (response) {
           console.log(response);
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
-            this.router.navigate(['/not-found']);
+            this.router.navigate(['/home']);
           }
         } else {
           this.apiData = "*Credential Invalid"
