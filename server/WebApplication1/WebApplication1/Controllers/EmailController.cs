@@ -15,11 +15,13 @@ namespace WebApplication1.Controllers
     {
         private readonly DataContext _context;
         private readonly IEmailRepository _emailRepository;
+        private readonly IAuthRepository _authRepository;
 
-        public EmailController(IEmailRepository emailRepository, DataContext context)
+        public EmailController(IEmailRepository emailRepository, DataContext context, IAuthRepository authRepository)
         {
             _emailRepository = emailRepository;
             _context = context;
+            _authRepository = authRepository;
         }
 
         /// <summary>

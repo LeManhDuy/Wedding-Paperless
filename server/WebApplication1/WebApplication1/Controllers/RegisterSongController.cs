@@ -12,11 +12,13 @@ namespace WebApplication1.Controllers
     {
         private readonly IRegisterSongRepository _registerSongRepository;
         private readonly DataContext _context;
+        private readonly IAuthRepository _authRepository;
 
-        public RegisterSongController(IRegisterSongRepository registerSongRepository, DataContext context)
+        public RegisterSongController(IRegisterSongRepository registerSongRepository, DataContext context, IAuthRepository authRepository)
         {
             _registerSongRepository = registerSongRepository;
             _context = context;
+            _authRepository = authRepository;
         }
 
         /// <summary>
