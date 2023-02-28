@@ -9,7 +9,7 @@ export class RegisterUser {
   email?: string;
   password?: string;
   confirmpassword?: string;
-  role: string = "User";
+  role: string = "user";
 }
 
 export class UserToken {

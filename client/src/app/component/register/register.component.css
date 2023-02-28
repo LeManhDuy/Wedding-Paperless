@@ -116,3 +116,12 @@
     color: var(--lightPink_color);
     text-align: center;
 }
+
+.form-control {
+    width: auto !important;
+}
+
+.input-group {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+}
