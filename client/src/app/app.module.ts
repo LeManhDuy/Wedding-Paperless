@@ -22,7 +22,9 @@ import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ContentComponent } from './component/content/content.component';
 import { DashboardUserComponent } from './component/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
-
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,10 @@ import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-a
     InvitationComponent,
     ContentComponent,
     DashboardUserComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ConfirmVerifyCodeComponent,
   ],
   imports: [
     BrowserModule,
