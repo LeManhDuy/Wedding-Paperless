@@ -30,7 +30,7 @@ export class LoginService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(loginUser: LoginUser) {
+  login(loginUser: LoginUser): Observable<any> {
     return this._http.post(`${this.baseUrl}login`, loginUser, {
       responseType: "text",
       headers: this.headers
@@ -49,9 +49,15 @@ export class LoginService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          return user;
+        } else {
+          throw new Error("Login failed");
         }
-        return user;
-      }));
+      }),
+        catchError((error: HttpErrorResponse) => {
+          console.log(error)
+          return of(null);
+        }));
   }
 
   logout() {
