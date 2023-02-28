@@ -78,6 +78,27 @@ namespace WebApplication1.Controller
         }
 
         /// <summary>
+        /// Checking code is verified or not.
+        /// </summary>
+        /// <param name="code">code</param>     
+        [HttpPut("{code}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> ValidateCode(string code)
+        {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+
+            if(!await _accountRepository.CodeIsExistAsync(code)){
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+        /// <summary>
         /// Get verify code to reset password.
         /// </summary>
         [HttpPost("forgotPassword")]
@@ -101,7 +122,7 @@ namespace WebApplication1.Controller
 
             var content = _accountService.CreateMessage(person);
             await _emailRepository.SendEmail(content);
-            return Ok("Please check email ");
+            return Ok();
         } 
 
         /// <summary>
