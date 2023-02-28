@@ -1,7 +1,7 @@
 export class ImageHandler {
   imageLink: string | undefined;
   position: string | undefined;
-  contentId: string | undefined;
+  contentId?: string;
 }
 
 export class Albumn {

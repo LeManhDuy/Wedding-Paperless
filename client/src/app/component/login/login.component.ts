@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {LoginService} from "../../_services/login.service";
-import {LoginUser} from "../../models/app-user";
-import {MatDialog} from '@angular/material/dialog';
-import {LoginSuccessDialogComponent} from "./login-success-dialog/login-success-dialog.component";
-import {ActivatedRoute, Router, RouterModule} from "@angular/router";
-import {FormBuilder, FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from "../../_services/login.service";
+import { LoginUser } from "../../models/app-user";
+import { MatDialog } from '@angular/material/dialog';
+import { LoginSuccessDialogComponent } from "./login-success-dialog/login-success-dialog.component";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
+import { FormBuilder, FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginService.login(this.loginUser)
       .subscribe(response => {
+        console.log("1");
         if (response) {
           console.log(response);
           this.loginSuccess = true;
@@ -61,7 +62,6 @@ export class LoginComponent implements OnInit {
           }
         } else {
           this.apiData = "*Credential Invalid"
-          console.log("Login failed");
         }
       });
   }

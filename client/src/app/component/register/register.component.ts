@@ -17,18 +17,10 @@ export class RegisterComponent implements OnInit {
   constructor(private registerService: RegisterService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    // this.registerForm = this.formBuilder.group({
-    //   fullname: ['', [Validators.required]],
-    //   username: ['', [Validators.required]],
-    //   email: ['', [Validators.required]],
-    //   password: ['', [Validators.required]],
-    //   confirmpassword: ['', [Validators.required]]
-    // });
   }
 
   register() {
     this.registerService.register(this.registerUser).subscribe(response => {
-      console.log(this.registerUser);
       if (this.registerUser.password !== this.registerUser.confirmpassword) {
         this.errorMessage = "Password don't match!";
       }
