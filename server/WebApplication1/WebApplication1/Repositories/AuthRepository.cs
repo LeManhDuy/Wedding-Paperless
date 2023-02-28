@@ -21,198 +21,196 @@ using WebApplication1.Services;
 
 namespace WebApplication1.Repositories
 {
-  public class AuthRepository : IAuthRepository
-  {
-    private readonly DataContext _context;
-    private readonly IEmailRepository _emailRepository;
-    private readonly LinkGenerator _linkGenerator;
-    private readonly IConfiguration _config;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+    public class AuthRepository : IAuthRepository
     {
-      _context = context;
-      _emailRepository = emailRepository;
-      _linkGenerator = linkGenerator;
-      _config = config;
-      _httpContextAccessor = httpContextAccessor;
-    }
-    public async Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto)
-    {
-      try
-      {
-        Account currentUser;
-        authAccountDto.UserName = authAccountDto.UserName.ToLower();
-        currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>
-            a.UserName == authAccountDto.UserName || a.Email == authAccountDto.UserName);
-        if (currentUser == null)
+        private readonly DataContext _context;
+        private readonly IEmailRepository _emailRepository;
+        private readonly LinkGenerator _linkGenerator;
+        private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
-          var checkAccount =
-              await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
-          if (checkAccount == null)
-          {
-            Console.WriteLine("User not found");
-            return null;
-          }
-          currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
-          if (currentUser == null)
-          {
-            Console.WriteLine("User not found");
-            return null;
-          }
+            _context = context;
+            _emailRepository = emailRepository;
+            _linkGenerator = linkGenerator;
+            _config = config;
+            _httpContextAccessor = httpContextAccessor;
         }
-
-        using var hmac = new HMACSHA512(currentUser.PasswordSalt);
-        var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
-        for (int i = 0; i < currentUser.PasswordHash.Length; i++)
+        public async Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto)
         {
-          if (currentUser.PasswordHash[i] != passwordBytes[i])
-          {
-            return null;
-          }
+            try
+            {
+                Account currentUser;
+                authAccountDto.UserName = authAccountDto.UserName.ToLower();
+                currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>
+                    a.UserName == authAccountDto.UserName || a.Email == authAccountDto.UserName);
+                if (currentUser == null)
+                {
+                    var checkAccount =
+                        await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
+                    if (checkAccount == null)
+                    {
+                        Console.WriteLine("User not found");
+                        return null;
+                    }
+                    currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
+                    if (currentUser == null)
+                    {
+                        Console.WriteLine("User not found");
+                        return null;
+                    }
+                }
+
+                using var hmac = new HMACSHA512(currentUser.PasswordSalt);
+                var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
+                for (int i = 0; i < currentUser.PasswordHash.Length; i++)
+                {
+                    if (currentUser.PasswordHash[i] != passwordBytes[i])
+                    {
+                        return null;
+                    }
+                }
+
+                Console.WriteLine(authAccountDto.Role);
+
+                var token = GenerateToken(currentUser);
+
+                var result = new TokenAccountDto()
+                {
+                    Token = token,
+                    Username = authAccountDto.UserName,
+                };
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception();
+            }
         }
-
-        Console.WriteLine(authAccountDto.Role);
-
-        var token = GenerateToken(currentUser);
-
-        var result = new TokenAccountDto()
+        public async Task<AuthDto> RegisterAsync(AuthDto authDto)
         {
-          Token = token,
-          Username = authAccountDto.UserName,
-        };
+            try
+            {
+                // Check if username already exists
+                var currentUser =
+                    await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName.ToLower());
+                if (currentUser != null)
+                {
+                    throw new Exception("Username is already taken!");
+                }
 
-        return result;
-      }
-      catch (Exception e)
-      {
-        Console.WriteLine(e);
-        throw new Exception();
-      }
-    }
-    public async Task<AuthDto> RegisterAsync(AuthDto authDto)
-    {
-      try
-      {
-        authDto.UserName = authDto.UserName.Trim().ToLower();
+                // Check if email already exists and not yet confirmed
+                var currentPerson =
+                    await _context.Persons.FirstOrDefaultAsync(p =>
+                        p.Email == authDto.Email && p.EmailConfirmed == false);
+                if (currentPerson != null)
+                {
+                    throw new Exception(
+                        "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
+                }
 
-        // Check if username already exists
-        var currentUser =
-            await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName);
-        if (currentUser != null)
-        {
-          throw new Exception("Username is already taken!");
+                // Hash the password and create new account
+                using var hmac = new HMACSHA512();
+                var passwordBytes = Encoding.UTF8.GetBytes(authDto.PassWord);
+                var user = new Account
+                {
+                    UserName = authDto.UserName,
+                    PasswordHash = hmac.ComputeHash(passwordBytes),
+                    PasswordSalt = hmac.Key,
+                    Role = authDto.Role
+                };
+                await _context.Accounts.AddAsync(user);
+
+                // Create new person and associate with the account
+                var person = new Person
+                {
+                    FullName = authDto.FullName,
+                    Email = authDto.Email.Trim(),
+                    EmailConfirmed = false,
+                    EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Account = user,
+                };
+                await _context.Persons.AddAsync(person);
+                await _context.SaveChangesAsync();
+
+                // Generate email confirmation token and send email
+                var emailToken = _emailRepository.GenerateEmailConfirmToken(person);
+                var confirmationLink = _config["Url"] + "api/email/confirm/" + emailToken;
+                var content = new Message
+                {
+                    To = person.Email,
+                    Subject = "Confirm your email address",
+                    Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+                };
+                await _emailRepository.SendEmail(content);
+
+                return authDto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to register user. " + ex.Message);
+            }
         }
-
-        // Check if email already exists and not yet confirmed
-        var currentPerson =
-            await _context.Persons.FirstOrDefaultAsync(p =>
-                p.Email == authDto.Email && p.EmailConfirmed == false);
-        if (currentPerson != null)
+        public Task<AuthDto> LogoutAsync()
         {
-          throw new Exception(
-              "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
+            throw new NotImplementedException();
         }
-
-        // Hash the password and create new account
-        using var hmac = new HMACSHA512();
-        var passwordBytes = Encoding.UTF8.GetBytes(authDto.PassWord);
-        var user = new Account
+        //Token
+        public string GenerateToken(Account account)
         {
-          UserName = authDto.UserName,
-          PasswordHash = hmac.ComputeHash(passwordBytes),
-          PasswordSalt = hmac.Key,
-          Role = authDto.Role
-        };
-        await _context.Accounts.AddAsync(user);
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        // Create new person and associate with the account
-        var person = new Person
-        {
-          FullName = authDto.FullName,
-          Email = authDto.Email.Trim(),
-          EmailConfirmed = false,
-          EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-          Account = user,
-        };
-        await _context.Persons.AddAsync(person);
-        await _context.SaveChangesAsync();
-
-        // Generate email confirmation token and send email
-        var emailToken = _emailRepository.GenerateEmailConfirmToken(person);
-        var confirmationLink = _config["Url"] + "api/email/confirm/" + emailToken;
-        var content = new Message
-        {
-          To = person.Email,
-          Subject = "Confirm your email address",
-          Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
-        };
-        await _emailRepository.SendEmail(content);
-
-        return authDto;
-      }
-      catch (Exception ex)
-      {
-        throw new Exception("Failed to register user. " + ex.Message);
-      }
-    }
-    public Task<AuthDto> LogoutAsync()
-    {
-      throw new NotImplementedException();
-    }
-    //Token
-    public string GenerateToken(Account account)
-    {
-      var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-      var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-      var claims = new[]
-      {
+            var claims = new[]
+            {
         new Claim(ClaimTypes.Role, account.Role),
         new Claim(ClaimTypes.Name, account.UserName),
       };
 
-      var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-        _config["JWT:Audience"],
-        claims,
-        expires: DateTime.Now.AddMinutes(2),
-        signingCredentials: credentials);
-      return new JwtSecurityTokenHandler().WriteToken(token);
-    }
-    public bool IsTokenValid()
-    {
-      var token = _httpContextAccessor.HttpContext!.Request.Headers["authorization"].Single().Split(" ").Last();
-      JwtSecurityToken jwtSecurityToken;
-      try
-      {
-        jwtSecurityToken = new JwtSecurityToken(token);
-      }
-      catch (Exception)
-      {
-        return false;
-      }
-      return jwtSecurityToken.ValidTo > DateTime.UtcNow;
-    }
-    public string GetCurrentToken()
-    {
-      string token = string.Empty;
-
-      // Lấy token từ header hoặc cookie của request
-      var authorizationHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"];
-      if (!string.IsNullOrEmpty(authorizationHeader))
-      {
-        token = authorizationHeader.ToString()!.Replace("Bearer ", string.Empty);
-      }
-      else
-      {
-        var cookie = _httpContextAccessor.HttpContext?.Request.Cookies["token"];
-        if (cookie != null)
-        {
-          token = cookie;
-          // _httpContextAccessor.HttpContext?.Response.Cookies.Delete();
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["JWT:Audience"],
+              claims,
+              expires: DateTime.Now.AddMinutes(2),
+              signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
-      }
-      Console.WriteLine(token);
-      return token;
+        public bool IsTokenValid()
+        {
+            var token = _httpContextAccessor.HttpContext!.Request.Headers["authorization"].Single().Split(" ").Last();
+            JwtSecurityToken jwtSecurityToken;
+            try
+            {
+                jwtSecurityToken = new JwtSecurityToken(token);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return jwtSecurityToken.ValidTo > DateTime.UtcNow;
+        }
+        public string GetCurrentToken()
+        {
+            string token = string.Empty;
+
+            // Lấy token từ header hoặc cookie của request
+            var authorizationHeader = _httpContextAccessor.HttpContext?.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(authorizationHeader))
+            {
+                token = authorizationHeader.ToString()!.Replace("Bearer ", string.Empty);
+            }
+            else
+            {
+                var cookie = _httpContextAccessor.HttpContext?.Request.Cookies["token"];
+                if (cookie != null)
+                {
+                    token = cookie;
+                    // _httpContextAccessor.HttpContext?.Response.Cookies.Delete();
+                }
+            }
+            Console.WriteLine(token);
+            return token;
+        }
     }
-  }
 }

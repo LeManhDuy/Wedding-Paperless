@@ -19,8 +19,8 @@ export class DashboardUserComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  showContent() {
-    this.router.navigate(['/content']);
+  showForm() {
+    this.router.navigate(['/form']);
   }
 
   logout() {
