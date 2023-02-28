@@ -57,7 +57,12 @@ export class LoginComponent implements OnInit {
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
-            this.router.navigate(['/home']);
+            if (response.role == "user")
+              this.router.navigate(['/home']);
+            if (response.role == "admin")
+              this.router.navigate([
+                '/dashboard'
+              ])
           }
         } else {
           this.apiData = "*Credential Invalid"
