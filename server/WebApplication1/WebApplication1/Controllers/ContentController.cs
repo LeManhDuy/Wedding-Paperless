@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
     /// Get all content.
     /// </summary>
     /// <returns>A list content</returns>
-    [HttpGet("content")]
+    [HttpGet()]
     [Authorize(Roles = "admin")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]

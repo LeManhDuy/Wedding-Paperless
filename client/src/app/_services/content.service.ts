@@ -14,6 +14,7 @@ export class ContentService {
   constructor(private http: HttpClient) { }
 
   getAllContents(): Observable<Content[]> {
+    console.log(this.baseUrl)
     return this.http.get<Content[]>(`${this.baseUrl}`)
   }
 
