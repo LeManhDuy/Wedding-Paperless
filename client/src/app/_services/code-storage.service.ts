@@ -10,4 +10,8 @@ export class CodeStorageService {
   assignCode(code: string){
     this.verifycode = code;
   }
+
+  getCode():String|undefined {
+    return this.verifycode;
+  }
 }
