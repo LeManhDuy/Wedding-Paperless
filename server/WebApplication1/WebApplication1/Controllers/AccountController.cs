@@ -102,7 +102,7 @@ namespace WebApplication1.Controller
         /// Checking code is verified or not.
         /// </summary>
         /// <param name="code">code</param>     
-        [HttpPut("{code}")]
+        [HttpPost("validate/{code}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -122,7 +122,7 @@ namespace WebApplication1.Controller
         /// <summary>
         /// Get verify code to reset password.
         /// </summary>
-        [HttpPost("forgotPassword")]
+        [HttpPost("forgotPassword/{email}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
