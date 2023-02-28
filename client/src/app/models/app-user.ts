@@ -24,3 +24,11 @@ class User {
   username?: string;
   password?: string;
 }
+
+export class ResetPassword {
+  code: string ="";
+  newPassword: string = "";
+  confirmPassword: string = "";
+}
+
+

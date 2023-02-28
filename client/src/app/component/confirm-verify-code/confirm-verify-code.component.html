@@ -1,0 +1,40 @@
+<header>
+    <link rel="stylesheet" href="confirm-verify-code.component.css">
+    <link rel="stylesheet" href="/client/src/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">-->
+</header>
+<script src="https://kit.fontawesome.com/f116b41309.js" crossorigin="anonymous"></script>
+<div class="content_Login">
+
+
+    <div class="slogan slogan_Brand">MyWedding</div>
+    <p class="slogan slogan_Content">Verify code</p>
+
+    <div class="login">Enter your verify code</div>
+    <div class="login_Content">
+        Have an account?
+        <a class="link_To_Login" routerLink="/login">Login</a>
+    </div>
+    <br>
+
+    <form #ConfirmVerifyCodeForm="ngForm" novalidate>
+        <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="input-group mb-3">
+            <input class="form-control" placeholder="Code" type="number" id="ConfirmVerifyCode" name="ConfirmVerifyCode"
+                [(ngModel)]="confirmVerifyCode" [required]="true" ConfirmVerifyCode>
+            <div
+                *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].invalid && (ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].dirty || ConfirmVerifyCodeForm.controls['ConfirmPassword'].touched)">
+                <small class="text-danger" *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode']?.errors?.['required']">ConfirmVerifyCode is
+                    required.</small>
+                <small class="text-danger" *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode']?.errors?.['ConfirmVerifyCode']">Please enter a
+                    valid
+                    ConfirmVerifyCode address.</small>
+            </div>
+        </div>
+    </form>
+    <button type="submit" class="submit_Register" (click)="ValidateCode()"
+    [disabled]="ConfirmVerifyCodeForm.invalid">Verify</button>
+    <div class="policy">By clicking "Create account", I agree to MyWedding's TOS and Privacy Policy.</div>
+</div>
