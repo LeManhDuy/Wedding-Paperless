@@ -11,6 +11,7 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import {EditAlbumnComponent} from "./component/albumn/edit-albumn/edit-albumn.component";
 import { InvitationComponent } from './component/invitation/invitation.component';
 import {AuthGuard} from "./_guards/auth.guard";
+import { FormComponent } from './component/form/form.component';
 
 const routes: Routes = [];
 
@@ -25,6 +26,7 @@ const routes: Routes = [];
     { path: 'invitation', component: InvitationComponent },
     { path: 'content', component: ContentComponent },
     { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
+    { path: 'form', component: FormComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
     { path: '**', redirectTo: 'not-found' }
   ])],
