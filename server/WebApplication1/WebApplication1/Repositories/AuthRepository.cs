@@ -23,18 +23,11 @@ namespace WebApplication1.Repositories
 {
   public class AuthRepository : IAuthRepository
   {
-
-    //public AuthRepository(DataContext context, IEmailRepository emailRepository)
-    //{
-    //    _context = context;
-    //    _emailRepository = emailRepository;
-    //}
     private readonly DataContext _context;
     private readonly IEmailRepository _emailRepository;
     private readonly LinkGenerator _linkGenerator;
     private readonly IConfiguration _config;
     private readonly IHttpContextAccessor _httpContextAccessor;
-
     public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
     {
       _context = context;
@@ -43,8 +36,6 @@ namespace WebApplication1.Repositories
       _config = config;
       _httpContextAccessor = httpContextAccessor;
     }
-
-
     public async Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto)
     {
       try
@@ -98,7 +89,6 @@ namespace WebApplication1.Repositories
         throw new Exception();
       }
     }
-
     public async Task<AuthDto> RegisterAsync(AuthDto authDto)
     {
       try
@@ -165,7 +155,11 @@ namespace WebApplication1.Repositories
         throw new Exception("Failed to register user. " + ex.Message);
       }
     }
-
+    public Task<AuthDto> LogoutAsync()
+    {
+      throw new NotImplementedException();
+    }
+    //Token
     public string GenerateToken(Account account)
     {
       var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -173,23 +167,31 @@ namespace WebApplication1.Repositories
 
       var claims = new[]
       {
-                new Claim(ClaimTypes.Role, account.Role),
-                new Claim(ClaimTypes.Name, account.UserName),
-            };
+        new Claim(ClaimTypes.Role, account.Role),
+        new Claim(ClaimTypes.Name, account.UserName),
+      };
 
       var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-          _config["JWT:Audience"],
-          claims,
-          expires: DateTime.Now.AddMinutes(2),
-          signingCredentials: credentials);
+        _config["JWT:Audience"],
+        claims,
+        expires: DateTime.Now.AddMinutes(2),
+        signingCredentials: credentials);
       return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
-    public Task<AuthDto> LogoutAsync()
+    public bool IsTokenValid()
     {
-      throw new NotImplementedException();
+      var token = _httpContextAccessor.HttpContext!.Request.Headers["authorization"].Single().Split(" ").Last();
+      JwtSecurityToken jwtSecurityToken;
+      try
+      {
+        jwtSecurityToken = new JwtSecurityToken(token);
+      }
+      catch (Exception)
+      {
+        return false;
+      }
+      return jwtSecurityToken.ValidTo > DateTime.UtcNow;
     }
-
     public string GetCurrentToken()
     {
       string token = string.Empty;

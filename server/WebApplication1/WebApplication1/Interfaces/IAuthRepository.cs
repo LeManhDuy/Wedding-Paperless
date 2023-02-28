@@ -12,7 +12,7 @@ namespace WebApplication1.Interfaces
         Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto);
         Task<AuthDto> RegisterAsync(AuthDto authDto);
         string GenerateToken(Account account);
-
+        public bool IsTokenValid();
         Task<AuthDto> LogoutAsync();
         string GetCurrentToken();
 

@@ -95,6 +95,10 @@ namespace WebApplication1.Controllers
         [Authorize]
         public async Task<IActionResult> LogoutAsync()
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             // Lấy ra jwt token trong request header
             // Huỷ token trong bộ nhớ cache hoặc trong cơ sở dữ liệu
             var token = _authRepository.GetCurrentToken();
