@@ -1,13 +1,13 @@
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {AuthComponent} from './component/auth/auth.component';
+import {RegisterComponent} from './component/register/register.component';
+import {LoginComponent} from './component/login/login.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AuthComponent } from './component/auth/auth.component';
-import { RegisterComponent } from './component/register/register.component';
-import { LoginComponent } from './component/login/login.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
 import { LoginSuccessDialogComponent } from './component/login/login-success-dialog/login-success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { NotFoundComponent } from './component/not-found/not-found.component';
@@ -17,7 +17,8 @@ import { RouterModule } from "@angular/router";
 import { EditAlbumnComponent } from 'src/app/component/albumn/edit-albumn/edit-albumn.component';
 import { HomeComponent } from './component/home/home.component';
 import { FormComponent } from './component/form/form.component';
-import { CommonModule } from '@angular/common';
+import {ErrorInterceptor} from "./_helpers/error.interceptor";
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 
 
 @NgModule({
@@ -40,10 +41,12 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
-    CommonModule,
-    RouterModule 
+    RouterModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

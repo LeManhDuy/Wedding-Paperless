@@ -4,15 +4,23 @@ export class LoginUser {
 }
 
 export class RegisterUser {
-  fullname: string | undefined;
-  username: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
-  confirmpassword: string | undefined;
+  fullname?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmpassword?: string;
   role: string = "User";
 }
 
 export class UserToken {
-  role: string = "";
-  name: string = "";
+  id?: number;
+  username?: string;
+  role?: string;
+  token?: string;
+}
+
+class User {
+  id?: number;
+  username?: string;
+  password?: string;
 }

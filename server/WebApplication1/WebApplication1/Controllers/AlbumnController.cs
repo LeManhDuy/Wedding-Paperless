@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Dto;
 using WebApplication1.Interfaces;
@@ -20,6 +21,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get albumnss.
         /// </summary>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
         public async Task<IActionResult> GetAlbumns()
