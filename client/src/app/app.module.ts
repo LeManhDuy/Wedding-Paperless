@@ -37,7 +37,7 @@ import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-a
     InvitationComponent,
     ContentComponent,
     DashboardUserComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
   ],
   imports: [
     BrowserModule,
