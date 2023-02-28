@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get albumnss.
         /// </summary>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
         public async Task<IActionResult> GetAlbumns()
@@ -59,7 +59,7 @@ namespace WebApplication1.Controllers
         /// Create albumn.
         /// </summary>
         [HttpPost("{contentId}")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
@@ -85,7 +85,7 @@ namespace WebApplication1.Controllers
         /// Update albumn.
         /// </summary>
         [HttpPut("{contentId}&{albumnId}")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromRoute] int albumnId, [FromBody] AlbumnDto albumnDto)

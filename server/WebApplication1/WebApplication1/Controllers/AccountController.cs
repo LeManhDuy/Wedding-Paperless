@@ -41,7 +41,7 @@ namespace WebApplication1.Controller
         /// </summary>
         /// <returns>A list account</returns>
         [HttpGet("account")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult<ICollection<AccountDto>>> GetAccounts()
@@ -73,7 +73,7 @@ namespace WebApplication1.Controller
         /// </summary>
         /// <param name="accountId">account id</param>     
         [HttpDelete("{accountId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
