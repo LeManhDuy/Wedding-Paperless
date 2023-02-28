@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Dto;
@@ -16,6 +17,7 @@ namespace WebApplication1.Controller
         private readonly IPersonRepository _personRepository;
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepository;
 
         public AccountController
         (
@@ -23,14 +25,15 @@ namespace WebApplication1.Controller
             IMapper mapper,
             IPersonRepository personRepository,
             IAccountService accountService,
-            IEmailRepository emailRepository
-        )
+            IEmailRepository emailRepository, 
+            IAuthRepository authRepository)
         {
             _accountRepository = accountRepository;
             _mapper = mapper;
             _personRepository = personRepository;
             _accountService = accountService;
             _emailRepository = emailRepository;
+            _authRepository = authRepository;
         }
 
         /// <summary>
@@ -38,18 +41,31 @@ namespace WebApplication1.Controller
         /// </summary>
         /// <returns>A list account</returns>
         [HttpGet("account")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult<ICollection<AccountDto>>> GetAccounts()
         {
-            var accounts = await _accountRepository.GetAccountsAsync();
+            try
+            {
+                if (!_authRepository.IsTokenValid())
+                {
+                    return Unauthorized();
+                }
+                var accounts = await _accountRepository.GetAccountsAsync();
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
             
-            var accountDto = _mapper.Map<ICollection<AccountDto>>(accounts);
+                var accountDto = _mapper.Map<ICollection<AccountDto>>(accounts);
 
-            return Ok(accountDto);
+                return Ok(accountDto);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         /// <summary>
@@ -57,11 +73,16 @@ namespace WebApplication1.Controller
         /// </summary>
         /// <param name="accountId">account id</param>     
         [HttpDelete("{accountId}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ICollection<AccountDto>>> DeleteAccount(int accountId)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if(!await _accountRepository.AccountExistsAsync(accountId)){
                 return NotFound();
             }
@@ -75,6 +96,27 @@ namespace WebApplication1.Controller
             }
 
             return NoContent();
+        }
+
+        /// <summary>
+        /// Checking code is verified or not.
+        /// </summary>
+        /// <param name="code">code</param>     
+        [HttpPut("{code}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> ValidateCode(string code)
+        {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+
+            if(!await _accountRepository.CodeIsExistAsync(code)){
+                return NotFound();
+            }
+
+            return Ok();
         }
 
         /// <summary>
@@ -101,7 +143,7 @@ namespace WebApplication1.Controller
 
             var content = _accountService.CreateMessage(person);
             await _emailRepository.SendEmail(content);
-            return Ok("Please check email ");
+            return Ok();
         } 
 
         /// <summary>
@@ -118,10 +160,15 @@ namespace WebApplication1.Controller
         ///     }
         /// </remarks>
         [HttpPost("resetPassword")]
+        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> ResetPassword([FromBody]ForgotPasswordDto forgotPasswordDto)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             var account = await _accountRepository.GetAccountByVerifyCode(forgotPasswordDto.Code);
             if(account == null || account.CodeExpries < DateTime.Now){
                 return BadRequest("Invalid code");
@@ -154,10 +201,15 @@ namespace WebApplication1.Controller
         ///     ]
         /// </remarks>
         [HttpPatch("{id}/patchAccount")]
+        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> PatchAccount(int id, [FromBody] JsonPatchDocument<UpdateAccountDto> patchDoc)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (patchDoc != null)
             {
                 var account = await _accountRepository.GetAccountByIdAsync(id);

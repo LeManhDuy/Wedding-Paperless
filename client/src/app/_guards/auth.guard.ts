@@ -18,21 +18,25 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const requiredRole = route.data['requiredRole'];
-
-
+    const requiredRoles = route.data['requiredRole'];
     return this.loginService.currentUser.pipe(
       map(user => {
         if (user.token) {
-          if (requiredRole) {
-            const payloadBase64 = user.token.split('.')[1];
-            const payloadJson = atob(payloadBase64);
-            const payloadObject = JSON.parse(payloadJson);
-            if (requiredRole == payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']) {
+          const payloadBase64 = user.token.split('.')[1];
+          const payloadJson = atob(payloadBase64);
+          const payloadObject = JSON.parse(payloadJson);
+          const role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+          if (requiredRoles) {
+            const requiredRoleList = requiredRoles.split(",")
+
+            if (requiredRoleList.includes(role)) {
               return true;
             }
             else {
-              this.router.navigate(['/home'])
+              if (role == "admin")
+                this.router.navigate(['/dashboard'])
+              if (role == "user")
+                this.router.navigate(['/home'])
               return false;
 
             }

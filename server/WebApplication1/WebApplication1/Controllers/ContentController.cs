@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Dto;
@@ -16,13 +17,15 @@ namespace WebApplication1.Controllers
         private readonly IContentRepository _contentRepository;
         private readonly IContentService _contentService;
         private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepository;
 
-        public ContentController(IPersonRepository personRepository, IMapper mapper, IContentRepository contentRepository, IContentService contentService)
+        public ContentController(IPersonRepository personRepository, IMapper mapper, IContentRepository contentRepository, IContentService contentService, IAuthRepository authRepository)
         {
             _personRepository = personRepository;
             _mapper = mapper;
             _contentRepository = contentRepository;
             _contentService = contentService;
+            _authRepository = authRepository;
         }
 
         /// <summary>
@@ -30,10 +33,15 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <returns>A list content</returns>
         [HttpGet("content")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             var content = await _contentRepository.GetContentsAsync();
 
             if (!ModelState.IsValid)
@@ -50,11 +58,16 @@ namespace WebApplication1.Controllers
         /// <param name="contentId">content id</param>   
         /// <returns>A content</returns>
         [HttpGet("{contentId}")]
+        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ICollection<ContentDto>>> GetContentById(int contentId)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             var content = await _contentRepository.GetContentByIdAsync(contentId);
             if(content == null){
                 return NotFound();
@@ -73,11 +86,16 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <param name="contentId">content id</param>     
         [HttpDelete("{contentId}")]
+        [Authorize]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ICollection<ContentDto>>> DeleteContent(int contentId)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if(!await _contentRepository.ContentExistAsync(contentId)){
                 return NotFound();
             }
@@ -97,10 +115,15 @@ namespace WebApplication1.Controllers
         /// Create content.
         /// </summary>
         [HttpPost]
+        [Authorize(Roles = "User")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> CreateContent(int idPerson,[FromBody]CreateUpdateContentDto createUpdateContentDto) 
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (createUpdateContentDto == null)
             {
                 return BadRequest();
@@ -138,10 +161,15 @@ namespace WebApplication1.Controllers
         ///     ]
         /// </remarks>
         [HttpPatch("{id}/patchContent")]
+        [Authorize(Roles = "User")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> PatchAccount(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
+        public async Task<ActionResult> PatchContent(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (patchDoc != null)
             {
                 var content = await _contentRepository.GetContentByIdAsync(id);

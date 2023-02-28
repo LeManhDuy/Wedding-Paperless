@@ -12,10 +12,12 @@ namespace WebApplication1.Controllers
     {
         public readonly DataContext _context;
         public readonly IAlbumnRepository _albumnRepository;
-        public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository)
+        public readonly IAuthRepository _authRepository;
+        public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository)
         {
             _context = dataContext;
             _albumnRepository = albumnRepository;
+            _authRepository = authRepository;
         }
 
         /// <summary>
@@ -26,6 +28,10 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
         public async Task<IActionResult> GetAlbumns()
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -53,10 +59,15 @@ namespace WebApplication1.Controllers
         /// Create albumn.
         /// </summary>
         [HttpPost("{contentId}")]
+        [Authorize(Roles = "User")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (albumnDto == null)
             {
                 return BadRequest();
@@ -74,10 +85,15 @@ namespace WebApplication1.Controllers
         /// Update albumn.
         /// </summary>
         [HttpPut("{contentId}&{albumnId}")]
+        [Authorize(Roles = "User")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromRoute] int albumnId, [FromBody] AlbumnDto albumnDto)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (albumnDto == null)
             {
                 return BadRequest();
@@ -112,11 +128,16 @@ namespace WebApplication1.Controllers
         /// Delete albumn by Id.
         /// </summary>
         [HttpDelete("{albumnId}")]
+        [Authorize]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteAlbumns([FromRoute] int albumnId)
         {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

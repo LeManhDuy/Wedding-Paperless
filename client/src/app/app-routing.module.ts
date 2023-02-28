@@ -21,10 +21,10 @@ const routes: Routes = [];
     { path: 'login', loadComponent: () => import('./component/login/login.component').then(m=>m.LoginComponent)},
     { path: 'register', component: RegisterComponent },
     { path: 'not-found', component: NotFoundComponent },
-    { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
-    { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
     { path: 'invitation', component: InvitationComponent },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
+    { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]
