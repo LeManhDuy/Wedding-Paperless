@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get albumnss.
         /// </summary>
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
         public async Task<IActionResult> GetAlbumns()
