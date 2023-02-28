@@ -8,7 +8,6 @@ import { LoginComponent } from "./component/login/login.component";
 import { NotFoundComponent } from './component/not-found/not-found.component';
 import {EditAlbumnComponent} from "./component/albumn/edit-albumn/edit-albumn.component";
 import { InvitationComponent } from './component/invitation/invitation.component';
-import {EditAlbumnComponent} from "./component/albumn/edit-albumn/edit-albumn.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {HomeComponent} from "./component/home/home.component";
 
