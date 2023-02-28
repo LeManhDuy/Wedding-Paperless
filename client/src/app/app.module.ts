@@ -13,12 +13,18 @@ import { AlbumnComponent } from './component/albumn/albumn.component';
 import { RouterModule } from "@angular/router";
 import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { FormComponent } from './component/form/form.component';
+import { InvitationComponent } from './component/invitation/invitation.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { CommonModule } from '@angular/common';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ContentComponent } from './component/content/content.component';
 import { DashboardUserComponent } from './component/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
-
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +36,13 @@ import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-a
     AlbumnComponent,
     EditAlbumnComponent,
     FormComponent,
+    InvitationComponent,
     ContentComponent,
     DashboardUserComponent,
-    DashboardAdminComponent
+    DashboardAdminComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    ConfirmVerifyCodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +51,10 @@ import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-a
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
-    RouterModule
+    NgImageSliderModule,
+    CommonModule,
+    RouterModule,
+    SlickCarouselModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

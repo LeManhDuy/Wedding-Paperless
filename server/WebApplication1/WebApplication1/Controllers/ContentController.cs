@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
     /// </summary>
     /// <returns>A list content</returns>
     [HttpGet("content")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
@@ -119,7 +119,7 @@ namespace WebApplication1.Controllers
     /// Create content.
     /// </summary>
     [HttpPost]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "user")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> CreateContent(int idPerson, [FromBody] CreateUpdateContentDto createUpdateContentDto)
@@ -167,7 +167,7 @@ namespace WebApplication1.Controllers
     ///     ]
     /// </remarks>
     [HttpPatch("{id}/patchContent")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "user")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<ActionResult> PatchContent(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)

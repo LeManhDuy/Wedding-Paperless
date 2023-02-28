@@ -15,6 +15,7 @@ export class AlbumnService {
   }
 
   getAllAlbumns(): Observable<Albumn[]> {
+    console.log(this.baseUrl)
     return this.http.get<Albumn[]>(`${this.baseUrl}`)
   }
 

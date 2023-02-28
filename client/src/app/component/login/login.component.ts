@@ -13,6 +13,7 @@ import { CommonModule } from "@angular/common";
   styleUrls: ['./login.component.css'],
   imports: [
     FormsModule,
+    RouterModule,
     CommonModule,
     RouterModule
   ],
