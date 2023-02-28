@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { timer, Subscription } from 'rxjs';
+
+// import {HeadService} from '../service/head.service';
 
 @Component({
   selector: 'app-invitation',
@@ -12,9 +15,12 @@ import { Component } from '@angular/core';
         `
   
 })
+
 export class InvitationComponent {
   
-  imageObject: Array<object> = [{
+  
+  
+  imageObjectOurStory: Array<object> = [{
     image: 'https://i.pinimg.com/564x/ea/a1/5e/eaa15e3eece5261c484fc717335550b3.jpg',
     thumbImage: 'https://i.pinimg.com/564x/ea/a1/5e/eaa15e3eece5261c484fc717335550b3.jpg',
     alt: 'alt of image',

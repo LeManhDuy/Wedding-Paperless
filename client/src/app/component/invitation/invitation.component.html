@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="container-content image_Center" app-create-form>
-                <img src="/Wedding-Paperless/client/src/img/imgMain.jpg" alt="">
+                <img src="https://i.pinimg.com/564x/d6/2f/a9/d62fa9c5ce67dcfe4e1fffd745136d18.jpg" alt="">
             </div>
             <div class="container-content our_Stories">
                 <h4 class="title">
@@ -72,7 +72,7 @@
                 </div>
                 
                 <div class="container-content image_Center" app-create-form>
-                    <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+                    <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
                 </div>
             </div>
             <div class="container-content schedule">
@@ -112,7 +112,7 @@
                 </h4>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-                        <img src="/Wedding-Paperless/client/src/img/Map.jpg" alt="">
+                        <img src="https://www.lumleycastle.com/wp-content/uploads/2022/03/Lumley-Map-scaled.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -125,9 +125,7 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-                        <input type="file" #fileDropRef id="fileDropRef" name="image_Our_Stories">
-                        <h3>Drag and drop photo here</h3>
-                        <label for="fileDropRef">Browse for file</label>
+                        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
                     </div>
                 </div>
             </div>
@@ -139,9 +137,8 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-                        <input type="file" #fileDropRef id="fileDropRef" name="image_Our_Stories">
-                        <h3>Drag and drop photo here</h3>
-                        <label for="fileDropRef">Browse for file</label>
+                        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
+
                     </div>
                 </div>
                 <div class="container-content hope_Join">

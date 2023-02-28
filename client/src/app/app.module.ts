@@ -22,7 +22,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { CommonModule } from '@angular/common';
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,8 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
     ReactiveFormsModule,
     NgImageSliderModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    SlickCarouselModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
