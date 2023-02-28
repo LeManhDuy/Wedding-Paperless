@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserToken } from 'src/app/models/app-user';
+import { LoginService } from 'src/app/_services/login.service';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -7,8 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard-user.component.css']
 })
 export class DashboardUserComponent implements OnInit {
+  currentUser?: UserToken;
 
-  constructor(private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {
+    this.loginService.currentUser?.subscribe(x => this.currentUser = x);
+  }
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
@@ -16,5 +21,10 @@ export class DashboardUserComponent implements OnInit {
 
   showContent() {
     this.router.navigate(['/content']);
+  }
+
+  logout() {
+    this.loginService.logout();
+    this.router.navigate(['/login']);
   }
 }

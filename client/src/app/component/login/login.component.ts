@@ -31,7 +31,16 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     if (this.loginService.currentUserValue) {
-      this.router.navigate(['/home']);
+      const payloadBase64 = this.loginService.currentUserValue.token?.split('.')[1];
+      if (payloadBase64) {
+        const payloadJson = atob(payloadBase64);
+        const payloadObject = JSON.parse(payloadJson);
+        const role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+        if (role == "admin")
+          this.router.navigate(['/dashboard-admin'])
+        if (role == "user")
+          this.router.navigate(['/dashboard-user'])
+      }
     }
   }
 
@@ -59,10 +68,10 @@ export class LoginComponent implements OnInit {
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
             if (response.role == "user")
-              this.router.navigate(['/home']);
+              this.router.navigate(['/dashboard-user']);
             if (response.role == "admin")
               this.router.navigate([
-                '/dashboard'
+                '/dashboard-admin'
               ])
           }
         } else {
