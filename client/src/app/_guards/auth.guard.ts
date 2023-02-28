@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import {catchError, Observable, of} from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { LoginService } from "../_services/login.service";
 import { map } from 'rxjs/operators';
 
@@ -34,11 +34,10 @@ export class AuthGuard implements CanActivate {
             }
             else {
               if (role == "admin")
-                this.router.navigate(['/dashboard'])
+                this.router.navigate(['/dashboard-admin'])
               if (role == "user")
-                this.router.navigate(['/home'])
+                this.router.navigate(['/dashboard-user'])
               return false;
-
             }
           }
           return true
