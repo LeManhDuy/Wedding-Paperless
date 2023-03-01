@@ -14,6 +14,9 @@ namespace WebApplication1.Helper
     {
       CreateMap<Account, AccountDto>();
       CreateMap<AccountDto, Account>();
+      CreateMap<Account, AccountInfoDto>();
+      CreateMap<AccountInfoDto, Account>();
+      
       CreateMap<Account, UpdateAccountDto>();
       CreateMap<UpdateAccountDto, Account>();
 

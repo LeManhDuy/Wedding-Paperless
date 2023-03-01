@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Dto;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 
@@ -8,9 +10,11 @@ namespace WebApplication1.Repositories
     public class AccountRepository : IAccountRepository
     {
         private readonly DataContext _context;
-        public AccountRepository(DataContext context)
+        private readonly IMapper _mapper;
+        public AccountRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<bool> AccountExistsAsync(int id)
@@ -25,7 +29,7 @@ namespace WebApplication1.Repositories
 
         public async Task<bool> DeleteAccountByIdAsync(int id)
         {
-            var account = await GetAccountByIdAsync(id);
+            var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
             if(account == null){
                 return false;
             }
@@ -33,9 +37,19 @@ namespace WebApplication1.Repositories
             return await SaveChangesAsync();
         }
 
-        public async Task<Account> GetAccountByIdAsync(int id)
+        public async Task<AccountInfoDto> GetAccountByIdAsync(int id)
         {
-            return await _context.Accounts.Where(p => p.Id == id).FirstOrDefaultAsync();
+            var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
+            var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
+            var accountInfo = _mapper.Map<AccountInfoDto>(account);
+            accountInfo.Email = person.Email;
+            return accountInfo;
+        }
+
+        public async Task<Account> GetAccountToSolveByIdAsync(int id)
+        {
+            var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
+            return account;
         }
 
         public async Task<Account> GetAccountByVerifyCode(string Code)
@@ -43,9 +57,18 @@ namespace WebApplication1.Repositories
            return await _context.Accounts.Where(p => p.Code == Code).FirstOrDefaultAsync();
         }
 
-        public async Task<ICollection<Account>> GetAccountsAsync()
+        public async Task<ICollection<AccountInfoDto>> GetAccountsAsync()
         {
-            return await _context.Accounts.AsNoTracking().ToListAsync();
+            var accountInfos = new List<AccountInfoDto>();
+            var accounts = await _context.Accounts.AsNoTracking().ToListAsync();
+            foreach (var account in accounts)
+            {
+                var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
+                var accountInfo = _mapper.Map<AccountInfoDto>(account);
+                accountInfo.Email = person.Email;
+                accountInfos.Add(accountInfo);
+            }
+            return accountInfos;
         }
 
         public async Task<bool> SaveChangesAsync()
