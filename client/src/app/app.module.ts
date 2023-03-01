@@ -43,7 +43,7 @@ import { EditRegisterSongComponent } from './components/register-song/edit-regis
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ConfirmVerifyCodeComponent,
-    EditRegisterSongComponent,
+    EditRegisterSongComponent
   ],
   imports: [
     BrowserModule,

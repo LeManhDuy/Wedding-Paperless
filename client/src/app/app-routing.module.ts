@@ -46,6 +46,7 @@ const routes: Routes = [];
     { path: 'form', component: FormComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
 
     { path: 'account', loadComponent: ()=> import('./components/account/account.component').then(c => c.AccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
+    { path: 'account/edit/:id', loadComponent: ()=> import('./components/account/edit-account/edit-account.component').then(c => c.EditAccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
 
     { path: '**', redirectTo: 'not-found' }
 
