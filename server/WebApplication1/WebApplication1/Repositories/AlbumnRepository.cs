@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using Firebase.Storage;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using WebApplication1.Data;
 using WebApplication1.Dto;
 using WebApplication1.Interfaces;

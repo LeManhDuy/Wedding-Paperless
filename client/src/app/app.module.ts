@@ -24,6 +24,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
 import { AccountComponent } from './components/account/account.component';
+import { EditRegisterSongComponent } from './component/register-song/edit-register-song/edit-register-song.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { AccountComponent } from './components/account/account.component';
     ResetPasswordComponent,
     ConfirmVerifyCodeComponent,
     AccountComponent,
+    EditRegisterSongComponent,
   ],
   imports: [
     BrowserModule,

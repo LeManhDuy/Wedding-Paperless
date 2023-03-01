@@ -49,7 +49,6 @@ export class RegisterSongComponent implements OnInit{
     this.contentService.getAllContents().subscribe({
       next: (response) => {
         this.song.contentId = response[0].id
-        console.log(response)
         this.contents = response
       },
       error: (error) => {
@@ -62,7 +61,6 @@ export class RegisterSongComponent implements OnInit{
   onContentSelected(value: any) {
     if (this.song) {
       this.song.contentId = value.target.value;
-      console.log(this.song.contentId);
     }
   }
 
@@ -71,7 +69,7 @@ export class RegisterSongComponent implements OnInit{
       this.registerSongService.addSong(this.song.contentId, this.song).subscribe({
         next: (song) => {
           this.router.navigate(['register-song']);
-          location.reload()
+          // location.reload()
         }
       })
     }

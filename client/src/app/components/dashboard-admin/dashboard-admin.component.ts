@@ -22,8 +22,10 @@ export class DashboardAdminComponent implements OnInit {
   showContent() {
     this.router.navigate(['/content']);
   }
+
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
   }
+  
 }
