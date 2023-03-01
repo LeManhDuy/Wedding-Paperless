@@ -45,16 +45,19 @@ namespace WebApplication1.Controllers
             try
             {
                 var token = await _authRepository.LoginAsync(accountDto);
-                if (token.Username == null)
+                if (token == null)
                 {
                     BadRequest();
                 }
-                var cookieOptions = new CookieOptions
+                else
                 {
-                    HttpOnly = true,
-                    Expires = DateTime.Now.AddMinutes(2)
-                };
-                Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
+                    var cookieOptions = new CookieOptions
+                    {
+                        HttpOnly = true,
+                        Expires = DateTime.Now.AddMinutes(2)
+                    };
+                    Response.Cookies.Append("refreshToken", token!.Token, cookieOptions);
+                }
                 return Ok(token!);
             }
             catch (Exception e)

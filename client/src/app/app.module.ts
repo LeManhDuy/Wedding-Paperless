@@ -23,6 +23,7 @@ import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-a
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
+import { EditRegisterSongComponent } from './component/register-song/edit-register-song/edit-register-song.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/conf
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ConfirmVerifyCodeComponent,
+    EditRegisterSongComponent,
   ],
   imports: [
     BrowserModule,
