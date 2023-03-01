@@ -106,6 +106,8 @@ builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 
 //Service Scope
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IContentService, ContentService>();
 
