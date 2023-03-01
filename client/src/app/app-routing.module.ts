@@ -1,3 +1,4 @@
+import { EditRegisterSongComponent } from './component/register-song/edit-register-song/edit-register-song.component';
 import { DashboardUserComponent } from './component/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
 import { ContentComponent } from './component/content/content.component';
@@ -21,20 +22,28 @@ const routes: Routes = [];
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
+
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
     { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
+
     { path: 'login', loadComponent: () => import('./component/login/login.component').then(c => c.LoginComponent) },
-    { path: 'register-song', loadComponent: () => import('./component/register-song/register-song.component').then(c => c.RegisterSongComponent)},
     { path: 'register', component: RegisterComponent },
     { path: 'forgotPassword', component: ForgotPasswordComponent },
     { path: 'forgotPassword/confirmVerifyCode', component: ConfirmVerifyCodeComponent },
     { path: 'forgotPassword/confirmVerifyCode/resetPassword', component: ResetPasswordComponent },
     { path: 'not-found', component: NotFoundComponent },
+
+    { path: 'register-song', loadComponent: () => import('./component/register-song/register-song.component').then(c => c.RegisterSongComponent)},
+    { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
+
     { path: 'invitation', component: InvitationComponent },
-    { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
-    { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
-    { path: 'form', component: FormComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
+
+    { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
+    
+    { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
+    
+    { path: 'form', component: FormComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
     { path: '**', redirectTo: 'not-found' }
   ])],
   exports: [RouterModule]
