@@ -69,7 +69,7 @@ export class RegisterSongComponent implements OnInit{
       this.registerSongService.addSong(this.song.contentId, this.song).subscribe({
         next: (song) => {
           this.router.navigate(['register-song']);
-          // location.reload()
+          location.reload()
         }
       })
     }

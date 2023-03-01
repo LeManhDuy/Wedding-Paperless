@@ -43,6 +43,8 @@ namespace WebApplication1.Repositories
             var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
             var accountInfo = _mapper.Map<AccountInfoDto>(account);
             accountInfo.Email = person.Email;
+            accountInfo.Avatar = person.Avatar;
+            accountInfo.Fullname = person.FullName;
             return accountInfo;
         }
 
@@ -52,9 +54,9 @@ namespace WebApplication1.Repositories
             return account;
         }
 
-        public async Task<Account> GetAccountByVerifyCode(string Code)
+        public async Task<Account> GetAccountByVerifyCode(string code)
         {
-           return await _context.Accounts.Where(p => p.Code == Code).FirstOrDefaultAsync();
+           return await _context.Accounts.Where(p => p.Code == code).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<AccountInfoDto>> GetAccountsAsync()
@@ -66,6 +68,8 @@ namespace WebApplication1.Repositories
                 var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
                 var accountInfo = _mapper.Map<AccountInfoDto>(account);
                 accountInfo.Email = person.Email;
+                accountInfo.Avatar = person.Avatar;
+                accountInfo.Fullname = person.FullName;
                 accountInfos.Add(accountInfo);
             }
             return accountInfos;
