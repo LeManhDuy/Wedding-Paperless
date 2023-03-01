@@ -42,7 +42,7 @@ export class RegisterSongComponent implements OnInit{
         this.songs = response;
       },
       error: (error) => {
-        console.log(error)
+        console.log(error )
       }
     })
 
