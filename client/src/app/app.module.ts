@@ -14,9 +14,7 @@ import { RouterModule } from "@angular/router";
 import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { FormComponent } from './component/form/form.component';
 import { InvitationComponent } from './component/invitation/invitation.component';
-import { NgImageSliderModule } from 'ng-image-slider';
 import { CommonModule } from '@angular/common';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
 import { ContentComponent } from './component/content/content.component';
@@ -51,10 +49,8 @@ import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/conf
     HttpClientModule,
     MatDialogModule,
     ReactiveFormsModule,
-    NgImageSliderModule,
     CommonModule,
     RouterModule,
-    SlickCarouselModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

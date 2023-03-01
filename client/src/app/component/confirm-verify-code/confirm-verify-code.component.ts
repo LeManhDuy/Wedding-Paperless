@@ -19,7 +19,7 @@ export class ConfirmVerifyCodeComponent {
     this.forgotpasswordService.validateCode(this.confirmVerifyCode?.toString()!)
     .subscribe(respose =>{
       this.codeStorageService.assignCode(this.confirmVerifyCode?.toString()!);
-      this.router.navigate(['./resetPassword']);
+      this.router.navigate(['/forgotPassword/confirmVerifyCode/resetPassword']);
     })
   }
 }

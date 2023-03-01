@@ -102,7 +102,7 @@ namespace WebApplication1.Controller
         /// Checking code is verified or not.
         /// </summary>
         /// <param name="code">code</param>     
-        [HttpPost("validate/{code}")]
+        [HttpPost("validateCode/{code}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

@@ -27,7 +27,7 @@ class User {
 
 export class ResetPassword {
   code: string ="";
-  newPassword: string = "";
+  password: string = "";
   confirmPassword: string = "";
 }
 
