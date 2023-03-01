@@ -2,27 +2,28 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {AuthComponent} from './component/auth/auth.component';
-import {RegisterComponent} from './component/register/register.component';
+import {AuthComponent} from './components/auth/auth.component';
+import {RegisterComponent} from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { LoginSuccessDialogComponent } from './component/login/login-success-dialog/login-success-dialog.component';
+import { LoginSuccessDialogComponent } from './components/login/login-success-dialog/login-success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
-import { NotFoundComponent } from './component/not-found/not-found.component';
-import { AlbumnComponent } from './component/albumn/albumn.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AlbumnComponent } from './components/albumn/albumn.component';
 import { RouterModule } from "@angular/router";
-import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
-import { FormComponent } from './component/form/form.component';
-import { InvitationComponent } from './component/invitation/invitation.component';
+import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
+import { FormComponent } from './components/form/form.component';
+import { InvitationComponent } from './components/invitation/invitation.component';
 import { CommonModule } from '@angular/common';
 import { ErrorInterceptor } from "./_helpers/error.interceptor";
 import { JwtInterceptor } from "./_helpers/jwt.interceptor";
-import { ContentComponent } from './component/content/content.component';
-import { DashboardUserComponent } from './component/dashboard-user/dashboard-user.component';
-import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
-import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
-import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
+import { ContentComponent } from './components/content/content.component';
+import { DashboardUserComponent } from './components/dashboard-user/dashboard-user.component';
+import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
+import { AccountComponent } from './components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/conf
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ConfirmVerifyCodeComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,

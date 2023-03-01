@@ -1,20 +1,20 @@
-import { DashboardUserComponent } from './component/dashboard-user/dashboard-user.component';
-import { DashboardAdminComponent } from './component/dashboard-admin/dashboard-admin.component';
-import { ContentComponent } from './component/content/content.component';
-// import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
-import { AlbumnComponent } from './component/albumn/albumn.component';
+import { DashboardUserComponent } from './components/dashboard-user/dashboard-user.component';
+import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
+import { ContentComponent } from './components/content/content.component';
+// import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.components';
+import { AlbumnComponent } from './components/albumn/albumn.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './component/register/register.component'
-import { LoginComponent } from "./component/login/login.component";
-import { NotFoundComponent } from './component/not-found/not-found.component';
-import { InvitationComponent } from './component/invitation/invitation.component';
+import { RegisterComponent } from './components/register/register.component'
+import { LoginComponent } from "./components/login/login.component";
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { InvitationComponent } from './components/invitation/invitation.component';
 import {AuthGuard} from "./_guards/auth.guard";
-import { FormComponent } from './component/form/form.component';
-import { EditAlbumnComponent } from "./component/albumn/edit-albumn/edit-albumn.component";
-import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
-import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
+import { FormComponent } from './components/form/form.component';
+import { EditAlbumnComponent } from "./components/albumn/edit-albumn/edit-albumn.component";
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
 
 const routes: Routes = [];
 
@@ -23,8 +23,8 @@ const routes: Routes = [];
     { path: '', component: LoginComponent },
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
     { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
-    { path: 'login', loadComponent: () => import('./component/login/login.component').then(c => c.LoginComponent) },
-    { path: 'register-song', loadComponent: () => import('./component/register-song/register-song.component').then(c => c.RegisterSongComponent)},
+    { path: 'login', loadComponent: () => import('./components/login/login.component').then(c => c.LoginComponent) },
+    { path: 'register-song', loadComponent: () => import('./components/register-song/register-song.component').then(c => c.RegisterSongComponent)},
     { path: 'register', component: RegisterComponent },
     { path: 'forgotPassword', component: ForgotPasswordComponent },
     { path: 'forgotPassword/confirmVerifyCode', component: ConfirmVerifyCodeComponent },
