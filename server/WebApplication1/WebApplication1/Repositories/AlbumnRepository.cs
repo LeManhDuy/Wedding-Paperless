@@ -22,7 +22,7 @@ namespace WebApplication1.Repositories
             return await _context.Albumns.AnyAsync(a => a.Id == albumnId);
         }
 
-        public async Task<Albumn> CreateAlbumn(int contentId, int[] matrix, string imageLink)
+        public async Task<Albumn> CreateAlbumnAsync(int contentId, int[] matrix, string imageLink)
         {
             try
             {
@@ -63,7 +63,11 @@ namespace WebApplication1.Repositories
             }
         }
 
-
+        public async Task<bool> CreateAlbumnWithoutColumnAsync(Albumn albumn)
+        {
+           await _context.Albumns.AddAsync(albumn);
+           return await Save();
+        }
 
         public async Task<bool> DeleteAlbumn(AlbumnDto albumn)
         {

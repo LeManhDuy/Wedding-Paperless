@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Dto;
 using WebApplication1.Interfaces;
+using WebApplication1.Interfaces.IService;
 
 namespace WebApplication1.Controllers
 {
@@ -11,10 +12,12 @@ namespace WebApplication1.Controllers
   public class AlbumnController : ControllerBase
   {
     public readonly DataContext _context;
+    public readonly IAlbumService _albumService;
     public readonly IAlbumnRepository _albumnRepository;
     public readonly IAuthRepository _authRepository;
-    public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository)
+    public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository, IAlbumService albumService)
     {
+      _albumService = albumService;
       _context = dataContext;
       _albumnRepository = albumnRepository;
       _authRepository = authRepository;
@@ -77,7 +80,35 @@ namespace WebApplication1.Controllers
         return BadRequest(ModelState);
       }
       int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
-      await _albumnRepository.CreateAlbumn(contentId, matrix, albumnDto.ImageLink);
+      await _albumnRepository.CreateAlbumnAsync(contentId, matrix, albumnDto.ImageLink);
+      return Ok();
+    }
+
+    /// <summary>
+    /// Create albumn.
+    /// </summary>
+    [HttpPost("CreateAlbums/{contentId}")]
+    [Authorize(Roles = "user")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> CreateAlbumns([FromRoute]int contentId, [FromBody]List<CreateAlbumDto> createAlbumDto)
+    {
+      if (!_authRepository.IsTokenValid())
+      {
+        return Unauthorized();
+      }
+
+      if (createAlbumDto == null)
+      {
+        return BadRequest();
+      }
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      await _albumService.CreateListAlbumnAsync(contentId, createAlbumDto);
       return Ok();
     }
 
@@ -117,10 +148,6 @@ namespace WebApplication1.Controllers
       {
         return StatusCode(500, ex.Message);
       }
-
-
-
-
     }
 
     /// <summary>

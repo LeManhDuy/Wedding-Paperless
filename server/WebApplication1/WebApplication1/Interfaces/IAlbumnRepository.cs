@@ -9,7 +9,9 @@ namespace WebApplication1.Interfaces
     {
         Task<List<AlbumnDto>> GetAlbumns();
         Task<AlbumnDto> GetAlbumnById(int id);
-        Task<Albumn> CreateAlbumn(int contentId, int[] matrix, string imageLink);
+
+        Task<bool> CreateAlbumnWithoutColumnAsync(Albumn albumn);
+        Task<Albumn> CreateAlbumnAsync(int contentId, int[] matrix, string imageLink);
         Task<bool> UpdateAlbumn(int contentId, int albumnId, int[] matrix, string imageLink);
         Task<bool> DeleteAlbumn(AlbumnDto albumn);
         Task<bool> AlbumnExist(int albumnId);
