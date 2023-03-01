@@ -172,7 +172,7 @@ namespace WebApplication1.Repositories
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["JWT:Audience"],
               claims,
-              expires: DateTime.Now.AddMinutes(2),
+              expires: DateTime.Now.AddMinutes(20),
               signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
