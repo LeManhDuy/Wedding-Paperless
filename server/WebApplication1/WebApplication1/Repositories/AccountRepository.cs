@@ -11,10 +11,13 @@ namespace WebApplication1.Repositories
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public AccountRepository(DataContext context, IMapper mapper)
+        private readonly IPersonRepository _personRepository;
+
+        public AccountRepository(DataContext context, IMapper mapper, IPersonRepository personRepository)
         {
             _context = context;
             _mapper = mapper;
+            _personRepository = personRepository;
         }
 
         public async Task<bool> AccountExistsAsync(int id)
@@ -30,10 +33,28 @@ namespace WebApplication1.Repositories
         public async Task<bool> DeleteAccountByIdAsync(int id)
         {
             var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
-            if(account == null){
+            if (account == null)
+            {
                 return false;
             }
+
             _context.Accounts.Remove(account);
+            var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
+            await _personRepository.DeletePersonAsync(person.Id);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> StoreAccountByIdAsync(int id)
+        {
+            var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
+            if (account == null)
+            {
+                return false;
+            }
+
+            account.IsHidden = !account.IsHidden;
+            var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == account.Id);
+            await _personRepository.StorePersonAsync(person.Id);
             return await SaveChangesAsync();
         }
 
@@ -50,13 +71,12 @@ namespace WebApplication1.Repositories
 
         public async Task<Account> GetAccountToSolveByIdAsync(int id)
         {
-            var account = await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
-            return account;
+            return await _context.Accounts.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Account> GetAccountByVerifyCode(string code)
         {
-           return await _context.Accounts.Where(p => p.Code == code).FirstOrDefaultAsync();
+            return await _context.Accounts.Where(p => p.Code == code).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<AccountInfoDto>> GetAccountsAsync()
@@ -72,6 +92,7 @@ namespace WebApplication1.Repositories
                 accountInfo.Fullname = person.FullName;
                 accountInfos.Add(accountInfo);
             }
+
             return accountInfos;
         }
 
@@ -85,6 +106,5 @@ namespace WebApplication1.Repositories
             _context.Accounts.Update(account);
             return await SaveChangesAsync();
         }
-
     }
 }

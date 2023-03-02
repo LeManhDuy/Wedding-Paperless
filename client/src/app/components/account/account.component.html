@@ -21,8 +21,9 @@
     <th hidden>{{ account?.id }}</th>
     <th scope="row">{{i + 1}}</th>
     <th>
-<!--      <a target="_blank" href="{{ account?.avatar }}" id="bottle">-->
-        <img [src]="account.avatar" alt="Avatar" />
+      <a target="_blank" href="{{ account?.avatar }}" id="bottle">
+        <img [src]="account.avatar" alt="Avatar"/>
+      </a>
     </th>
     <th>{{ account.username }}</th>
     <th>{{ account.fullname }}</th>

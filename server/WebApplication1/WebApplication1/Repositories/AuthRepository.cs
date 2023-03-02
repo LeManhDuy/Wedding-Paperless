@@ -28,7 +28,9 @@ namespace WebApplication1.Repositories
         private readonly LinkGenerator _linkGenerator;
         private readonly IConfiguration _config;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator, IConfiguration config, IHttpContextAccessor httpContextAccessor)
+
+        public AuthRepository(DataContext context, IEmailRepository emailRepository, LinkGenerator linkGenerator,
+            IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _emailRepository = emailRepository;
@@ -36,6 +38,7 @@ namespace WebApplication1.Repositories
             _config = config;
             _httpContextAccessor = httpContextAccessor;
         }
+
         public async Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto)
         {
             try
@@ -53,6 +56,7 @@ namespace WebApplication1.Repositories
                         Console.WriteLine("User not found");
                         return null;
                     }
+
                     currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
                     if (currentUser == null)
                     {
@@ -89,13 +93,49 @@ namespace WebApplication1.Repositories
                 throw new Exception();
             }
         }
+
+        public async Task<bool> CheckAccountAsync(AccountDto authAccountDto)
+        {
+            try
+            {
+                Account currentUser;
+                authAccountDto.UserName = authAccountDto.UserName.ToLower();
+                currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>
+                    a.UserName == authAccountDto.UserName || a.Email == authAccountDto.UserName);
+                if (currentUser == null)
+                {
+                    var checkAccount =
+                        await _context.Persons.FirstOrDefaultAsync(p => p.Email == authAccountDto.UserName);
+                    if (checkAccount == null)
+                    {
+                        Console.WriteLine("User not found");
+                        return false;
+                    }
+
+                    currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
+                    if (currentUser == null)
+                    {
+                        Console.WriteLine("User not found");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception();
+            }
+        }
+
         public async Task<AuthDto> RegisterAsync(AuthDto authDto)
         {
             try
             {
                 // Check if username already exists
                 var currentUser =
-                    await _context.Accounts.FirstOrDefaultAsync(p => p.UserName.ToLower() == authDto.UserName.ToLower());
+                    await _context.Accounts.FirstOrDefaultAsync(p =>
+                        p.UserName.ToLower() == authDto.UserName.ToLower());
                 if (currentUser != null)
                 {
                     throw new Exception("Username is already taken!");
@@ -142,7 +182,8 @@ namespace WebApplication1.Repositories
                 {
                     To = person.Email,
                     Subject = "Confirm your email address",
-                    Body = $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+                    Body =
+                        $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
                 };
                 await _emailRepository.SendEmail(content);
 
@@ -153,10 +194,12 @@ namespace WebApplication1.Repositories
                 throw new Exception("Failed to register user. " + ex.Message);
             }
         }
+
         public Task<AuthDto> LogoutAsync()
         {
             throw new NotImplementedException();
         }
+
         //Token
         public string GenerateToken(Account account)
         {
@@ -165,17 +208,18 @@ namespace WebApplication1.Repositories
 
             var claims = new[]
             {
-        new Claim(ClaimTypes.Role, account.Role),
-        new Claim(ClaimTypes.Name, account.UserName),
-      };
+                new Claim(ClaimTypes.Role, account.Role),
+                new Claim(ClaimTypes.Name, account.UserName),
+            };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["JWT:Audience"],
-              claims,
-              expires: DateTime.Now.AddMinutes(20),
-              signingCredentials: credentials);
+                _config["JWT:Audience"],
+                claims,
+                expires: DateTime.Now.AddMinutes(20),
+                signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
         public bool IsTokenValid()
         {
             var token = _httpContextAccessor.HttpContext!.Request.Headers["authorization"].Single().Split(" ").Last();
@@ -188,8 +232,10 @@ namespace WebApplication1.Repositories
             {
                 return false;
             }
+
             return jwtSecurityToken.ValidTo > DateTime.UtcNow;
         }
+
         public string GetCurrentToken()
         {
             string token = string.Empty;
@@ -209,6 +255,7 @@ namespace WebApplication1.Repositories
                     // _httpContextAccessor.HttpContext?.Response.Cookies.Delete();
                 }
             }
+
             Console.WriteLine(token);
             return token;
         }

@@ -25,5 +25,6 @@ namespace WebApplication1.Models
         public Account Account { get; set; }
 
         public Content Content { get; set; }
+        public bool IsHidden { get; set; } = true;
     }
 }

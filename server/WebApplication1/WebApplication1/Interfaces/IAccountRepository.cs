@@ -12,6 +12,7 @@ namespace WebApplication1.Interfaces
         Task<bool> UpdateAccountAsync(Account account);
 
         Task<bool> DeleteAccountByIdAsync(int id);
+         Task<bool> StoreAccountByIdAsync(int id);
 
         Task<bool> AccountExistsAsync(int id);
 

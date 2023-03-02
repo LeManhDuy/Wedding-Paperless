@@ -12,7 +12,13 @@ namespace WebApplication1.Dto
     [Required]
     [EmailAddress(ErrorMessage = "Invalid email address")]
     public string Email { get; set; }
+    
+    public string Avatar { get; set; }
+  }
 
-    public string UserName { get; set; }
+  public class UpdatePersonDto
+  {
+    public string FullName { get; set; }
+    public string Avatar { get; set; }
   }
 }

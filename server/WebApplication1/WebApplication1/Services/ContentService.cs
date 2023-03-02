@@ -26,12 +26,13 @@ namespace WebApplication1.Services
         public async Task<bool> CreateContentAsync(int idPerson, CreateUpdateContentDto contentDto)
         {
             var person = await _personRepository.GetPersonByIdAsync(idPerson);
+            var personEmail = await _personRepository.GetPersonByEmailAsync(person.Email);
             if(person == null){
                 throw new Exception("Not found");
             }
 
             var content = _mapper.Map<Content>(contentDto);
-            content.Person = person;
+            content.Person = personEmail;
             if(!await _contentRepository.CreateContentAsync(content)){
                 return false;
             };
