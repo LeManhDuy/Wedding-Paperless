@@ -112,10 +112,10 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IContentService, ContentService>();
 
 
-builder.WebHost.ConfigureKestrel(kestrelServerOptions =>
-{
-    kestrelServerOptions.Listen(IPAddress.Loopback, 5001);
-});
+// builder.WebHost.ConfigureKestrel(kestrelServerOptions =>
+// {
+//     kestrelServerOptions.Listen(IPAddress.Loopback, 5001);
+// });
 
 var app = builder.Build();
 
