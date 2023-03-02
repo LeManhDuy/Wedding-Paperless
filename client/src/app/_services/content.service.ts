@@ -18,4 +18,21 @@ export class ContentService {
     return this.http.get<Content[]>(`${this.baseUrl}`)
   }
 
+  getContent(idContent: string): Observable<Content> {
+    return this.http.get<Content>(this.baseUrl + idContent);
+  }
+
+  addContent(personId: string, content: Content): Observable<Content> {
+    return this.http.post<Content>(this.baseUrl + personId, content);
+  }
+
+  // updateAlbumn(contentId: string, albumnId: string, imageHandler: ImageHandler): Observable<ImageHandler> {
+  //   return this.http.put<ImageHandler>(this.baseUrl + contentId + "&" + albumnId, imageHandler)
+  // }
+
+  deleteContent(idContent: string | undefined): Observable<Content> {
+    if (idContent)
+      return this.http.delete<Content>(`${this.baseUrl}${idContent}`)
+    throw new Error()
+  }
 }
