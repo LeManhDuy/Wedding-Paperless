@@ -3,22 +3,25 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
 using WebApplication1.Dto;
 using WebApplication1.Interfaces;
+using WebApplication1.Interfaces.IService;
 
 namespace WebApplication1.Controllers
 {
-    [Route("api/albumn")]
-    [ApiController]
-    public class AlbumnController : ControllerBase
+  [Route("api/albumn")]
+  [ApiController]
+  public class AlbumnController : ControllerBase
+  {
+    public readonly DataContext _context;
+    public readonly IAlbumService _albumService;
+    public readonly IAlbumnRepository _albumnRepository;
+    public readonly IAuthRepository _authRepository;
+    public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository, IAlbumService albumService)
     {
-        public readonly DataContext _context;
-        public readonly IAlbumnRepository _albumnRepository;
-        public readonly IAuthRepository _authRepository;
-        public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository)
-        {
-            _context = dataContext;
-            _albumnRepository = albumnRepository;
-            _authRepository = authRepository;
-        }
+      _albumService = albumService;
+      _context = dataContext;
+      _albumnRepository = albumnRepository;
+      _authRepository = authRepository;
+    }
 
         /// <summary>
         /// Get albumnss.
@@ -55,31 +58,59 @@ namespace WebApplication1.Controllers
             return Ok(albumn);
         }
 
-        /// <summary>
-        /// Create albumn.
-        /// </summary>
-        [HttpPost("{contentId}")]
-        [Authorize(Roles = "user")]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
-        {
-            if (!_authRepository.IsTokenValid())
-            {
-                return Unauthorized();
-            }
-            if (albumnDto == null)
-            {
-                return BadRequest();
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
-            await _albumnRepository.CreateAlbumn(contentId, matrix, albumnDto.ImageLink);
-            return Ok();
-        }
+    /// <summary>
+    /// Create albumn.
+    /// </summary>
+    [HttpPost("{contentId}")]
+    [Authorize(Roles = "user")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
+    {
+      if (!_authRepository.IsTokenValid())
+      {
+        return Unauthorized();
+      }
+      if (albumnDto == null)
+      {
+        return BadRequest();
+      }
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
+      await _albumnRepository.CreateAlbumnAsync(contentId, matrix, albumnDto.ImageLink);
+      return Ok();
+    }
+
+    /// <summary>
+    /// Create albumn.
+    /// </summary>
+    [HttpPost("CreateAlbums/{contentId}")]
+    [Authorize(Roles = "user")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> CreateAlbumns([FromRoute]int contentId, [FromBody]List<CreateAlbumDto> createAlbumDto)
+    {
+      if (!_authRepository.IsTokenValid())
+      {
+        return Unauthorized();
+      }
+
+      if (createAlbumDto == null)
+      {
+        return BadRequest();
+      }
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      await _albumService.CreateListAlbumnAsync(contentId, createAlbumDto);
+      return Ok();
+    }
 
         /// <summary>
         /// Update albumn.
@@ -107,22 +138,17 @@ namespace WebApplication1.Controllers
                 return BadRequest();
             }
 
-
-            try
-            {
-                int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
-                await _albumnRepository.UpdateAlbumn(contentId, albumnId, matrix, albumnDto.ImageLink);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-
-
-
-
-        }
+      try
+      {
+        int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
+        await _albumnRepository.UpdateAlbumn(contentId, albumnId, matrix, albumnDto.ImageLink);
+        return Ok();
+      }
+      catch (Exception ex)
+      {
+        return StatusCode(500, ex.Message);
+      }
+    }
 
         /// <summary>
         /// Delete albumn by Id.
