@@ -17,4 +17,12 @@ export class AlbumnDelete {
   selected: boolean = false;
 }
 
+export class AlbumnRequest {
+  base64Image: string | undefined;
+  position: number | undefined;
+  personName?: string = "";
+}
+
+
+
 

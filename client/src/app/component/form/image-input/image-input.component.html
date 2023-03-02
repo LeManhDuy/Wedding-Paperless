@@ -1,0 +1,16 @@
+<div class="container-content restaurant_Map">
+    <h4 class="title" *ngIf ="imageInputModel.title">
+        <p name="restaurant_Map">{{imageInputModel.title}}</p>
+    </h4>
+    <div class="container-content image_Center" *ngIf ="imageInputModel.row !== '2'" app-create-form>
+        <img src="{{imageUrl}}" alt="">
+    </div>
+    <div class="container-content image_Center" *ngIf ="imageInputModel.row === '2'" app-create-form>
+        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
+    </div>
+    <div class="image_Drop">
+            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileSelected($event)" name="image_Our_Stories" >
+            <!-- <h3>{{imageInputModel.instructionTitle}}</h3> -->
+            <!-- <label for="fileDropRef">{{imageInputModel.buttonName}}</label> -->
+    </div>
+</div>

@@ -10,6 +10,7 @@ namespace WebApplication1.Interfaces
         Task<bool> UpdateContentAsync(Content content);
         Task<bool> DeleteContentAsync(int id);
         Task<bool> ContentExistAsync(int contentId);
+        Task<Content> GetContentByIdPerson(int personId);
         Task<bool> SaveAsync();
     }
 }

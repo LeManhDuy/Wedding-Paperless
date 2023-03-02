@@ -39,13 +39,15 @@ export class LoginService {
         let userInfo = new UserToken();
         const user = JSON.parse(response);
 
+
         if (user && user.token) {
           const payloadBase64 = user.token.split('.')[1];
           const payloadJson = atob(payloadBase64);
           const payloadObject = JSON.parse(payloadJson);
           userInfo.username = user.username;
           userInfo.role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-          userInfo.token = user.token
+          userInfo.token = user.token;
+          userInfo.id = user.id;
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);

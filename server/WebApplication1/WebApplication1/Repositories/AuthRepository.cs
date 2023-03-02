@@ -60,7 +60,7 @@ namespace WebApplication1.Repositories
                         return null;
                     }
                 }
-
+                var person = await _context.Persons.Where(p => p.AccountId == currentUser.Id).FirstOrDefaultAsync();
                 using var hmac = new HMACSHA512(currentUser.PasswordSalt);
                 var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
                 for (int i = 0; i < currentUser.PasswordHash.Length; i++)
@@ -77,6 +77,7 @@ namespace WebApplication1.Repositories
 
                 var result = new TokenAccountDto()
                 {
+                    Id = person.Id,
                     Token = token,
                     Username = authAccountDto.UserName,
                 };

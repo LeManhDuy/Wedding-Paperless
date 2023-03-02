@@ -68,7 +68,10 @@ export class LoginComponent implements OnInit {
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
+            console.log(1);
+            
             if (response.role == "user")
+            console.log(2);
               this.router.navigate(['/dashboard-user']);
             if (response.role == "admin")
               this.router.navigate([

@@ -1,17 +1,20 @@
-import { Content } from './../models/content';
+import { Content, ContentRequest } from './../models/content';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { API_URL } from 'src/assets/apiUrl';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentService {
+
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/content/'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private loginService: LoginService) { }
 
   getAllContents(): Observable<Content[]> {
     console.log(this.baseUrl)
@@ -34,5 +37,17 @@ export class ContentService {
     if (idContent)
       return this.http.delete<Content>(`${this.baseUrl}${idContent}`)
     throw new Error()
+  }
+  creatContent(content: Content ): Observable<Content> {
+      const user = this.loginService.currentUserValue;
+
+      const url = this.prefixUrl + API_URL.CREATE_CONTENT(user.id!);
+      content.wish = "Hope you join us";
+      content.personName = "";
+      return this.http.post<Content>(url,content).pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      )
   }
 }

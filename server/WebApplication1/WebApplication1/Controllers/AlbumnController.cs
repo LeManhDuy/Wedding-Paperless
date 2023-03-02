@@ -15,12 +15,16 @@ namespace WebApplication1.Controllers
     public readonly IAlbumService _albumService;
     public readonly IAlbumnRepository _albumnRepository;
     public readonly IAuthRepository _authRepository;
-    public AlbumnController(DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository, IAlbumService albumService)
+
+    public readonly IImageService _imageService;
+
+    public AlbumnController(IImageService imageService, DataContext dataContext, IAlbumnRepository albumnRepository, IAuthRepository authRepository, IAlbumService albumService)
     {
       _albumService = albumService;
       _context = dataContext;
       _albumnRepository = albumnRepository;
       _authRepository = authRepository;
+      _imageService = imageService;
     }
 
     /// <summary>
@@ -82,6 +86,22 @@ namespace WebApplication1.Controllers
       int[] matrix = albumnDto.Position.Split(',').Select(int.Parse).ToArray();
       await _albumnRepository.CreateAlbumnAsync(contentId, matrix, albumnDto.ImageLink);
       return Ok();
+    }
+
+    /// <summary>
+    /// Create albumn.
+    /// </summary>
+    [HttpPost("covertToUrl")]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(200, Type = typeof(string))]
+    public async Task<IActionResult> ConvertBase64ToUrl([FromBody]string base64)
+    {
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      return Ok(await _imageService.ConvertBase64ToUrlAsync(base64));
     }
 
     /// <summary>

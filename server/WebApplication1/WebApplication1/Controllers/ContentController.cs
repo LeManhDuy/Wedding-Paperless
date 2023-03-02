@@ -33,15 +33,10 @@ namespace WebApplication1.Controllers
     /// </summary>
     /// <returns>A list content</returns>
     [HttpGet()]
-    [Authorize(Roles = "admin")]
-    [ProducesResponseType(200)]
     [ProducesResponseType(400)]
+    [ProducesResponseType(200, Type = typeof(ICollection<ContentDto>))]
     public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
     {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
       var content = await _contentRepository.GetContentsAsync();
 
       if (!ModelState.IsValid)
@@ -62,7 +57,8 @@ namespace WebApplication1.Controllers
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult<ICollection<ContentDto>>> GetContentById(int contentId)
+    [ProducesResponseType(200, Type = typeof(ContentDto))]
+    public async Task<ActionResult<ContentDto>> GetContentById(int contentId)
     {
       if (!_authRepository.IsTokenValid())
       {
@@ -87,16 +83,11 @@ namespace WebApplication1.Controllers
     /// </summary>
     /// <param name="contentId">content id</param>     
     [HttpDelete("{contentId}")]
-    [Authorize]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult<ICollection<ContentDto>>> DeleteContent(int contentId)
+    public async Task<ActionResult> DeleteContent(int contentId)
     {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
       if (!await _contentRepository.ContentExistAsync(contentId))
       {
         return NotFound();
@@ -122,7 +113,8 @@ namespace WebApplication1.Controllers
     [Authorize(Roles = "user")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> CreateContent(int idPerson, [FromBody] CreateUpdateContentDto createUpdateContentDto)
+    [ProducesResponseType(200, Type = typeof(ContentDto))]
+    public async Task<ActionResult<ContentDto>> CreateContent(int idPerson, [FromBody] CreateUpdateContentDto createUpdateContentDto)
     {
       if (!_authRepository.IsTokenValid())
       {
@@ -147,8 +139,8 @@ namespace WebApplication1.Controllers
       {
         ModelState.AddModelError("", "Something went wrong when creating content");
       };
-
-      return Ok();
+      var content = await _contentRepository.GetContentByIdPerson(idPerson);
+      return Ok(_mapper.Map<ContentDto>(content));
     }
 
     /// <summary>

@@ -37,6 +37,11 @@ namespace WebApplication1.Repositories
             return await _context.Contents.Where(p => p.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<Content> GetContentByIdPerson(int personId)
+        {
+            return await _context.Contents.Where( p => p.PersonId == personId).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Content>> GetContentsAsync()
         {
             return await _context.Contents.ToListAsync();

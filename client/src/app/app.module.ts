@@ -25,6 +25,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
 import { EditRegisterSongComponent } from './component/register-song/edit-register-song/edit-register-song.component';
 import { EditContentComponent } from './component/content/edit-content/edit-content.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageInputComponent } from './component/form/image-input/image-input.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { EditContentComponent } from './component/content/edit-content/edit-cont
     ConfirmVerifyCodeComponent,
     EditRegisterSongComponent,
     EditContentComponent,
+    ImageInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { EditContentComponent } from './component/content/edit-content/edit-cont
     ReactiveFormsModule,
     CommonModule,
     RouterModule,
+    NgImageSliderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

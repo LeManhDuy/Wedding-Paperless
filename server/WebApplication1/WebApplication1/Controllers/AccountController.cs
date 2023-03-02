@@ -41,17 +41,13 @@ namespace WebApplication1.Controller
         /// </summary>
         /// <returns>A list account</returns>
         [HttpGet("account")]
-        [Authorize(Roles = "admin")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(200, Type = typeof(ICollection<AccountDto>))]
         public async Task<ActionResult<ICollection<AccountDto>>> GetAccounts()
         {
             try
             {
-                if (!_authRepository.IsTokenValid())
-                {
-                    return Unauthorized();
-                }
                 var accounts = await _accountRepository.GetAccountsAsync();
 
                 if (!ModelState.IsValid)
@@ -76,8 +72,8 @@ namespace WebApplication1.Controller
         [Authorize(Roles = "admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        public async Task<ActionResult<ICollection<AccountDto>>> DeleteAccount(int accountId)
+        [ProducesResponseType(404)]   
+        public async Task<ActionResult> DeleteAccount(int accountId)
         {
             if (!_authRepository.IsTokenValid())
             {
@@ -95,7 +91,7 @@ namespace WebApplication1.Controller
                 ModelState.AddModelError("", "Something went wrong deleting category");
             }
 
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>
@@ -106,6 +102,7 @@ namespace WebApplication1.Controller
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
+        [ProducesResponseType(200)]
         public async Task<ActionResult> ValidateCode(string code)
         {
             if(!ModelState.IsValid){
@@ -201,15 +198,10 @@ namespace WebApplication1.Controller
         ///     ]
         /// </remarks>
         [HttpPatch("{id}/patchAccount")]
-        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> PatchAccount(int id, [FromBody] JsonPatchDocument<UpdateAccountDto> patchDoc)
         {
-            if (!_authRepository.IsTokenValid())
-            {
-                return Unauthorized();
-            }
             if (patchDoc != null)
             {
                 var account = await _accountRepository.GetAccountByIdAsync(id);
