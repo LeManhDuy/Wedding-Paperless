@@ -2,7 +2,6 @@ import { EditRegisterSongComponent } from './components/register-song/edit-regis
 import { DashboardUserComponent } from './components/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
 import { ContentComponent } from './components/content/content.component';
-import { ContentComponent } from './component/content/content.component';
 // import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { AlbumnComponent } from './components/albumn/albumn.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +16,7 @@ import { EditAlbumnComponent } from "./components/albumn/edit-albumn/edit-albumn
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
+import {EditContentComponent} from "./components/content/edit-content/edit-content.component";
 
 const routes: Routes = [];
 
