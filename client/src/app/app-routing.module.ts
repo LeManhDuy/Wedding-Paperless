@@ -17,14 +17,12 @@ import { EditAlbumnComponent } from "./component/albumn/edit-albumn/edit-albumn.
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
 
 const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
-    { path:'', component: NavbarComponent},
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
     { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
