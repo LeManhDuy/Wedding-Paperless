@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {AccountInfo} from "../../../models/account";
+import {AccountInfo, PersonInfo} from "../../../models/account";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../_services/account.service";
+import {EditAccountService} from "../../../_services/edit-account.service";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {
@@ -18,19 +19,17 @@ class ImageSnippet {
   standalone: true
 })
 export class EditAccountComponent implements OnInit{
-  accountInfo: AccountInfo = {
+  personInfo: PersonInfo = {
     id: '',
-    username: '',
     avatar: '',
     fullname: '',
     email:'',
-    role:''
   }
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private accountService: AccountService) {
+    private personService: EditAccountService) {
 
   }
 
@@ -41,8 +40,9 @@ export class EditAccountComponent implements OnInit{
     const file: File = avatar.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (evt: any) => {
+      console.log(this.selectedFile)
       this.selectedFile = new ImageSnippet(evt.target.result, file);
-      this.accountInfo.avatar = this.selectedFile.src;
+      this.personInfo.avatar = this.selectedFile.src;
     });
     reader.readAsDataURL(file);
   }
@@ -52,9 +52,10 @@ export class EditAccountComponent implements OnInit{
       next: params => {
         const id = params.get('id')
         if (id) {
-          this.accountService.getAccount(id).subscribe({
+          this.personService.getPerson(id).subscribe({
             next: response => {
-              this.accountInfo = response
+              this.personInfo = response
+              console.log(this.personInfo)
             }
           })
         }
@@ -62,10 +63,10 @@ export class EditAccountComponent implements OnInit{
     })
   }
 
-  // updateAccount() {
-  //   if (this.accountInfo.id) {
-  //     this.accountService.updateAccount(this.albumnDetails.id)
-  //   }
-  // }
+  updatePerson() {
+    if (this.personInfo.id) {
+      this.personService.updatePerson(this.personInfo.id, this.personInfo)
+    }
+  }
 
 }

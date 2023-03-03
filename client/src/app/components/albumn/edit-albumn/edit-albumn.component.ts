@@ -44,9 +44,11 @@ export class EditAlbumnComponent implements OnInit {
   }
 
   processFile(imageInput: any) {
+    console.log("loading")
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
+      console.log(this.selectedFile)
       this.selectedFile = new ImageSnippet(event.target.result, file);
       this.albumnDetails.imageLink = this.selectedFile.src;
     });

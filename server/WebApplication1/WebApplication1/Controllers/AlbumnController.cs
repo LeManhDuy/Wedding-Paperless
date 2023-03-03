@@ -62,7 +62,7 @@ namespace WebApplication1.Controllers
     /// Create albumn.
     /// </summary>
     [HttpPost("{contentId}")]
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user, admin")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
@@ -88,7 +88,7 @@ namespace WebApplication1.Controllers
     /// Create albumn.
     /// </summary>
     [HttpPost("CreateAlbums/{contentId}")]
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user, admin")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> CreateAlbumns([FromRoute]int contentId, [FromBody]List<CreateAlbumDto> createAlbumDto)

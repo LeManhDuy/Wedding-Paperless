@@ -6,6 +6,12 @@ export class AccountInfo{
   email?:string;
   role?:string;
 }
+export class PersonInfo{
+  id?: string;
+  fullname?: string;
+  avatar?: string;
+  email?:string;
+}
 
 // export class AccountHandle{
 //   username?: string;

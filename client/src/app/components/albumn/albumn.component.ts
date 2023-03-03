@@ -53,6 +53,7 @@ export class AlbumnComponent implements OnInit {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
+      console.log(this.selectedFile)
       this.selectedFile = new ImageSnippet(event.target.result, file);
       this.imageHandler.imageLink = this.selectedFile.src;
     });

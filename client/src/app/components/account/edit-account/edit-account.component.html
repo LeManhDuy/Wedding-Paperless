@@ -1,14 +1,38 @@
-<form #form="ngForm" >
-  <div class="input-group mb-3">
-    <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-           [(ngModel)]="accountInfo.avatar" name="imageLink">
-<!--    <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="albumnDetails.position">-->
-  </div>
-  <br>
-  <button class="btn btn-success btn-sm float-right" type="submit">
-    Upload
-  </button>
-<!--  <button class="btn btn-danger btn-sm float-right" type="button" (click)="deleteImage(albumnDetails.id)">-->
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Avatar</th>
+      <th scope="col">Email</th>
+      <th scope="col">Fullname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td>
+      <a target="_blank" href="{{ personInfo.avatar }}" id="bottle">
+        <img class="card-img-top" src="{{ personInfo.avatar }}" alt="Card image cap">
+      </a>
+    </td>
+    <td>{{ personInfo.email }}</td>
+    <td>{{ personInfo.fullname }}</td>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <form #form="ngForm" (ngSubmit)="updatePerson()">
+    <div class="input-group mb-3">
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+             [(ngModel)]="personInfo.avatar" name="imageLink">
+      <!--    <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="albumnDetails.position">-->
+    </div>
+    <br>
+    <button class="btn btn-success btn-sm float-right" type="submit">
+      Upload
+    </button>
+    <!--  <button class="btn btn-danger btn-sm float-right" type="button" (click)="deleteImage(albumnDetails.id)">-->
     Delete
-<!--  </button>-->
-</form>
+    <!--  </button>-->
+  </form>
+
+</div>

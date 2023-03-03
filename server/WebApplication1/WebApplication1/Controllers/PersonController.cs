@@ -61,7 +61,7 @@ public class PersonController: ControllerBase
     //     }
     // }
 
-    [HttpPost("/{{id}}")]
+    [HttpGet("{id}")]
     [Authorize(Roles = "admin, user")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
@@ -89,12 +89,12 @@ public class PersonController: ControllerBase
         }
     }
     
-    [HttpPatch("/{{id}}")]
+    [HttpPatch("{id}")]
     [Authorize(Roles = "admin, user")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult> PatchAccount(int id, [FromBody] JsonPatchDocument<UpdatePersonDto> patchDoc)
+    public async Task<ActionResult> PatchPerson(int id, [FromBody] JsonPatchDocument<UpdatePersonDto> patchDoc)
     {
         if (!_authRepository.IsTokenValid())
         {
@@ -107,7 +107,7 @@ public class PersonController: ControllerBase
 
             patchDoc.ApplyTo(updatePersonDto, ModelState);
 
-            person.FullName = updatePersonDto.FullName;
+            person.FullName = updatePersonDto.Fullname;
             person.Avatar = updatePersonDto.Avatar;
 
             if (!ModelState.IsValid)
