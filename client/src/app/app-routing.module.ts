@@ -2,6 +2,7 @@ import { EditRegisterSongComponent } from './components/register-song/edit-regis
 import { DashboardUserComponent } from './components/dashboard-user/dashboard-user.component';
 import { DashboardAdminComponent } from './components/dashboard-admin/dashboard-admin.component';
 import { ContentComponent } from './components/content/content.component';
+import { ContentComponent } from './component/content/content.component';
 // import { EditAlbumnComponent } from './component/albumn/edit-albumn/edit-albumn.component';
 import { AlbumnComponent } from './components/albumn/albumn.component';
 import { NgModule } from '@angular/core';
@@ -22,6 +23,7 @@ const routes: Routes = [];
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
+
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
     { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
@@ -39,6 +41,7 @@ const routes: Routes = [];
 
     { path: 'invitation', component: InvitationComponent },
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
+    { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
     { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
@@ -47,6 +50,7 @@ const routes: Routes = [];
 
     { path: 'account', loadComponent: ()=> import('./components/account/account.component').then(c => c.AccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
     { path: 'account/edit/:id', loadComponent: ()=> import('./components/account/edit-account/edit-account.component').then(c => c.EditAccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
+
 
     { path: '**', redirectTo: 'not-found' }
 

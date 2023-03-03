@@ -1,1 +1,30 @@
-<p>content works!</p>
+<form #form="ngForm">
+  <div class="container">
+    <div class="row">
+      <div class="col order-first">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Host Name</th>
+              <th scope="col">Date Event</th>
+              <th scope="col">Address</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let content of contents; let i = index ">
+              <th hidden>{{ content.id }}</th>
+              <th scope="row">{{i + 1}}</th>
+              <td>{{ content.hostName }}</td>
+              <td>{{ content.date }}</td>
+              <td>{{ content.address }}</td>
+              <td><a [routerLink]="['/content/edit',content.id]" routerLinkActive="router-link-active">Update/Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

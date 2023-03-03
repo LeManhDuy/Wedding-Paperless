@@ -20,7 +20,6 @@ export class AlbumnService {
   }
 
   addAlbumn(contentId: string, imageHandler: ImageHandler): Observable<ImageHandler> {
-    console.log(contentId, imageHandler);
     return this.http.post<ImageHandler>(this.baseUrl + contentId, imageHandler);
   }
 
@@ -36,4 +35,5 @@ export class AlbumnService {
   updateAlbumn(contentId: string, albumnId: string, imageHandler: ImageHandler): Observable<ImageHandler> {
     return this.http.put<ImageHandler>(this.baseUrl + contentId + "&" + albumnId, imageHandler)
   }
+
 }
