@@ -25,6 +25,8 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ConfirmVerifyCodeComponent } from './component/confirm-verify-code/confirm-verify-code.component';
 import { EditRegisterSongComponent } from './component/register-song/edit-register-song/edit-register-song.component';
 import { EditContentComponent } from './component/content/edit-content/edit-content.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { EditContentComponent } from './component/content/edit-content/edit-cont
     ConfirmVerifyCodeComponent,
     EditRegisterSongComponent,
     EditContentComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
