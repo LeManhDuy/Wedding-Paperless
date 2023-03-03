@@ -22,8 +22,7 @@
 <div>
   <form #form="ngForm" (ngSubmit)="updatePerson()">
     <div class="input-group mb-3">
-      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-             [(ngModel)]="personInfo.avatar" name="imageLink">
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" name="imageLink">
       <!--    <input type="text" class="form-control" id="position" name="Position" [(ngModel)]="albumnDetails.position">-->
     </div>
     <br>

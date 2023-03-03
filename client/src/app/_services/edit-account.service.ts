@@ -21,6 +21,8 @@ export class EditAccountService {
   }
 
   updatePerson(id: string, personInfo: PersonInfo) : Observable<PersonInfo>{
-    return this.http.patch<PersonInfo>(this.baseUrlPerson + id, personInfo)
+    console.log(id, personInfo)
+    // return this.http.patch<PersonInfo>(this.baseUrlPerson + id, personInfo)
+    return new Observable<PersonInfo>()
   }
 }

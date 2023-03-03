@@ -4,6 +4,7 @@ import {AccountInfo, PersonInfo} from "../../../models/account";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AccountService} from "../../../_services/account.service";
 import {EditAccountService} from "../../../_services/edit-account.service";
+import * as jsonpatch from 'fast-json-patch';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {
@@ -40,9 +41,9 @@ export class EditAccountComponent implements OnInit{
     const file: File = avatar.files[0];
     const reader = new FileReader();
     reader.addEventListener('load', (evt: any) => {
-      console.log(this.selectedFile)
       this.selectedFile = new ImageSnippet(evt.target.result, file);
       this.personInfo.avatar = this.selectedFile.src;
+      console.log(this.personInfo.avatar)
     });
     reader.readAsDataURL(file);
   }
@@ -64,8 +65,20 @@ export class EditAccountComponent implements OnInit{
   }
 
   updatePerson() {
+    // if (this.personInfo.id) {
+    //   this.personService.updatePerson(this.personInfo.id, this.personInfo)
+    // }
     if (this.personInfo.id) {
-      this.personService.updatePerson(this.personInfo.id, this.personInfo)
+      const originalPerson = { ...this.personInfo }; // make a copy of the original object
+      this.personService.updatePerson(this.personInfo.id, this.personInfo).subscribe(
+        (updatedPerson) => {
+          const patchDocument = jsonpatch.compare(originalPerson, updatedPerson);
+          console.log(patchDocument);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
     }
   }
 
