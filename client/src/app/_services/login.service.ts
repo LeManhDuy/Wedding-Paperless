@@ -10,7 +10,11 @@ import { LoginUser, RegisterUser, UserToken } from '../models/app-user';
 export class LoginService {
   private currentUserSubject: BehaviorSubject<UserToken>;
   public currentUser: Observable<UserToken>;
+  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
 
+  get isLoggedIn() {
+    return this.loggedIn.asObservable(); // {2}
+  }
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
@@ -49,6 +53,7 @@ export class LoginService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          this.loggedIn.next(true);
           return userInfo;
         } else {
           throw new Error("Login failed");
@@ -64,5 +69,6 @@ export class LoginService {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(new UserToken());
+    this.loggedIn.next(false);
   }
 }

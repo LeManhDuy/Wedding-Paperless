@@ -23,7 +23,6 @@ const routes: Routes = [];
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
-
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
     { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
