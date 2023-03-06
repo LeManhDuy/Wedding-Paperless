@@ -65,6 +65,43 @@ namespace WebApplication1.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
+
+        /// <summary>
+        /// Login Account.
+        /// </summary>
+        [HttpPost("verify")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> VerifyAsync([FromBody] AccountDto accountDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (accountDto == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var token = await _authRepository.CheckAccountAsync(accountDto);
+                if (!token)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
         /// <summary>
         /// Register Account.
         /// </summary>

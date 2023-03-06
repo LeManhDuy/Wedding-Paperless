@@ -123,4 +123,36 @@ public class PersonController: ControllerBase
 
         return BadRequest(ModelState);
     } 
+    
+    [HttpPut("{id}")]
+    [Authorize(Roles = "admin, user")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> UpdatePerson(int id, [FromBody] PersonDto updatePersonDto)
+    {
+        if (!_authRepository.IsTokenValid())
+        {
+            return Unauthorized();
+        }
+        if (updatePersonDto != null)
+        {
+            var person = await _personRepository.GetPersonToSolveByIdAsync(id);
+
+            person.FullName = updatePersonDto.Fullname;
+            person.Avatar = updatePersonDto.Avatar;
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(!await _personRepository.UpdatePersonAsync(person)){
+                ModelState.AddModelError("", "Something went wrong updating person");                    
+            } 
+                   
+            return Ok();
+        }
+
+        return BadRequest(ModelState);
+    } 
 }

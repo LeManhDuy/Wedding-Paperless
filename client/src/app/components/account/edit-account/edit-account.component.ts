@@ -68,15 +68,10 @@ export class EditAccountComponent implements OnInit{
     // if (this.personInfo.id) {
     //   this.personService.updatePerson(this.personInfo.id, this.personInfo)
     // }
-    if (this.personInfo.id) {
-      const originalPerson = { ...this.personInfo }; // make a copy of the original object
-      this.personService.updatePerson(this.personInfo.id, this.personInfo).subscribe(
+    if (this.personInfo.id) {// make a copy of the original object
+      this.personService.updatePerson(this.personInfo.id, this.personInfo ).subscribe(
         (updatedPerson) => {
-          const patchDocument = jsonpatch.compare(originalPerson, updatedPerson);
-          console.log(patchDocument);
-        },
-        (error) => {
-          console.error(error);
+          this.router.navigate(['account'])
         }
       );
     }

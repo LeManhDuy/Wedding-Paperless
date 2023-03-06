@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {AccountInfo, PersonInfo} from "../models/account";
+import * as jsonpatch from "fast-json-patch";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,6 @@ export class EditAccountService {
   }
 
   updatePerson(id: string, personInfo: PersonInfo) : Observable<PersonInfo>{
-    console.log(id, personInfo)
-    // return this.http.patch<PersonInfo>(this.baseUrlPerson + id, personInfo)
-    return new Observable<PersonInfo>()
+    return this.http.put<PersonInfo>(this.baseUrlPerson + id, personInfo)
   }
 }

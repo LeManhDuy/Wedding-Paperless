@@ -10,6 +10,7 @@ namespace WebApplication1.Interfaces
     public interface IAuthRepository
     {
         Task<TokenAccountDto> LoginAsync(AccountDto authAccountDto);
+        Task<bool> CheckAccountAsync(AccountDto authAccountDto);
         Task<AuthDto> RegisterAsync(AuthDto authDto);
         string GenerateToken(Account account);
         public bool IsTokenValid();
