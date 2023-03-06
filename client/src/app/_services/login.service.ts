@@ -15,6 +15,10 @@ export class LoginService {
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
+  get roleLoggedIn(){
+    return this.currentUserValue.role;
+  }
+
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });

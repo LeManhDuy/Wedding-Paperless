@@ -1,4 +1,4 @@
-<nav class="navbar" color="primary" *ngIf="isLoggedIn$ | async">
+<nav class="navbar" color="primary" *ngIf=" roleLoggedIn==='user'">
     <button class="button-MW" (click)="showDashboard()" >
       <!-- <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo"> -->
       <!-- Angular NavBar + Login Example #01 -->
@@ -8,5 +8,5 @@
     <!-- <button mat-button>Menu Option 01</button>
     <button mat-button>Menu Option 02</button>
     <button mat-button routerLink="login">Login</button> -->
-    <button mat-button (click)="logout()" *ngIf="isLoggedIn$">Logout</button>
+    <button mat-button (click)="logout()" *ngIf="isLoggedIn$ ">Logout</button>
   </nav>
