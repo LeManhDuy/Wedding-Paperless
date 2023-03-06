@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormsModule} from "@angular/forms";
-import {AccountInfo, PersonInfo} from "../../../models/account";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AccountService} from "../../../_services/account.service";
-import {EditAccountService} from "../../../_services/edit-account.service";
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from "@angular/forms";
+import { AccountInfo, PersonInfo } from "../../../models/account";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AccountService } from "../../../_services/account.service";
+import { EditAccountService } from "../../../_services/edit-account.service";
 import * as jsonpatch from 'fast-json-patch';
+import { AuthService } from 'src/app/_services/auth.service';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {
@@ -19,21 +20,25 @@ class ImageSnippet {
   ],
   standalone: true
 })
-export class EditAccountComponent implements OnInit{
+export class EditAccountComponent implements OnInit {
+
   personInfo: PersonInfo = {
     id: '',
     avatar: '',
     fullname: '',
-    email:'',
+    email: '',
   }
+
+  idToken?: string
+  roleToken?: string
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private personService: EditAccountService) {
+    private personService: EditAccountService,
+    private authService: AuthService) {
 
   }
-
 
   selectedFile?: ImageSnippet;
 
@@ -43,33 +48,42 @@ export class EditAccountComponent implements OnInit{
     reader.addEventListener('load', (evt: any) => {
       this.selectedFile = new ImageSnippet(evt.target.result, file);
       this.personInfo.avatar = this.selectedFile.src;
-      console.log(this.personInfo.avatar)
     });
     reader.readAsDataURL(file);
   }
 
   ngOnInit(): void {
+    this.idToken = this.authService.getTokenId()
+    this.roleToken = this.authService.getTokenRole()
     this.route.paramMap.subscribe({
       next: params => {
         const id = params.get('id')
         if (id) {
-          this.personService.getPerson(id).subscribe({
-            next: response => {
-              this.personInfo = response
-              console.log(this.personInfo)
-            }
-          })
+          if (this.roleToken == "admin") {
+            this.personService.getPerson(id).subscribe({
+              next: response => {
+                this.personInfo = response
+              }
+            })
+          }
+          else if (this.idToken == id) {
+            this.personService.getPerson(this.idToken).subscribe({
+              next: response => {
+                this.personInfo = response
+              }
+            })
+          }
+          else {
+            this.router.navigate(['not-found']);
+          }
         }
       }
     })
   }
 
   updatePerson() {
-    // if (this.personInfo.id) {
-    //   this.personService.updatePerson(this.personInfo.id, this.personInfo)
-    // }
     if (this.personInfo.id) {// make a copy of the original object
-      this.personService.updatePerson(this.personInfo.id, this.personInfo ).subscribe(
+      this.personService.updatePerson(this.personInfo.id, this.personInfo).subscribe(
         (updatedPerson) => {
           this.router.navigate(['account'])
         }
