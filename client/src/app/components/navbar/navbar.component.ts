@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import {LoginService} from 'src/app/_services/login.service'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/_services/auth.service';
+import { UserToken } from 'src/app/models/app-user';
 
 
 @Component({
@@ -10,28 +12,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-  isLoggedIn$?: Observable<boolean>;
-  roleLoggedIn?: string;
-
-  role?: string;
-  constructor(private loginService: LoginService,private router: Router) {
-    
+  isLoggedIn$?: boolean;
+  userRole?: string;
+  public currentUser : UserToken | undefined
+  constructor(private loginService: LoginService,private router: Router, private authService : AuthService) {
    }
-
+  
   ngOnInit() {
-    if (this.loginService.currentUserValue) {
-      const payloadBase64 = this.loginService.currentUserValue.token?.split('.')[1];
-      if (payloadBase64) {
-        const payloadJson = atob(payloadBase64);
-        const payloadObject = JSON.parse(payloadJson);
-        this.role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-        // if (this.loginService.isLoggedIn)
-        //   this.roleLoggedIn == 'user'
+    this.loginService.isLoggedIn.subscribe(
+      respone => {
+        this.isLoggedIn$ = respone;
       }
-      
-    }
-    return this.roleLoggedIn==='user';
-  }
+    );
+
+    this.loginService.currentUserValueBehaviorSubject()
+    .subscribe(respone =>{
+      const token = respone.token;
+      const role = this.loginService.parseTokenToRole(token!);
+      this.userRole = role;
+    })
+  }  
 
   
 
@@ -46,4 +46,8 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['/dashboard-user']);
     
   }
+  showContent() {
+    this.router.navigate(['/content']);
+  }
+  
 }

@@ -15,9 +15,8 @@ export class LoginService {
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
-  get roleLoggedIn(){
-    return this.currentUserValue.role;
-  }
+
+  roleToken?: string;
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
@@ -38,6 +37,11 @@ export class LoginService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
+  public  currentUserValueBehaviorSubject(): BehaviorSubject<UserToken> {
+    return this.currentUserSubject;
+  }
+
+
   login(loginUser: LoginUser): Observable<any> {
     return this._http.post(`${this.baseUrl}login`, loginUser, {
       responseType: "text",
@@ -46,13 +50,9 @@ export class LoginService {
       .pipe(map((response: any) => {
         let userInfo = new UserToken();
         const user = JSON.parse(response);
-
         if (user && user.token) {
-          const payloadBase64 = user.token.split('.')[1];
-          const payloadJson = atob(payloadBase64);
-          const payloadObject = JSON.parse(payloadJson);
           userInfo.username = user.username;
-          userInfo.role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+          userInfo.role = this.parseTokenToRole(user.token)
           userInfo.token = user.token
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
@@ -67,6 +67,14 @@ export class LoginService {
           console.log(error)
           return of(null);
         }));
+  }
+
+  parseTokenToRole(token: string): string{
+    const payloadBase64 = token.split('.')[1];
+    const payloadJson = atob(payloadBase64);
+    const payloadObject = JSON.parse(payloadJson);
+    const role = payloadObject['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role;
   }
 
   logout() {

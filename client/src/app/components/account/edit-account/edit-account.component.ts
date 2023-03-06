@@ -4,7 +4,7 @@ import { AccountInfo, PersonInfo } from "../../../models/account";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AccountService } from "../../../_services/account.service";
 import { EditAccountService } from "../../../_services/edit-account.service";
-import * as jsonpatch from 'fast-json-patch';
+// import * as jsonpatch from 'fast-json-patch';
 import { AuthService } from 'src/app/_services/auth.service';
 
 class ImageSnippet {
