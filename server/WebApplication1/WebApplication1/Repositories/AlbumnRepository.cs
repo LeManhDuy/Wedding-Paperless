@@ -45,9 +45,9 @@ namespace WebApplication1.Repositories
                                         .TrimEnd('=');
 
                 imageLink = await storage.Child("images_by_months/" + DateTime.Now.Month + "/img" + "_" + id).PutAsync(stream);
-
+      
                 var albumn = new Albumn()
-                {
+                { 
                     ImageLink = imageLink,
                     Content = content,
                     Row = matrix[0],
