@@ -40,7 +40,7 @@ namespace WebApplication1.Controller
         /// Get all account.
         /// </summary>
         /// <returns>A list account</returns>
-        [HttpGet("account")]
+        [HttpGet]
         [Authorize(Roles = "admin")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
@@ -57,9 +57,9 @@ namespace WebApplication1.Controller
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
             
-                var accountDto = _mapper.Map<ICollection<AccountDto>>(accounts);
+                var accountInfoDto = _mapper.Map<ICollection<AccountInfoDto>>(accounts);
 
-                return Ok(accountDto);
+                return Ok(accountInfoDto);
             }
             catch (Exception e)
             {
@@ -212,7 +212,7 @@ namespace WebApplication1.Controller
             }
             if (patchDoc != null)
             {
-                var account = await _accountRepository.GetAccountByIdAsync(id);
+                var account = await _accountRepository.GetAccountToSolveByIdAsync(id);
                 var updateAccountDto = _mapper.Map<UpdateAccountDto>(account);
 
                 patchDoc.ApplyTo(updateAccountDto, ModelState);

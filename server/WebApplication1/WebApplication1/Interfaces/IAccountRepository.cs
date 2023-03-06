@@ -1,16 +1,18 @@
+using WebApplication1.Dto;
 using WebApplication1.Models;
 
 namespace WebApplication1.Interfaces
 {
     public interface IAccountRepository 
     {
-        Task<ICollection<Account>> GetAccountsAsync();
+        Task<ICollection<AccountInfoDto>> GetAccountsAsync();
 
-        Task<Account> GetAccountByIdAsync(int id);
-
+        Task<AccountInfoDto> GetAccountByIdAsync(int id);
+        Task<Account> GetAccountToSolveByIdAsync(int id);
         Task<bool> UpdateAccountAsync(Account account);
 
         Task<bool> DeleteAccountByIdAsync(int id);
+         Task<bool> StoreAccountByIdAsync(int id);
 
         Task<bool> AccountExistsAsync(int id);
 

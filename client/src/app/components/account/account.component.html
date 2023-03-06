@@ -1,0 +1,36 @@
+<!--<div class="user-profile">-->
+<!--  <img [src]="user.avatar" alt="User avatar" />-->
+<!--  <h2>{{ user.username }}</h2>-->
+<!--  <p>{{ user.email }}</p>-->
+<!--  <p>{{ user.role }}</p>-->
+<!--</div>-->
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Avatar</th>
+    <th scope="col">Username</th>
+    <th scope="col">Account Name</th>
+    <th scope="col">Email</th>
+    <th scope="col">Role</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let account of accounts; let i = index">
+    <th hidden>{{ account?.id }}</th>
+    <th scope="row">{{i + 1}}</th>
+    <th>
+      <a target="_blank" href="{{ account?.avatar }}" id="bottle">
+        <img class="card-img-top" [src]="account.avatar" alt="Avatar"/>
+      </a>
+    </th>
+    <th>{{ account.username }}</th>
+    <th>{{ account.fullname }}</th>
+    <th>{{ account.email }}</th>
+    <th>{{ account.role }}</th>
+    <th><a [routerLink]="['/account/edit',account.id]" routerLinkActive="router-link-active">Update</a>
+    </th>
+  </tr>
+  </tbody>
+</table>

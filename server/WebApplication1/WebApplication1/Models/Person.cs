@@ -9,7 +9,7 @@ namespace WebApplication1.Models
 
         [Required]
         public string FullName { get; set; }
-
+        public string Avatar { get; set; } = "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png";
         [Required]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
@@ -25,5 +25,6 @@ namespace WebApplication1.Models
         public Account Account { get; set; }
 
         public Content Content { get; set; }
+        public bool IsHidden { get; set; } = true;
     }
 }

@@ -23,46 +23,45 @@ namespace WebApplication1.Controllers
       _authRepository = authRepository;
     }
 
-    /// <summary>
-    /// Get albumnss.
-    /// </summary>
-    [Authorize(Roles = "admin")]
-    [HttpGet]
-    [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
-    public async Task<IActionResult> GetAlbumns()
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-      var albumns = await _albumnRepository.GetAlbumns();
-      return Ok(albumns);
-    }
+        /// <summary>
+        /// Get albumnss.
+        /// </summary>
+        [Authorize(Roles = "admin")]
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<AlbumnDto>))]
+        public async Task<IActionResult> GetAlbumns()
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var albumns = await _albumnRepository.GetAlbumns();
+            return Ok(albumns);
+        }
 
-    /// <summary>
-    /// Get albumn by Id.
-    /// </summary>
-    [HttpGet("{albumnId}")]
-    [ProducesResponseType(200, Type = typeof(AlbumnDto))]
-    public async Task<IActionResult> GetAlbumns(int albumnId)
-    {
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-      var albumn = await _albumnRepository.GetAlbumnById(albumnId);
-      return Ok(albumn);
-    }
+        /// <summary>
+        /// Get albumn by Id.
+        /// </summary>
+        [HttpGet("{albumnId}")]
+        [ProducesResponseType(200, Type = typeof(AlbumnDto))]
+        public async Task<IActionResult> GetAlbumns(int albumnId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var albumn = await _albumnRepository.GetAlbumnById(albumnId);
+            return Ok(albumn);
+        }
 
     /// <summary>
     /// Create albumn.
     /// </summary>
     [HttpPost("{contentId}")]
-    [Authorize(Roles = "user")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> CreateAlbumn([FromRoute] int contentId, [FromBody] AlbumnDto albumnDto)
@@ -88,7 +87,7 @@ namespace WebApplication1.Controllers
     /// Create albumn.
     /// </summary>
     [HttpPost("CreateAlbums/{contentId}")]
-    [Authorize(Roles = "user")]
+    [Authorize(Roles = "user, admin")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> CreateAlbumns([FromRoute]int contentId, [FromBody]List<CreateAlbumDto> createAlbumDto)
@@ -112,31 +111,31 @@ namespace WebApplication1.Controllers
       return Ok();
     }
 
-    /// <summary>
-    /// Update albumn.
-    /// </summary>
-    [HttpPut("{contentId}&{albumnId}")]
-    [Authorize(Roles = "user")]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromRoute] int albumnId, [FromBody] AlbumnDto albumnDto)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      if (albumnDto == null)
-      {
-        return BadRequest();
-      }
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-      if (!await _albumnRepository.AlbumnExist(albumnDto.Id))
-      {
-        return BadRequest();
-      }
+        /// <summary>
+        /// Update albumn.
+        /// </summary>
+        [HttpPut("{contentId}&{albumnId}")]
+        [Authorize(Roles = "user")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdateAlbumn([FromRoute] int contentId, [FromRoute] int albumnId, [FromBody] AlbumnDto albumnDto)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            if (albumnDto == null)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!await _albumnRepository.AlbumnExist(albumnDto.Id))
+            {
+                return BadRequest();
+            }
 
       try
       {
@@ -150,27 +149,27 @@ namespace WebApplication1.Controllers
       }
     }
 
-    /// <summary>
-    /// Delete albumn by Id.
-    /// </summary>
-    [HttpDelete("{albumnId}")]
-    [Authorize]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(404)]
-    public async Task<IActionResult> DeleteAlbumns([FromRoute] int albumnId)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-      var albumn = await _albumnRepository.GetAlbumnById(albumnId);
-      await _albumnRepository.DeleteAlbumn(albumn);
-      return Ok(albumn);
+        /// <summary>
+        /// Delete albumn by Id.
+        /// </summary>
+        [HttpDelete("{albumnId}")]
+        [Authorize]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> DeleteAlbumns([FromRoute] int albumnId)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var albumn = await _albumnRepository.GetAlbumnById(albumnId);
+            await _albumnRepository.DeleteAlbumn(albumn);
+            return Ok(albumn);
+        }
     }
-  }
 }
