@@ -1,23 +1,31 @@
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject, map, Observable } from 'rxjs';
-// import { AuthUser, RegisterUser } from '../models/app-user';
-//
-// @Injectable({
-//   providedIn: "root"
-// })
-// export class AuthService{
-//   headers = new HttpHeaders({
-//     'Content-Type': 'application/json'
-//   });
-//   baseUrl = 'https://localhost:44328/api/auth/';
-//   constructor(private _http:HttpClient) {
-//   }
-//
-//   login(data: any): Observable<any> {
-//     return this._http.post('https://localhost:44328/api/auth/login', data);
-//   }
-//   register(data: any): Observable<any> {
-//     return this._http.post('https://localhost:44328/api/auth/login', data);
-//   }
-// }
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: "root"
+})
+
+export class AuthService {
+
+  getTokenInformation() {
+    const token = localStorage.getItem('currentUser');
+    if (token) {
+      const payloadBase64 = JSON.parse(token).token.split('.')[1];
+      const payloadJson = atob(payloadBase64);
+      const payloadObject = JSON.parse(payloadJson);
+      return payloadObject
+    }
+  }
+
+  getTokenId() {
+    return this.getTokenInformation()['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+  }
+
+  getTokenRole() {
+    return this.getTokenInformation()['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+  }
+
+  getTokenName() {
+    return this.getTokenInformation()['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+  }
+
+}

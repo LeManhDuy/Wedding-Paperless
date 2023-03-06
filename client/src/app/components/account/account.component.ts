@@ -29,7 +29,6 @@ export class AccountComponent implements OnInit{
     this.accountService.getAllAccounts().subscribe({
       next: (response) => {
         this.accounts = response;
-        console.log("accounts: ",this.accounts)
         // for (let account of this.accounts) {
         //   console.log(account.username)
         // }

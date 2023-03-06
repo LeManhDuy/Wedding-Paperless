@@ -2,6 +2,7 @@ import { RegisterService } from '../../_services/register.service';
 import { Component, OnInit } from '@angular/core';
 import { RegisterUser } from 'src/app/models/app-user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
   errorMessage: string | undefined
   //registerForm: FormGroup | undefined;
 
-  constructor(private registerService: RegisterService, private formBuilder: FormBuilder) { }
+  constructor(private registerService: RegisterService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = "Password don't match!";
       }
       else {
-        this.errorMessage = "Dont success";
+        this.router.navigate(['login']);
       }
     })
   }
