@@ -63,9 +63,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginService.login(this.loginUser)
       .subscribe(response => {
-        console.log("1");
         if (response) {
-          console.log(response);
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
