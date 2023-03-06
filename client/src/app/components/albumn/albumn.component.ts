@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Content } from 'src/app/models/content';
 import { ContentService } from 'src/app/_services/content.service';
-class ImageSnippet {
+export class ImageSnippet {
   constructor(public src: string, public file: File) { }
 }
 
@@ -40,12 +40,15 @@ export class AlbumnComponent implements OnInit {
 
     this.contentService.getAllContents().subscribe({
       next: (response) => {
-        this.contents = response;
+        this.imageHandler.contentId = response[0].id
+        console.log(response)
+        this.contents = response
       },
       error: (error) => {
-        console.log(error);
+        console.log(error)
       }
     })
+
 
   }
 
@@ -55,12 +58,13 @@ export class AlbumnComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
       this.imageHandler.imageLink = this.selectedFile.src;
+      console.log(this.imageHandler.imageLink)
     });
     reader.readAsDataURL(file);
   }
 
   onContentSelected(value: any) {
-    this.imageHandler.contentId = value.target.value;
+    this.imageHandler.contentId = value.target.value ;
     console.log(this.imageHandler.contentId);
   }
 

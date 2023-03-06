@@ -25,5 +25,6 @@ namespace WebApplication1.Models
         public string Role { get; set; }
 
         public Person Person { get; set; }
+        public bool IsHidden { get; set; } = true;
     }
 }

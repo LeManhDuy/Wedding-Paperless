@@ -1,0 +1,26 @@
+
+<div class="ngForm" >
+  <form class="lNero" #form="ngForm" (ngSubmit)="updatePerson()">
+    <div class="">
+      <a class="" target="_blank" href="{{ personInfo.avatar }}" id="bottle">
+        <img class="card-img-top" src="{{ personInfo.avatar }}" alt="Card image cap">
+      </a>
+    </div>
+    <div class="input-group mb-3">
+      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" name="imageLink">
+    </div>
+    <div>
+      <a>Full Name: </a>
+      <input type="text" class="form-control" id="fullname" [(ngModel)]="personInfo.fullname" name="fullname" [value]="personInfo.fullname">
+    </div>
+    <div>
+      <a>Email: </a>
+      <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email" [value]="personInfo.email" disabled>
+    </div>
+    <br>
+    <button class="btn btn-success btn-sm float-right" type="submit">
+      Upload
+    </button>
+  </form>
+
+</div>
