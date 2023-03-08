@@ -20,7 +20,8 @@ using WebApplication1.Interfaces.IService;
 using WebApplication1.Models;
 using WebApplication1.Repositories;
 using WebApplication1.Services;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -105,12 +106,12 @@ builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 
+
 //Service Scope
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IAlbumService, AlbumService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IContentService, ContentService>();
-
 
 var app = builder.Build();
 
@@ -119,11 +120,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseHsts();
 }
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
-app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
