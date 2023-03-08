@@ -1,5 +1,6 @@
-<nav class="navbar" color="primary" *ngIf="isLoggedIn$ | async">
-    <button class="button-MW" (click)="showDashboard()" >
+<nav class="navbar" color="primary" *ngIf="userRole === 'user' && isLoggedIn$">
+    
+    <button class="button-MW" (click)="showDashboard() ">
       <!-- <img src="assets/img/angular_whiteTransparent.svg" class="angular-logo"> -->
       <!-- Angular NavBar + Login Example #01 -->
       MyWedding
@@ -8,5 +9,15 @@
     <!-- <button mat-button>Menu Option 01</button>
     <button mat-button>Menu Option 02</button>
     <button mat-button routerLink="login">Login</button> -->
-    <button mat-button (click)="logout()" *ngIf="isLoggedIn$">Logout</button>
-  </nav>
+    <button mat-button (click)="logout()" *ngIf="isLoggedIn$" >Logout</button>
+</nav>
+<!-- <div class="sidebar" *ngIf="userRole === 'admin' && isLoggedIn$">
+  <h2>Dashboard</h2>
+  <ul>
+    <li><a [routerLink]="['/account']" routerLinkActive="router-link-active">Accounts</a></li>
+    <li><a [routerLink]="['/albumn']" routerLinkActive="router-link-active" >Albumns</a></li>
+    <li><a (click)="showContent()">Contents</a></li>
+    <li><a [routerLink]="['/register-song']" routerLinkActive="router-link-active" >Register Song</a></li>
+    <li><a (click)="logout()">Logout</a></li>
+  </ul>
+</div> -->
