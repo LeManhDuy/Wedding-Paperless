@@ -7,11 +7,45 @@
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
+  width: 40%;
+}
+
+.container {
+  display: flex;
   width: 100%;
 }
 
+.logoutButton{
+  border: 0px ;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fffbfb, #e6d4d4);
+  box-shadow:  6px 6px 12px #918686,
+               -6px -6px 12px #ffffff;
+}
+.logoutButton{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.content_Create_Page {
+  border: 0px ;
+  border-radius: 5px;
+  width: 200px;
+  height: 70px;
+
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fffbfb, #e6d4d4);
+  box-shadow:  6px 6px 12px #918686,
+               -6px -6px 12px #ffffff;
+}
+
+.invitation{
+  width: 80%;
+}
+
 .create_New {
-  width: 20%;
+  width: 50%;
   height: 50%;
   text-align: center;
   align-items: center;
@@ -23,7 +57,7 @@
 }
 
 .content_CreatePage {
-  width: 100%;
+  width: 20%;
   justify-content: center;
 }
 
@@ -31,4 +65,5 @@
   /* border: 3px solid var(--lightPink_color); */
   border-radius: 5px;
   width: 200px;
+  height: 70px;
 }

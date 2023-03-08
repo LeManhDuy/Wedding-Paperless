@@ -19,7 +19,6 @@ export class RegisterSongService {
   }
 
   addSong(contentId: string, registerSong: RegisterSong): Observable<RegisterSong> {
-    console.log(this.baseUrl + contentId, registerSong)
     return this.http.post<RegisterSong>(this.baseUrl + contentId, registerSong)
   }
 

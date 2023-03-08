@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
-import { timer, Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlbumnRequest } from 'src/app/models/albumn';
+import { Content } from 'src/app/models/content';
+import { ContentService } from 'src/app/_services/content.service';
 
 // import {HeadService} from '../service/head.service';
 
@@ -13,39 +16,54 @@ import { timer, Subscription } from 'rxjs';
         <button (click)="prevImageClick()">Prev</button>
         <button (click)="nextImageClick()">Next</button>
         `
-  
 })
 
 export class InvitationComponent {
   
-  
-  
-  imageObjectOurStory: Array<object> = [{
-    image: 'https://i.pinimg.com/564x/ea/a1/5e/eaa15e3eece5261c484fc717335550b3.jpg',
-    thumbImage: 'https://i.pinimg.com/564x/ea/a1/5e/eaa15e3eece5261c484fc717335550b3.jpg',
-    alt: 'alt of image',
-    title: 'title of image'
-}, {
-    image: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-    thumbImage: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-    title: 'Image title', //Optional: You can use this key if want to show image with title
-    alt: 'Image alt', //Optional: You can use this key if want to show image with alt
-    order: 1 //Optional: if you pass this key then slider images will be arrange according @input: slideOrderType
-},
-{
-  image: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-  thumbImage: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-  title: 'Image title', //Optional: You can use this key if want to show image with title
-  alt: 'Image alt', //Optional: You can use this key if want to show image with alt
-  order: 2 //Optional: if you pass this key then slider images will be arrange according @input: slideOrderType
-},
-{
-  image: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-  thumbImage: 'https://miro.medium.com/v2/resize:fit:720/format:webp/0*kVWjy9SH_nurfvu9.png', // Support base64 image
-  title: 'Image title', //Optional: You can use this key if want to show image with title
-  alt: 'Image alt', //Optional: You can use this key if want to show image with alt
-  order: 3 //Optional: if you pass this key then slider images will be arrange according @input: slideOrderType
-}
-];
+  @Input() reviewInDashBoard : boolean = false;
 
+  content: Content = new Content();
+  imageObjectOurStory: Array<object> = [];
+  imageObjectOurMemory: Array<object> = [];
+
+  hashMapContent = new Map();
+  constructor(private contentService: ContentService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.contentService.checkContentIsExistByPersonId().subscribe(value => {
+        if(!value){
+            this.router.navigate(['dashboard-user']);
+            return;
+        }
+        this.getContent();
+
+    });
+  }
+
+  getContent(): void{
+      this.contentService.getContentAttachAlbums()
+      .subscribe(respone =>{
+        this.content = respone;
+        
+        this.content.albumnDtos?.forEach(element => {
+            if(element.row === 2){
+              this.pushToOject(this.imageObjectOurStory, element);
+            }
+            else if(element.row === 4){
+              this.pushToOject(this.imageObjectOurMemory,element);
+            }
+            else{
+              this.hashMapContent.set(element.row,element); 
+            }
+        });           
+      })
+  }
+
+  pushToOject(object: Array<object>, element : AlbumnRequest){
+    const image = {
+      image: element.imageLink,
+      thumbImage:element.imageLink,
+     }
+    object.push(image);
+  }
 }

@@ -19,6 +19,11 @@ namespace WebApplication1.Repositories
             return await _context.Contents.AnyAsync(p => p.Id == contentId);
         }
 
+        public async Task<bool> ContentIsExistByPersonId(int personId)
+        {
+            return await _context.Contents.AnyAsync(p => p.PersonId == personId);
+        }
+
         public async Task<bool> CreateContentAsync(Content content)
         {
             await _context.Contents.AddAsync(content);
@@ -35,6 +40,18 @@ namespace WebApplication1.Repositories
         public async Task<Content> GetContentByIdAsync(int id)
         {
             return await _context.Contents.Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<Content> GetContentByIdPersonAsync(int personId)
+        {
+            return await _context.Contents.Where( p => p.PersonId == personId).FirstOrDefaultAsync();
+        }
+
+        public async Task<Content> GetContentByIdPersonWithAlbumsAsync(int personId)
+        {
+            return await _context.Contents.Where(p => p.PersonId == personId)
+                .Include(x => x.Albumns)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<List<Content>> GetContentsAsync()

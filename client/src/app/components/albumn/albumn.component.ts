@@ -18,7 +18,7 @@ export class AlbumnComponent implements OnInit {
 
   imageHandler: ImageHandler = {
     imageLink: '',
-    position: '',
+    row: '',
     contentId: '',
   };
 

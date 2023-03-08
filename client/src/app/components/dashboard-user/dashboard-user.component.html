@@ -1,14 +1,18 @@
-<div class="container_CreatePage">
-  <div class="create_New">
-    <button class="content_Create_Page" (click)="showForm()">
-      <div class="content_Create">
-        Blank
-      </div>
-      <p style="color:blue;">Create New</p>
-    </button>
+<div class="container">
+  <div class="container_CreatePage">
+    <div *ngIf ="!contentIsExist" class="create_New">
+      <button class="content_Create_Page" (click)="showForm()">
+          Create new
+      </button>
+    </div>
+    <div *ngIf ="contentIsExist" class="create_New">
+      <button class="content_Create_Page" (click)="showInvitation()">
+          Review
+      </button>
+    </div>
     <button class="content_Create_Page" (click)="showEditAccount()">
       <p style="color:blue;">Update Account</p>
     </button>
+    <button class="logoutButton" (click)="logout()">Logout</button>
   </div>
-  <button class="button button-primary" (click)="logout()">Logout</button>
 </div>

@@ -18,6 +18,7 @@ export class LoginService {
 
   roleToken?: string;
 
+  
   headers = new HttpHeaders({
     'Content-Type': 'application/json'
   });
@@ -53,7 +54,8 @@ export class LoginService {
         if (user && user.token) {
           userInfo.username = user.username;
           userInfo.role = this.parseTokenToRole(user.token)
-          userInfo.token = user.token
+          userInfo.token = user.token;
+          userInfo.id = user.id;
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
@@ -64,7 +66,6 @@ export class LoginService {
         }
       }),
         catchError((error: HttpErrorResponse) => {
-          console.log(error)
           return of(null);
         }));
   }

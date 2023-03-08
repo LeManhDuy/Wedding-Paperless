@@ -78,7 +78,7 @@ namespace WebApplication1.Repositories
                 Console.WriteLine(authAccountDto.Role);
 
                 var token = GenerateToken(currentUser);
-
+                Console.WriteLine(token);
                 var result = new TokenAccountDto()
                 {
                     Token = token,
@@ -208,6 +208,7 @@ namespace WebApplication1.Repositories
 
             var claims = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
                 new Claim(ClaimTypes.Role, account.Role),
                 new Claim(ClaimTypes.Name, account.UserName),
             };

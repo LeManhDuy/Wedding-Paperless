@@ -100,6 +100,7 @@ namespace WebApplication1.Repositories
                     ImageLink = a.ImageLink,
                     PersonName = a.Content.Person.FullName,
                     ContentId = a.Content.Id,
+                    Row = a.Row
                 }).ToListAsync();
         }
 

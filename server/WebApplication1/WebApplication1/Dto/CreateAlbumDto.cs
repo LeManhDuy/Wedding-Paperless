@@ -8,11 +8,10 @@ namespace WebApplication1.Dto
 {
     public class CreateAlbumDto
     {
-        [Required]
         public string ImageLink { get; set; }
 
         [Required]
-        public int Position { get; set; }
+        public int Row { get; set; }
         public string PersonName { get; set; }
     }
 }

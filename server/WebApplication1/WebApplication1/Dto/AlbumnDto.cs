@@ -10,7 +10,7 @@ namespace WebApplication1.Dto
         public string ImageLink { get; set; }
 
         [Required]
-        public string Position { get; set; }
+        public int Row { get; set; }
         public string PersonName { get; set; }
         public int ContentId { get; set; }
     }

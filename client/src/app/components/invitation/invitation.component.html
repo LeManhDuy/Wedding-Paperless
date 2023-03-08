@@ -14,9 +14,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav d-flex">
+        <ul class="navbar-nav d-flex" *ngIf = "!reviewInDashBoard">
           <!-- me-auto mb-2 mb-lg-0 -->
-          <form class=" col-md">  
+          <form  class=" col-md">  
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="">
             <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
           </form>
@@ -46,20 +46,21 @@
         <form class="create_Form_Container" action="" method="post">
             <div class="host_Name">
                 <h4 class="title">
-                    Oliver & Sarrah
+                    {{this.content.hostName}}
                 </h4>
                 's wedding ceremony
             </div>
             <div class="time_And_Place">
                 <div class="time">
-                    <p>05:30 PM, 10-DEC-2023</p>
+                    <p>{{ this.content.date | date : 'HH:mm' }}</p>
+                    <p>{{ this.content.date | date }}</p>
                 </div>
                 <div class="place">
-                    <a href="">ForU, 23 2/9 street, Danang</a>
+                    <a href="">{{this.content.address}}</a>
                 </div>
             </div>
             <div class="container-content image_Center" app-create-form>
-                <img src="https://i.pinimg.com/564x/d6/2f/a9/d62fa9c5ce67dcfe4e1fffd745136d18.jpg" alt="">
+                <img src= {{hashMapContent.get(1).imageLink}} alt="">
             </div>
             <div class="container-content our_Stories">
                 <h4 class="title">
@@ -67,43 +68,11 @@
                 </h4>
                 <div class="text-area">
                     <p name="our_Stories_Text"
-                                    >I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
-                                    I implement user interface design and solve user problems with HTML, CSS AND Javascript.</p>
+                                    >{{this.content.story}}</p>
                 </div>
-                
+                <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
                 <div class="container-content image_Center" app-create-form>
                 </div>
-            </div>
-            <div class="container-content schedule">
-                <h4 class="title">
-                    Schedule
-                </h4>
-                <div class="time_Map">
-                    <ul class="time_Stamp">
-                        <li>
-                            <div class="time">05:30 PM</div>
-                            <p>Wellcome</p>
-                        </li>
-                        <li>
-                            <div class="time">06:00 PM</div>
-                            <p>Ceremony</p>
-                        </li>
-                        <li>
-                            <div class="time">06:30 PM</div>
-                            <p>Photo shoot</p>
-                        </li>
-                        <li>
-                            <div class="time">07:00 PM</div>
-                            <p>Toast and dance</p>
-                        </li>
-                        <li>
-                            <div class="time">07:30 PM</div>
-                            <p>Feast</p>
-                        </li>
-                    </ul>
-                </div>
-                <input placeholder="Wanna sing a song ?" type="text">
-
             </div>
             <div class="container-content restaurant_Map">
                 <h4 class="title">
@@ -111,7 +80,7 @@
                 </h4>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-                        <img src="https://www.lumleycastle.com/wp-content/uploads/2022/03/Lumley-Map-scaled.jpg" alt="">
+                        <img src= {{hashMapContent.get(3).imageLink}} alt="">
                     </div>
                 </div>
             </div>
@@ -124,6 +93,7 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
+                        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
                     </div>
                 </div>
             </div>
@@ -135,7 +105,7 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-
+                        <img src= {{hashMapContent.get(5).imageLink}} alt="">
                     </div>
                 </div>
                 <div class="container-content hope_Join">

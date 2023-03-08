@@ -49,14 +49,25 @@
     /* width: 100%; */
 }
 .image_Center {
-    width: 100%;
-    height: 200px;
-    padding: 10px;
+    /* width: 100%;
+    height: 200px; */
+    padding: 2px;
     text-align: center;
     border: dashed 1px black;
     position: relative;
     margin: 0 auto;
 }
+.image_Center img{
+    width: 80%;
+}
+
+.error{
+    color: red;
+    font-size: 15px;
+    text-align: center;
+    margin: 15px;
+}
+
 .image_Center input {
     opacity: 0;
     position: absolute;
@@ -83,21 +94,6 @@ h3{
     color:var(--lightGreen_color);
     margin-bottom: 20px;
 }
-.create_Form_Content p{
-    border: none;
-    background-color: transparent;
-    color: #000000;
-    font-size: 16px;
-    width: 100%;
-    text-align: end;
-    height: auto;
-    padding: 10px 5px;
-}
-
-#saveButton{
-    float: right;
-}
-
 .create_Form_Content input{
     border: none;
     background-color: transparent;
@@ -107,12 +103,6 @@ h3{
     text-align: center;
     height: auto;
     padding: 10px 5px;
-}
-.error{
-    color: red;
-    font-size: 15px;
-    text-align: center;
-    margin: 15px;
 }
 
 .container-content{
@@ -125,7 +115,6 @@ h3{
     color: var(--MW-pinkNeon_color);
     width: 100%;
     text-align: center;
-
 }
 
 .our_Stories{
@@ -141,7 +130,7 @@ h3{
 textarea{
     border: none;
     background-color: var(--MW-background_color);
-    color:#c3c3c3;
+    color: #c3c3c3;
     width: 100%;
     text-align: center;
     height: auto;

@@ -17,7 +17,6 @@ namespace WebApplication1.Models
         [Required]
         public int Row { get; set; }
 
-        [Required]
         public int Column { get; set; }
 
         [Required]

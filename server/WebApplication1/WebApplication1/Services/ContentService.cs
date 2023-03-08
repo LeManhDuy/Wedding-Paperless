@@ -39,5 +39,22 @@ namespace WebApplication1.Services
 
             return true;
         }
+
+        public async Task<bool> ExistContentByPersonIdAsync(int personId)
+        {   
+            return await _contentRepository.ContentIsExistByPersonId(personId);
+        }
+
+        public async Task<ContentWithAlbumDto> GetContentWithAlbumAsync(int personId)
+        {
+            if(! await ExistContentByPersonIdAsync(personId)){
+                throw new Exception("Not found");
+            }
+
+            var contentWithAlbum = await _contentRepository.GetContentByIdPersonWithAlbumsAsync(personId);
+
+            return _mapper.Map<ContentWithAlbumDto>(contentWithAlbum);
+
+        }
     }
 }

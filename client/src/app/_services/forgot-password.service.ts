@@ -37,16 +37,13 @@ export class ForgotPasswordService {
     }))
   }
 
-  ResetPassword(newPassword: ResetPassword):Observable<any>{
+  resetPassword(newPassword: ResetPassword):Observable<any>{
     const baseUrl: string = this.prefixUrl + API_URL.RESET_PASSWORD();
     return this._http.post(baseUrl,newPassword, {
       responseType: 'text',
       headers: new HttpHeaders({ 'Content-Type': ' application/json ' },
       )
-    }).pipe(catchError((error) => {
-      console.error(error);
-      return throwError(error);
-    }))     
+    });  
   }
 
 

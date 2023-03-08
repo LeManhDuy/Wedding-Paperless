@@ -18,7 +18,7 @@ export class EditAlbumnComponent implements OnInit {
   albumnDetails: Albumn = {
     id: '',
     imageLink: '',
-    position: '',
+    row: '',
     personName: '',
     contentId: ''
   }
@@ -67,7 +67,6 @@ export class EditAlbumnComponent implements OnInit {
 
   deleteImage(id?: string) {
     if (id) {
-      console.log(id);
       this.albumnService.deleteSelected(id).subscribe({
         next: () => {
           this.router.navigate(['albumn'])

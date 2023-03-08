@@ -5,9 +5,9 @@ namespace WebApplication1.Services
 {
     public class ImageService : IImageService
     {
-        public async Task<string> ConvertBase64ToUrlAsync(string url)
+        public async Task<string> ConvertBase64ToUrlAsync(string base64)
         {
-                var base64String = url.Split("base64,")[1];
+                var base64String = base64.Split("base64,")[1];
                 byte[] bytesImage = Convert.FromBase64String(base64String);
                 var storage = new FirebaseStorage("marinerum.appspot.com");
                 var stream = new MemoryStream(bytesImage);

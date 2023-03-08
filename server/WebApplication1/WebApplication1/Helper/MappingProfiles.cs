@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using WebApplication1.Dto;
 using WebApplication1.Models;
 
@@ -25,6 +21,8 @@ namespace WebApplication1.Helper
 
       CreateMap<Content, ContentDto>();
       CreateMap<ContentDto, Content>();
+      CreateMap<Content, ContentWithAlbumDto>()
+      .ForMember(x => x.AlbumnDtos, y => y.MapFrom(src => src.Albumns));
 
       CreateMap<Person, PersonDto>();
       CreateMap<PersonDto, Person>();
