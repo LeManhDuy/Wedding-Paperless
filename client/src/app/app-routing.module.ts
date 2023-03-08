@@ -17,14 +17,25 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
 import {EditContentComponent} from "./components/content/edit-content/edit-content.component";
+import { AccountComponent } from './components/account/account.component';
+import { RegisterSongComponent } from './components/register-song/register-song.component';
 
-const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    component: DashboardAdminComponent,
+    children: [
+        {
+      path: '',
+      loadChildren: () => import('../app/components/dashboard-admin/dashboard-admin.module').then(x => x.DashboardAdminModule)
+  }]},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot([
     { path: '', component: LoginComponent },
     { path: 'dashboard-user', component: DashboardUserComponent, canActivate: [AuthGuard], data: { requiredRole: 'user' } },
-    { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
+    { path: 'dashboard-admin', component: DashboardAdminComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' },},
 
     { path: 'login', loadComponent: () => import('./components/login/login.component').then(c => c.LoginComponent) },
     { path: 'register', component: RegisterComponent },
@@ -35,7 +46,7 @@ const routes: Routes = [];
 
     { path: 'not-found', component: NotFoundComponent },
 
-    { path: 'register-song', loadComponent: () => import('./components/register-song/register-song.component').then(c => c.RegisterSongComponent)},
+    { path: 'register-song', component :RegisterSongComponent, loadComponent: () => import('./components/register-song/register-song.component').then(c => c.RegisterSongComponent)},
     { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
 
     { path: 'invitation', component: InvitationComponent },

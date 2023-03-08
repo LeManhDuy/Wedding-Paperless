@@ -26,6 +26,8 @@ import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/con
 import { EditRegisterSongComponent } from './components/register-song/edit-register-song/edit-register-song.component';
 import { EditContentComponent } from './components/content/edit-content/edit-content.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardAdminModule } from './components/dashboard-admin/dashboard-admin.module';
+import { SidebarAdminModule } from './components/sidebar-admin/sidebar-admin.module';
 
 
 @NgModule({
@@ -35,11 +37,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     RegisterComponent,
     LoginSuccessDialogComponent,
     NotFoundComponent,
-    AlbumnComponent,
+    // AlbumnComponent,
     EditAlbumnComponent,
     FormComponent,
     InvitationComponent,
-    ContentComponent,
+    // ContentComponent,
     DashboardUserComponent,
     DashboardAdminComponent,
     ForgotPasswordComponent,
@@ -48,6 +50,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     EditRegisterSongComponent,
     EditContentComponent,
     NavbarComponent,
+    DashboardAdminComponent,
+    // SidebarAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +62,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule,
     CommonModule,
     RouterModule,
+    SidebarAdminModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserToken } from 'src/app/models/app-user';
 import { LoginService } from 'src/app/_services/login.service';
-
 @Component({
   selector: 'app-dashboard-admin',
   templateUrl: './dashboard-admin.component.html',
@@ -17,10 +16,6 @@ export class DashboardAdminComponent implements OnInit {
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
-  }
-
-  showContent() {
-    this.router.navigate(['/content']);
   }
 
   logout() {
