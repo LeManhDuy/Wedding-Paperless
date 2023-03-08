@@ -174,7 +174,7 @@ namespace WebApplication1.Controllers
     /// <summary>
     /// Create content.
     /// </summary>
-    [HttpPost]
+   [HttpPost("{personId}")]
     [Authorize(Roles = "user")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
