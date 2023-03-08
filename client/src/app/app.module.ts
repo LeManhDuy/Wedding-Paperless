@@ -26,7 +26,8 @@ import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/con
 import { EditRegisterSongComponent } from './components/register-song/edit-register-song/edit-register-song.component';
 import { EditContentComponent } from './components/content/edit-content/edit-content.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-
+import { NgImageSliderModule } from 'ng-image-slider';
+import { ImageInputComponent } from './components/form/image-input/image-input.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     EditRegisterSongComponent,
     EditContentComponent,
     NavbarComponent,
+    ImageInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReactiveFormsModule,
     CommonModule,
     RouterModule,
+    NgImageSliderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

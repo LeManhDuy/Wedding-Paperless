@@ -23,7 +23,7 @@ export class ResetPasswordComponent {
       return;
     }
     this.resetPassword.code = verifycode;
-    this.forgotpasswordService.ResetPassword(this.resetPassword)
+    this.forgotpasswordService.resetPassword(this.resetPassword)
     .subscribe(_ => {
         this.router.navigate(['/login']);
     })

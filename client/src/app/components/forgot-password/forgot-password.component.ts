@@ -19,8 +19,6 @@ export class ForgotPasswordComponent {
     private codeStorageService: CodeStorageService) {
   }
   GetVerifyCode(): void{
-    console.log(34);
-    
     this.forgotpasswordService.getVerifyCode(this.forgotEmail)
     .subscribe(_ =>{
        this.router.navigate(['forgotPassword/confirmVerifyCode']);

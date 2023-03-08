@@ -25,11 +25,16 @@ namespace WebApplication1.Services
 
            foreach (var item in createAlbumDtos)
            {
+                if(string.IsNullOrWhiteSpace(item.ImageLink)){
+                    continue;
+                }
+
                 var album = new Albumn(){
-                    ImageLink = await _imageService.ConvertBase64ToUrlAsync(item.ImageLink),
-                    Row = item.Position,
+                    ImageLink = item.ImageLink,
+                    Row = item.Row,
                     Content = content,
-                };  
+                };
+
                 await _albumnRepository.CreateAlbumnWithoutColumnAsync(album);    
            }
 

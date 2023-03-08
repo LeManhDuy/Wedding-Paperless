@@ -1,7 +1,8 @@
 import { AuthService } from './../../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserToken } from 'src/app/models/app-user';
+import { ContentService } from 'src/app/_services/content.service';
 import { LoginService } from 'src/app/_services/login.service';
 import * as jwt_decode from 'jwt-decode';
 
@@ -12,13 +13,19 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class DashboardUserComponent implements OnInit {
   currentUser?: UserToken;
+  public contentIsExist: boolean = false;
 
-  constructor(private loginService: LoginService, private router: Router, private authService: AuthService) {
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, private contentService: ContentService, private route:ActivatedRoute) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }
 
   ngOnInit(): void {
+    this.contentService.checkContentIsExistByPersonId().subscribe(value => {
+      this.contentIsExist = value;
+    });
   }
+
+  
 
   showForm() {
     this.router.navigate(['/form']);
@@ -27,6 +34,11 @@ export class DashboardUserComponent implements OnInit {
   showEditAccount() {
     this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
   }
+  
+  showInvitation() {
+    this.router.navigate(['/invitation']);
+  }
+
 
   logout() {
     this.loginService.logout();

@@ -6,6 +6,8 @@ import { LoginSuccessDialogComponent } from "./login-success-dialog/login-succes
 import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { FormBuilder, FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { ContentService } from 'src/app/_services/content.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private contentService: ContentService
   ) {
     if (this.loginService.currentUserValue) {
       const payloadBase64 = this.loginService.currentUserValue.token?.split('.')[1];
@@ -52,7 +55,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   openLoginSuccessDialog(): void {
     const dialogRef = this.dialog.open(LoginSuccessDialogComponent, {
       width: '400px',
@@ -67,12 +69,12 @@ export class LoginComponent implements OnInit {
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
-            if (response.role == "user")
-              this.router.navigate(['/dashboard-user']);
-            if (response.role == "admin")
-              this.router.navigate([
-                '/dashboard-admin'
-              ])
+              if (response.role == "user")
+                this.router.navigate(['/dashboard-user']);
+              if (response.role == "admin")
+                this.router.navigate([
+                  '/dashboard-admin'
+                ])
           }
         } else {
           this.apiData = "*Credential Invalid"

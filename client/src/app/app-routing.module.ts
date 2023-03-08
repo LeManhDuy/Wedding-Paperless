@@ -17,6 +17,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
 import {EditContentComponent} from "./components/content/edit-content/edit-content.component";
+import { IsExistContentGuard } from './_guards/is-exist-content.guard';
 
 const routes: Routes = [];
 
@@ -39,19 +40,20 @@ const routes: Routes = [];
     { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
 
     { path: 'invitation', component: InvitationComponent },
+
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
     { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
     { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
 
-    { path: 'form', component: FormComponent, canActivate: [AuthGuard], data: {requiredRole: 'user'} },
 
     { path: 'account', loadComponent: ()=> import('./components/account/account.component').then(c => c.AccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin'} },
     { path: 'account/edit/:id', loadComponent: ()=> import('./components/account/edit-account/edit-account.component').then(c => c.EditAccountComponent), canActivate: [AuthGuard], data: {requiredRole: 'admin,user'} },
 
     
 
+    { path: 'form', component: FormComponent, canActivate: [AuthGuard,IsExistContentGuard], data: { requiredRole: 'user' } },
     { path: '**', redirectTo: 'not-found' }
 
   ])],
