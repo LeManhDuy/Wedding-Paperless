@@ -153,6 +153,16 @@ namespace WebApplication1.Repositories
                         p.Email == authDto.Email && p.EmailConfirmed == false);
                 if (currentPerson != null)
                 {
+                    var emailTk = _emailRepository.GenerateEmailConfirmToken(currentPerson);
+                    var confirmationLinkUrl = _config["Url"] + "api/email/confirm/" + emailTk;
+                    var message = new Message
+                    {
+                        To = currentPerson.Email,
+                        Subject = "Confirm your email address",
+                        Body =
+                            $"<p>Hello {currentPerson.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLinkUrl}'>{confirmationLinkUrl}</a></p>"
+                    };
+                    await _emailRepository.SendEmail(message);
                     throw new Exception(
                         "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
                 }

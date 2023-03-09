@@ -21,14 +21,19 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.registerService.register(this.registerUser).subscribe(response => {
-      if (this.registerUser.password !== this.registerUser.confirmpassword) {
-        this.errorMessage = "Password don't match!";
-      }
-      else {
+    this.registerService.register(this.registerUser).subscribe(
+      response => {
+        if (this.registerUser.password !== this.registerUser.confirmpassword) {
+          this.errorMessage = "Password don't match!";
+        }
+        else {
+          this.router.navigate(['login']);
+        }
+      },
+      error => {
         this.router.navigate(['login']);
       }
-    })
+    )
   }
 
 }

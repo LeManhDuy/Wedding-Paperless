@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import {BehaviorSubject, catchError, map, throwError} from 'rxjs';
 import { RegisterUser, UserToken } from '../models/app-user';
 
 @Injectable({
@@ -28,15 +28,23 @@ export class RegisterService {
         responseType: 'text',
         headers: this.headers
       })
-    // .pipe(
-    //   map((token) => {
-    //     if (token) {
-    //       const userToken: UserToken = { username: registerUser.username, token }
-    //       localStorage.setItem('userToken', JSON.stringify(userToken));
-    //       this.currentUser.next(userToken);
-    //     }
-    //   })
-    // );
+    .pipe(
+      map((response) => {
+        return response
+      }),
+      catchError(catchError((error: HttpErrorResponse) => {
+        console.log("Debug ", error.message)
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+          // client-side error
+          errorMessage = `Error: ${error.error.message}`;
+        } else {
+          // server-side error
+          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        }
+        return throwError(() => new Error(error.message))
+      }))
+    );
   }
 
 }
