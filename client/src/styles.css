@@ -2,17 +2,20 @@
 :root{
     --white_color : white;
     --background_color : #F2F2F2;
-    --lightGreen_color : #83A64E;
-    --lightPink_color : #D97373;
-    --darkPink_color : #A60303;
+    --lightGreen_color : #378fbb;
+    --darkBlue_color : #205b79;
+    --lightPink_color : #FC6C85 ;
+    --darkPink_color : #26a851;
+    --lighPinkNav_color:#FEE2E7;
+    --lighPinkHover_color:#FEC4CE;
 }
 
 *{
     margin: 0;
     list-style: none;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-}
+    font-family: 'Playfair Display', serif;
+  }
 
 @media screen and (max-width: 1400px){
     body{

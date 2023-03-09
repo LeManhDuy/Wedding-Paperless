@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { AccountInfo, PersonInfo } from "../../../models/account";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -14,13 +14,11 @@ class ImageSnippet {
 @Component({
   selector: 'app-edit-account',
   templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.css'],
-  imports: [
-    FormsModule
-  ],
-  standalone: true
+  styleUrls: ['./edit-account.component.css']
 })
 export class EditAccountComponent implements OnInit {
+  @Input() idToken: string | undefined;
+  @Input() id: string | undefined;
 
   personInfo: PersonInfo = {
     id: '',
@@ -29,7 +27,8 @@ export class EditAccountComponent implements OnInit {
     email: '',
   }
 
-  idToken?: string
+  // idToken?: string
+
   roleToken?: string
 
   constructor(
@@ -57,16 +56,15 @@ export class EditAccountComponent implements OnInit {
     this.roleToken = this.authService.getTokenRole()
     this.route.paramMap.subscribe({
       next: params => {
-        const id = params.get('id')
-        if (id) {
+        if (this.id) {
           if (this.roleToken == "admin") {
-            this.personService.getPerson(id).subscribe({
+            this.personService.getPerson(this.id).subscribe({
               next: response => {
                 this.personInfo = response
               }
             })
           }
-          else if (this.idToken == id) {
+          else if (this.idToken == this.id) {
             this.personService.getPerson(this.idToken).subscribe({
               next: response => {
                 this.personInfo = response
@@ -85,7 +83,7 @@ export class EditAccountComponent implements OnInit {
     if (this.personInfo.id) {// make a copy of the original object
       this.personService.updatePerson(this.personInfo.id, this.personInfo).subscribe(
         (updatedPerson) => {
-          this.router.navigate(['account'])
+          location.reload()
         }
       );
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterSong } from 'src/app/models/song';
 import { RegisterSongService } from 'src/app/_services/register-song.service';
@@ -9,6 +9,7 @@ import { RegisterSongService } from 'src/app/_services/register-song.service';
   styleUrls: ['./edit-register-song.component.css']
 })
 export class EditRegisterSongComponent implements OnInit {
+  @Input() id: string | undefined;
 
   song: RegisterSong = {
     id: '',
@@ -28,9 +29,8 @@ export class EditRegisterSongComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params) => {
-        const id = params.get('id')
-        if (id) {
-          this.registerSongService.getSong(id).subscribe({
+        if (this.id) {
+          this.registerSongService.getSong(this.id).subscribe({
             next: (response) => {
               this.song = response;
             }
@@ -44,7 +44,7 @@ export class EditRegisterSongComponent implements OnInit {
     if (id) {
       this.registerSongService.updateSong(id, this.song).subscribe({
         next: (song) => {
-          this.router.navigate(['register-song']);
+          location.reload()
         }
       });
     }
@@ -54,7 +54,7 @@ export class EditRegisterSongComponent implements OnInit {
     if (id) {
       this.registerSongService.deleteSong(id).subscribe({
         next: (song) => {
-          this.router.navigate(['register-song']);
+          location.reload()
         }
       });
     }

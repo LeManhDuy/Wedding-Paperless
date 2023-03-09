@@ -10,15 +10,7 @@ import {CommonModule, NgFor} from "@angular/common";
 @Component({
   selector: 'app-register-song',
   templateUrl: './register-song.component.html',
-  styleUrls: ['./register-song.component.css'],
-  imports: [
-    FormsModule,
-    CommonModule,
-    NgFor,
-    RouterLink,
-    RouterLinkActive
-  ],
-  standalone: true
+  styleUrls: ['./register-song.component.css']
 })
 export class RegisterSongComponent implements OnInit{
   songs?: RegisterSong[]
@@ -28,7 +20,9 @@ export class RegisterSongComponent implements OnInit{
     songName: '',
     linkBeat: ''
   }
-
+  isAlbumnComponentVisible = true;
+  isEditAlbumnComponentVisible = false;
+  id?:string
   constructor(
     private registerSongService: RegisterSongService,
     private router: Router,
@@ -58,6 +52,12 @@ export class RegisterSongComponent implements OnInit{
 
   }
 
+  showComponent(song: RegisterSong){
+    this.id = song.id
+    this.isAlbumnComponentVisible = false;
+    this.isEditAlbumnComponentVisible = true;
+  }
+
   onContentSelected(value: any) {
     if (this.song) {
       this.song.contentId = value.target.value;
@@ -68,8 +68,7 @@ export class RegisterSongComponent implements OnInit{
     if (this.song?.contentId) {
       this.registerSongService.addSong(this.song.contentId, this.song).subscribe({
         next: (song) => {
-          this.router.navigate(['register-song']);
-          location.reload()
+          this.router.navigate(['dashboard-admin']);
         }
       })
     }
