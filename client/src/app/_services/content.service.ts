@@ -45,6 +45,7 @@ export class ContentService {
 
   getContentAttachAlbums(id : string): Observable<Content>{
     const url = this.prefixUrl + API_URL.GET_CONTENT_BY_ID_ATTACH_ALBUMS(Number.parseInt(id));
+    console.log("URL",url)
     return this.http.get<Content>(url)
     .pipe(
       catchError((error) => {
@@ -62,9 +63,15 @@ export class ContentService {
   // }
 
   deleteContent(contentId: string | undefined): Observable<Content> {
+    console.log("GET",contentId)
+
     if (contentId)
-      return this.http.delete<Content>(`${this.baseUrl}${contentId}`)
-    throw new Error()
+      console.log(this.baseUrl+contentId)
+      return this.http.delete<Content>((this.baseUrl+contentId).trim()).pipe(
+        catchError((error) => {
+          return throwError(error);
+        })
+      )
   }
   creatContent(content: Content ): Observable<Content> {
     const user = this.auth.getTokenId();
@@ -73,10 +80,6 @@ export class ContentService {
       content.wish = "Hope you join us";
       content.personName = "";
       content.personId = user
-      return this.http.post<Content>(url,content).pipe(
-        catchError((error) => {
-          return throwError(error);
-        })
-      )
+      return this.http.post<Content>(url,content)
   }
 }

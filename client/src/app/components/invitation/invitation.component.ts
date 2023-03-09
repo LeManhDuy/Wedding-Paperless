@@ -21,7 +21,7 @@ import { ContentService } from 'src/app/_services/content.service';
 export class InvitationComponent {
 
   @Input() reviewInDashBoard : boolean = false;
-
+  @Input() contentPerson: Content | undefined;
   content: Content = new Content();
   imageObjectOurStory: Array<object> = [];
   imageObjectOurMemory: Array<object> = [];
@@ -30,13 +30,14 @@ export class InvitationComponent {
   constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
+    console.log("DEBUG", this.contentPerson?.personId)
+    // const id = this.route.snapshot.paramMap.get('id');
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
         if(!value){
             this.router.navigate(['dashboard-user']);
             return;
         }
-        this.getContent(id!);
+        this.getContent(this.contentPerson?.personId!);
 
     });
   }

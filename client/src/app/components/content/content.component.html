@@ -20,7 +20,7 @@
                 <td>{{ content.hostName }}</td>
                 <td>{{ content.date }}</td>
                 <td>{{ content.address }}</td>
-                <td><a class="tag" (click)="showComponent(content)">Update/Delete</a>
+                <td><a class="tag" (click)="showComponent(content)">View/Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -31,4 +31,5 @@
   </form>
 </div>
 
-<app-edit-content *ngIf="isEditContentComponentVisible"  [id]="id" ></app-edit-content>
+<app-edit-content *ngIf="isEditContentComponentVisible"  [content]="content" ></app-edit-content>
+

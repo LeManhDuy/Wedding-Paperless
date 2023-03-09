@@ -1,1 +1,2 @@
-<app-invitation></app-invitation>
+<app-invitation [contentPerson]="content" ></app-invitation>
+<button class="btn btn-danger btn-sm float-right"  (click)="deleteContent(content?.id)">DELETE</button>

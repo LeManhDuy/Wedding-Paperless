@@ -9,8 +9,7 @@ import { ContentService } from 'src/app/_services/content.service';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  @Input() id: string | undefined;
-
+  @Input() content: Content | undefined;
   isContentComponentVisible = true;
   isEditContentComponentVisible = false;
 
@@ -23,7 +22,7 @@ export class ContentComponent implements OnInit {
   }
 
   showComponent(content: Content){
-  this.id = content.id
+  this.content = content
   this.isContentComponentVisible = false;
   this.isEditContentComponentVisible = true;
 }
@@ -37,10 +36,6 @@ export class ContentComponent implements OnInit {
         console.log(error)
       }
     })
-  }
-
-  showInvitationInform(content: Content){
-    console.log(content.personId)
   }
 
 }
