@@ -144,5 +144,14 @@ namespace WebApplication1.Controllers
             var token = _authRepository.GetCurrentToken();
             return Ok(token);
         }
+
+        /// <summary>
+        /// Check email confirm
+        /// </summary>
+        [HttpPost("check")]
+        public async Task<IActionResult> CheckEmailConfirm([FromBody] string email)
+        {
+            return Ok(await _authRepository.IsConfirmedEmail(email));
+        }
     }
 }
