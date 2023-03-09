@@ -36,7 +36,7 @@ export class DashboardUserComponent implements OnInit {
   }
   
   showInvitation() {
-    this.router.navigate(['/invitation']);
+    this.router.navigate(['/invitation/'+this.authService.getTokenId()]);
   }
 
 
