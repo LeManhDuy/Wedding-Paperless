@@ -54,7 +54,9 @@ export class DashboardUserComponent implements OnInit {
   showEditAccount() {
     this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
   }
-
+  showInvitation() {
+    this.router.navigate(['/invitation/'+this.authService.getTokenId()]);
+  }
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
