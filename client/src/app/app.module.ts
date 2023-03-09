@@ -1,3 +1,5 @@
+import { AccountComponent } from './components/account/account.component';
+import { RegisterSongComponent } from './components/register-song/register-song.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
@@ -61,6 +63,8 @@ import { ImageInputComponent } from './components/form/image-input/image-input.c
     CommonModule,
     RouterModule,
     NgImageSliderModule,
+    RegisterSongComponent,
+    AccountComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
