@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from "../../_services/login.service";
 import { LoginUser } from "../../models/app-user";
 import { MatDialog } from '@angular/material/dialog';
@@ -8,20 +8,16 @@ import { FormBuilder, FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { ContentService } from 'src/app/_services/content.service';
 import { Observable } from 'rxjs';
-
+import { LoadingComponent } from '../loading/loading.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [
-    FormsModule,
-    RouterModule,
-    CommonModule,
-    RouterModule
-  ],
-  standalone: true
+  
 })
 export class LoginComponent implements OnInit {
+
+  isLoading:boolean =false;
   apiData: any = "";
   loginUser: LoginUser = new LoginUser()
   loginSuccess = false;
@@ -30,9 +26,6 @@ export class LoginComponent implements OnInit {
     public loginService: LoginService,
     private dialog: MatDialog,
     private router: Router,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private contentService: ContentService
   ) {
     if (this.loginService.currentUserValue) {
       const payloadBase64 = this.loginService.currentUserValue.token?.split('.')[1];
@@ -63,9 +56,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.isLoading = true;
     this.loginService.login(this.loginUser)
       .subscribe(response => {
         if (response) {
+          this.isLoading = false;
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
           if (this.loginSuccess) {
@@ -82,6 +77,7 @@ export class LoginComponent implements OnInit {
         // }
       },
         (errorMsg: any) => {
+          this.isLoading = false;
           console.log(errorMsg)
           this.apiData = "*Credential Invalid"
         });

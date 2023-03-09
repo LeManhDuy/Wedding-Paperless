@@ -33,8 +33,11 @@
     <div class="login_fail" *ngIf="apiData">
       <i><b>{{ apiData }}</b></i>
     </div>
-    <input class="submit_Login" routerLink="/login" type="submit" value="Login" (click)="login()">
+    <div  class="submit_Login" (click)="login()">
+      <app-loading></app-loading>
+    </div>
   </form>
+
   <!-- <h3 class="other_Login">or</h3>
   <div class="login_By">
       <div class="login_By_Google">
