@@ -78,6 +78,8 @@
 
 
 .submit_Login{
+  display: flex;
+  justify-content: center;
   align-items: center;
   height: 50px;
   width: 100%;
@@ -90,8 +92,37 @@
   color: var(--white_color);
 }
 
+.lds-dual-ring {
+  display: inline-block;
+  width: 55px;
+  height: 55px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 35px;
+  height: 35px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .submit_Login :active{
   background-color: var(--lightGreen_color);
+}
+
+.submit_Login:hover {
+  cursor: pointer;
 }
 
 .other_Login{

@@ -30,7 +30,8 @@ import { EditContentComponent } from './components/content/edit-content/edit-con
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageInputComponent } from './components/form/image-input/image-input.component';
-
+import { LoadingComponent } from './components/loading/loading.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,8 @@ import { ImageInputComponent } from './components/form/image-input/image-input.c
     EditContentComponent,
     NavbarComponent,
     ImageInputComponent,
+    LoadingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
