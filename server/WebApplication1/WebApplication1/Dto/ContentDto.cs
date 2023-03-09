@@ -22,5 +22,6 @@ namespace WebApplication1.Dto
     public string Wish { get; set; }
 
     public string PersonName { get; set; }
+    public int PersonId { get; set; }
   }
 }
