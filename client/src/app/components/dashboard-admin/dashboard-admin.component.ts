@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserToken } from 'src/app/models/app-user';
 import { LoginService } from 'src/app/_services/login.service';
@@ -8,15 +8,51 @@ import { LoginService } from 'src/app/_services/login.service';
   templateUrl: './dashboard-admin.component.html',
   styleUrls: ['./dashboard-admin.component.css']
 })
-export class DashboardAdminComponent implements OnInit {
+export class DashboardAdminComponent {
   currentUser?: UserToken;
+  isAlbumnComponentVisible = false;
+  isRegisterComponentVisible = false;
+  isAccountComponentVisible = false;
+  isContentComponentVisible = false;
+  isImageVisible = true;
 
-  constructor(private loginService: LoginService, private router: Router) { 
+  constructor(private loginService: LoginService, private router: Router) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  showComponent(componentName: string) {
+    switch (componentName) {
+      case 'register':
+        this.isRegisterComponentVisible = true;
+        this.isAlbumnComponentVisible = false;
+        this.isAccountComponentVisible = false;
+        this.isContentComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      case 'albumn':
+        this.isAlbumnComponentVisible = true;
+        this.isRegisterComponentVisible = false;
+        this.isAccountComponentVisible = false;
+        this.isContentComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      case 'account':
+        this.isAccountComponentVisible = true;
+        this.isRegisterComponentVisible = false;
+        this.isAlbumnComponentVisible = false;
+        this.isContentComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      case 'content':
+        this.isContentComponentVisible = true;
+        this.isRegisterComponentVisible = false;
+        this.isAlbumnComponentVisible = false;
+        this.isAccountComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      default:
+        console.error('Invalid component name.');
+    }
   }
 
   showContent() {
@@ -27,5 +63,4 @@ export class DashboardAdminComponent implements OnInit {
     this.loginService.logout();
     this.router.navigate(['/login']);
   }
-  
 }
