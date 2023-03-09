@@ -10,7 +10,8 @@ export class Content {
   wish: string | undefined;
   personName: string | undefined;
   albumnDtos: AlbumnRequest[] | undefined;
-  registerSong: RegisterSong[] | undefined; 
+  registerSong: RegisterSong[] | undefined;
+  personId?: string;
 }
 
 export class ContentRequest {

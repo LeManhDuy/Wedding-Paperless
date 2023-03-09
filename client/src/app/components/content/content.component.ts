@@ -14,6 +14,7 @@ export class ContentComponent implements OnInit {
 
   constructor(
     private contentService: ContentService
+
   ) {
   }
 
@@ -26,6 +27,10 @@ export class ContentComponent implements OnInit {
         console.log(error)
       }
     })
+  }
+
+  showInvitationInform(content: Content){
+    console.log(content.personId)
   }
 
 }

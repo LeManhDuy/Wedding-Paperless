@@ -15,9 +15,9 @@ export class ContentService {
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/content/'
 
-  constructor(private http: HttpClient,private loginService: LoginService, private auth:AuthService) { 
+  constructor(private http: HttpClient,private loginService: LoginService, private auth:AuthService) {
   }
-  
+
   checkContentIsExistByPersonId(): Observable<boolean>{
     const id = this.auth.getTokenId();
     const url = this.prefixUrl + API_URL.CONTET_IS_EXIST_BY_PERSON_ID(id);
@@ -46,7 +46,7 @@ export class ContentService {
   getContentAttachAlbums(): Observable<Content>{
     const user = this.auth.getTokenId();
     console.log(user);
-    
+
     const url = this.prefixUrl + API_URL.GET_CONTENT_BY_ID_ATTACH_ALBUMS(user);
     return this.http.get<Content>(url)
     .pipe(
@@ -71,10 +71,11 @@ export class ContentService {
   }
   creatContent(content: Content ): Observable<Content> {
     const user = this.auth.getTokenId();
-      
+
       const url = this.prefixUrl + API_URL.CREATE_CONTENT(user);
       content.wish = "Hope you join us";
       content.personName = "";
+      content.personId = user
       return this.http.post<Content>(url,content).pipe(
         catchError((error) => {
           return throwError(error);
