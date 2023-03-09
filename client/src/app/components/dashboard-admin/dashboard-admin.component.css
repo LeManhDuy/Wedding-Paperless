@@ -1,13 +1,15 @@
-.dashboard {
+/* .dashboard {
+  height: 100%;
   display: flex;
-  height: 100vh;
 }
 
 .sidebar {
   flex-basis: 20%;
-  background-color: #333;
+  background-color: #343a40;
   color: #fff;
   padding: 20px;
+  position: fixed;
+  height: 100vh;
 }
 
 .sidebar h2 {
@@ -44,11 +46,89 @@ a {
 
 .landscape {
   width: 100%;
-  height: 100%;
+  height: 90vh;
+  margin-left: 225px;
+  overflow-y: scroll;
 }
 
 .landscape img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.card-header{
+  position: fixed;
+  background-color: #343a40;
+  color: white;
+  width: 100%;
+} */
+
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color:var(--lighPinkNav_color);
+  font-weight: 800;
+}
+h4{
+  color:var(--darkPink_color);
+  border-bottom: 1px solid var(--darkPink_color);
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  color: var(--white_color);
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.2s ease-in-out;
+}
+
+.sidebar a:hover {
+  color: var(--lighPinkHover_color);
+}
+
+.landscape {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  height: 95vh;
+}
+
+.landscape img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+
+.sidebar {
+  background-color: var(--lightPink_color);
+}
+
+
+a{
+  cursor: pointer;
 }

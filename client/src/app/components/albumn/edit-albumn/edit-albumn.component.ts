@@ -1,7 +1,9 @@
 import {AlbumnService} from '../../../_services/albumn.service';
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Albumn, ImageHandler} from 'src/app/models/albumn';
+import { ContentService } from 'src/app/_services/content.service';
+import { Content } from 'src/app/models/content';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {
@@ -14,6 +16,7 @@ class ImageSnippet {
   styleUrls: ['./edit-albumn.component.css']
 })
 export class EditAlbumnComponent implements OnInit {
+  @Input() id: string | undefined;
 
   albumnDetails: Albumn = {
     id: '',
@@ -23,17 +26,20 @@ export class EditAlbumnComponent implements OnInit {
     contentId: ''
   }
 
+  contents: Content[] = [];
+
   selectedFile?: ImageSnippet;
 
-  constructor(private router: Router, private route: ActivatedRoute, private albumnService: AlbumnService) {
+  constructor(private router: Router, private route: ActivatedRoute, private albumnService: AlbumnService,private contentService: ContentService) {
   }
 
   ngOnInit(): void {
+    console.log("dasfdasf1",this.id);
+
     this.route.paramMap.subscribe({
       next: (params) => {
-        const id = params.get('id')
-        if (id) {
-          this.albumnService.getAlbumn(id).subscribe({
+        if (this.id) {
+          this.albumnService.getAlbumn(this.id).subscribe({
             next: (response) => {
               this.albumnDetails = response;
             }
@@ -41,6 +47,19 @@ export class EditAlbumnComponent implements OnInit {
         }
       }
     })
+    this.contentService.getAllContents().subscribe({
+      next: (response) => {
+        this.albumnDetails.contentId = response[0].id
+        this.contents = response
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+
+  onContentSelected(value: any) {
+    this.albumnDetails.contentId = value.target.value ;
   }
 
   processFile(imageInput: any) {
@@ -59,7 +78,7 @@ export class EditAlbumnComponent implements OnInit {
     if (this.albumnDetails.contentId && this.albumnDetails.id) {
       this.albumnService.updateAlbumn(this.albumnDetails.contentId, this.albumnDetails.id, this.albumnDetails).subscribe({
         next: (albumn) => {
-          this.router.navigate(['albumn']);
+          location.reload()
         }
       });
     }
@@ -69,7 +88,7 @@ export class EditAlbumnComponent implements OnInit {
     if (id) {
       this.albumnService.deleteSelected(id).subscribe({
         next: () => {
-          this.router.navigate(['albumn'])
+          location.reload()
         }
       })
     }

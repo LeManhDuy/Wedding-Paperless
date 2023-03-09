@@ -22,7 +22,7 @@ namespace WebApplication1.Repositories
             return await _context.Albumns.AnyAsync(a => a.Id == albumnId);
         }
 
-        public async Task<Albumn> CreateAlbumnAsync(int contentId, int[] matrix, string imageLink)
+        public async Task<Albumn> CreateAlbumnAsync(int contentId, int matrix, string imageLink)
         {
             try
             {
@@ -45,13 +45,12 @@ namespace WebApplication1.Repositories
                                         .TrimEnd('=');
 
                 imageLink = await storage.Child("images_by_months/" + DateTime.Now.Month + "/img" + "_" + id).PutAsync(stream);
-      
+
                 var albumn = new Albumn()
-                { 
+                {
                     ImageLink = imageLink,
                     Content = content,
-                    Row = matrix[0],
-                    Column = matrix[1]
+                    Row = matrix
                 };
                 await _context.Albumns.AddAsync(albumn);
                 await _context.SaveChangesAsync();
@@ -59,14 +58,14 @@ namespace WebApplication1.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception(ex.Message);
             }
         }
 
         public async Task<bool> CreateAlbumnWithoutColumnAsync(Albumn albumn)
         {
-           await _context.Albumns.AddAsync(albumn);
-           return await Save();
+            await _context.Albumns.AddAsync(albumn);
+            return await Save();
         }
 
         public async Task<bool> DeleteAlbumn(AlbumnDto albumn)
@@ -85,6 +84,7 @@ namespace WebApplication1.Repositories
                     Id = a.Id,
                     ImageLink = a.ImageLink,
                     PersonName = a.Content.Person.FullName,
+                    Row = a.Row,
                     ContentId = a.Content.Id,
                 }).FirstOrDefaultAsync();
         }
@@ -110,7 +110,7 @@ namespace WebApplication1.Repositories
             return Saved > 0 ? true : false;
         }
 
-        public async Task<bool> UpdateAlbumn(int contentId, int albumnId, int[] matrix, string imageLink)
+        public async Task<bool> UpdateAlbumn(int contentId, int albumnId, int matrix, string imageLink)
         {
             try
             {
@@ -137,8 +137,7 @@ namespace WebApplication1.Repositories
                 imageLink = await storage.Child("images_by_months/" + DateTime.Now.Month + "/img" + "_" + id).PutAsync(stream);
 
                 albumn.ImageLink = imageLink;
-                albumn.Row = matrix[0];
-                albumn.Column = matrix[1];
+                albumn.Row = matrix;
 
 
                 _context.Albumns.Update(albumn);

@@ -14,6 +14,11 @@ import * as jwt_decode from 'jwt-decode';
 export class DashboardUserComponent implements OnInit {
   currentUser?: UserToken;
   public contentIsExist: boolean = false;
+  isFormComponentVisible = false;
+  isInvitationComponentVisible = false;
+  isEditAccountComponentVisible = false;
+  isImageVisible = true;
+  idToken: any;
 
   constructor(private loginService: LoginService, private router: Router, private authService: AuthService, private contentService: ContentService, private route:ActivatedRoute) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
@@ -23,22 +28,32 @@ export class DashboardUserComponent implements OnInit {
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
       this.contentIsExist = value;
     });
+
+
   }
 
-  
-
-  showForm() {
-    this.router.navigate(['/form']);
+  showComponent(componentName: string) {
+    switch (componentName) {
+      case 'form':
+        this.isFormComponentVisible = true;
+        this.isInvitationComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      case 'invitation':
+        this.isInvitationComponentVisible = true;
+        this.isFormComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
+        this.isImageVisible = false;
+        break;
+      default:
+        console.error('Invalid component name.');
+    }
   }
 
   showEditAccount() {
     this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
   }
-  
-  showInvitation() {
-    this.router.navigate(['/invitation']);
-  }
-
 
   logout() {
     this.loginService.logout();

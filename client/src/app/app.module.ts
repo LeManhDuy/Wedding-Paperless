@@ -13,7 +13,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AlbumnComponent } from './components/albumn/albumn.component';
 import { RouterModule } from "@angular/router";
-import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
 import { FormComponent } from './components/form/form.component';
 import { InvitationComponent } from './components/invitation/invitation.component';
 import { CommonModule } from '@angular/common';
@@ -27,9 +26,10 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ConfirmVerifyCodeComponent } from './components/confirm-verify-code/confirm-verify-code.component';
 import { EditRegisterSongComponent } from './components/register-song/edit-register-song/edit-register-song.component';
 import { EditContentComponent } from './components/content/edit-content/edit-content.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageInputComponent } from './components/form/image-input/image-input.component';
+import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
+import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
 
 @NgModule({
   declarations: [
@@ -48,10 +48,12 @@ import { ImageInputComponent } from './components/form/image-input/image-input.c
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ConfirmVerifyCodeComponent,
-    EditRegisterSongComponent,
     EditContentComponent,
-    NavbarComponent,
     ImageInputComponent,
+    RegisterSongComponent,
+    EditRegisterSongComponent,
+    AccountComponent,
+    EditAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +65,6 @@ import { ImageInputComponent } from './components/form/image-input/image-input.c
     CommonModule,
     RouterModule,
     NgImageSliderModule,
-    RegisterSongComponent,
-    AccountComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
