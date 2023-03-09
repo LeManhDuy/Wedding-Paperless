@@ -22,9 +22,14 @@ export class AlbumnComponent implements OnInit {
     contentId: '',
   };
 
+  id?:string
+
   contents: Content[] = [];
 
   selectedFile: ImageSnippet | undefined;
+
+  isAlbumnComponentVisible = true;
+  isEditAlbumnComponentVisible = false;
 
   constructor(private albumnService: AlbumnService, private router: Router, private contentService: ContentService) { }
 
@@ -41,15 +46,12 @@ export class AlbumnComponent implements OnInit {
     this.contentService.getAllContents().subscribe({
       next: (response) => {
         this.imageHandler.contentId = response[0].id
-        console.log(response)
         this.contents = response
       },
       error: (error) => {
         console.log(error)
       }
     })
-
-
   }
 
   processFile(imageInput: any) {
@@ -58,28 +60,32 @@ export class AlbumnComponent implements OnInit {
     reader.addEventListener('load', (event: any) => {
       this.selectedFile = new ImageSnippet(event.target.result, file);
       this.imageHandler.imageLink = this.selectedFile.src;
-      console.log(this.imageHandler.imageLink)
     });
     reader.readAsDataURL(file);
   }
 
   onContentSelected(value: any) {
     this.imageHandler.contentId = value.target.value ;
-    console.log(this.imageHandler.contentId);
+  }
+
+  showComponent(albumn: Albumn){
+    this.id = albumn.id
+    this.isAlbumnComponentVisible = false;
+    this.isEditAlbumnComponentVisible = true;
   }
 
   addImage() {
     if (this.imageHandler.contentId) {
       this.albumnService.addAlbumn(this.imageHandler.contentId, this.imageHandler).subscribe({
         next: (imageHandler) => {
-          this.router.navigate(['albumn']);
+          location.reload()
         }
       })
     }
   }
 
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   this.uploadFile(file);
+  // onFileSelected(albumn: Albumn) {
+  //   console.log(albumn.id);
+
   // }
 }

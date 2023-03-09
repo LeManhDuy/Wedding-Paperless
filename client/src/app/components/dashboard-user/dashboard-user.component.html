@@ -1,18 +1,43 @@
-<div class="container">
-  <div class="container_CreatePage">
-    <div *ngIf ="!contentIsExist" class="create_New">
-      <button class="content_Create_Page" (click)="showForm()">
-          Create new
-      </button>
-    </div>
-    <div *ngIf ="contentIsExist" class="create_New">
-      <button class="content_Create_Page" (click)="showInvitation()">
-          Review
-      </button>
-    </div>
-    <button class="content_Create_Page" (click)="showEditAccount()">
-      <p style="color:blue;">Update Account</p>
-    </button>
-    <button class="logoutButton" (click)="logout()">Logout</button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" color="primary">
+  <a class="navbar-brand" href="#">MyWedding</a>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <div *ngIf ="!contentIsExist" >
+          <button class="btn btn-success my-2 my-sm-0" (click)="showComponent('form')">
+              Create new
+          </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div *ngIf ="contentIsExist" >
+          <button class="btn btn-success my-2 my-sm-0" (click)="showComponent('invitation')">
+              Review
+          </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div  >
+          <button style="margin: 0 50px !important" class="btn btn-warning my-2 my-sm-0" (click)="showEditAccount()">
+            Update Account
+          </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <div  >
+          <button class="btn btn-danger my-2 my-sm-0" (click)="logout()">Logout</button>
+        </div>
+      </li>
+    </ul>
   </div>
+</nav>
+
+<div class="landscape">
+  <img
+    src="https://images.squarespace-cdn.com/content/v1/5648f830e4b00accac88c0b2/1557322095929-9JZKLXA35GFJCCEZ6TQ3/Harelaw+farm+Ayrshire+wedding+photographer_J31A1617.jpg?format=1000w"
+    alt="Wedding" *ngIf="isImageVisible">
+    <app-form  *ngIf="isFormComponentVisible"></app-form>
+    <app-invitation  *ngIf="isInvitationComponentVisible"></app-invitation>
 </div>
+
+

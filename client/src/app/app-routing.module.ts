@@ -21,6 +21,7 @@ import { EditContentComponent } from "./components/content/edit-content/edit-con
 import { IsExistContentGuard } from './_guards/is-exist-content.guard';
 import { RegisterSongComponent } from './components/register-song/register-song.component';
 import { AccountComponent } from './components/account/account.component';
+import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 
 const routes: Routes = [];
 
@@ -52,12 +53,9 @@ const routes: Routes = [];
     { path: 'albumn', component: AlbumnComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
     { path: 'albumn/edit/:id', component: EditAlbumnComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
-
     // { path: 'account', loadComponent: () => import('./components/account/account.component').then(c => c.AccountComponent), canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
-    { path: 'account/edit/:id', loadComponent: () => import('./components/account/edit-account/edit-account.component').then(c => c.EditAccountComponent), canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
-
-
+    { path: 'account/edit/:id', component: EditAccountComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' } },
 
     { path: 'form', component: FormComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user' } },
     { path: '**', redirectTo: 'not-found' }

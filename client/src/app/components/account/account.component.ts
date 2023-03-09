@@ -8,23 +8,28 @@ import {CommonModule} from "@angular/common";
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css'],
-  imports: [
-    RouterLink,
-    RouterLinkActive,
-    CommonModule
-  ],
-  standalone: true
+  styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit{
+  id?:string
 
   accounts: AccountInfo[] = [];
 
+  isAlbumnComponentVisible = true;
+  isEditAlbumnComponentVisible = false;
+  
   constructor(
     private accountService: AccountService,
     private router: Router,
   ) {
   }
+
+  showComponent(albumn: AccountInfo){
+    this.id = albumn.id
+    this.isAlbumnComponentVisible = false;
+    this.isEditAlbumnComponentVisible = true;
+  }
+
   ngOnInit(): void {
     this.accountService.getAllAccounts().subscribe({
       next: (response) => {

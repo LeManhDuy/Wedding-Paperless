@@ -1,0 +1,7 @@
+.tag{
+  cursor: pointer;
+  color:var(--lightGreen_color);
+}
+.tag:hover{
+  color:var(--darkBlue_color);
+}

@@ -1,6 +1,6 @@
 <div class="dashboard">
   <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>My Wedding</h2>
     <ul>
       <li><a (click)="showComponent('account')">Accounts</a></li>
       <li><a (click)="showComponent('albumn')">Albumns</a></li>
@@ -10,9 +10,7 @@
     </ul>
   </div>
   <div class="landscape">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/5648f830e4b00accac88c0b2/1557322095929-9JZKLXA35GFJCCEZ6TQ3/Harelaw+farm+Ayrshire+wedding+photographer_J31A1617.jpg?format=1000w"
-      alt="Wedding" *ngIf="isImageVisible">
+    <h4>{{title}}</h4>
     <app-account *ngIf="isAccountComponentVisible"></app-account>
     <app-albumn *ngIf="isAlbumnComponentVisible"></app-albumn>
     <app-content *ngIf="isContentComponentVisible"></app-content>
