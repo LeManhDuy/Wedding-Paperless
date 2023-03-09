@@ -19,7 +19,7 @@
               <td>{{ content.hostName }}</td>
               <td>{{ content.date }}</td>
               <td>{{ content.address }}</td>
-              <td><a [routerLink]="" routerLinkActive="router-link-active" (click)="showInvitationInform(content)" >Delete</a>
+              <td><a [routerLink]="['/content/edit',content.personId]" routerLinkActive="router-link-active" (click)="showInvitationInform(content)" >Delete</a>
               </td>
             </tr>
           </tbody>
@@ -28,3 +28,5 @@
     </div>
   </div>
 </form>
+
+<!--<app-edit-content> [] </app-edit-content>-->

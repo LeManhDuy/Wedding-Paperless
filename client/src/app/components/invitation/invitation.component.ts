@@ -19,7 +19,7 @@ import { ContentService } from 'src/app/_services/content.service';
 })
 
 export class InvitationComponent {
-  
+
   @Input() reviewInDashBoard : boolean = false;
 
   content: Content = new Content();
@@ -45,7 +45,7 @@ export class InvitationComponent {
       this.contentService.getContentAttachAlbums(id)
       .subscribe(respone =>{
         this.content = respone;
-        
+
         this.content.albumnDtos?.forEach(element => {
             if(element.row === 2){
               this.pushToOject(this.imageObjectOurStory, element);
@@ -54,9 +54,9 @@ export class InvitationComponent {
               this.pushToOject(this.imageObjectOurMemory,element);
             }
             else{
-              this.hashMapContent.set(element.row,element); 
+              this.hashMapContent.set(element.row,element);
             }
-        });           
+        });
       })
   }
 

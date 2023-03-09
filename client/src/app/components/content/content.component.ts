@@ -13,8 +13,8 @@ export class ContentComponent implements OnInit {
   contents?: Content[]
 
   constructor(
-    private contentService: ContentService
-
+    private contentService: ContentService,
+    private router : Router
   ) {
   }
 
