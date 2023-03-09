@@ -54,24 +54,31 @@ namespace WebApplication1.Repositories
                     if (checkAccount == null)
                     {
                         Console.WriteLine("User not found");
-                        return null;
+                        throw new Exception("User not found");
                     }
 
                     currentUser = await _context.Accounts.FirstOrDefaultAsync(a => a.Id == checkAccount.Id);
                     if (currentUser == null)
                     {
                         Console.WriteLine("User not found");
-                        return null;
+                        throw new Exception("User not found");
                     }
                 }
-
+                var person = await _context.Persons.FirstOrDefaultAsync(p => p.Id == currentUser.Id);
+                if (!await IsConfirmedEmail(person.Email))
+                {
+                    Console.WriteLine("User not confirmed");
+                    throw new Exception("Thang ngu check email di");
+                }
+                
                 using var hmac = new HMACSHA512(currentUser.PasswordSalt);
                 var passwordBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(authAccountDto.PassWord));
                 for (int i = 0; i < currentUser.PasswordHash.Length; i++)
                 {
                     if (currentUser.PasswordHash[i] != passwordBytes[i])
                     {
-                        return null;
+                        Console.WriteLine("Password mismatch");
+                        throw new Exception();
                     }
                 }
 
@@ -90,10 +97,9 @@ namespace WebApplication1.Repositories
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw new Exception();
+                throw new Exception(e.Message);
             }
         }
-
         public async Task<bool> CheckAccountAsync(AccountDto authAccountDto)
         {
             try
@@ -259,6 +265,11 @@ namespace WebApplication1.Repositories
 
             Console.WriteLine(token);
             return token;
+        }
+
+        public async Task<bool> IsConfirmedEmail(string email)
+        {
+            return await _context.Persons.AnyAsync(x => x.Email == email && x.EmailConfirmed); 
         }
     }
 }

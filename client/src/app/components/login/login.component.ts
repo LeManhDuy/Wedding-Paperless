@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         if (role == "user")
           this.router.navigate(['/dashboard-user'])
       }
-      
+
     }
   }
 
@@ -76,9 +76,14 @@ export class LoginComponent implements OnInit {
                   '/dashboard-admin'
                 ])
           }
-        } else {
-          this.apiData = "*Credential Invalid"
         }
-      });
+        // else {
+        //   this.apiData = "*Credential Invalid"
+        // }
+      },
+        (errorMsg: any) => {
+          console.log(errorMsg)
+          this.apiData = "*Credential Invalid"
+        });
   }
 }

@@ -16,6 +16,6 @@ namespace WebApplication1.Interfaces
         public bool IsTokenValid();
         Task<AuthDto> LogoutAsync();
         string GetCurrentToken();
-
+        Task<bool> IsConfirmedEmail(string email);
     }
 }
