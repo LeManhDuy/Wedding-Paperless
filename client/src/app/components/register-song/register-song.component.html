@@ -1,4 +1,6 @@
-<div *ngIf="isAlbumnComponentVisible">
+<button *ngIf="isEditRegisterSongComponentVisible" class="btn btn-success" (click)="back()">BACK</button>
+
+<div *ngIf="isRegisterSongComponentVisible">
 <form #form="ngForm" >
   <div class="container">
     <div class="row">
@@ -57,4 +59,4 @@
 </form>
 </div>
 
-<app-edit-register-song *ngIf="isEditAlbumnComponentVisible"  [id]="id" ></app-edit-register-song>
+<app-edit-register-song *ngIf="isEditRegisterSongComponentVisible"  [id]="id" ></app-edit-register-song>

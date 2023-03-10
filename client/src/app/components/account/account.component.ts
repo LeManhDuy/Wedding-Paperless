@@ -16,9 +16,9 @@ export class AccountComponent implements OnInit{
 
   accounts: AccountInfo[] = [];
 
-  isAlbumnComponentVisible = true;
-  isEditAlbumnComponentVisible = false;
-  
+  isAccountComponentVisible = true;
+  isEditAccountComponentVisible = false;
+
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -27,8 +27,8 @@ export class AccountComponent implements OnInit{
 
   showComponent(albumn: AccountInfo){
     this.id = albumn.id
-    this.isAlbumnComponentVisible = false;
-    this.isEditAlbumnComponentVisible = true;
+    this.isAccountComponentVisible = false;
+    this.isEditAccountComponentVisible = true;
   }
 
   ngOnInit(): void {
@@ -46,5 +46,9 @@ export class AccountComponent implements OnInit{
         console.log(err)
       }
     })
+  }
+  back(){
+    this.isAccountComponentVisible = true;
+    this.isEditAccountComponentVisible = false;
   }
 }
