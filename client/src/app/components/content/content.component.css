@@ -5,3 +5,7 @@
 .tag:hover{
   color:var(--darkBlue_color);
 }
+.container
+{
+  margin-left: 0px;
+}
