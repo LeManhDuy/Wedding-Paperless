@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {Content} from "../../../models/content";
+import {ContentService} from "../../../_services/content.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-edit-content',
@@ -6,11 +9,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./edit-content.component.css']
 })
 export class EditContentComponent implements OnInit {
+  constructor(
+    private contentService: ContentService,
+    private router: Router
+  ) {
 
-  @Input() id: string | undefined;
-
+  }
+  @Input() content: Content | undefined;
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    console.log(this.content)
+  }
+
+  deleteContent(id?: string){
+    this.contentService.deleteContent(id).subscribe(_ =>{})
+    location.reload()
   }
 
 }
