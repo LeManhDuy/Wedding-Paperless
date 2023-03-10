@@ -101,9 +101,9 @@ export class LoginService {
             errorMessage = `Error: ${error.error.message}`;
           } else {
             // server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
           }
-          return throwError(() => new Error(error.message))
+          return throwError(() => new Error(errorMessage))
         }));
   }
 
