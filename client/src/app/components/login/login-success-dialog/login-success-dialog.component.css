@@ -7,9 +7,9 @@
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 20px;
-  z-index: 9999;
+  z-index: 100;
 }
 
 .dialog--appear {
-  animation-duration: 2s;
+  animation-duration: 1s;
 }

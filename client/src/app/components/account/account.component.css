@@ -8,3 +8,9 @@
 .tag:hover{
   color:var(--darkBlue_color);
 }
+
+.loadingCenter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

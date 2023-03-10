@@ -30,6 +30,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { ImageInputComponent } from './components/form/image-input/image-input.component';
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
@@ -55,6 +56,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     EditRegisterSongComponent,
     AccountComponent,
     EditAccountComponent,
+    FooterComponent,
     LoadingComponent,
   ],
   imports: [

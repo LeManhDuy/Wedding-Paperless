@@ -1,36 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" color="primary">
-  <a class="navbar-brand" href="#">MyWedding</a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <div *ngIf ="!contentIsExist" >
-          <button class="btn btn-success my-2 my-sm-0" (click)="showComponent('form')">
-              Create new
-          </button>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div *ngIf ="contentIsExist" >
-          <button class="btn btn-success my-2 my-sm-0" (click)="showComponent('invitation')">
-              Review
-          </button>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div  >
-          <button style="margin: 0 50px !important" class="btn btn-warning my-2 my-sm-0" (click)="showEditAccount()">
-            Update Account
-          </button>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div  >
-          <button class="btn btn-danger my-2 my-sm-0" (click)="logout()">Logout</button>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+<div class="nav-bar">
+  <nav class="navbar navbar-expand-lg navbar-dark " color="primary">
+    <a class="navbar-brand" href="#">MyWedding</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" onclick="setOpacity()" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class=" collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class=" navbar-nav mr-auto">
+        <li class="nav-item active">
+          <div *ngIf ="!contentIsExist" >
+            <button class="button-nav-create" (click)="showComponent('form')">
+              <span>
+                Create new
+              </span>
+            </button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div *ngIf ="contentIsExist" >
+            <button class="button-nav-create" (click)="showComponent('invitation')">
+                Review
+            </button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div  >
+            <button class="button-nav" (click)="showComponent('editAccount')">
+              {{currentUser?.username}}
+            </button>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div  >
+            <button class="button-nav" (click)="logout()">Logout</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+</div>
 
 <div class="landscape">
   <img
@@ -38,6 +47,8 @@
     alt="Wedding" *ngIf="isImageVisible">
     <app-form  *ngIf="isFormComponentVisible"></app-form>
     <app-invitation  *ngIf="isInvitationComponentVisible"></app-invitation>
+    <app-edit-account *ngIf="isEditAccountComponentVisible"></app-edit-account>
 </div>
+
 
 

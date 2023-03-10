@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserToken } from 'src/app/models/app-user';
 import { ContentService } from 'src/app/_services/content.service';
 import { LoginService } from 'src/app/_services/login.service';
+import {AccountInfo} from "../../models/account";
 import * as jwt_decode from 'jwt-decode';
 
 @Component({
@@ -39,21 +40,30 @@ export class DashboardUserComponent implements OnInit {
         this.isInvitationComponentVisible = false;
         this.isEditAccountComponentVisible = false;
         this.isImageVisible = false;
+        this.isEditAccountComponentVisible = false;
         break;
       case 'invitation':
         this.isInvitationComponentVisible = true;
         this.isFormComponentVisible = false;
         this.isEditAccountComponentVisible = false;
         this.isImageVisible = false;
+        this.isEditAccountComponentVisible = false;
+        break;
+      case 'editAccount':
+        this.isFormComponentVisible = false;
+        this.isInvitationComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
+        this.isImageVisible = false;
+        this.isEditAccountComponentVisible = true;
         break;
       default:
         console.error('Invalid component name.');
     }
   }
 
-  showEditAccount() {
-    this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
-  }
+  // showEditAccount() {
+  //   this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
+  // }
   showInvitation() {
     this.router.navigate(['/invitation/'+this.authService.getTokenId()]);
   }

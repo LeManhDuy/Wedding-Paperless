@@ -1,10 +1,30 @@
 <div *ngIf="isAlbumnComponentVisible">
   <form #form="ngForm" >
     <div class="container">
-      <div class="row">
-        <div class="col order-first">
+      <div class="col">
+        <!-- <select (change)="onContentSelected($event)">
+          <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
+        </select> -->
+        <h4>Upload Albumns</h4>
+        <div class="btn-group">
+          <select  class="btn btn-success dropdown-toggle"  (change)="onContentSelected($event)">
+            <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+            [(ngModel)]="imageHandler.imageLink" name="imageLink">
 
-          <table class="table">
+          <input type="text" placeholder="Submit location you want" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.row">
+        </div>
+        <button class="btn btn-success btn-sm float-right" (click)="addImage()" type="submit">
+          Upload
+        </button>
+      </div>
+      <div class="table-container row">
+        <h4>Albumns</h4>
+        <div class="table col ">
+          <table >
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -30,30 +50,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col">
-          <!-- <select (change)="onContentSelected($event)">
-            <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
-          </select> -->
 
-          <div class="btn-group">
-            <select  class="btn btn-success dropdown-toggle"  (change)="onContentSelected($event)">
-              <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
-            </select>
-          </div>
-
-          <br>
-          <br>
-          <div class="input-group mb-3">
-            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-              [(ngModel)]="imageHandler.imageLink" name="imageLink">
-
-            <input type="text" placeholder="Submit location you want" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.row">
-          </div>
-          <br>
-          <button class="btn btn-success btn-sm float-right" (click)="addImage()" type="submit">
-            Upload
-          </button>
-        </div>
       </div>
     </div>
   </form>
