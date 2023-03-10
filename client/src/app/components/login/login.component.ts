@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.loginService.login(this.loginUser)
       .subscribe(response => {
-        // if (response) {
         this.isLoading = false;
         if (response) {
           this.loginSuccess = true;
@@ -78,7 +77,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([
                   '/dashboard-admin'
                 ])
-          // }
+          }
         }
         // else {
         //   this.apiData = "*Credential Invalid"

@@ -12,6 +12,7 @@ import {CommonModule} from "@angular/common";
 })
 export class AccountComponent implements OnInit{
   id?:string
+  isLoading: boolean=false;
 
   accounts: AccountInfo[] = [];
 
@@ -31,14 +32,17 @@ export class AccountComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.accountService.getAllAccounts().subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.accounts = response;
         // for (let account of this.accounts) {
         //   console.log(account.username)
         // }
       },
       error: err => {
+        this.isLoading = false;
         console.log(err)
       }
     })
