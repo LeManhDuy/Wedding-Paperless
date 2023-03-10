@@ -85,9 +85,15 @@ a {
   color:var(--lighPinkNav_color);
   font-weight: 800;
 }
-h4{
+
+.nav-admin{
+  display: flex;
   color:var(--darkPink_color);
   border-bottom: 1px solid var(--darkPink_color);
+  justify-content: space-between;
+}
+.account-admin{
+  width: 100%;
 }
 .sidebar ul {
   list-style: none;

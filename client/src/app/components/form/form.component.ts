@@ -44,14 +44,19 @@ export class FormComponent {
     ]
       this.contentService.creatContent(this.contentRequest)
       .subscribe(respone => {
-        
+
         this.albumService.currentContentId = Number.parseInt(respone.id!);
         this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
         .subscribe(respone => {
           this.contentService.setExistContent(true);
-          this.router.navigate(['dashboard-user']) 
+          this.router.navigate(['dashboard-user'])
         })
-      })
+      },
+      (errorMsg: any) => {
+        console.log(errorMsg)
+        
+      }
+      )
 
   }
 }
