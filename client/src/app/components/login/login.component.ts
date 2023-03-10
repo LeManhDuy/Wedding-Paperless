@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([
                   '/dashboard-admin'
                 ])
-          // }
+          }
         }
         // else {
         //   this.apiData = "*Credential Invalid"

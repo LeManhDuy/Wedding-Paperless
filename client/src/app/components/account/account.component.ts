@@ -4,6 +4,7 @@ import {AccountService} from "../../_services/account.service";
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -17,10 +18,11 @@ export class AccountComponent implements OnInit{
 
   isAlbumnComponentVisible = true;
   isEditAlbumnComponentVisible = false;
-  
+
   constructor(
     private accountService: AccountService,
     private router: Router,
+    private auth : AuthService
   ) {
   }
 

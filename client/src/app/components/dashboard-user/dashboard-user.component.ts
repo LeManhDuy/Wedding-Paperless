@@ -13,6 +13,7 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./dashboard-user.component.css']
 })
 export class DashboardUserComponent implements OnInit {
+  id?:string
   currentUser?: UserToken;
   public contentIsExist: boolean = false;
   isFormComponentVisible = false;
@@ -34,6 +35,7 @@ export class DashboardUserComponent implements OnInit {
   }
 
   showComponent(componentName: string) {
+    this.id = this.authService.getTokenId()
     switch (componentName) {
       case 'form':
         this.isFormComponentVisible = true;

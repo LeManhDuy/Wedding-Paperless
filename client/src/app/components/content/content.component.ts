@@ -22,6 +22,7 @@ export class ContentComponent implements OnInit {
   }
 
   showComponent(content: Content){
+    
   this.content = content
   this.isContentComponentVisible = false;
   this.isEditContentComponentVisible = true;

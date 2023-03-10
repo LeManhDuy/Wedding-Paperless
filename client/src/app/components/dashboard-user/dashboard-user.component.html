@@ -47,7 +47,7 @@
     alt="Wedding" *ngIf="isImageVisible">
     <app-form  *ngIf="isFormComponentVisible"></app-form>
     <app-invitation  *ngIf="isInvitationComponentVisible"></app-invitation>
-    <app-edit-account *ngIf="isEditAccountComponentVisible"></app-edit-account>
+    <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
 </div>
 
 
