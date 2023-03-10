@@ -1,7 +1,7 @@
 import { Content } from './../models/content';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, catchError, Observable, retry, throwError } from 'rxjs';
+import {BehaviorSubject, catchError, Observable, of, retry, throwError} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from 'src/assets/apiUrl';
 import { LoginService } from './login.service';
@@ -19,6 +19,9 @@ export class ContentService {
   }
 
   checkContentIsExistByPersonId(): Observable<boolean>{
+    if (this.auth.getTokenRole() == "admin"){
+      return of(true);
+    }
     const id = this.auth.getTokenId();
     const url = this.prefixUrl + API_URL.CONTET_IS_EXIST_BY_PERSON_ID(id);
     return this.http.get<boolean>(url).pipe(
