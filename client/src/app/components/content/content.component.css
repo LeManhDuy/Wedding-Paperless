@@ -9,3 +9,8 @@
 {
   margin-left: 0px;
 }
+.loadingCenter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

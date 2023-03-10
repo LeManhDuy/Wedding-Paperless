@@ -12,6 +12,7 @@ export class ContentComponent implements OnInit {
   @Input() content: Content | undefined;
   isContentComponentVisible = true;
   isEditContentComponentVisible = false;
+  isLoading : boolean = false;
 
   contents?: Content[]
 
@@ -28,11 +29,14 @@ export class ContentComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.contentService.getAllContents().subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.contents = response
       },
       error: (error) => {
+        this.isLoading = false;
         console.log(error)
       }
     })
