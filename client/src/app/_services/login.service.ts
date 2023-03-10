@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, catchError, map, Observable, of, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginUser, RegisterUser, UserToken } from '../models/app-user';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: "root"
@@ -11,6 +12,7 @@ export class LoginService {
   private currentUserSubject: BehaviorSubject<UserToken>;
   public currentUser: Observable<UserToken>;
   private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  isUser?:  BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
@@ -32,7 +34,11 @@ export class LoginService {
     return this.currentUserSubject.value;
   }
 
-  constructor(private _http: HttpClient) {
+  getUserRoleObser():Observable<boolean>{
+    return this.isUser?.asObservable()!;
+  }
+
+  constructor(private _http: HttpClient,private auth: AuthService) {
     const currentUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<UserToken>(currentUser ? JSON.parse(currentUser) : null);
     this.currentUser = this.currentUserSubject.asObservable();
@@ -79,11 +85,14 @@ export class LoginService {
       .pipe(map((response: any) => {
           let userInfo = new UserToken();
           const user = JSON.parse(response);
+          
           if (user && user.token) {
             userInfo.username = user.username;
             userInfo.role = this.parseTokenToRole(user.token)
             userInfo.token = user.token;
             userInfo.id = user.id;
+            this.auth.setLocalStorageValue(userInfo.role);
+            console.log(userInfo);
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);

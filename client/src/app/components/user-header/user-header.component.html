@@ -1,0 +1,42 @@
+<div class="nav-bar">
+    <nav class="navbar navbar-expand-lg navbar-dark " color="primary">
+      <a class="navbar-brand" href="#">MyWedding</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" onclick="setOpacity()" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class=" collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class=" navbar-nav mr-auto">
+          <li class="nav-item active">
+            <div *ngIf ="!contentIsExist" >
+              <button class="button-nav-create" (click)="showForm()">
+                <span>
+                  Create new
+                </span>
+              </button>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div *ngIf ="contentIsExist" >
+              <button class="button-nav-create" (click)="showInvitation()">
+                  Review
+              </button>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div  >
+              <button class="button-nav" (click)="showEditAccount()">
+                {{currentUser?.username}}
+              </button>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div  >
+              <button class="button-nav" (click)="logout()">Logout</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+  
+    </nav>
+  
+  </div>

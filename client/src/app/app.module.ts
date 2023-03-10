@@ -32,6 +32,7 @@ import { EditAccountComponent } from './components/account/edit-account/edit-acc
 import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { UserHeaderComponent } from './components/user-header/user-header.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     EditAccountComponent,
     FooterComponent,
     LoadingComponent,
+    UserHeaderComponent,
   ],
   imports: [
     BrowserModule,
