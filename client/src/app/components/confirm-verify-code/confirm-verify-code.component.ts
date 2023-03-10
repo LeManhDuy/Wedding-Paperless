@@ -10,16 +10,23 @@ import { ForgotPasswordService } from 'src/app/_services/forgot-password.service
 })
 export class ConfirmVerifyCodeComponent {
   errorMessage: string | undefined
-  confirmVerifyCode: number | undefined
+  confirmVerifyCode?: number
+  isLoading: boolean = false;
 
   constructor(public forgotpasswordService: ForgotPasswordService, private router: Router,private codeStorageService: CodeStorageService) {
   }
 
   ValidateCode(){
+    this.isLoading = true;
     this.forgotpasswordService.validateCode(this.confirmVerifyCode?.toString()!)
     .subscribe(respose =>{
+      this.isLoading = false;
       this.codeStorageService.assignCode(this.confirmVerifyCode?.toString()!);
       this.router.navigate(['/forgotPassword/confirmVerifyCode/resetPassword']);
+    },
+    (errorMsg: any) => {
+      this.isLoading = false;
+      console.log(errorMsg)
     })
   }
 }

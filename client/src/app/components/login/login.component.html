@@ -33,7 +33,10 @@
     <div class="login_fail" *ngIf="apiData">
       <i><b>{{ apiData }}</b></i>
     </div>
-    <input class="submit_Login" routerLink="/login" type="submit" value="Login" (click)="login()">
+    <button [disabled]="isLoading" class="submit_Login" routerLink="/login" type="submit" value="Login" (click)="login()">
+      <div class="lds-dual-ring"  *ngIf="isLoading" ></div>
+      <div *ngIf="!isLoading" >Login</div>
+    </button>
   </form>
   <!-- <h3 class="other_Login">or</h3>
   <div class="login_By">

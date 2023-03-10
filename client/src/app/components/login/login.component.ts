@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   apiData: any = "";
   loginUser: LoginUser = new LoginUser()
   loginSuccess = false;
-
+  isLoading : boolean = false;
   constructor(
     public loginService: LoginService,
     private dialog: MatDialog,
@@ -63,8 +63,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.isLoading = true;
     this.loginService.login(this.loginUser)
       .subscribe(response => {
+        this.isLoading = false;
         if (response) {
           this.loginSuccess = true;
           this.openLoginSuccessDialog();
@@ -82,6 +84,7 @@ export class LoginComponent implements OnInit {
         // }
       },
         (errorMsg: any) => {
+          this.isLoading = false;
           console.log(errorMsg)
           this.apiData = "*Credential Invalid"
         });
