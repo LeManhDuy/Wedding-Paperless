@@ -53,6 +53,10 @@ export class AlbumnComponent implements OnInit {
       }
     })
   }
+  back(){
+    this.isAlbumnComponentVisible = true;
+    this.isEditAlbumnComponentVisible = false;
+  }
 
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];

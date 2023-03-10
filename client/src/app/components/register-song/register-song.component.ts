@@ -20,8 +20,8 @@ export class RegisterSongComponent implements OnInit{
     songName: '',
     linkBeat: ''
   }
-  isAlbumnComponentVisible = true;
-  isEditAlbumnComponentVisible = false;
+  isRegisterSongComponentVisible = true;
+  isEditRegisterSongComponentVisible = false;
   id?:string
   constructor(
     private registerSongService: RegisterSongService,
@@ -54,8 +54,8 @@ export class RegisterSongComponent implements OnInit{
 
   showComponent(song: RegisterSong){
     this.id = song.id
-    this.isAlbumnComponentVisible = false;
-    this.isEditAlbumnComponentVisible = true;
+    this.isRegisterSongComponentVisible = false;
+    this.isEditRegisterSongComponentVisible = true;
   }
 
   onContentSelected(value: any) {
@@ -72,6 +72,11 @@ export class RegisterSongComponent implements OnInit{
         }
       })
     }
+  }
+
+  back(){
+    this.isRegisterSongComponentVisible = true;
+    this.isEditRegisterSongComponentVisible = false;
   }
 
 }
