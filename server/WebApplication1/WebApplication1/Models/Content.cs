@@ -23,6 +23,7 @@ namespace WebApplication1.Models
 
     [Required]
     public int PersonId { get; set; }
+    
     public Person Person { get; set; }
 
     public List<Albumn> Albumns { get; set; }

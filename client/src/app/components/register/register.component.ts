@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
 
   registerUser: RegisterUser = new RegisterUser()
   errorMessage: string | undefined
+  isLoading: boolean = false;
   //registerForm: FormGroup | undefined;
 
   constructor(private registerService: RegisterService, private formBuilder: FormBuilder, private router: Router) { }
@@ -21,8 +22,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.isLoading = true;
     this.registerService.register(this.registerUser).subscribe(
       response => {
+        this.isLoading = false;
         if (this.registerUser.password !== this.registerUser.confirmpassword) {
           this.errorMessage = "Password don't match!";
         }
@@ -31,6 +34,7 @@ export class RegisterComponent implements OnInit {
         }
       },
       error => {
+        this.isLoading = false;
         this.router.navigate(['login']);
       }
     )

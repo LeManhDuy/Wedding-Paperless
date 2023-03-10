@@ -11,6 +11,7 @@ import { ForgotPasswordService } from 'src/app/_services/forgot-password.service
 export class ForgotPasswordComponent {
   errorMessage: string | undefined
   forgotEmail: string | undefined
+  isLoading: boolean = false;
 
   constructor
   (
@@ -19,9 +20,16 @@ export class ForgotPasswordComponent {
     private codeStorageService: CodeStorageService) {
   }
   GetVerifyCode(): void{
+    this.isLoading = true;
     this.forgotpasswordService.getVerifyCode(this.forgotEmail)
     .subscribe(_ =>{
+      this.isLoading = false;
        this.router.navigate(['forgotPassword/confirmVerifyCode']);
+    },
+    (errorMsg: any) => {
+      this.isLoading = false;
+      console.log(errorMsg)
     })
+    
   }
 }
