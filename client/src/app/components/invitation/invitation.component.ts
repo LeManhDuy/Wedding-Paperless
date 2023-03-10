@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlbumnRequest } from 'src/app/models/albumn';
 import { Content } from 'src/app/models/content';
 import { ContentService } from 'src/app/_services/content.service';
+import {AuthService} from "../../_services/auth.service";
 
 // import {HeadService} from '../service/head.service';
 
@@ -27,17 +28,23 @@ export class InvitationComponent {
   imageObjectOurMemory: Array<object> = [];
 
   hashMapContent = new Map();
-  constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute) {}
+  constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute, private auth: AuthService) {}
 
   ngOnInit(): void {
     console.log("DEBUG", this.contentPerson?.personId)
-    // const id = this.route.snapshot.paramMap.get('id');
+    const id = this.auth.getTokenId()
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
         if(!value){
             this.router.navigate(['dashboard-user']);
             return;
         }
-        this.getContent(this.contentPerson?.personId!);
+        if (this.contentPerson?.personId){
+          this.getContent(this.contentPerson?.personId!);
+          return;
+        }
+      console.log(id)
+      this.getContent(id!);
+
 
     });
   }

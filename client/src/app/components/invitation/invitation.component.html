@@ -49,7 +49,7 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
-                        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
+                        <ng-image-slider [images]="imageObjectOurMemory" #nav></ng-image-slider>
                     </div>
                 </div>
             </div>
@@ -65,9 +65,9 @@
                     </div>
                 </div>
                 <div class="container-content hope_Join">
-                    <p class="hope_Join_Date"  name="hope_Join_Date">12-Feb-2023</p>
+                    <p class="hope_Join_Date"  name="hope_Join_Date">{{this.content.date}}</p>
                     <p class="hope_Join_Content"  name="hope_Join_Content">Hope you join us</p>
-                    <p class="hope_Join_Sign" name="hope_Join_Sign">Oliver and Sarrah</p>
+                    <p class="hope_Join_Sign" name="hope_Join_Sign"> {{this.content.hostName}}</p>
                 </div>
             </div>
         </form>
