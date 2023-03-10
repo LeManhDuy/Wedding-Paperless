@@ -15,7 +15,7 @@ export class DashboardAdminComponent {
   isRegisterComponentVisible = false;
   isAccountComponentVisible = false;
   isContentComponentVisible = true;
-  title : string ='Dashboard';
+  title : string ='Content';
   constructor(private loginService: LoginService, private router: Router) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }

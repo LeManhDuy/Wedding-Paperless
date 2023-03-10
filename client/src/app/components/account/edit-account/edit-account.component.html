@@ -1,5 +1,5 @@
 
-<div class="ngForm" >
+<div class="ngForm container" >
   <form class="lNero" #form="ngForm" (ngSubmit)="updatePerson()">
     <div class="">
       <a class="" target="_blank" href="{{ personInfo.avatar }}" id="bottle">
@@ -18,9 +18,8 @@
       <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email" [value]="personInfo.email" disabled>
     </div>
     <br>
-    <button class="btn btn-success btn-sm float-right" type="submit">
+    <button class="btn btn-success btn-sm float-right" type="submit" >
       Upload
     </button>
   </form>
-
 </div>

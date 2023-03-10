@@ -1,16 +1,17 @@
 @media screen and (max-width: 800px) {
-    
+
     .create_Form_Container{
-        margin: 0px;
+        margin: 0px auto;
+        width: 80%;
 
     }
     .create_Form_Content{
-
+      width: 100%;
     }
-    
+
   }
   @media screen and (min-width: 801px) {
-    
+
     .create_Form_Container {
       /* width: 30%; Th1e width is 100%, when the viewport is 800px or smaller */
       margin: 0px auto;
@@ -47,6 +48,7 @@
     font-family: 'Source Sans Pro';
     align-items: center;
     /* width: 100%; */
+    margin-top: 40px;
 }
 .image_Center {
     width: 100%;
@@ -109,7 +111,7 @@ h3{
     padding: 10px 5px;
 }
 .error{
-    color: red;
+    color: var(--lightPink_color);
     font-size: 15px;
     text-align: center;
     margin: 15px;
@@ -187,7 +189,7 @@ textarea{
       position: absolute;
       left: -10px;
       top: 0px;
-} 
+}
 
 
 .schedule input::placeholder{
@@ -200,7 +202,7 @@ textarea{
 .title input::placeholder{
     color: var(--MW-pinkNeon_color);
     font-size: 2rem;
-    
+
 }
 
 .host_Name{
