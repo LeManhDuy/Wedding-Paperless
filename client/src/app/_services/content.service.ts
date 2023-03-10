@@ -1,7 +1,7 @@
 import { Content } from './../models/content';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, catchError, Observable, retry, throwError } from 'rxjs';
+import {BehaviorSubject, catchError, Observable, of, retry, throwError} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from 'src/assets/apiUrl';
 import { LoginService } from './login.service';
@@ -15,10 +15,13 @@ export class ContentService {
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/content/'
 
-  constructor(private http: HttpClient,private loginService: LoginService, private auth:AuthService) { 
+  constructor(private http: HttpClient,private loginService: LoginService, private auth:AuthService) {
   }
-  
+
   checkContentIsExistByPersonId(): Observable<boolean>{
+    if (this.auth.getTokenRole() == "admin"){
+      return of(true);
+    }
     const id = this.auth.getTokenId();
     const url = this.prefixUrl + API_URL.CONTET_IS_EXIST_BY_PERSON_ID(id);
     return this.http.get<boolean>(url).pipe(
@@ -45,6 +48,7 @@ export class ContentService {
 
   getContentAttachAlbums(id : string): Observable<Content>{
     const url = this.prefixUrl + API_URL.GET_CONTENT_BY_ID_ATTACH_ALBUMS(Number.parseInt(id));
+    console.log("URL",url)
     return this.http.get<Content>(url)
     .pipe(
       catchError((error) => {
@@ -62,20 +66,23 @@ export class ContentService {
   // }
 
   deleteContent(contentId: string | undefined): Observable<Content> {
+    console.log("GET",contentId)
+
     if (contentId)
-      return this.http.delete<Content>(`${this.baseUrl}${contentId}`)
-    throw new Error()
-  }
-  creatContent(content: Content ): Observable<Content> {
-    const user = this.auth.getTokenId();
-      
-      const url = this.prefixUrl + API_URL.CREATE_CONTENT(user);
-      content.wish = "Hope you join us";
-      content.personName = "";
-      return this.http.post<Content>(url,content).pipe(
+      console.log(this.baseUrl+contentId)
+      return this.http.delete<Content>((this.baseUrl+contentId).trim()).pipe(
         catchError((error) => {
           return throwError(error);
         })
       )
+  }
+  creatContent(content: Content ): Observable<Content> {
+    const user = this.auth.getTokenId();
+
+      const url = this.prefixUrl + API_URL.CREATE_CONTENT(user);
+      content.wish = "Hope you join us";
+      content.personName = "";
+      content.personId = user
+      return this.http.post<Content>(url,content)
   }
 }

@@ -12,29 +12,33 @@
     <div class="slogan slogan_Brand">MyWedding</div>
     <p class="slogan slogan_Content">Verify code</p>
 
-    <div class="login">Enter your verify code</div>
-    <div class="login_Content">
+    <div  class="login">Enter your verify code</div>
+    <div  class="login_Content">
         Have an account?
         <a class="link_To_Login" routerLink="/login">Login</a>
     </div>
     <br>
 
-    <form #ConfirmVerifyCodeForm="ngForm" novalidate>
+    <form #ConfirmVerifyCodeForm="ngForm">
         <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
         <div class="input-group mb-3">
+            
             <input class="form-control" placeholder="Code" type="number" id="ConfirmVerifyCode" name="ConfirmVerifyCode"
                 [(ngModel)]="confirmVerifyCode" [required]="true" ConfirmVerifyCode>
             <div
-                *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].invalid && (ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].dirty || ConfirmVerifyCodeForm.controls['ConfirmPassword'].touched)">
+                *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].invalid && (ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].dirty || ConfirmVerifyCodeForm.controls['ConfirmVerifyCode'].touched)">
                 <small class="text-danger" *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode']?.errors?.['required']">ConfirmVerifyCode is
                     required.</small>
                 <small class="text-danger" *ngIf="ConfirmVerifyCodeForm.controls['ConfirmVerifyCode']?.errors?.['ConfirmVerifyCode']">Please enter a
                     valid
                     ConfirmVerifyCode address.</small>
+                    
             </div>
         </div>
+        <button type="submit" class="submit_Register" (click)="ValidateCode()"
+        [disabled]="ConfirmVerifyCodeForm.invalid || isLoading">
+            <app-loading [text] = "'Verify'" [isLoading]="isLoading" ></app-loading>
+        </button>
     </form>
-    <button type="submit" class="submit_Register" (click)="ValidateCode()"
-    [disabled]="ConfirmVerifyCodeForm.invalid">Verify</button>
     <div class="policy">By clicking "Create account", I agree to MyWedding's TOS and Privacy Policy.</div>
 </div>

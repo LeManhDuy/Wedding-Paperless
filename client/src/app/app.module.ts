@@ -31,6 +31,7 @@ import { ImageInputComponent } from './components/form/image-input/image-input.c
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FooterComponent } from './components/footer/footer.component';
     AccountComponent,
     EditAccountComponent,
     FooterComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

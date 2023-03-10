@@ -86,12 +86,14 @@
                     *ngIf="registerForm.controls['confirmpassword']?.errors?.['minlength']">Confirm
                     Password
                     must
-                    be at least 8 characters long.</small>
+                    be at least 5 characters long.</small>
             </div>
         </div>
 
-        <button type="submit" (click)="register()" class="submit_Register"
-            [disabled]="registerForm.invalid">Register</button>
+        <button type="submit" (click)="register()" [disabled]="isLoading" class="submit_Register"
+            [disabled]="registerForm.invalid">
+            <app-loading [text]="'Register'" [isLoading]="isLoading"></app-loading>
+            </button>
     </form>
 
     <!-- <form>

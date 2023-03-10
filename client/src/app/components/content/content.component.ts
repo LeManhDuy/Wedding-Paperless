@@ -9,20 +9,20 @@ import { ContentService } from 'src/app/_services/content.service';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-  @Input() id: string | undefined;
-
+  @Input() content: Content | undefined;
   isContentComponentVisible = true;
   isEditContentComponentVisible = false;
 
   contents?: Content[]
 
   constructor(
-    private contentService: ContentService
+    private contentService: ContentService,
+    private router : Router
   ) {
   }
 
   showComponent(content: Content){
-  this.id = content.id
+  this.content = content
   this.isContentComponentVisible = false;
   this.isEditContentComponentVisible = true;
 }
