@@ -49,12 +49,12 @@ export class FormComponent {
         this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
         .subscribe(respone => {
           this.contentService.setExistContent(true);
-          this.router.navigate(['dashboard-user'])
+          location.reload()
         })
       },
       (errorMsg: any) => {
         console.log(errorMsg)
-        
+
       }
       )
 
