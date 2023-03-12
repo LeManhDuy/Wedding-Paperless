@@ -29,6 +29,7 @@ export class UserHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.contentService.getExistContent()?.subscribe(_ =>{
     this.isExistContent = _;
+
     })
   }
     showEditAccount() {
