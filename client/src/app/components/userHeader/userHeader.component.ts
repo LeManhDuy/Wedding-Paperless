@@ -12,10 +12,11 @@ import { LoginService } from 'src/app/_services/login.service';
   styleUrls: ['./userHeader.component.css']
 })
 export class UserHeaderComponent implements OnInit {
+  id?:string;
   isLoading: boolean = false;
     currentUser?: UserToken;
   isExistContent?: boolean ;
-  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, public contentService: ContentService, private route:ActivatedRoute) {
+  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, public contentService: ContentService, private route:ActivatedRoute, private auth: AuthService) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
     this.isLoading = true;
     this.contentService.checkContentIsExistByPersonId()
@@ -31,7 +32,8 @@ export class UserHeaderComponent implements OnInit {
     })
   }
     showEditAccount() {
-      this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
+    this.id = this.auth.getTokenId();
+    this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
   }
 
   showInvitation() {

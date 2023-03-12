@@ -2,6 +2,7 @@
   <div class="sidebar">
     <h2>My Wedding</h2>
     <ul>
+      <li></li>
       <li><a (click)="showComponent('account')">Accounts</a></li>
       <li><a (click)="showComponent('albumn')">Albumns</a></li>
       <li><a (click)="showComponent('content')">Contents</a></li>
@@ -10,6 +11,24 @@
     </ul>
   </div>
   <div class="landscape">
+    <div class="card">
+      <div class="item item--1">
+        <svg class="fa-solid fa-user"  height="24" width="24" viewBox="0 0 24 24" ></svg>
+        <span class="quantity"> 90+ </span>
+      </div>
+      <div class="item item--2">
+        <svg class="fa-solid fa-print"  height="24" width="24" viewBox="0 0 24 24" ></svg>
+        <span class="quantity"> 70+ </span>
+      </div>
+      <div class="item item--3">
+        <svg class="fa-regular fa-image"  height="24" width="24" viewBox="0 0 24 24" ></svg>
+        <span class="quantity"> 150+ </span>
+      </div>
+      <div class="item item--4">
+        <svg class="fa-solid fa-music"  height="24" width="24" viewBox="0 0 24 24" ></svg>
+        <span class="quantity"> 30+ </span>
+      </div>
+    </div>
     <div class="nav-admin">
       <div>
         <h4>{{title}}</h4>
@@ -18,13 +37,14 @@
 
       <h4 class="account-admin">
         <i class="fas fa-user "></i>
-        {{currentUser?.username}}</h4>
+        <a (click)="showComponent('editAccount')">{{currentUser?.username}}</a></h4>
       </div>
     </div>
     <app-account *ngIf="isAccountComponentVisible"></app-account>
     <app-albumn *ngIf="isAlbumnComponentVisible"></app-albumn>
     <app-content *ngIf="isContentComponentVisible"></app-content>
     <app-register-song *ngIf="isRegisterComponentVisible"></app-register-song>
+    <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
   </div>
 </div>
 
