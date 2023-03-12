@@ -6,7 +6,7 @@
           <div class="avatar-upload">
               <div class="avatar-edit">
                   <input #imageInput type='file' (change)="processFile(imageInput)" id="imageUpload" accept=".png, .jpg, .jpeg" name="imageLink" />
-                  <label for="imageUpload"></label>
+                  <label for="imageUpload"><i class="fa-solid fa-pen-to-square"></i></label>
               </div>
               <div class="avatar-preview" >
                       <img id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap" >
