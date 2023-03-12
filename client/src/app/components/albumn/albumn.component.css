@@ -28,3 +28,9 @@ table{
   height: 80px;
   width: auto;
 }
+.loadingCenter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+

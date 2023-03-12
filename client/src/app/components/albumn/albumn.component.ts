@@ -15,7 +15,7 @@ export class ImageSnippet {
 })
 export class AlbumnComponent implements OnInit {
   albumns: Albumn[] = [];
-
+  isLoading: boolean = false;
   imageHandler: ImageHandler = {
     imageLink: '',
     row: '',
@@ -34,11 +34,14 @@ export class AlbumnComponent implements OnInit {
   constructor(private albumnService: AlbumnService, private router: Router, private contentService: ContentService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.albumnService.getAllAlbumns().subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.albumns = response;
       },
       error: (error) => {
+      this.isLoading = false;
         console.log(error);
       }
     });

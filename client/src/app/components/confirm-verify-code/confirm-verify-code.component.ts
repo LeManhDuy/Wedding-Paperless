@@ -25,6 +25,7 @@ export class ConfirmVerifyCodeComponent {
       this.router.navigate(['/forgotPassword/confirmVerifyCode/resetPassword']);
     },
     (errorMsg: any) => {
+      this.errorMessage = errorMsg;
       this.isLoading = false;
       console.log(errorMsg)
     })

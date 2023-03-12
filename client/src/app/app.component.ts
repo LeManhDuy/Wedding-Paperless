@@ -1,6 +1,8 @@
+import { AuthService } from './_services/auth.service';
+
 import { Component } from '@angular/core';
 import {LoginService} from "./_services/login.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {UserToken} from "./models/app-user";
 
 @Component({
@@ -10,10 +12,14 @@ import {UserToken} from "./models/app-user";
 })
 export class AppComponent {
   currentUser?: UserToken;
-  
+
+  showHeader = false;
+
   constructor(
+    private activatedRoute: ActivatedRoute,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }
@@ -21,5 +27,17 @@ export class AppComponent {
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit() {
+    const dwd= 'dwad';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+      this.showHeader = this.activatedRoute.firstChild!.snapshot.data['showHeader'] === true;
+      if(this.auth.getTokenRole() === 'admin'){
+        this.showHeader = false;
+      }
+      }
+    });
   }
 }

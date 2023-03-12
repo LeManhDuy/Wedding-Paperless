@@ -9,14 +9,14 @@ import { ForgotPasswordService } from 'src/app/_services/forgot-password.service
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {
-  errorMessage: string | undefined
+  errorMessage: string =""
   forgotEmail: string | undefined
   isLoading: boolean = false;
 
   constructor
   (
     public forgotpasswordService: ForgotPasswordService,
-    private router: Router, 
+    private router: Router,
     private codeStorageService: CodeStorageService) {
   }
   GetVerifyCode(): void{
@@ -28,8 +28,9 @@ export class ForgotPasswordComponent {
     },
     (errorMsg: any) => {
       this.isLoading = false;
+      this.errorMessage =errorMsg;
       console.log(errorMsg)
     })
-    
+
   }
 }
