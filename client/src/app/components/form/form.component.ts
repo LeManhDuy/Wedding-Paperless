@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
+  isLoading : boolean = false;
   contentRequest: Content = new Content();
   public hostControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   public datetimeControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
@@ -21,12 +22,12 @@ export class FormComponent {
   constructor
   (
     private contentService: ContentService,
-    private loginService: LoginService,
     private router: Router,
     private albumService: AlbumnService
   ) {}
 
   saveContent(){
+    this.isLoading = true;
     var {
       currentAlbumFirstPo,
       currentAlbumSecondListPo,
@@ -44,17 +45,23 @@ export class FormComponent {
     ]
       this.contentService.creatContent(this.contentRequest)
       .subscribe(respone => {
-
         this.albumService.currentContentId = Number.parseInt(respone.id!);
         this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
         .subscribe(respone => {
           this.contentService.setExistContent(true);
+          this.isLoading = false;
           this.router.navigate(['dashboard-user'])
+        },
+        (errorMsg: any) => {
+          this.isLoading = false;
+          console.log(errorMsg)
+
         })
       },
       (errorMsg: any) => {
+        this.isLoading = false;
         console.log(errorMsg)
-        
+
       }
       )
 

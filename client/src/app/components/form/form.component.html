@@ -79,6 +79,8 @@
                     <p class="hope_Join_Sign" name="hope_Join_Sign">{{contentRequest.hostName}}</p>
                 </div>
             </div>
-            <button id="saveButton" type="button" (click) = "saveContent()" [disabled]="contentForm.invalid" class="btn btn-primary">Save</button>
+            <button  type="button" (click) = "saveContent()" [disabled]="contentForm.invalid || isLoading" id="saveButton">
+              <app-loading [text] = "'Save'" [isLoading] = "isLoading"></app-loading>
+            </button>
         </form>
 </div>
