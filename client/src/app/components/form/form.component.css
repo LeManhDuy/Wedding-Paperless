@@ -205,6 +205,11 @@ textarea{
 
 }
 
+.title input{
+    font-size: 2rem;
+
+}
+
 .host_Name{
     color: #000000;
     text-align: center;

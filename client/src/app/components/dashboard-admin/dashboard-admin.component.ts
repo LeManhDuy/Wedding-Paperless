@@ -18,7 +18,7 @@ export class DashboardAdminComponent {
   isAccountComponentVisible = false;
   isContentComponentVisible = true;
   isEditAccountComponentVisible = false;
-  title : string ='Content';
+  title : string ='Content';   
   constructor(private loginService: LoginService, private router: Router, private auth : AuthService) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }
@@ -32,6 +32,7 @@ export class DashboardAdminComponent {
         this.isAlbumnComponentVisible = false;
         this.isAccountComponentVisible = false;
         this.isContentComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
         break;
       case 'albumn':
         this.title = 'Albumn';
@@ -39,6 +40,7 @@ export class DashboardAdminComponent {
         this.isRegisterComponentVisible = false;
         this.isAccountComponentVisible = false;
         this.isContentComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
         break;
       case 'account':
         this.title = 'Account';
@@ -46,6 +48,7 @@ export class DashboardAdminComponent {
         this.isRegisterComponentVisible = false;
         this.isAlbumnComponentVisible = false;
         this.isContentComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
         break;
       case 'content':
         this.title = 'Content';
@@ -53,6 +56,8 @@ export class DashboardAdminComponent {
         this.isRegisterComponentVisible = false;
         this.isAlbumnComponentVisible = false;
         this.isAccountComponentVisible = false;
+        this.isEditAccountComponentVisible = false;
+
         break;
       case 'editAccount':
         this.title = 'Your Account';

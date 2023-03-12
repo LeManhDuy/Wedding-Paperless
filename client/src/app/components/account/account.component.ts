@@ -13,7 +13,7 @@ import {CommonModule} from "@angular/common";
 export class AccountComponent implements OnInit{
   id?:string
   isLoading: boolean=false;
-
+  countAccount?:number;
   accounts: AccountInfo[] = [];
 
   isAccountComponentVisible = true;
@@ -32,6 +32,7 @@ export class AccountComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.countAccount=this.accounts.length;
     this.isLoading = true;
     this.accountService.getAllAccounts().subscribe({
       next: (response) => {
