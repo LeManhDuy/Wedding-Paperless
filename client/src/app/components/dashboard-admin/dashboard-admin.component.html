@@ -2,6 +2,7 @@
   <div class="sidebar">
     <h2>My Wedding</h2>
     <ul>
+      <li><a (click)="showComponent('editAccount')">{{currentUser?.username}}</a></li>
       <li><a (click)="showComponent('account')">Accounts</a></li>
       <li><a (click)="showComponent('albumn')">Albumns</a></li>
       <li><a (click)="showComponent('content')">Contents</a></li>
@@ -25,6 +26,7 @@
     <app-albumn *ngIf="isAlbumnComponentVisible"></app-albumn>
     <app-content *ngIf="isContentComponentVisible"></app-content>
     <app-register-song *ngIf="isRegisterComponentVisible"></app-register-song>
+    <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
   </div>
 </div>
 

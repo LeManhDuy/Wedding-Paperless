@@ -1,25 +1,38 @@
 
 <div class="ngForm container" >
   <form class="lNero" #form="ngForm" (ngSubmit)="updatePerson()">
-    <div class="">
-      <a class="" target="_blank" href="{{ personInfo.avatar }}" id="bottle">
-        <img class="card-img-top" src="{{ personInfo.avatar }}" alt="Card image cap">
-      </a>
+    <div class="form-content">
+      <div class="form-avt">
+          <div class="avatar-upload">
+              <div class="avatar-edit">
+                  <input #imageInput type='file' (change)="processFile(imageInput)" id="imageUpload" accept=".png, .jpg, .jpeg" name="imageLink" />
+                  <label for="imageUpload"></label>
+              </div>
+              <div class="avatar-preview" >
+                      <img id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap" >
+              </div>
+              <h3>{{personInfo.fullname}}</h3>
+          </div>
+      </div>
+      
+      <div class="form-info">
+        <div>
+          <a>Full Name: </a>
+          <input type="text" class="form-control" id="fullname" [(ngModel)]="personInfo.fullname" name="fullname" [value]="personInfo.fullname">
+        </div>
+        <div>
+          <a>Email: </a>
+          <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email" [value]="personInfo.email" disabled>
+        </div>
+        <br>
+      </div>
     </div>
-    <div class="input-group mb-3">
-      <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" name="imageLink">
+    
+    <div class="form-submit">
+      <button class="btn btn-success btn-sm float-right " type="submit" >
+        Upload
+      </button>
     </div>
-    <div>
-      <a>Full Name: </a>
-      <input type="text" class="form-control" id="fullname" [(ngModel)]="personInfo.fullname" name="fullname" [value]="personInfo.fullname">
-    </div>
-    <div>
-      <a>Email: </a>
-      <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email" [value]="personInfo.email" disabled>
-    </div>
-    <br>
-    <button class="btn btn-success btn-sm float-right" type="submit" >
-      Upload
-    </button>
+    
   </form>
 </div>
