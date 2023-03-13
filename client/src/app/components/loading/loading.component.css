@@ -1,14 +1,13 @@
 .lds-dual-ring {
-    display: inline-block;
-    width: 45px;
-    height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   }
   .lds-dual-ring:after {
     content: " ";
     display: block;
     width: 30px;
     height: 30px;
-    margin: 8px;
     border-radius: 50%;
     border: 6px solid var(--color);
     border-color: var(--color) transparent var(--color) transparent;

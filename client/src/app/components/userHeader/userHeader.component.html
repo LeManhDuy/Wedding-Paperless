@@ -25,7 +25,12 @@
       </div>
       <app-loading style="margin-right: 15px;" [isLoading]="isLoading"></app-loading>
         <li id="account" class="nav-item">
-          <div class="avatar-account" style="padding: 0 15px;" ><img class="" src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w"></div>
+          <div class="avatar-account" style="padding: 0 15px;" >
+            <app-loading [isLoading] = "isLoadingAvartar"></app-loading>
+            <div>
+              <img *ngIf="!isLoadingAvartar" class="" src="{{avartar}}">
+            </div>
+          </div>
           <div class="avatar-account-child" >
             <div class="wedding-system">
               <div style="font-size: 18px;
