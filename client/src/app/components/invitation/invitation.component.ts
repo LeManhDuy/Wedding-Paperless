@@ -40,7 +40,6 @@ export class InvitationComponent {
   }
 
   ngOnInit(): void {
-    console.log("DEBUG", this.contentPerson?.personId)
     const id = this.auth.getTokenId()
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
         if(!value){
@@ -51,10 +50,7 @@ export class InvitationComponent {
           this.getContent(this.contentPerson?.personId!);
           return;
         }
-      console.log(id)
       this.getContent(id!);
-
-
     });
   }
 
