@@ -15,6 +15,7 @@ export class ImageSnippet {
 })
 export class AlbumnComponent implements OnInit {
   albumns: Albumn[] = [];
+  albumnsContent: Albumn[] = [];
   isLoading: boolean = false;
   imageHandler: ImageHandler = {
     imageLink: '',
@@ -72,7 +73,36 @@ export class AlbumnComponent implements OnInit {
   }
 
   onContentSelected(value: any) {
-    this.imageHandler.contentId = value.target.value ;
+    this.isLoading = true;
+    if (value.target.value == 0) {
+      this.isLoading = true;
+      this.albumnService.getAllAlbumns().subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          this.albumns = response;
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.log(error);
+        }
+      });
+      return
+    }
+    this.imageHandler.contentId = value.target.value;
+    console.log(this.imageHandler.contentId)
+    if (this.imageHandler.contentId != null) {
+      this.contentService.getAlbumnsOfContent(this.imageHandler.contentId).subscribe(
+        {
+          next: (response => {
+            this.isLoading = false;
+            this.albumns = response;
+          }),
+          error: (err) => {
+            console.log(err)
+          }
+        }
+      )
+    }
   }
 
   showComponent(albumn: Albumn){

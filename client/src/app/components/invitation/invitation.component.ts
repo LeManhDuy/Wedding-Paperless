@@ -61,10 +61,10 @@ export class InvitationComponent {
 
         this.content.albumnDtos?.forEach(element => {
             if(element.row === 2){
-              this.pushToOject(this.imageObjectOurStory, element);
+              this.pushToObject(this.imageObjectOurStory, element);
             }
             else if(element.row === 4){
-              this.pushToOject(this.imageObjectOurMemory,element);
+              this.pushToObject(this.imageObjectOurMemory,element);
             }
             else{
               this.hashMapContent.set(element.row,element);
@@ -73,7 +73,7 @@ export class InvitationComponent {
       })
   }
 
-  pushToOject(object: Array<object>, element : AlbumnRequest){
+  pushToObject(object: Array<object>, element : AlbumnRequest){
     const image = {
       image: element.imageLink,
       thumbImage:element.imageLink,

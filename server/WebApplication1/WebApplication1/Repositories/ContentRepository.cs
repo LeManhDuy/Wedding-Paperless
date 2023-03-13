@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Dto;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 
@@ -22,6 +23,23 @@ namespace WebApplication1.Repositories
         public async Task<bool> ContentIsExistByPersonId(int personId)
         {
             return await _context.Contents.AnyAsync(p => p.PersonId == personId);
+        }
+
+        public async Task<List<AlbumnDto>> GetAlbumnContentAsync(int id)
+        {
+            return await _context.Albumns
+                .Where(a => a.Content.Id == id)
+                .OrderBy(a => a.Id)
+                .Include(a => a.Content)
+                .ThenInclude(c => c.Person)
+                .Select(a => new AlbumnDto
+                {
+                    Id = a.Id,
+                    ImageLink = a.ImageLink,
+                    PersonName = a.Content.Person.FullName,
+                    ContentId = a.Content.Id,
+                    Row = a.Row
+                }).ToListAsync();
         }
 
         public async Task<bool> CreateContentAsync(Content content)

@@ -146,13 +146,22 @@ namespace WebApplication1.Repositories
                 {
                     throw new Exception("Username is already taken!");
                 }
-
+                using var hmac = new HMACSHA512();
                 // Check if email already exists and not yet confirmed
                 var currentPerson =
                     await _context.Persons.FirstOrDefaultAsync(p =>
                         p.Email == authDto.Email && p.EmailConfirmed == false);
                 if (currentPerson != null)
                 {
+                    currentUser.UserName = authDto.UserName;
+                    currentUser.PasswordHash = Encoding.UTF8.GetBytes(authDto.PassWord);
+                    currentUser.PasswordSalt = hmac.Key;
+                    currentPerson.FullName = authDto.FullName;
+                    currentPerson.EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    _context.Persons.Update(currentPerson);
+                    _context.Accounts.Update(currentUser);
+                    await _context.SaveChangesAsync();
+                    
                     var emailTk = _emailRepository.GenerateEmailConfirmToken(currentPerson);
                     var confirmationLinkUrl = _config["Url"] + "api/email/confirm/" + emailTk;
                     var message = new Message
@@ -168,7 +177,6 @@ namespace WebApplication1.Repositories
                 }
 
                 // Hash the password and create new account
-                using var hmac = new HMACSHA512();
                 var passwordBytes = Encoding.UTF8.GetBytes(authDto.PassWord);
                 var user = new Account
                 {

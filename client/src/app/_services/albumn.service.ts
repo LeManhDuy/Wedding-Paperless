@@ -13,7 +13,7 @@ export class AlbumnService {
   public currentAlbumFirstPo : AlbumnRequest = new AlbumnRequest() ;
   public currentAlbumSecondListPo : AlbumnRequest[] = [];
   public currentAlbumThirtPo : AlbumnRequest = new AlbumnRequest() ;
-  public currentAlbumFourthListPo : AlbumnRequest [] = []; 
+  public currentAlbumFourthListPo : AlbumnRequest [] = [];
   public currentAlbumFifthPo : AlbumnRequest = new AlbumnRequest() ;
 
   prefixUrl: string = environment.apiURL;
@@ -43,9 +43,9 @@ export class AlbumnService {
   }
 
   createListOfAlbum(albumlist: AlbumnRequest[], contentId : number): Observable<ImageHandler[]> {
-    
+
     const url = this.prefixUrl + API_URL.CREATE_ALBUMS(contentId);
-    
+
     return this.http.post<ImageHandler[]>(url,albumlist, {
       responseType: 'json',
       headers: new HttpHeaders({ 'Content-Type': ' application/json ' },
