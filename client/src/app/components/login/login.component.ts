@@ -85,8 +85,6 @@ export class LoginComponent implements OnInit {
       },
         (errorMsg: any) => {
           this.isLoading = false;
-          console.log(errorMsg)
-          alert(errorMsg)
           this.apiData = "*Credential Invalid"
         });
   }

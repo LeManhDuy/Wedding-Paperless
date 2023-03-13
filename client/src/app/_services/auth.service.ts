@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   getTokenName() {
+    console.log(this.getTokenInformation()['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'])
     return this.getTokenInformation()['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
   }
 

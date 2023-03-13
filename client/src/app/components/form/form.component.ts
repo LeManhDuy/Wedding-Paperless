@@ -5,6 +5,7 @@ import {AlbumnService} from 'src/app/_services/albumn.service';
 import {ContentService} from 'src/app/_services/content.service';
 import {LoginService} from 'src/app/_services/login.service';
 import {FormControl, Validators} from '@angular/forms';
+import { ColorPickerService } from 'ngx-color-picker/public-api';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +24,7 @@ export class FormComponent {
   (
     private contentService: ContentService,
     private router: Router,
-    private albumService: AlbumnService
+    private albumService: AlbumnService,
   ) {
   }
 
