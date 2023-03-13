@@ -1,25 +1,44 @@
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { UserToken } from 'src/app/models/app-user';
-import { AuthService } from 'src/app/_services/auth.service';
-import { LoginService } from 'src/app/_services/login.service';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {UserToken} from 'src/app/models/app-user';
+import {AuthService} from 'src/app/_services/auth.service';
+import {LoginService} from 'src/app/_services/login.service';
+import {AccountService} from "../../_services/account.service";
+import {AlbumnService} from "../../_services/albumn.service";
+import {ContentService} from "../../_services/content.service";
+import {RegisterSongService} from "../../_services/register-song.service";
+import {Quantity} from "../../models/quantity";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-dashboard-admin',
   templateUrl: './dashboard-admin.component.html',
   styleUrls: ['./dashboard-admin.component.css']
 })
-export class DashboardAdminComponent {
-  id?:string;
+export class DashboardAdminComponent implements OnInit {
+  id?: string;
   currentUser?: UserToken;
+
+  quantityAccount?:number;
+  quantityAlbumn?:number;
+  quantityContent?:number;
+  quantityRegisterSong?:number;
   isAlbumnComponentVisible = false;
   isRegisterComponentVisible = false;
   isAccountComponentVisible = false;
   isContentComponentVisible = true;
   isEditAccountComponentVisible = false;
-  title : string ='Content';   
-  constructor(private loginService: LoginService, private router: Router, private auth : AuthService) {
+  title: string = 'Content';
+
+  constructor(
+    private loginService: LoginService,
+    private accountService: AccountService,
+    private albumnService: AlbumnService,
+    private contentService: ContentService,
+    private registerSongService: RegisterSongService,
+    private router: Router,
+    private auth: AuthService) {
     this.loginService.currentUser?.subscribe(x => this.currentUser = x);
   }
 
@@ -72,12 +91,31 @@ export class DashboardAdminComponent {
     }
   }
 
-  showContent() {
-    this.router.navigate(['/content']);
-  }
-
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit(): void {
+    this.accountService.getAllAccounts().subscribe(
+      (value) => {
+        this.quantityAccount = value.length
+      }
+    )
+    this.albumnService.getAllAlbumns().subscribe(
+      (value) => {
+        this.quantityAlbumn = value.length
+      }
+    )
+    this.contentService.getAllContents().subscribe(
+      (value) => {
+        this.quantityContent = value.length
+      }
+    )
+    this.registerSongService.getAllSongs().subscribe(
+      (value) => {
+        this.quantityRegisterSong = value.length
+      }
+    )
   }
 }
