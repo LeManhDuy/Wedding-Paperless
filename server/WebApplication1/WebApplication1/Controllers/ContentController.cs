@@ -9,258 +9,258 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-  [ApiController]
-  [Route("api/content")]
-  public class ContentController : ControllerBase
-  {
-    private readonly IPersonRepository _personRepository;
-    private readonly IContentRepository _contentRepository;
-    private readonly IContentService _contentService;
-    private readonly IMapper _mapper;
-    private readonly IAuthRepository _authRepository;
-
-    public ContentController(IPersonRepository personRepository, IMapper mapper, IContentRepository contentRepository, IContentService contentService, IAuthRepository authRepository)
+    [ApiController]
+    [Route("api/content")]
+    public class ContentController : ControllerBase
     {
-      _personRepository = personRepository;
-      _mapper = mapper;
-      _contentRepository = contentRepository;
-      _contentService = contentService;
-      _authRepository = authRepository;
-    }
+        private readonly IPersonRepository _personRepository;
+        private readonly IContentRepository _contentRepository;
+        private readonly IContentService _contentService;
+        private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepository;
 
-    /// <summary>
-    /// Get all content.
-    /// </summary>
-    /// <returns>A list content</returns>
-    [Authorize(Roles = "admin")]
-    [HttpGet()]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(200, Type = typeof(ICollection<ContentDto>))]
-    public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      var content = await _contentRepository.GetContentsAsync();
+        public ContentController(IPersonRepository personRepository, IMapper mapper, IContentRepository contentRepository, IContentService contentService, IAuthRepository authRepository)
+        {
+            _personRepository = personRepository;
+            _mapper = mapper;
+            _contentRepository = contentRepository;
+            _contentService = contentService;
+            _authRepository = authRepository;
+        }
 
-      if (!ModelState.IsValid)
-        return BadRequest(ModelState);
+        /// <summary>
+        /// Get all content.
+        /// </summary>
+        /// <returns>A list content</returns>
+        [Authorize(Roles = "admin")]
+        [HttpGet()]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(200, Type = typeof(ICollection<ContentDto>))]
+        public async Task<ActionResult<ICollection<ContentDto>>> GetContents()
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            var content = await _contentRepository.GetContentsAsync();
 
-      var contentDto = _mapper.Map<ICollection<ContentDto>>(content);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-      return Ok(contentDto);
-    }
+            var contentDto = _mapper.Map<ICollection<ContentDto>>(content);
 
-    /// <summary>
-    /// Get content by id.
-    /// </summary>
-    /// <param name="contentId">content id</param>   
-    /// <returns>A content</returns>
-    [HttpGet("{contentId}")]
-    [Authorize]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(404)]
-    [ProducesResponseType(200, Type = typeof(ContentDto))]
-    public async Task<ActionResult<ContentDto>> GetContentById(int contentId)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
+            return Ok(contentDto);
+        }
+
+        /// <summary>
+        /// Get content by id.
+        /// </summary>
+        /// <param name="contentId">content id</param>   
+        /// <returns>A content</returns>
+        [HttpGet("{contentId}")]
+        [Authorize]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(ContentDto))]
+        public async Task<ActionResult<ContentDto>> GetContentById(int contentId)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
             var content = await _contentRepository.GetContentByIdAsync(contentId);
-      if (content == null)
-      {
-        return NotFound();
-      }
+            if (content == null)
+            {
+                return NotFound();
+            }
 
-      if (!ModelState.IsValid)
-        return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-      var contentDto = _mapper.Map<ContentDto>(content);
+            var contentDto = _mapper.Map<ContentDto>(content);
 
-      return Ok(contentDto);
-    }
-
-    /// <summary>
-    /// Get content by person id attach albums.
-    /// </summary>
-    /// <param name="personId">content id</param>   
-    /// <returns>A content</returns>
-    [HttpGet("getContentAttachAlbums/{personId}")]
-    [Authorize]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(404)]
-    [ProducesResponseType(200, Type = typeof(ContentWithAlbumDto))]
-    public async Task<ActionResult<ContentWithAlbumDto>> GetContentByPersonIdAttachAlbums(int personId)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-
-      var content = await _contentService.GetContentWithAlbumAsync(personId);
-      if (content == null)
-      {
-        return NotFound();
-      }
-
-      if (!ModelState.IsValid)
-        return BadRequest(ModelState);
-
-      return Ok(content);
-    }
-
-    /// <summary>
-    /// Delete content by id.
-    /// </summary>
-    /// <param name="contentId">content id</param>     
-    [HttpDelete("{contentId}")]
-    [Authorize]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(404)]
-    public async Task<ActionResult> DeleteContent(int contentId)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-
-      if (!await _contentRepository.ContentExistAsync(contentId))
-      {
-        return NotFound();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      if (!await _contentRepository.DeleteContentAsync(contentId))
-      {
-        ModelState.AddModelError("", "Something went wrong deleting content");
-      }
-
-      return NoContent();
-    }
-
-    /// <summary>
-    /// Check content is exist by person id
-    /// </summary>
-    /// <param name="personId">person id</param>     
-    [HttpGet("checkContentByPersonId/{personId}")]
-    [Authorize]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(404)]
-    public async Task<ActionResult<bool>> CheckContentByPersonId(int personId)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      return Ok(await _contentService.ExistContentByPersonIdAsync(personId));
-    }
-
-    /// <summary>
-    /// Create content.
-    /// </summary>
-   [HttpPost("{personId}")]
-    [Authorize(Roles = "user")]
-    [ProducesResponseType(204)]
-    [ProducesResponseType(400)]
-    [ProducesResponseType(200, Type = typeof(ContentDto))]
-    public async Task<ActionResult<ContentDto>> CreateContent(int personId, [FromBody] CreateUpdateContentDto createUpdateContentDto)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      if (createUpdateContentDto == null)
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      if (!await _personRepository.PersonIsExistsAsync(personId))
-      {
-        return NotFound();
-      }
-
-      if (!await _contentService.CreateContentAsync(personId, createUpdateContentDto))
-      {
-        ModelState.AddModelError("", "Something went wrong when creating content");
-      };
-      var content = await _contentRepository.GetContentByIdPersonAsync(personId);
-      return Ok(_mapper.Map<ContentDto>(content));
-    }
-
-    /// <summary>
-    /// Update patch json for content.
-    /// </summary>
-    /// <remarks>
-    /// Sample request:
-    /// 
-    ///     POST 1/patchAccount
-    ///     [
-    ///       {
-    ///         "path": "/hostName",
-    ///         "op": "replace",
-    ///         "value": "new name"
-    ///       }
-    ///     ]
-    /// </remarks>
-    [HttpPatch("{id}/patchContent")]
-    [Authorize(Roles = "user")]
-    [ProducesResponseType(200)]
-    [ProducesResponseType(400)]
-    public async Task<ActionResult> PatchContent(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
-    {
-      if (!_authRepository.IsTokenValid())
-      {
-        return Unauthorized();
-      }
-      if (patchDoc != null)
-      {
-        var content = await _contentRepository.GetContentByIdAsync(id);
-        var contentDto = _mapper.Map<CreateUpdateContentDto>(content);
-
-        patchDoc.ApplyTo(contentDto, ModelState);
-
-        content.HostName = contentDto.HostName;
-        content.Date = contentDto.Date;
-        content.Address = contentDto.Address;
-        content.Story = contentDto.Story;
-        content.Wish = contentDto.Wish;
-
-        if (!ModelState.IsValid)
-        {
-          return BadRequest(ModelState);
+            return Ok(contentDto);
         }
 
-        if (!await _contentRepository.UpdateContentAsync(content))
+        /// <summary>
+        /// Get content by person id attach albums.
+        /// </summary>
+        /// <param name="personId">content id</param>   
+        /// <returns>A content</returns>
+        [HttpGet("getContentAttachAlbums/{personId}")]
+        [Authorize]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(ContentWithAlbumDto))]
+        public async Task<ActionResult<ContentWithAlbumDto>> GetContentByPersonIdAttachAlbums(int personId)
         {
-          ModelState.AddModelError("", "Something went wrong updating content");
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+
+            var content = await _contentService.GetContentWithAlbumAsync(personId);
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(content);
         }
 
-        return Ok();
-      }
+        /// <summary>
+        /// Delete content by id.
+        /// </summary>
+        /// <param name="contentId">content id</param>     
+        [HttpDelete("{contentId}")]
+        [Authorize]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> DeleteContent(int contentId)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
 
-      return BadRequest(ModelState);
+            if (!await _contentRepository.ContentExistAsync(contentId))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!await _contentRepository.DeleteContentAsync(contentId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting content");
+            }
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Check content is exist by person id
+        /// </summary>
+        /// <param name="personId">person id</param>     
+        [HttpGet("checkContentByPersonId/{personId}")]
+        [Authorize]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<bool>> CheckContentByPersonId(int personId)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(await _contentService.ExistContentByPersonIdAsync(personId));
+        }
+
+        /// <summary>
+        /// Create content.
+        /// </summary>
+        [HttpPost("{personId}")]
+        [Authorize(Roles = "user")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(200, Type = typeof(ContentDto))]
+        public async Task<ActionResult<ContentDto>> CreateContent(int personId, [FromBody] CreateUpdateContentDto createUpdateContentDto)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            if (createUpdateContentDto == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!await _personRepository.PersonIsExistsAsync(personId))
+            {
+                return NotFound();
+            }
+
+            if (!await _contentService.CreateContentAsync(personId, createUpdateContentDto))
+            {
+                ModelState.AddModelError("", "Something went wrong when creating content");
+            };
+            var content = await _contentRepository.GetContentByIdPersonAsync(personId);
+            return Ok(_mapper.Map<ContentDto>(content));
+        }
+
+        /// <summary>
+        /// Update patch json for content.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST 1/patchAccount
+        ///     [
+        ///       {
+        ///         "path": "/hostName",
+        ///         "op": "replace",
+        ///         "value": "new name"
+        ///       }
+        ///     ]
+        /// </remarks>
+        [HttpPatch("{id}/patchContent")]
+        [Authorize(Roles = "user")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> PatchContent(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            if (patchDoc != null)
+            {
+                var content = await _contentRepository.GetContentByIdAsync(id);
+                var contentDto = _mapper.Map<CreateUpdateContentDto>(content);
+
+                patchDoc.ApplyTo(contentDto, ModelState);
+
+                content.HostName = contentDto.HostName;
+                content.Date = contentDto.Date;
+                content.Address = contentDto.Address;
+                content.Story = contentDto.Story;
+                content.Wish = contentDto.Wish;
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                if (!await _contentRepository.UpdateContentAsync(content))
+                {
+                    ModelState.AddModelError("", "Something went wrong updating content");
+                }
+
+                return Ok();
+            }
+
+            return BadRequest(ModelState);
+        }
+
     }
-
-  }
 }

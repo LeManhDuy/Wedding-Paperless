@@ -31,7 +31,6 @@ export class InvitationComponent {
   constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute, private auth: AuthService) {}
 
   ngOnInit(): void {
-    console.log("DEBUG", this.contentPerson?.personId)
     const id = this.auth.getTokenId()
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
         if(!value){
@@ -42,10 +41,7 @@ export class InvitationComponent {
           this.getContent(this.contentPerson?.personId!);
           return;
         }
-      console.log(id)
       this.getContent(id!);
-
-
     });
   }
 
