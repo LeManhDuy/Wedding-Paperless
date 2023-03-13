@@ -1,10 +1,10 @@
-import { Component} from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { Content, ContentRequest } from 'src/app/models/content';
-import { AlbumnService } from 'src/app/_services/albumn.service';
-import { ContentService } from 'src/app/_services/content.service';
-import { LoginService } from 'src/app/_services/login.service';
-import { FormControl, Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {Route, Router} from '@angular/router';
+import {Content, ContentRequest} from 'src/app/models/content';
+import {AlbumnService} from 'src/app/_services/albumn.service';
+import {ContentService} from 'src/app/_services/content.service';
+import {LoginService} from 'src/app/_services/login.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -24,9 +24,10 @@ export class FormComponent {
     private contentService: ContentService,
     private router: Router,
     private albumService: AlbumnService
-  ) {}
+  ) {
+  }
 
-  saveContent(){
+  saveContent() {
     this.isLoading = true;
     var {
       currentAlbumFirstPo,
@@ -37,32 +38,35 @@ export class FormComponent {
     } = this.albumService;
 
     var listRequest = [
-        currentAlbumFirstPo,
-        ...currentAlbumSecondListPo,
-        currentAlbumThirtPo,
-        ...currentAlbumFourthListPo,
-        currentAlbumFifthPo
+      currentAlbumFirstPo,
+      ...currentAlbumSecondListPo,
+      currentAlbumThirtPo,
+      ...currentAlbumFourthListPo,
+      currentAlbumFifthPo
     ]
-      this.contentService.creatContent(this.contentRequest)
+    this.contentService.creatContent(this.contentRequest)
       .subscribe(respone => {
-        this.albumService.currentContentId = Number.parseInt(respone.id!);
-        this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
-        .subscribe(respone => {
-          this.contentService.setExistContent(true);
-          this.isLoading = false;
-          this.router.navigate(['dashboard-user'])
+          this.albumService.currentContentId = Number.parseInt(respone.id!);
+          this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
+            .subscribe(respone => {
+                this.contentService.setExistContent(true);
+                this.isLoading = false;
+                location.reload()
+
+                // this.router.navigate(['dashboard-user'])
+              },
+              (errorMsg: any) => {
+                this.isLoading = false;
+                console.log(errorMsg)
+
+              })
         },
         (errorMsg: any) => {
-          this.isLoading = false;
+        this.isLoading = false;
           console.log(errorMsg)
 
-        })
-      },
-      (errorMsg: any) => {
-        this.isLoading = false;
-        console.log(errorMsg)
+        }
 
-      }
       )
 
   }

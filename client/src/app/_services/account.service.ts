@@ -16,7 +16,6 @@ export class AccountService {
   }
 
   getAllAccounts(): Observable<AccountInfo[]> {
-    console.log(this.baseUrl)
     return this.http.get<AccountInfo[]>(`${this.baseUrl}`)
   }
 
