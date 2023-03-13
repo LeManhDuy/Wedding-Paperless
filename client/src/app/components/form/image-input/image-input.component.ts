@@ -14,10 +14,12 @@ export class ImageInputComponent {
   public imageUrl : string = "https://www.chanchao.com.tw/VietnamPrintPack/images/default.jpg";
   imageObjectOurStory: Array<object> = [];
   imageObjectOurMemory: Array<object> = [];
+  isLoading :boolean =false;
   constructor(private album: AlbumnService, private uploadImageService: UploadImageService) {
 
   }
    async onFileSelected(event: any) {
+    this.isLoading =true;
     const row = Number.parseInt(this.imageInputModel.row!);
     const base64 = await this.uploadImageService.processFileToBase64(event.target);
     this.setCurrentAlbum(base64, row);
@@ -31,6 +33,7 @@ export class ImageInputComponent {
           row : row,
         }
         row === 2 || row === 4 ? this.addImageToMultipleStorge(album, row) : this.addImageToSingleStorge(album, row);
+        this.isLoading =false;
     });
   }
 

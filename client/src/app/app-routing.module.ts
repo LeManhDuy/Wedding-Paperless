@@ -45,7 +45,7 @@ const routes: Routes = [];
     { path: 'register-song', component: RegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
     { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
-    { path: 'invitation/:id', component: InvitationComponent  },
+    { path: 'invitation/:id', component: InvitationComponent,  data: {showHeader: true  }  },
 
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
     { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
