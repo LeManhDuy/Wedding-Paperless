@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
         /// <param name="contentId">content id</param>   
         /// <returns>A content</returns>
         [HttpGet("{contentId}")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
