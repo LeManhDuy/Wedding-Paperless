@@ -84,6 +84,36 @@ namespace WebApplication1.Controllers
     }
 
     /// <summary>
+    /// Get albumn by content id.
+    /// </summary>
+    /// <param name="contentId">content id</param>   
+    /// <returns>A content</returns>
+    [HttpGet("{contentId}/albumn")]
+    [Authorize]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    [ProducesResponseType(404)]
+    [ProducesResponseType(200, Type = typeof(ContentDto))]
+    public async Task<ActionResult<ContentDto>> GetAlbumnContent(int contentId)
+    {
+      if (!_authRepository.IsTokenValid())
+      {
+        return Unauthorized();
+      }
+      var albumns = await _contentRepository.GetAlbumnContentAsync(contentId);
+      if (albumns == null)
+      {
+        return NotFound();
+      }
+
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+
+      return Ok(albumns);
+    }
+
+    /// <summary>
     /// Get content by person id attach albums.
     /// </summary>
     /// <param name="personId">content id</param>   
