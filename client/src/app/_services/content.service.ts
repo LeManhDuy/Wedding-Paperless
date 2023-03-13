@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ContentService {
-  private existContent : BehaviorSubject<boolean> | undefined ;
+  private existContent : BehaviorSubject<boolean> = new BehaviorSubject(false) ;
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/content/'
 
@@ -23,7 +23,7 @@ export class ContentService {
       return of(true);
     }
     const id = this.auth.getTokenId();
-    const url = this.prefixUrl + API_URL.CONTET_IS_EXIST_BY_PERSON_ID(id);
+    const url = this.prefixUrl + API_URL.CONTET_IS_EXIST_BY_PERSON_ID(id!);
     return this.http.get<boolean>(url).pipe(
       catchError((error) => {
       console.error(error);
@@ -34,9 +34,10 @@ export class ContentService {
   getExistContent():Observable<boolean> | undefined{
       return this.existContent?.asObservable();
   }
+
   setExistContent(value : boolean):any{
      this.existContent?.next(value);
-}
+  }
 
   getAllContents(): Observable<Content[]> {
     return this.http.get<Content[]>(`${this.baseUrl}`)

@@ -1,3 +1,4 @@
+import { UserHeaderComponent } from './components/userHeader/userHeader.component';
 import { AccountComponent } from './components/account/account.component';
 import { RegisterSongComponent } from './components/register-song/register-song.component';
 import {NgModule} from '@angular/core';
@@ -58,6 +59,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     EditAccountComponent,
     FooterComponent,
     LoadingComponent,
+    UserHeaderComponent
   ],
   imports: [
     BrowserModule,

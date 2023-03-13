@@ -1,10 +1,10 @@
-import { Component} from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { Content, ContentRequest } from 'src/app/models/content';
-import { AlbumnService } from 'src/app/_services/albumn.service';
-import { ContentService } from 'src/app/_services/content.service';
-import { LoginService } from 'src/app/_services/login.service';
-import { FormControl, Validators } from '@angular/forms';
+import {Component} from '@angular/core';
+import {Route, Router} from '@angular/router';
+import {Content, ContentRequest} from 'src/app/models/content';
+import {AlbumnService} from 'src/app/_services/albumn.service';
+import {ContentService} from 'src/app/_services/content.service';
+import {LoginService} from 'src/app/_services/login.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -12,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
+  isLoading : boolean = false;
   contentRequest: Content = new Content();
   public hostControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   public datetimeControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
@@ -21,12 +22,13 @@ export class FormComponent {
   constructor
   (
     private contentService: ContentService,
-    private loginService: LoginService,
     private router: Router,
     private albumService: AlbumnService
-  ) {}
+  ) {
+  }
 
-  saveContent(){
+  saveContent() {
+    this.isLoading = true;
     var {
       currentAlbumFirstPo,
       currentAlbumSecondListPo,
@@ -36,26 +38,35 @@ export class FormComponent {
     } = this.albumService;
 
     var listRequest = [
-        currentAlbumFirstPo,
-        ...currentAlbumSecondListPo,
-        currentAlbumThirtPo,
-        ...currentAlbumFourthListPo,
-        currentAlbumFifthPo
+      currentAlbumFirstPo,
+      ...currentAlbumSecondListPo,
+      currentAlbumThirtPo,
+      ...currentAlbumFourthListPo,
+      currentAlbumFifthPo
     ]
-      this.contentService.creatContent(this.contentRequest)
+    this.contentService.creatContent(this.contentRequest)
       .subscribe(respone => {
+          this.albumService.currentContentId = Number.parseInt(respone.id!);
+          this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
+            .subscribe(respone => {
+                this.contentService.setExistContent(true);
+                this.isLoading = false;
+                location.reload()
 
-        this.albumService.currentContentId = Number.parseInt(respone.id!);
-        this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
-        .subscribe(respone => {
-          this.contentService.setExistContent(true);
-          location.reload()
-        })
-      },
-      (errorMsg: any) => {
-        console.log(errorMsg)
+                // this.router.navigate(['dashboard-user'])
+              },
+              (errorMsg: any) => {
+                this.isLoading = false;
+                console.log(errorMsg)
 
-      }
+              })
+        },
+        (errorMsg: any) => {
+        this.isLoading = false;
+          console.log(errorMsg)
+
+        }
+
       )
 
   }

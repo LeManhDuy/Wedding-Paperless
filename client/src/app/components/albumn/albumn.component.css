@@ -8,23 +8,36 @@
 .container
 {
   margin-left: 0px;
+  margin-top: 50px;
 }
 .table{
   border: 1px solid black;
   border-radius: 10px;
-  min-height: 500px;
-  overflow-y: auto;
+  max-height: 600px;
+  overflow-y:scroll;
   width: 100%;
+  
 }
 table{
   width: 100%;
   overflow-y: auto;
 }
 .table-container{
-  margin-top: 80px;
-
+  
 }
 .card-img-top{
   height: 80px;
   width: auto;
+}
+.loadingCenter{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.col{
+  margin-left: 60px;
+}
+.up-albumn-container{
+  
 }
