@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { API_URL } from 'src/assets/apiUrl';
 import { LoginService } from './login.service';
 import { AuthService } from './auth.service';
+import {Albumn} from "../models/albumn";
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,9 @@ export class ContentService {
   getAllContents(): Observable<Content[]> {
     return this.http.get<Content[]>(`${this.baseUrl}`)
   }
-
+  getAlbumnsOfContent(id: string): Observable<Albumn[]> {
+    return this.http.get<Albumn[]>(this.baseUrl + id + "/albumn");
+  }
   getContent(contentId: string): Observable<Content> {
     return this.http.get<Content>(this.baseUrl + contentId);
   }

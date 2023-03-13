@@ -3,8 +3,8 @@
 <div *ngIf="isAlbumnComponentVisible">
   <form #form="ngForm" >
     <div class="container row">
-      
-      <div class="col table-container row">
+
+      <div class="col table-container col">
         <div class="table col ">
           <table >
             <thead>
@@ -46,19 +46,21 @@
         <div class="btn-group">
           Select albumn
           <select   class="btn btn-success dropdown-toggle"  (change)="onContentSelected($event)">
+            <option [value]="0" >All</option>
             <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
           </select>
         </div>
-        <input type="text" placeholder="Submit location you want" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.row">
-        <div class="input-group mb-3">
-          Select file
-          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
-            [(ngModel)]="imageHandler.imageLink" name="imageLink">
+<!--        -->
+<!--        <input type="text" placeholder="Submit location you want" class="form-control" id="position" name="Position" [(ngModel)]="imageHandler.row">-->
+<!--        <div class="input-group mb-3">-->
+<!--          Select file-->
+<!--          <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"-->
+<!--            [(ngModel)]="imageHandler.imageLink" name="imageLink">-->
 
-        </div>
-        <button class="btn btn-success btn-sm float-right" (click)="addImage()" type="submit">
-          Upload
-        </button>
+<!--        </div>-->
+<!--        <button class="btn btn-success btn-sm float-right" (click)="addImage()" type="submit">-->
+<!--          Upload-->
+<!--        </button>-->
       </div>
     </div>
   </form>
