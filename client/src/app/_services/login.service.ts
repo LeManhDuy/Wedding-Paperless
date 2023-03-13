@@ -42,35 +42,6 @@ export class LoginService {
     return this.currentUserSubject;
   }
 
-
-  // login(loginUser: LoginUser): Observable<any> {
-  //   return this._http.post(`${this.baseUrl}login`, loginUser, {
-  //     responseType: "text",
-  //     headers: this.headers
-  //   })
-  //     .pipe(map((response: any) => {
-  //       let userInfo = new UserToken();
-  //       const user = JSON.parse(response);
-  //       if (user && user.token) {
-  //         userInfo.username = user.username;
-  //         userInfo.role = this.parseTokenToRole(user.token)
-  //         userInfo.token = user.token;
-  //         userInfo.id = user.id;
-  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //         localStorage.setItem('currentUser', JSON.stringify(user));
-  //         this.currentUserSubject.next(user);
-  //         this.loggedIn.next(true);
-  //         return userInfo;
-  //       } else {
-  //         throw new Error("Login failed");
-  //       }
-  //     }),
-  //       catchError((error: HttpErrorResponse) => {
-  //         console.log("Debug ", error.message)
-  //         return throwError(() => new Error(error.message))
-  //       }));
-  // }
-
   login(loginUser: LoginUser): Observable<any> {
     return this._http.post(`${this.baseUrl}login`, loginUser, {
       responseType: "text",
@@ -81,6 +52,7 @@ export class LoginService {
           const user = JSON.parse(response);
           if (user && user.token) {
             userInfo.username = user.username;
+            console.log(user)
             userInfo.role = this.parseTokenToRole(user.token)
             userInfo.token = user.token;
             userInfo.id = user.id;

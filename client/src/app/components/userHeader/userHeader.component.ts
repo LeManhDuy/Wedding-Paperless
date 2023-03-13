@@ -14,10 +14,20 @@ import { LoginService } from 'src/app/_services/login.service';
 export class UserHeaderComponent implements OnInit {
   id?:string;
   isLoading: boolean = false;
-    currentUser?: UserToken;
+  currentUser?: UserToken;
   isExistContent?: boolean ;
-  constructor(private loginService: LoginService, private router: Router, private authService: AuthService, public contentService: ContentService, private route:ActivatedRoute, private auth: AuthService) {
-    this.loginService.currentUser?.subscribe(x => this.currentUser = x);
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private authService: AuthService,
+    public contentService: ContentService,
+    private route:ActivatedRoute,
+    private auth: AuthService
+  ) {
+    this.loginService.currentUser?.subscribe(x => {
+      console.log(x)
+      this.currentUser = x
+    });
     this.isLoading = true;
     this.contentService.checkContentIsExistByPersonId()
     .subscribe(respone =>{
