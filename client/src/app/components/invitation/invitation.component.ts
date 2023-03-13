@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlbumnRequest } from 'src/app/models/albumn';
 import { Content } from 'src/app/models/content';
 import { ContentService } from 'src/app/_services/content.service';
+import { environment } from 'src/environments/environment';
 import {AuthService} from "../../_services/auth.service";
 
 // import {HeadService} from '../service/head.service';
@@ -26,17 +28,18 @@ export class InvitationComponent {
   content: Content = new Content();
   imageObjectOurStory: Array<object> = [];
   imageObjectOurMemory: Array<object> = [];
-
+  public myAngularxQrCode: string = "";
+  public qrCodeDownloadLink: SafeUrl = "";
   hashMapContent = new Map();
-  constructor(
-    private contentService: ContentService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private auth: AuthService
-  ) {}
+  constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute, private auth: AuthService) {
+    this.myAngularxQrCode =  environment.apiURLClient + router.url;
+  }
+
+  onChangeURL(url: SafeUrl) {
+    this.qrCodeDownloadLink = url;
+  }
 
   ngOnInit(): void {
-    console.log("DEBUG", this.contentPerson?.personId)
     const id = this.auth.getTokenId()
     this.contentService.checkContentIsExistByPersonId().subscribe(value => {
         if(!value){
@@ -47,10 +50,7 @@ export class InvitationComponent {
           this.getContent(this.contentPerson?.personId!);
           return;
         }
-      console.log(id)
       this.getContent(id!);
-
-
     });
   }
 

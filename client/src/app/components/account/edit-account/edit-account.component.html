@@ -9,10 +9,11 @@
                   <label for="imageUpload"><i class="fa-solid fa-pen-to-square"></i></label>
               </div>
               <div class="avatar-preview" >
-                      <img id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap" >
+                <app-loading  [isLoading]="isLoadingAvar" [color]="'red'"></app-loading>
+                      <img *ngIf="!isLoadingAvar" id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap" >
               </div>
-              <h3>{{personInfo.fullname}}</h3>
-              <h6>{{roleToken}}</h6>
+              <h3 *ngIf="!isLoadingAvar">{{personInfo.fullname}}</h3>
+              <h6 *ngIf="!isLoadingAvar">{{roleToken}}</h6>
           </div>
       </div>
       
@@ -29,9 +30,9 @@
       </div>
     </div>
     
-    <div class="form-submit">
-      <button class="btn btn-success btn-sm float-right " type="submit" >
-        Upload
+    <div style="padding: 8px 0px" class="form-submit">
+      <button [disabled]="isLoading"  class="btn btn-success btn-sm float-right " type="submit" >
+        <app-loading  [isLoading]="isLoading" [text]="'Up load'"></app-loading>
       </button>
     </div>
     

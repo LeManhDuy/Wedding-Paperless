@@ -34,7 +34,7 @@ import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { QRCodeModule } from 'angularx-qrcode';
-
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     CommonModule,
     RouterModule,
     NgImageSliderModule,
-    QRCodeModule
+    QRCodeModule,
+    ColorPickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -74,7 +74,7 @@
 }
 
 .navbar{
-  padding: 0 15px;
+  padding: 0 30px;
   background-color: var(--lightGreen_color);
   width: 100%;
   position: fixed;
@@ -96,10 +96,12 @@
   height: 37px;
   width: 37px;
   border-radius: 50px;
+  margin-bottom: 2px;
 
 }
 .avatar-account {
   line-height: 63px;
+
 }
 
 .avatar-account-child{
@@ -112,8 +114,15 @@
 
 }
 
+.border-avatar{
+}
+
 .avatar-account:hover + .avatar-account-child {
   display: block;
+}
+
+.avatar-account:hover {
+
 }
 
 .avatar-account-child .account-item:hover{

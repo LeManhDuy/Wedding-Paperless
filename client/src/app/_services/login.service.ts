@@ -58,6 +58,7 @@ export class LoginService {
           let userInfo = new UserToken();
           const user = JSON.parse(response);
           if (user && user.token) {
+            
             userInfo.username = user.username;
             userInfo.role = this.parseTokenToRole(user.token)
             userInfo.token = user.token;

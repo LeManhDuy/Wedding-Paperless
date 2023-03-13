@@ -52,7 +52,6 @@ export class ContentService {
 
   getContentAttachAlbums(id : string): Observable<Content>{
     const url = this.prefixUrl + API_URL.GET_CONTENT_BY_ID_ATTACH_ALBUMS(Number.parseInt(id));
-    console.log("URL",url)
     return this.http.get<Content>(url)
     .pipe(
       catchError((error) => {
