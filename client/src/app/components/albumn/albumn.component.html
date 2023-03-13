@@ -42,9 +42,8 @@
         <!-- <select (change)="onContentSelected($event)">
           <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
         </select> -->
-        <h4>Upload Albumns</h4>
+        <h4>Albumn:</h4>
         <div class="btn-group">
-          Select albumn
           <select   class="btn btn-success dropdown-toggle"  (change)="onContentSelected($event)">
             <option [value]="0" >All</option>
             <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
