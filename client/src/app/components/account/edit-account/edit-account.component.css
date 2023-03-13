@@ -103,6 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
   
 }
 .avatar-upload .avatar-preview > img {

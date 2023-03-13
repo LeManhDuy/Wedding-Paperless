@@ -25,6 +25,7 @@ export class InvitationComponent {
 
   @Input() reviewInDashBoard : boolean = false;
   @Input() contentPerson: Content | undefined;
+  isLoading : boolean =false;
   content: Content = new Content();
   imageObjectOurStory: Array<object> = [];
   imageObjectOurMemory: Array<object> = [];
@@ -55,6 +56,7 @@ export class InvitationComponent {
   }
 
   getContent(id : string): void{
+    this.isLoading = true;
       this.contentService.getContentAttachAlbums(id)
       .subscribe(respone =>{
         this.content = respone;
@@ -70,6 +72,7 @@ export class InvitationComponent {
               this.hashMapContent.set(element.row,element);
             }
         });
+        this.isLoading = false;
       })
   }
 
