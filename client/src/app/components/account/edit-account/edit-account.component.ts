@@ -56,17 +56,21 @@ export class EditAccountComponent implements OnInit {
     this.roleToken = this.authService.getTokenRole()
     this.route.paramMap.subscribe({
       next: params => {
-        if (this.id) {
+      if (this.id) {
           if (this.roleToken == "admin") {
+
             this.personService.getPerson(this.id).subscribe({
               next: response => {
+
                 this.personInfo = response
               }
             })
           }
           else if (this.idToken == this.id) {
+
             this.personService.getPerson(this.idToken).subscribe({
               next: response => {
+
                 this.personInfo = response
               }
             })
@@ -74,6 +78,13 @@ export class EditAccountComponent implements OnInit {
           else {
             this.router.navigate(['not-found']);
           }
+        }
+        else {
+          this.personService.getPerson(this.idToken!).subscribe({
+            next: response => {
+              this.personInfo = response
+            }
+          })
         }
       }
     })

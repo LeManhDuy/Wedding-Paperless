@@ -6,9 +6,10 @@
         <img src="{{imageUrl}}" alt="">
     </div>
     <div class="container-content image_Center" *ngIf ="imageInputModel.row === '2'|| imageInputModel.row === '4'" app-create-form>
-        <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
+        <ng-image-slider [images]="imageObjectOurStory" ></ng-image-slider>
     </div>
     <div class="image_Drop">
-            <input type="file" #fileDropRef id="fileDropRef" (change)="onFileSelected($event)" name="image_Our_Stories" required >
+            <input type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event)" required >
+            <label (click)="fileDropRef.click()" >Choose photo</label>
     </div>
 </div>
