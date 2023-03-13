@@ -43,8 +43,8 @@ export class UserHeaderComponent implements OnInit {
     })
   }
     showEditAccount() {
-    this.id = this.auth.getTokenId();
     this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
+
   }
 
   showInvitation() {
