@@ -22,6 +22,7 @@ import { IsExistContentGuard } from './_guards/is-exist-content.guard';
 import { RegisterSongComponent } from './components/register-song/register-song.component';
 import { AccountComponent } from './components/account/account.component';
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
+import { ShareComponent } from './components/share/share.component';
 
 const routes: Routes = [];
 
@@ -46,6 +47,7 @@ const routes: Routes = [];
     { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
     { path: 'invitation/:id', component: InvitationComponent,  data: {showHeader: true  }  },
+    { path: 'share-invitation/:id', component: ShareComponent },
 
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
     { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },

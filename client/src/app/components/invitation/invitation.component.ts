@@ -33,7 +33,7 @@ export class InvitationComponent {
   public qrCodeDownloadLink: SafeUrl = "";
   hashMapContent = new Map();
   constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute, private auth: AuthService) {
-    this.myAngularxQrCode =  environment.apiURLClient + router.url;
+    this.myAngularxQrCode =  environment.apiURLClient + 'share-invitation/' + auth.getTokenId();
   }
 
   onChangeURL(url: SafeUrl) {
