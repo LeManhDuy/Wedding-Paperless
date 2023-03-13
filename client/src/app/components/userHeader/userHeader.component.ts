@@ -19,14 +19,13 @@ export class UserHeaderComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private authService: AuthService,
     public contentService: ContentService,
     private route:ActivatedRoute,
     private auth: AuthService
   ) {
     this.loginService.currentUser?.subscribe(x => {
-      console.log(x)
       this.currentUser = x
+      this.currentUser.username = auth.getTokenName()
     });
     this.isLoading = true;
     this.contentService.checkContentIsExistByPersonId()
@@ -43,12 +42,12 @@ export class UserHeaderComponent implements OnInit {
     })
   }
     showEditAccount() {
-    this.router.navigate(['account/edit/' + this.authService.getTokenId()]);
+    this.router.navigate(['account/edit/' + this.auth.getTokenId()]);
 
   }
 
   showInvitation() {
-    this.router.navigate(['/invitation/'+this.authService.getTokenId()]);
+    this.router.navigate(['/invitation/'+this.auth.getTokenId()]);
   }
 
   showForm() {
