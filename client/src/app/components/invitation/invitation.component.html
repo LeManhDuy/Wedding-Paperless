@@ -48,7 +48,9 @@
                 </div>
                 <div class="image_Drop">
                     <div class="image_Center" app-create-form>
+                      <div class="img-slide">
                         <ng-image-slider [images]="imageObjectOurMemory" #nav></ng-image-slider>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -70,4 +72,12 @@
                 </div>
             </div>
         </div>
+          <div class="qr-code-container">
+            <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+            <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+          </div>
+
+
 </div>
+
+

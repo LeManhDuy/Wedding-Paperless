@@ -1,5 +1,5 @@
 @media screen and (max-width: 800px) {
-    
+
     .create_Form_Container{
         margin: 0px auto;
         width: 100%;
@@ -7,10 +7,10 @@
     .create_Form_Content{
         width: 100%;
     }
-    
+
   }
   @media screen and (min-width: 801px) {
-    
+
     .create_Form_Container {
       /* width: 30%; Th1e width is 100%, when the viewport is 800px or smaller */
       margin: 0px auto;
@@ -38,12 +38,18 @@
     padding: 80px 0px;
     width: 80%;
     text-align: center;
+
 }
 
 .create_Form_Content{
     /* background-color: var(--MW-background_color); */
     font-family: 'Source Sans Pro';
     align-items: center;
+    background-color: var(--MW-background_color);
+    /* margin-top: 80px; */
+    padding: 80px 0px;
+    text-align: center;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     /* width: 100%; */
 }
 .image_Center {
@@ -57,6 +63,10 @@
 
 .image_Center img{
     width: 80%;
+}
+
+.img-slide{
+  width: 80%;
 }
 
 label {
@@ -163,7 +173,7 @@ textarea{
       position: absolute;
       left: -10px;
       top: 0px;
-} 
+}
 
 
 .schedule input::placeholder{
@@ -176,7 +186,7 @@ textarea{
 .title input::placeholder{
     color: var(--MW-pinkNeon_color);
     font-size: 2rem;
-    
+
 }
 
 .host_Name{
@@ -194,3 +204,11 @@ textarea{
 .hope_Join{
     text-align:right ;
 }
+
+.qr-code-container{
+  margin: auto;
+  text-align: right;
+  width: 80%;
+}
+
+
