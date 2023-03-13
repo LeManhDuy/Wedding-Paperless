@@ -19,6 +19,10 @@ import {tap} from "rxjs";
 export class DashboardAdminComponent implements OnInit {
   id?: string;
   currentUser?: UserToken;
+  isAccountLoading: boolean = false;
+  isAlbumLoading: boolean = false;
+  isContentLoading: boolean = false;
+  isSongLoading: boolean = false;
 
   quantityAccount?:number;
   quantityAlbumn?:number;
@@ -97,24 +101,32 @@ export class DashboardAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAccountLoading = true;
     this.accountService.getAllAccounts().subscribe(
       (value) => {
         this.quantityAccount = value.length
+        this.isAccountLoading = false;
       }
     )
+    this.isAlbumLoading = true;
     this.albumnService.getAllAlbumns().subscribe(
       (value) => {
         this.quantityAlbumn = value.length
+        this.isAlbumLoading = false;
       }
     )
+    this.isContentLoading = true;
     this.contentService.getAllContents().subscribe(
       (value) => {
         this.quantityContent = value.length
+        this.isContentLoading = false;
       }
     )
+    this.isSongLoading = true;
     this.registerSongService.getAllSongs().subscribe(
       (value) => {
         this.quantityRegisterSong = value.length
+        this.isSongLoading = false;
       }
     )
   }

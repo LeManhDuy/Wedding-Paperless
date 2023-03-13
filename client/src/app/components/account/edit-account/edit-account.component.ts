@@ -19,10 +19,12 @@ class ImageSnippet {
 export class EditAccountComponent implements OnInit {
   @Input() idToken: string | undefined;
   @Input() id: string | undefined;
+  isLoading :boolean = false;
+  isLoadingAvar :boolean = false;
 
   personInfo: PersonInfo = {
     id: '',
-    avatar: '',
+    avatar: 'https://miro.medium.com/v2/resize:fit:720/1*W35QUSvGpcLuxPo3SRTH4w.png',
     fullname: '',
     email: '',
   }
@@ -54,6 +56,7 @@ export class EditAccountComponent implements OnInit {
   ngOnInit(): void {
     this.idToken = this.authService.getTokenId()
     this.roleToken = this.authService.getTokenRole()
+    this.isLoadingAvar = true;
     this.route.paramMap.subscribe({
       next: params => {
       if (this.id) {
@@ -61,8 +64,11 @@ export class EditAccountComponent implements OnInit {
 
             this.personService.getPerson(this.id).subscribe({
               next: response => {
-
+                this.isLoadingAvar = false;
                 this.personInfo = response
+              },
+              error:eror =>{
+                this.isLoadingAvar = false;
               }
             })
           }
@@ -70,8 +76,11 @@ export class EditAccountComponent implements OnInit {
 
             this.personService.getPerson(this.idToken).subscribe({
               next: response => {
-
+                this.isLoadingAvar = false;
                 this.personInfo = response
+              },
+              error:eror =>{
+                this.isLoadingAvar = false;
               }
             })
           }
@@ -82,20 +91,31 @@ export class EditAccountComponent implements OnInit {
         else {
           this.personService.getPerson(this.idToken!).subscribe({
             next: response => {
+              this.isLoadingAvar = false;
               this.personInfo = response
             }
           })
         }
+      },
+      error:eror =>{
+        this.isLoadingAvar = false;
       }
     })
   }
 
   updatePerson() {
+    this.isLoading = true;
     if (this.personInfo.id) {// make a copy of the original object
       this.personService.updatePerson(this.personInfo.id, this.personInfo).subscribe(
         (updatedPerson) => {
+          this.isLoading = false;
           location.reload()
+        },
+        (errorMsg: any) => {
+          this.isLoading = false;
+          console.log(errorMsg)
         }
+
       );
     }
   }
