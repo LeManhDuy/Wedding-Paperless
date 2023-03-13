@@ -35,6 +35,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ShareComponent } from './components/share/share.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     EditAccountComponent,
     FooterComponent,
     LoadingComponent,
-    UserHeaderComponent
+    UserHeaderComponent,
+    ShareComponent
   ],
   imports: [
     BrowserModule,

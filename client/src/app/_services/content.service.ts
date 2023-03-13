@@ -50,8 +50,8 @@ export class ContentService {
     return this.http.get<Content>(this.baseUrl + contentId);
   }
 
-  getContentAttachAlbums(id : string): Observable<Content>{
-    const url = this.prefixUrl + API_URL.GET_CONTENT_BY_ID_ATTACH_ALBUMS(Number.parseInt(id));
+  getContentAttachAlbums(idPerson : string): Observable<Content>{
+    const url = this.prefixUrl + API_URL.GET_CONTENT_BY_PERSON_ID_ATTACH_ALBUMS(Number.parseInt(idPerson));
     return this.http.get<Content>(url)
     .pipe(
       catchError((error) => {

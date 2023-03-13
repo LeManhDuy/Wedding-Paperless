@@ -65,10 +65,10 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(200, Type = typeof(ContentDto))]
         public async Task<ActionResult<ContentDto>> GetContentById(int contentId)
         {
-            if (!_authRepository.IsTokenValid())
-            {
-                return Unauthorized();
-            }
+            // if (!_authRepository.IsTokenValid())
+            // {
+            //     return Unauthorized();
+            // }
             var content = await _contentRepository.GetContentByIdAsync(contentId);
             if (content == null)
             {
@@ -79,6 +79,37 @@ namespace WebApplication1.Controllers
                 return BadRequest(ModelState);
 
             var contentDto = _mapper.Map<ContentDto>(content);
+
+            return Ok(contentDto);
+        }
+
+        /// <summary>
+        /// Get content by personId.
+        /// </summary>
+        /// <param name="personId">person id</param>   
+        /// <returns>A content</returns>
+        [HttpGet("get-content-by-person/{personId}")]
+        //[Authorize]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(ContentWithAlbumDto))]
+        public async Task<ActionResult<ContentWithAlbumDto>> GetContentByPersonId(int personId)
+        {
+            // if (!_authRepository.IsTokenValid())
+            // {
+            //     return Unauthorized();
+            // }
+            var content = await _contentRepository.GetContentByIdPersonWithAlbumsAsync(personId);
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var contentDto = _mapper.Map<ContentWithAlbumDto>(content);
 
             return Ok(contentDto);
         }
