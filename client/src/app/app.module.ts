@@ -36,6 +36,13 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ShareComponent } from './components/share/share.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { ChartModule } from 'angular-highcharts';
+import { ChartByMonthComponent } from './components/chart/chart-by-month/chart-by-month.component';
+import { ChartByYearComponent } from './components/chart/chart-by-year/chart-by-year.component';
+import { ChartByDayComponent } from './components/chart/chart-by-day/chart-by-day.component';
+import { ContentChartComponent } from "./components/chart/chart-by-day/content/content.component";
+import { AccountChartComponent } from "./components/chart/chart-by-day/account/account.component";
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { StopPropagationDirectiveService } from 'src/assets/stop-propagation-directive.service';
 import { NgbModule,NgbAlertModule  } from '@ng-bootstrap/ng-bootstrap';
@@ -68,6 +75,13 @@ import { AlertComponent } from './components/alert/alert.component';
     LoadingComponent,
     UserHeaderComponent,
     ShareComponent,
+    ChartComponent,
+    ChartByMonthComponent,
+    ChartByYearComponent,
+    ChartByDayComponent,
+    ContentChartComponent,
+    AccountChartComponent,
+    ShareComponent,
     RegisterFormComponent,
     StopPropagationDirectiveService,
     AlertComponent,
@@ -85,7 +99,8 @@ import { AlertComponent } from './components/alert/alert.component';
     QRCodeModule,
     ColorPickerModule,
     NgbModule,
-    NgbAlertModule
+    NgbAlertModule,
+    ChartModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

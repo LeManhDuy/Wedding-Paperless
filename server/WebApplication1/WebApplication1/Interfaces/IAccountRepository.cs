@@ -9,6 +9,7 @@ namespace WebApplication1.Interfaces
 
         Task<AccountInfoDto> GetAccountByIdAsync(int id);
         Task<Account> GetAccountToSolveByIdAsync(int id);
+        Task<DateTimeDto> CountAccountsByDateTime();
         Task<bool> UpdateAccountAsync(Account account);
 
         Task<bool> DeleteAccountByIdAsync(int id);

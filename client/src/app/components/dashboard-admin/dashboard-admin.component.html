@@ -7,6 +7,7 @@
       <li><a (click)="showComponent('albumn')">Albumns</a></li>
       <li><a (click)="showComponent('content')">Contents</a></li>
       <li><a (click)="showComponent('register')">Register Song</a></li>
+      <li><a (click)="showComponent('chart')">Chart</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
   </div>
@@ -56,6 +57,7 @@
     <app-albumn *ngIf="isAlbumnComponentVisible"></app-albumn>
     <app-content *ngIf="isContentComponentVisible"></app-content>
     <app-register-song *ngIf="isRegisterComponentVisible"></app-register-song>
+    <app-chart *ngIf="isChartComponentVisible"></app-chart>
     <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
   </div>
 </div>
@@ -167,20 +169,15 @@
             </div>
 
             <div class="col-xl-12 col-md-12 mb-12">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                        Chart Overview</div>
-                      <canvas id="myAreaChart">
-
-                      </canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <app-chart-by-month></app-chart-by-month>
             </div>
+            <div class="col-xl-6 col-md-6 mb-6">
+              <app-content-chart></app-content-chart>
+            </div>
+            <div class="col-xl-6 col-md-6 mb-6">
+              <app-account-chart></app-account-chart>
+            </div>
+
 
           </div>
 

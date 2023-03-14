@@ -42,6 +42,73 @@ namespace WebApplication1.Repositories
                 }).ToListAsync();
         }
 
+        public async Task<DateTimeDto> CountContentsByDateTime()
+        {
+            var contents = await _context.Contents.ToListAsync();
+    
+            var contentCountsByYear = contents
+                .GroupBy(c => c.Date.Year)
+                .Select(g => new { Year = g.Key.ToString(), Count = g.Count() })
+                .OrderBy(x => x.Year)
+                .ToDictionary(x => x.Year, x => x.Count);
+    
+            var contentCountsByMonth = contents
+                .GroupBy(c => new { c.Date.Year, c.Date.Month })
+                .Select(g => new { Year = g.Key.Year.ToString(), Month = g.Key.Month.ToString(), Count = g.Count() })
+                .OrderBy(x => x.Year)
+                .ThenBy(x => x.Month)
+                .ToDictionary(x => x.Year + "-" + x.Month, x => x.Count);
+    
+            var contentCountsByDay = contents
+                .GroupBy(c => c.Date.Date)
+                .Select(g => new { Day = g.Key.ToString("yyyy-MM-dd"), Count = g.Count() })
+                .OrderBy(x => x.Day)
+                .ToDictionary(x => x.Day, x => x.Count);
+    
+            return new DateTimeDto
+            {
+                NumbByDays = contentCountsByDay,
+                NumbByMonths = contentCountsByMonth,
+                NumbByYears = contentCountsByYear
+            };
+        }
+
+        
+        // public async Task<DateTimeDto> CountContentsByDateTime()
+        // {
+        //     var contents = await _context.Contents.ToListAsync();
+        //     
+        //     var contentCountsByYear = contents
+        //         .GroupBy(c => c.Date.Year)
+        //         .Select(g => new { Year = g.Key, Count = g.Count() })
+        //         .OrderBy(x => x.Year)
+        //         .ToList();
+        //     
+        //     var contentCountsByMonth = contents
+        //         .GroupBy(c => new { c.Date.Year, c.Date.Month })
+        //         .Select(g => new { Year = g.Key.Year, Month = g.Key.Month, Count = g.Count() })
+        //         .OrderBy(x => x.Year)
+        //         .ThenBy(x => x.Month)
+        //         .ToList();
+        //     
+        //     var contentCountsByDay = contents
+        //         .GroupBy(c => new { c.Date.Year, c.Date.Month, c.Date.Day })
+        //         .Select(g => new { Year = g.Key.Year, Month = g.Key.Month, Day = g.Key.Day, Count = g.Count() })
+        //         .OrderBy(x => x.Year)
+        //         .ThenBy(x => x.Month)
+        //         .ThenBy(x => x.Day)
+        //         .ToList();
+        //     
+        //     var dto = new DateTimeDto();
+        //     
+        //     dto.NumbByYears = contentCountsByYear.Select(x => x.Count).ToArray();
+        //     dto.NumbByMonths = contentCountsByMonth.Select(x => x.Count).ToArray();
+        //     dto.NumbByDays = contentCountsByDay.Select(x => x.Count).ToArray();
+        //     
+        //     return dto;
+        // }
+
+
         public async Task<bool> CreateContentAsync(Content content)
         {
             await _context.Contents.AddAsync(content);

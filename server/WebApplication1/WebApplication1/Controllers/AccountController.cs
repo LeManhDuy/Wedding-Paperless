@@ -150,6 +150,34 @@ namespace WebApplication1.Controller
         } 
 
         /// <summary>
+        /// Count acccount by Date.
+        /// </summary>  
+        /// <returns>Numb Of Account</returns>
+        [HttpGet("count-account-by-datetime")]
+        //[Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<DateTimeDto>> CountContentsByDateTime()
+        {
+            // if (!_authRepository.IsTokenValid())
+            // {
+            //     return Unauthorized();
+            // }
+            var dateTimeDto = await _accountRepository.CountAccountsByDateTime();
+            if (dateTimeDto == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            return Ok(dateTimeDto);
+        }
+        
+        /// <summary>
         /// Reset password with verify code.
         /// </summary>
         /// <remarks>

@@ -19,7 +19,8 @@ namespace WebApplication1.Controllers
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
 
-        public ContentController(IPersonRepository personRepository, IMapper mapper, IContentRepository contentRepository, IContentService contentService, IAuthRepository authRepository)
+        public ContentController(IPersonRepository personRepository, IMapper mapper,
+            IContentRepository contentRepository, IContentService contentService, IAuthRepository authRepository)
         {
             _personRepository = personRepository;
             _mapper = mapper;
@@ -42,6 +43,7 @@ namespace WebApplication1.Controllers
             {
                 return Unauthorized();
             }
+
             var content = await _contentRepository.GetContentsAsync();
 
             if (!ModelState.IsValid)
@@ -83,25 +85,25 @@ namespace WebApplication1.Controllers
             return Ok(contentDto);
         }
 
+
         /// <summary>
-        /// Get content by personId.
+        /// Count contents by Date.
         /// </summary>
-        /// <param name="personId">person id</param>   
-        /// <returns>A content</returns>
-        [HttpGet("get-content-by-person/{personId}")]
+        /// <returns>Numb Of Contents</returns>
+        [HttpGet("count-contents-by-datetime")]
         //[Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(200, Type = typeof(ContentWithAlbumDto))]
-        public async Task<ActionResult<ContentWithAlbumDto>> GetContentByPersonId(int personId)
+        public async Task<ActionResult<DateTimeDto>> CountContentsByDateTime()
         {
             // if (!_authRepository.IsTokenValid())
             // {
             //     return Unauthorized();
             // }
-            var content = await _contentRepository.GetContentByIdPersonWithAlbumsAsync(personId);
-            if (content == null)
+            var dateTimeDto = await _contentRepository.CountContentsByDateTime();
+            if (dateTimeDto == null)
             {
                 return NotFound();
             }
@@ -109,15 +111,14 @@ namespace WebApplication1.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var contentDto = _mapper.Map<ContentWithAlbumDto>(content);
 
-            return Ok(contentDto);
+            return Ok(dateTimeDto);
         }
 
         /// <summary>
         /// Get albumn by content id.
         /// </summary>
-        /// <param name="contentId">content id</param>   
+        /// <param name="contentId">content id</param>
         /// <returns>A content</returns>
         [HttpGet("{contentId}/albumn")]
         [Authorize]
@@ -131,6 +132,7 @@ namespace WebApplication1.Controllers
             {
                 return Unauthorized();
             }
+
             var albumns = await _contentRepository.GetAlbumnContentAsync(contentId);
             if (albumns == null)
             {
@@ -147,7 +149,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get content by person id attach albums.
         /// </summary>
-        /// <param name="personId">content id</param>   
+        /// <param name="personId">content id</param>
         /// <returns>A content</returns>
         [HttpGet("getContentAttachAlbums/{personId}")]
         [Authorize]
@@ -177,7 +179,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Delete content by id.
         /// </summary>
-        /// <param name="contentId">content id</param>     
+        /// <param name="contentId">content id</param>
         [HttpDelete("{contentId}")]
         [Authorize]
         [ProducesResponseType(204)]
@@ -211,7 +213,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Check content is exist by person id
         /// </summary>
-        /// <param name="personId">person id</param>     
+        /// <param name="personId">person id</param>
         [HttpGet("checkContentByPersonId/{personId}")]
         [Authorize]
         [ProducesResponseType(204)]
@@ -240,12 +242,14 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(200, Type = typeof(ContentDto))]
-        public async Task<ActionResult<ContentDto>> CreateContent(int personId, [FromBody] CreateUpdateContentDto createUpdateContentDto)
+        public async Task<ActionResult<ContentDto>> CreateContent(int personId,
+            [FromBody] CreateUpdateContentDto createUpdateContentDto)
         {
             if (!_authRepository.IsTokenValid())
             {
                 return Unauthorized();
             }
+
             if (createUpdateContentDto == null)
             {
                 return BadRequest();
@@ -264,7 +268,9 @@ namespace WebApplication1.Controllers
             if (!await _contentService.CreateContentAsync(personId, createUpdateContentDto))
             {
                 ModelState.AddModelError("", "Something went wrong when creating content");
-            };
+            }
+
+            ;
             var content = await _contentRepository.GetContentByIdPersonAsync(personId);
             return Ok(_mapper.Map<ContentDto>(content));
         }
@@ -274,7 +280,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// 
+        ///
         ///     POST 1/patchAccount
         ///     [
         ///       {
@@ -288,12 +294,14 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = "user")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> PatchContent(int id, [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
+        public async Task<ActionResult> PatchContent(int id,
+            [FromBody] JsonPatchDocument<CreateUpdateContentDto> patchDoc)
         {
             if (!_authRepository.IsTokenValid())
             {
                 return Unauthorized();
             }
+
             if (patchDoc != null)
             {
                 var content = await _contentRepository.GetContentByIdAsync(id);
@@ -322,6 +330,5 @@ namespace WebApplication1.Controllers
 
             return BadRequest(ModelState);
         }
-
     }
 }
