@@ -37,6 +37,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ShareComponent } from './components/share/share.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { ChartModule } from 'angular-highcharts';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { ChartComponent } from './components/chart/chart.component';
     RouterModule,
     NgImageSliderModule,
     QRCodeModule,
-    ColorPickerModule
+    ColorPickerModule,
+    ChartModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
