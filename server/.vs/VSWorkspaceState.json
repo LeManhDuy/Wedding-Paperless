@@ -3,8 +3,9 @@
     "",
     "\\WebApplication1",
     "\\WebApplication1\\WebApplication1",
+    "\\WebApplication1\\WebApplication1\\Controllers",
     "\\WebApplication1\\WebApplication1\\Repositories"
   ],
-  "SelectedNode": "\\WebApplication1\\WebApplication1.sln",
+  "SelectedNode": "\\WebApplication1\\WebApplication1\\Controllers\\ContentController.cs",
   "PreviewInSolutionExplorer": false
 }

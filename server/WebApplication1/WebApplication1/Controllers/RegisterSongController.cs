@@ -97,6 +97,30 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+        /// Create Register Song by person Id.
+        /// </summary>
+        [HttpPost("register-song-by-person-id/{personId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<RegisterSongDto>> RegisterSongByPersonId([FromBody] RegisterSongDto registerSongDto, [FromRoute] int personId)
+        {
+            if (registerSongDto == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                return Ok(await _registerSongRepository.CreateByPersonIdAsync(personId, registerSongDto));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
+        }
+
+        /// <summary>
         /// Update Register Song.
         /// </summary>
         [HttpPut("{registerSongId}")]

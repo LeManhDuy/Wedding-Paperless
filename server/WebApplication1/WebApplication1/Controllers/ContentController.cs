@@ -60,7 +60,7 @@ namespace WebApplication1.Controllers
         /// <param name="contentId">content id</param>   
         /// <returns>A content</returns>
         [HttpGet("{contentId}")]
-        //[Authorize]
+        [Authorize]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -118,7 +118,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get albumn by content id.
         /// </summary>
-        /// <param name="contentId">content id</param>   
+        /// <param name="contentId">content id</param>
         /// <returns>A content</returns>
         [HttpGet("{contentId}/albumn")]
         [Authorize]
@@ -149,7 +149,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Get content by person id attach albums.
         /// </summary>
-        /// <param name="personId">content id</param>   
+        /// <param name="personId">content id</param>
         /// <returns>A content</returns>
         [HttpGet("getContentAttachAlbums/{personId}")]
         [Authorize]
@@ -179,7 +179,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Delete content by id.
         /// </summary>
-        /// <param name="contentId">content id</param>     
+        /// <param name="contentId">content id</param>
         [HttpDelete("{contentId}")]
         [Authorize]
         [ProducesResponseType(204)]
@@ -213,7 +213,7 @@ namespace WebApplication1.Controllers
         /// <summary>
         /// Check content is exist by person id
         /// </summary>
-        /// <param name="personId">person id</param>     
+        /// <param name="personId">person id</param>
         [HttpGet("checkContentByPersonId/{personId}")]
         [Authorize]
         [ProducesResponseType(204)]
@@ -280,7 +280,7 @@ namespace WebApplication1.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// 
+        ///
         ///     POST 1/patchAccount
         ///     [
         ///       {

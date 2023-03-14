@@ -3,6 +3,7 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { RegisterSong } from "../models/song";
+import { API_URL } from 'src/assets/apiUrl';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,12 @@ export class RegisterSongService {
   addSong(contentId: string, registerSong: RegisterSong): Observable<RegisterSong> {
     return this.http.post<RegisterSong>(this.baseUrl + contentId, registerSong)
   }
+
+  addSongByPersonId(personId: string, registerSong: RegisterSong): Observable<RegisterSong> {
+    const url = this.prefixUrl + API_URL.REGISTER_SONG_BY_PERSON_ID(Number.parseInt(personId));
+    return this.http.post<RegisterSong>(url, registerSong);
+  }
+
 
   getSong(id: string): Observable<RegisterSong> {
     return this.http.get<RegisterSong>(this.baseUrl + id)

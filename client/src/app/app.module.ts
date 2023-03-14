@@ -44,6 +44,10 @@ import { ChartByDayComponent } from './components/chart/chart-by-day/chart-by-da
 import { ContentChartComponent } from "./components/chart/chart-by-day/content/content.component";
 import { AccountChartComponent } from "./components/chart/chart-by-day/account/account.component";
 
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { StopPropagationDirectiveService } from 'src/assets/stop-propagation-directive.service';
+import { NgbModule,NgbAlertModule  } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,11 @@ import { AccountChartComponent } from "./components/chart/chart-by-day/account/a
     ChartByYearComponent,
     ChartByDayComponent,
     ContentChartComponent,
-    AccountChartComponent
+    AccountChartComponent,
+    ShareComponent,
+    RegisterFormComponent,
+    StopPropagationDirectiveService,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +99,8 @@ import { AccountChartComponent } from "./components/chart/chart-by-day/account/a
     NgImageSliderModule,
     QRCodeModule,
     ColorPickerModule,
+    NgbModule,
+    NgbAlertModule,
     ChartModule,
   ],
   providers: [
