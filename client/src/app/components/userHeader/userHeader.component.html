@@ -1,5 +1,5 @@
 
-<div class="nav-bar">
+<!-- <div class="nav-bar">
   <div class="navbar  navbar-dark " color="primary">
     <a class="navbar-brand" href="#">MyWedding</a>
     <div style="display: flex; align-items: center;">
@@ -54,5 +54,83 @@
         </li>
       </div>
   </div>
+
+</div> -->
+
+<div class="navbar">
+
+<div class="header_section">
+  <div class="container-fluid">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand logo"><a>MyWedding</a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                 <a class="nav-link" href="">Home</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="">About</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="">Contact</a>
+              </li>
+           </ul>
+           <div class="search_icon">
+            <div *ngIf = "!isLoading">
+              <li class="nav-item active">
+                <div *ngIf ="isExistContent=== false" >
+                  <button class="button-nav-create" (click)="showForm()">
+                    <span>
+                      Create new
+                    </span>
+                  </button>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div *ngIf ="isExistContent === true" >
+                  <button class="button-nav-create" (click)="showInvitation()">
+                    <span>
+                      Review
+                    </span>
+                  </button>
+                </div>
+              </li>
+            </div>
+            <app-loading style="margin-right: 15px;" [isLoading]="isLoading"></app-loading>
+            <li id="account" class="nav-item">
+              <div class="avatar-account" style="padding: 0 15px;" >
+                <app-loading [isLoading] = "isLoadingAvartar"></app-loading>
+                <div>
+                  <img *ngIf="!isLoadingAvartar" class="" src="{{avartar}}">
+                </div>
+              </div>
+              <div class="avatar-account-child" >
+                <div class="wedding-system">
+                  <div style="font-size: 18px;
+                  color: black;
+                  border-bottom: 2px solid #47758f;
+                  font-weight: 600;">
+                  </div>
+                </div>
+                <div class="account-item">
+                  <i class="fas fa-user-edit"></i>
+                <button class="button-nav"  (click)="showEditAccount()">
+                  {{this.currentUser?.username}}
+                </button>
+                </div>
+                <div class="account-item">
+                  <i class="fas fa-sign-out-alt"></i>
+                <button  class="button-nav" (click)="logout()">Logout</button>
+              </div>
+              </div>
+            </li>
+           </div>
+        </div>
+     </nav>
+  </div>
+</div>
 
 </div>

@@ -16,6 +16,7 @@
 .container {
   display: flex;
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -115,7 +116,7 @@ flex: 1 1 auto;
 }
 
 .landscape img {
-  margin-top: 63px;
+  /* margin-top: 63px; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -153,4 +154,298 @@ flex: 1 1 auto;
   background-color: transparent;
   border: none;
   color: white;
+}
+
+.banner_section {
+  width: 100%;
+  float: left;
+  background-image: url(https://images.squarespace-cdn.com/content/v1/5648f830e4b00accac88c0b2/1557322095929-9JZKLXA35GFJCCEZ6TQ3/Harelaw+farm+Ayrshire+wedding+photographer_J31A1617.jpg?format=1000w);
+  height: 70vh;
+  padding-bottom: 50px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.furniture_text{
+  width: 100%;
+  float: left;
+  font-size: 100px;
+  color: #090808;
+  text-align: center;
+  text-transform: uppercase;
+}
+.there_text {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #090808;
+  text-align: center;
+}
+.carousel-inner {
+  background-color: hsla(0, 0%, 100%, 0.5);
+  border-radius: 15px;
+}
+
+.contact_bt_main{
+  width: 17%;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact_bt {
+  width: 100%;
+  float: left;
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.contact_bt a{
+  width: 100%;
+  float: left;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #ffb607;
+  text-align: center;
+  padding: 10px 0px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.contact_bt a:hover{
+  color: #ffffff;
+  background-color: #000;
+}
+
+.services_section{
+  width: 100%;
+  float: left;
+  padding-bottom: 90px;
+}
+.services_taital{
+  width: 100%;
+  float: left;
+  font-size: 36px;
+  color: #090808;
+  text-align: center;
+  text-transform: uppercase;
+}
+.many_taital{
+  width: 100%;
+  float: left;
+  font-size: 16px;
+  color: #090808;
+  text-align: center;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+.services_section2{
+  width: 100%;
+  float: left;
+}
+.furnitures_text {
+  width: 100%;
+  float: left;
+  font-size: 24px;
+  color: #090808;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 20px;
+}
+.dummy_text{
+  width: 100%;
+  float: left;
+  font-size: 16px;
+  color: #090808;
+  text-align: center;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+
+.read_bt_main{
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+.read_bt {
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+}
+.read_bt a{
+  width: 100%;
+  float: left;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #ffb607;
+  text-align: center;
+  padding: 10px 0px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.read_bt a:hover{
+  color: #ffffff;
+  background-color: #000;
+}
+.about_section{
+  width: 100%;
+  float: left;
+  background-color: #ffb607;
+  height: auto;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.image_1{
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  float: left;
+}
+
+.about_text {
+  width: 100%;
+  float: left;
+  font-size: 40px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.lorem_text {
+  width: 100%;
+  float: left;
+  font-size: 16px;
+  color: #ffffff;
+  margin-left: 0px;
+  padding-top: 40px;
+}
+.read_bt1 {
+  width: 30%;
+  float: left;
+  margin-top: 70px;
+}
+.read_bt1 a{
+  width: 100%;
+  float: left;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #070201;
+  text-align: center;
+  padding: 10px 0px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.read_bt1 a:hover{
+  color: #000;
+  background-color: #ffffff;
+}
+.contact_section {
+  width: 100%;
+  float: left;
+  /* background-image: url(https://www.rockmywedding.co.uk/470x592/jpg/8216/7810/4799/average-wedding-cost.webp);  */
+  background-color: var(--lightGreen_color);
+  height: auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
+.mail_sectin{
+  width: 100%;
+  float: left;
+}
+.contact_text{
+  width: 100%;
+  float: left;
+  font-size: 36px;
+  color: #ffffff;
+
+}
+.email-bt {
+  color: #989696;
+  width: 100%;
+  height: 55px;
+  font-size: 18px;
+  padding: 20px;
+  margin-top: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+input.email-bt::placeholder {
+  color: #989696;
+}
+.massage-bt {
+  color: #989696;
+  width: 100%;
+  height: 150px;
+  font-size: 18px;
+  padding: 50px 20px 10px 20px;
+  margin-top: 25px;
+  border: 0px;
+  border-radius: 5px;
+}
+textarea#comment::placeholder {
+  color: #989696;
+}
+.send_bt {
+  width: 100%;
+  float: right;
+  margin-top: 50px;
+}
+.send_bt a{
+  width: 30%;
+  float: right;
+  font-size: 20px;
+  color: #989696;
+  text-align: center;
+  border: 2px solid #ffffff;
+  padding: 10px 0px;
+  font-weight: bold;
+}
+.send_bt a:hover{
+  color: #989696;
+  background-color: #ffffff;
+}
+.image_9 {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  float: left;
+}
+.input-group {
+  width: 45%;
+  float: right;
+}
+
+.form-control {
+  display: block;
+  /* width: 100%; */
+  padding: 0px 15px 10px 0px;
+  font-size: 18px;
+  /* line-height: 1.5; */
+  color: #fff;
+  background-color: transparent;
+  /* background-clip: padding-box; */
+  border-bottom: 1px solid #fff !important;
+  border-radius: 0px;
+  /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+  border: 0px;
+}
+.input-group-text {
+  padding: 0px;
+  margin-bottom: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: 0px;
+  border-radius: 0px;
+  border-bottom: 1px solid #fff;
+  text-transform: uppercase;
+}
+.input-group-text a{
+  color: #ffffff;
+}
+.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  width: 1%;
+  margin-bottom: 0px;
+  background: transparent !important;
+  border-bottom: 1px solid #ffff;
 }
