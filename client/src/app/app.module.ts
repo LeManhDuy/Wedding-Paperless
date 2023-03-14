@@ -43,7 +43,6 @@ import { ChartByYearComponent } from './components/chart/chart-by-year/chart-by-
 import { ChartByDayComponent } from './components/chart/chart-by-day/chart-by-day.component';
 import { ContentChartComponent } from "./components/chart/chart-by-day/content/content.component";
 import { AccountChartComponent } from "./components/chart/chart-by-day/account/account.component";
-
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { StopPropagationDirectiveService } from 'src/assets/stop-propagation-directive.service';
 import { NgbModule,NgbAlertModule  } from '@ng-bootstrap/ng-bootstrap';
