@@ -33,6 +33,7 @@ export class DashboardAdminComponent implements OnInit {
   isAccountComponentVisible = false;
   isContentComponentVisible = true;
   isEditAccountComponentVisible = false;
+  isChartComponentVisible = false;
   title: string = 'Content';
 
   constructor(
@@ -56,6 +57,7 @@ export class DashboardAdminComponent implements OnInit {
         this.isAccountComponentVisible = false;
         this.isContentComponentVisible = false;
         this.isEditAccountComponentVisible = false;
+        this.isChartComponentVisible = false;
         break;
       case 'albumn':
         this.title = 'Albumn';
@@ -64,6 +66,7 @@ export class DashboardAdminComponent implements OnInit {
         this.isAccountComponentVisible = false;
         this.isContentComponentVisible = false;
         this.isEditAccountComponentVisible = false;
+        this.isChartComponentVisible = false;
         break;
       case 'account':
         this.title = 'Account';
@@ -72,6 +75,7 @@ export class DashboardAdminComponent implements OnInit {
         this.isAlbumnComponentVisible = false;
         this.isContentComponentVisible = false;
         this.isEditAccountComponentVisible = false;
+        this.isChartComponentVisible = false;
         break;
       case 'content':
         this.title = 'Content';
@@ -80,7 +84,7 @@ export class DashboardAdminComponent implements OnInit {
         this.isAlbumnComponentVisible = false;
         this.isAccountComponentVisible = false;
         this.isEditAccountComponentVisible = false;
-
+        this.isChartComponentVisible = false;
         break;
       case 'editAccount':
         this.title = 'Your Account';
@@ -89,6 +93,16 @@ export class DashboardAdminComponent implements OnInit {
         this.isRegisterComponentVisible = false;
         this.isAlbumnComponentVisible = false;
         this.isAccountComponentVisible = false;
+        this.isChartComponentVisible = false;
+        break;
+      case 'chart':
+        this.title = 'Chart';
+        this.isEditAccountComponentVisible = false;
+        this.isContentComponentVisible = false;
+        this.isRegisterComponentVisible = false;
+        this.isAlbumnComponentVisible = false;
+        this.isAccountComponentVisible = false;
+        this.isChartComponentVisible = true;
         break;
       default:
         console.error('Invalid component name.');
