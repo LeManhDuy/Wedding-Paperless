@@ -1,4 +1,4 @@
-<div class="dashboard">
+<!-- <div class="dashboard">
   <div class="sidebar">
     <h2>My Wedding</h2>
     <ul>
@@ -61,4 +61,130 @@
     <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
   </div>
 </div>
+ -->
 
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <h4 class="m-0 font-weight-bold">My Wedding</h4>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" (click)="showComponent('statistic')" style="cursor: pointer;">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span class="sidebar-brand-text mx-3">Dashboard</span></a>
+      </li>
+
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" (click)="showComponent('account')" style="cursor: pointer;">
+          <i class="fas fa-fw fa-table"></i>
+          <span class="sidebar-brand-text mx-3">Account</span></a>
+      </li>
+
+      <hr class="sidebar-divider my-0">
+
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()" style="cursor: pointer;">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span class="sidebar-brand-text mx-3">Logout</span></a>
+      </li>
+
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <h4 class="m-0 font-weight-bold text-primary">{{title}}</h4>
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <app-account *ngIf="isAccountComponentVisible"></app-account>
+
+          <app-edit-account *ngIf="isEditAccountComponentVisible" [id]="id"></app-edit-account>
+
+          <div class="row" *ngIf="isStatisticComponentVisible">
+
+            <div class="col-divide">
+              <div class="col-xl-6 col-md-6 mb-6">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <app-loading [isLoading]="isAccountLoading"></app-loading>
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center" *ngIf="!isAccountLoading">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                          Total Account</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ quantityAccount }} </div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fa-solid fa-person fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-6 col-md-6 mb-6">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <app-loading [isLoading]="isContentLoading"></app-loading>
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center" *ngIf="!isContentLoading">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                          Total Content</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ quantityContent }}</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-12 col-md-12 mb-12">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        Chart Overview</div>
+                      <canvas id="myAreaChart">
+
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
