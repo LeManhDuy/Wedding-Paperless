@@ -38,6 +38,11 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ShareComponent } from './components/share/share.component';
 import { ChartComponent } from './components/chart/chart.component';
 import { ChartModule } from 'angular-highcharts';
+import { ChartByMonthComponent } from './components/chart/chart-by-month/chart-by-month.component';
+import { ChartByYearComponent } from './components/chart/chart-by-year/chart-by-year.component';
+import { ChartByDayComponent } from './components/chart/chart-by-day/chart-by-day.component';
+import { ContentChartComponent } from "./components/chart/chart-by-day/content/content.component";
+import { AccountChartComponent } from "./components/chart/chart-by-day/account/account.component";
 
 
 @NgModule({
@@ -67,7 +72,12 @@ import { ChartModule } from 'angular-highcharts';
     LoadingComponent,
     UserHeaderComponent,
     ShareComponent,
-    ChartComponent
+    ChartComponent,
+    ChartByMonthComponent,
+    ChartByYearComponent,
+    ChartByDayComponent,
+    ContentChartComponent,
+    AccountChartComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+using System.Globalization;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
@@ -105,6 +106,42 @@ namespace WebApplication1.Repositories
         {
             _context.Accounts.Update(account);
             return await SaveChangesAsync();
+        }
+
+
+        private DateTime ParseDateTime(Person person)
+        {
+            return DateTime.ParseExact(person.EmailVerifiedAt, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+        }
+        public async Task<DateTimeDto> CountAccountsByDateTime()
+        {
+            var accounts = await _context.Persons.ToListAsync();
+            
+            var contentAccountsByYear = accounts
+                .GroupBy(c => ParseDateTime(c).Year)
+                .Select(g => new { Year = g.Key.ToString(), Count = g.Count() })
+                .OrderBy(x => x.Year)
+                .ToDictionary(x => x.Year, x => x.Count);
+    
+            var contentAccountsByMonth = accounts
+                .GroupBy(c => new { ParseDateTime(c).Year, ParseDateTime(c).Month })
+                .Select(g => new { Year = g.Key.Year.ToString(), Month = g.Key.Month.ToString(), Count = g.Count() })
+                .OrderBy(x => x.Year)
+                .ThenBy(x => x.Month)
+                .ToDictionary(x => x.Year + "-" + x.Month, x => x.Count);
+    
+            var contentAccountsByDay = accounts
+                .GroupBy(c => ParseDateTime(c).Date)
+                .Select(g => new { Day = g.Key.ToString("yyyy-MM-dd"), Count = g.Count() })
+                .OrderBy(x => x.Day)
+                .ToDictionary(x => x.Day, x => x.Count);
+    
+            return new DateTimeDto
+            {
+                NumbByDays = contentAccountsByDay,
+                NumbByMonths = contentAccountsByMonth,
+                NumbByYears = contentAccountsByYear
+            };
         }
     }
 }
