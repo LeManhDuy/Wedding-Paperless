@@ -1,40 +1,43 @@
-
-<div class="ngForm container" >
+<br>
+<div class="ngForm container">
   <form class="lNero" #form="ngForm" (ngSubmit)="updatePerson()">
     <div class="form-content">
       <div class="form-avt">
-          <div class="avatar-upload">
-              <div class="avatar-edit">
-                  <input #imageInput type='file' (change)="processFile(imageInput)" id="imageUpload" accept=".png, .jpg, .jpeg" name="imageLink" />
-                  <label for="imageUpload"><i class="fa-solid fa-pen-to-square"></i></label>
-              </div>
-              <div class="avatar-preview" >
-                <app-loading  [isLoading]="isLoadingAvar" [color]="'red'"></app-loading>
-                      <img *ngIf="!isLoadingAvar" id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap" >
-              </div>
-              <h3 *ngIf="!isLoadingAvar">{{personInfo.fullname}}</h3>
-              <h6 *ngIf="!isLoadingAvar">{{roleToken}}</h6>
+        <div class="avatar-upload">
+          <div class="avatar-edit">
+            <input #imageInput type='file' (change)="processFile(imageInput)" id="imageUpload"
+              accept=".png, .jpg, .jpeg" name="imageLink" />
+            <label for="imageUpload"><i class="fa-solid fa-pen-to-square"></i></label>
           </div>
+          <div class="avatar-preview">
+            <app-loading [isLoading]="isLoadingAvar" [color]="'red'"></app-loading>
+            <img *ngIf="!isLoadingAvar" id="imagePreview" src="{{ personInfo.avatar }}" alt="Card image cap">
+          </div>
+          <h3 class="m-0 font-weight-bold text-primary" *ngIf="!isLoadingAvar">{{personInfo.fullname}}</h3>
+          <br>
+          <h6 *ngIf="!isLoadingAvar">{{roleToken}}</h6>
+        </div>
       </div>
-      
+
       <div class="form-info">
         <div>
           <a>Full Name: </a>
-          <input type="text" class="form-control" id="fullname" [(ngModel)]="personInfo.fullname" name="fullname" [value]="personInfo.fullname">
-        </div>
-        <div>
-          <a>Email: </a>
-          <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email" [value]="personInfo.email" disabled>
+          <input type="text" class="form-control" id="fullname" [(ngModel)]="personInfo.fullname" name="fullname"
+            [value]="personInfo.fullname">
         </div>
         <br>
+        <div>
+          <a>Email: </a>
+          <input type="text" class="form-control" id="email" [(ngModel)]="personInfo.email" name="email"
+            [value]="personInfo.email" disabled>
+        </div>
+        <br>
+        <div class="form-submit">
+          <button [disabled]="isLoading" class="btn btn-success btn-sm float-left my-button" type="submit">
+            <app-loading [isLoading]="isLoading" [text]="'Upload'"></app-loading>
+          </button>
+        </div>
       </div>
     </div>
-    
-    <div style="padding: 8px 0px" class="form-submit">
-      <button [disabled]="isLoading"  class="btn btn-success btn-sm float-right " type="submit" >
-        <app-loading  [isLoading]="isLoading" [text]="'Up load'"></app-loading>
-      </button>
-    </div>
-    
   </form>
 </div>
