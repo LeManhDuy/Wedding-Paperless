@@ -10,7 +10,8 @@ import { ContentService } from 'src/app/_services/content.service';
   styleUrls: ['./share.component.css']
 })
 export class ShareComponent {
-
+  personId:string='';
+  state:string = 'none';
    content: Content = new Content();
   hashMapContent = new Map();
   imageObjectOurStory: Array<object> = [];
@@ -28,6 +29,7 @@ export class ShareComponent {
   ngOnInit(): void {
 
     const personId = this.route.snapshot.paramMap.get('id');
+    this.personId = personId!;
       this.isLoading = true;
         this.contentService.getContentAttachAlbums(personId!)
         .subscribe(respone =>{
@@ -56,5 +58,13 @@ export class ShareComponent {
       thumbImage:element.imageLink,
      }
     object.push(image);
+  }
+
+  appearForm(){
+    this.state = '';
+  }
+
+  existForm(){
+    this.state = 'none';
   }
 }

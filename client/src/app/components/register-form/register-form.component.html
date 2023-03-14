@@ -1,0 +1,11 @@
+<form  #registerForm="ngForm">
+    <div class="form" >
+        <p class="heading">Register Song</p>
+        <input [required]="true" name="fullName"  type="text" class="input" [(ngModel)]="registerSong.fullName"  placeholder="Singer">
+        <input [required]="true" name="songName"  type="text" class="input"  [(ngModel)]="registerSong.songName"  placeholder="Song">
+        <input [required]="true"  name="linkBeat"  type="text" class="input" [(ngModel)]="registerSong.linkBeat" placeholder="Link beat">
+        <app-loading style="padding-left: 20px;
+        padding-right: 20px;" class="btn" *ngIf ="isLoading" [isLoading]="isLoading"></app-loading>
+        <button  *ngIf ="!isLoading" class="btn" type="button" (click)="save()">Save</button>
+    </div>
+</form>

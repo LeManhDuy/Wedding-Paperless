@@ -1,4 +1,8 @@
-<div class="create_Form_Content">
+<div class="register-container" [style.display]="state"  (click)="existForm()">
+    <app-register-form [personId]="personId" class="anima" stopPropagation ></app-register-form>
+</div>
+<div class="create_Form_Content" style="position: relative;">
+
     <div *ngIf ="isLoading" style="height: 60vh; display: flex; align-items: center; justify-content: center;">
         <app-loading  [isLoading]="true" [color]="'red'"></app-loading>
     </div>
@@ -73,6 +77,9 @@
                 <p class="hope_Join_Date"  name="hope_Join_Date">{{this.content.date}}</p>
                 <p class="hope_Join_Content"  name="hope_Join_Content">Hope you join us</p>
                 <p class="hope_Join_Sign" name="hope_Join_Sign"> {{this.content.hostName}}</p>
+                <button class="button" (click)="appearForm()" >
+                    Register song
+                </button>
             </div>
         </div>
     </div>
