@@ -23,6 +23,7 @@ import { RegisterSongComponent } from './components/register-song/register-song.
 import { AccountComponent } from './components/account/account.component';
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 import { ShareComponent } from './components/share/share.component';
+import {ChartComponent} from "./components/chart/chart.component";
 
 const routes: Routes = [];
 
@@ -58,6 +59,8 @@ const routes: Routes = [];
     // { path: 'account', loadComponent: () => import('./components/account/account.component').then(c => c.AccountComponent), canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
     { path: 'account', component: AccountComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
     { path: 'account/edit/:id', component: EditAccountComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user' ,showHeader: true } },
+
+    { path: 'chart', component: ChartComponent},
 
     { path: 'form', component: FormComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user',showHeader: true } },
     { path: '**', redirectTo: 'not-found' }
