@@ -1,11 +1,10 @@
-
 <div class="nav-bar">
   <div class="navbar  navbar-dark " color="primary">
     <a class="navbar-brand" href="#">MyWedding</a>
     <div style="display: flex; align-items: center;">
-      <div *ngIf = "!isLoading">
+      <div *ngIf="!isLoading">
         <li class="nav-item active">
-          <div *ngIf ="isExistContent=== false" >
+          <div *ngIf="isExistContent=== false">
             <button class="button-nav-create" (click)="showForm()">
               <span>
                 Create new
@@ -14,7 +13,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <div *ngIf ="isExistContent === true" >
+          <div *ngIf="isExistContent === true">
             <button class="button-nav-create" (click)="showInvitation()">
               <span>
                 Review
@@ -24,35 +23,27 @@
         </li>
       </div>
       <app-loading style="margin-right: 15px;" [isLoading]="isLoading"></app-loading>
-        <li id="account" class="nav-item">
-          <div class="avatar-account" style="padding: 0 15px;" >
-            <app-loading [isLoading] = "isLoadingAvartar"></app-loading>
-            <div>
-              <img *ngIf="!isLoadingAvartar" class="" src="{{avartar}}">
-            </div>
+      <li id="account" class="nav-item">
+        <div class="avatar-account" style="padding: 0 15px;">
+          <app-loading [isLoading]="isLoadingAvartar"></app-loading>
+          <div>
+            <img *ngIf="!isLoadingAvartar" class="" src="{{avartar}}">
           </div>
-          <div class="avatar-account-child" >
-            <div class="wedding-system">
-              <div style="font-size: 18px;
-              color: black;
-              border-bottom: 2px solid #47758f;
-              font-weight: 600;">
-                Wedding
-              </div>
-            </div>
-            <div class="account-item">
-              <i class="fas fa-user-edit"></i>
-            <button class="button-nav"  (click)="showEditAccount()">
+        </div>
+        <div class="avatar-account-child">
+          <div class="account-item">
+            <i class="fas fa-user-edit"></i>
+            <button class="button-nav" (click)="showEditAccount()">
               {{this.currentUser?.username}}
             </button>
-            </div>
-            <div class="account-item">
-              <i class="fas fa-sign-out-alt"></i>
-            <button  class="button-nav" (click)="logout()">Logout</button>
           </div>
+          <div class="account-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <button class="button-nav" (click)="logout()">Logout</button>
           </div>
-        </li>
-      </div>
+        </div>
+      </li>
+    </div>
   </div>
 
 </div>

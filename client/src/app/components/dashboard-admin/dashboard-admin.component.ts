@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
-import {UserToken} from 'src/app/models/app-user';
-import {AuthService} from 'src/app/_services/auth.service';
-import {LoginService} from 'src/app/_services/login.service';
-import {AccountService} from "../../_services/account.service";
-import {AlbumnService} from "../../_services/albumn.service";
-import {ContentService} from "../../_services/content.service";
-import {RegisterSongService} from "../../_services/register-song.service";
-import {Quantity} from "../../models/quantity";
-import {tap} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { UserToken } from 'src/app/models/app-user';
+import { AuthService } from 'src/app/_services/auth.service';
+import { LoginService } from 'src/app/_services/login.service';
+import { AccountService } from "../../_services/account.service";
+import { AlbumnService } from "../../_services/albumn.service";
+import { ContentService } from "../../_services/content.service";
+import { RegisterSongService } from "../../_services/register-song.service";
+import { Quantity } from "../../models/quantity";
+import { tap } from "rxjs";
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -24,16 +24,16 @@ export class DashboardAdminComponent implements OnInit {
   isContentLoading: boolean = false;
   isSongLoading: boolean = false;
 
-  quantityAccount?:number;
-  quantityAlbumn?:number;
-  quantityContent?:number;
-  quantityRegisterSong?:number;
+  quantityAccount?: number;
+  quantityAlbumn?: number;
+  quantityContent?: number;
+  quantityRegisterSong?: number;
   isAlbumnComponentVisible = false;
   isRegisterComponentVisible = false;
   isAccountComponentVisible = false;
-  isContentComponentVisible = true;
   isEditAccountComponentVisible = false;
-  title: string = 'Content';
+  isStatisticComponentVisible = true;
+  title: string = 'Statistics';
 
   constructor(
     private loginService: LoginService,
@@ -49,47 +49,55 @@ export class DashboardAdminComponent implements OnInit {
   showComponent(componentName: string) {
     this.id = this.auth.getTokenId();
     switch (componentName) {
-      case 'register':
-        this.title = 'Register Song';
-        this.isRegisterComponentVisible = true;
-        this.isAlbumnComponentVisible = false;
-        this.isAccountComponentVisible = false;
-        this.isContentComponentVisible = false;
-        this.isEditAccountComponentVisible = false;
-        break;
-      case 'albumn':
-        this.title = 'Albumn';
-        this.isAlbumnComponentVisible = true;
-        this.isRegisterComponentVisible = false;
-        this.isAccountComponentVisible = false;
-        this.isContentComponentVisible = false;
-        this.isEditAccountComponentVisible = false;
-        break;
+
+      // case 'register':
+      //   this.title = 'Register Song';
+      //   this.isRegisterComponentVisible = true;
+      //   this.isAlbumnComponentVisible = false;
+      //   this.isAccountComponentVisible = false;
+      //   this.isContentComponentVisible = false;
+      //   this.isEditAccountComponentVisible = false;
+      //   break;
+
+      // case 'albumn':
+      //   this.title = 'Albumn';
+      //   this.isAlbumnComponentVisible = true;
+      //   this.isRegisterComponentVisible = false;
+      //   this.isAccountComponentVisible = false;
+      //   this.isContentComponentVisible = false;
+      //   this.isEditAccountComponentVisible = false;
+      //   break;
+
       case 'account':
         this.title = 'Account';
         this.isAccountComponentVisible = true;
-        this.isRegisterComponentVisible = false;
-        this.isAlbumnComponentVisible = false;
-        this.isContentComponentVisible = false;
+        this.isStatisticComponentVisible = false;
         this.isEditAccountComponentVisible = false;
         break;
-      case 'content':
-        this.title = 'Content';
-        this.isContentComponentVisible = true;
-        this.isRegisterComponentVisible = false;
-        this.isAlbumnComponentVisible = false;
+
+      case 'statistic':
+        this.title = 'Statistics';
+        this.isStatisticComponentVisible = true;
         this.isAccountComponentVisible = false;
         this.isEditAccountComponentVisible = false;
-
         break;
+
+      // case 'content':
+      //   this.title = 'Content';
+      //   this.isContentComponentVisible = true;
+      //   this.isRegisterComponentVisible = false;
+      //   this.isAlbumnComponentVisible = false;
+      //   this.isAccountComponentVisible = false;
+      //   this.isEditAccountComponentVisible = false;
+      //   break;
+
       case 'editAccount':
         this.title = 'Your Account';
         this.isEditAccountComponentVisible = true;
-        this.isContentComponentVisible = false;
-        this.isRegisterComponentVisible = false;
-        this.isAlbumnComponentVisible = false;
+        this.isStatisticComponentVisible = false;
         this.isAccountComponentVisible = false;
         break;
+
       default:
         console.error('Invalid component name.');
     }
