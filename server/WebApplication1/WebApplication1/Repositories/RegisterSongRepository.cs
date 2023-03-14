@@ -45,6 +45,19 @@ namespace WebApplication1.Repositories
             }
         }
 
+        public async Task<RegisterSongDto> CreateByPersonIdAsync(int personId, RegisterSongDto registerSongDto)
+        {
+            var contentId = await _context.Persons.Where(p=> p.Id == personId)
+            .Include(x => x.Content)
+            .Select(v => v.Content.Id)
+            .FirstOrDefaultAsync();
+
+            var registerSongDtoR = await CreateAsync(contentId, registerSongDto);
+            await SaveAsync();
+            return registerSongDtoR;
+
+        }
+
         public async Task DeleteAsync(int registerSongId)
         {
             var registerSong = await _context.RegisterSongs.Where(c => c.Id == registerSongId).FirstOrDefaultAsync();
@@ -71,6 +84,11 @@ namespace WebApplication1.Repositories
         public bool RegisterSongExists(int registerSongId)
         {
             return _context.RegisterSongs.Any(c => c.Id == registerSongId);
+        }
+
+        public async Task<bool> SaveAsync()
+        {
+           return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<RegisterSongDto> UpdateAsync(int registerSongId, RegisterSongDto registerSongDto)

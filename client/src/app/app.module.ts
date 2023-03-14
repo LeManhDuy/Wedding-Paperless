@@ -36,6 +36,10 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ShareComponent } from './components/share/share.component';
+import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { StopPropagationDirectiveService } from 'src/assets/stop-propagation-directive.service';
+import { NgbModule,NgbAlertModule  } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,10 @@ import { ShareComponent } from './components/share/share.component';
     FooterComponent,
     LoadingComponent,
     UserHeaderComponent,
-    ShareComponent
+    ShareComponent,
+    RegisterFormComponent,
+    StopPropagationDirectiveService,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,9 @@ import { ShareComponent } from './components/share/share.component';
     RouterModule,
     NgImageSliderModule,
     QRCodeModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgbModule,
+    NgbAlertModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
