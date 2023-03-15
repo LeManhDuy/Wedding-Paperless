@@ -22,12 +22,12 @@ export class RegisterFormComponent {
     .subscribe(
       _ =>{
         this.registerSong = new RegisterSong();
-        this.alertService.setAlertModel(true,"success", 'Add song successed');
+        this.alertService.setAlertModel("success", 'Add song successed');
         this.isLoading =false;
       },
       (error) =>{
         this.isLoading =false;
-        this.alertService.setAlertModel(true,'danger',"Add failed");
+        this.alertService.setAlertModel('danger',"Add failed");
       }
     )
     

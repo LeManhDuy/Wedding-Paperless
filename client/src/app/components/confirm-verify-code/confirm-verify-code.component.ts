@@ -23,12 +23,12 @@ export class ConfirmVerifyCodeComponent {
     .subscribe(respose =>{
       this.isLoading = false;
       this.codeStorageService.assignCode(this.confirmVerifyCode?.toString()!);
-      this.alerService.setAlertModel(true,"success","Code is correct");
+      this.alerService.setAlertModel("success","Code is correct");
       this.router.navigate(['/forgotPassword/confirmVerifyCode/resetPassword']);
     },
     (errorMsg: any) => {
       this.isLoading = false;
-      this.alerService.setAlertModel(true,"danger","Some thing went wrong");
+      this.alerService.setAlertModel("danger","Some thing went wrong");
       console.log(errorMsg)
     })
   }

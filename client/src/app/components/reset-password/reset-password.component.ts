@@ -22,7 +22,7 @@ export class ResetPasswordComponent {
   ResetPassword(){
     const verifycode = this.codeStorageService.verifycode;
     if(!verifycode){
-      this.alerService.setAlertModel(true,"danger","Verify code is null")
+      this.alerService.setAlertModel("danger","Verify code is null")
       setTimeout(() =>{ this._location.back()} ,500)
       return;
     }
@@ -31,12 +31,12 @@ export class ResetPasswordComponent {
     this.forgotpasswordService.resetPassword(this.resetPassword)
     .subscribe(_ => {
       this.isLoading = false;
-      this.alerService.setAlertModel(true,"success","Change password successfully")
+      this.alerService.setAlertModel("success","Change password successfully")
         this.router.navigate(['/login']);
     },
     (errorMsg: any) => {
       this.errorMessage = errorMsg;
-      this.alerService.setAlertModel(true,"success","Some thing went wrong")
+      this.alerService.setAlertModel("success","Some thing went wrong")
       this.isLoading = false;
       console.log(errorMsg)
     }

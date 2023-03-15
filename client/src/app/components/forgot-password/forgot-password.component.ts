@@ -25,12 +25,12 @@ export class ForgotPasswordComponent {
     this.forgotpasswordService.getVerifyCode(this.forgotEmail)
     .subscribe(_ =>{
       this.isLoading = false;
-      this.alertService.setAlertModel(true,"success","Get code from your email")
+      this.alertService.setAlertModel("success","Get code from your email")
        this.router.navigate(['forgotPassword/confirmVerifyCode']);
     },
     (errorMsg: any) => {
       this.isLoading = false;
-      this.alertService.setAlertModel(true,"danger","Some thing went wrong")
+      this.alertService.setAlertModel("danger","Some thing went wrong")
       console.log(errorMsg)
     })
 
