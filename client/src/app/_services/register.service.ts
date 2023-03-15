@@ -1,7 +1,7 @@
 import { environment } from './../../environments/environment';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, catchError, map, throwError} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, throwError} from 'rxjs';
 import { RegisterUser, UserToken } from '../models/app-user';
 
 @Injectable({

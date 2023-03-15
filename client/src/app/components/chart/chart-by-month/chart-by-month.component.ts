@@ -40,22 +40,41 @@ export class ChartByMonthComponent {
       this.accountByTime = accountData;
       this.contentByTime = contentData;
       for (let i = 1; i <= 12 ; i++) {
+        let checkDataAccount: number[] = []
+        let checkDataContent: number[] = []
+        //add data Account
         Object.keys(this.accountByTime.numbByMonths!).map(key => {
           let m = key.split("-")[1]
           if (i.toString() == m) {
-            this.dataAccount.push(this.accountByTime.numbByMonths![key])
+            checkDataAccount.push(this.accountByTime.numbByMonths![key])
             return
           }
-          this.dataAccount.push(0)
+          checkDataAccount.push(0)
         })
+        let nonZeroAccountElement = checkDataAccount.find(element => element !== 0);
+        if (nonZeroAccountElement) {
+          this.dataAccount.push(nonZeroAccountElement)
+        }
+        else {
+          this.dataAccount.push(0)
+        }
+        //add data Content
         Object.keys(this.contentByTime.numbByMonths!).map(key => {
           let m = key.split("-")[1]
           if (i.toString() == m) {
-            this.dataContent.push(this.contentByTime.numbByMonths![key])
+            checkDataContent.push(this.contentByTime.numbByMonths![key])
             return
           }
-          this.dataContent.push(0)
+          checkDataContent.push(0)
         })
+        let nonZeroContentElement = checkDataContent.find(element => element !== 0);
+        if (nonZeroContentElement) {
+          this.dataContent.push(nonZeroContentElement)
+        }
+        else {
+          this.dataContent.push(0)
+        }
+
       }
       this.chart = new Chart(
         {

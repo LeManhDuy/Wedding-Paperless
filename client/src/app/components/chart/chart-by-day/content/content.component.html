@@ -1,6 +1,11 @@
 <div class="card shadow mb-4">
   <div class="card border-left-danger shadow h-100 py-2">
     <div class="card-body">
+      <select class="form-select" [(ngModel)]="month" (change)="onChangeSelection()">
+        <option *ngFor="let m of months" [value]="m" >{{m}}
+        </option>
+      </select>
+
       <!--    <div class="chart-area">-->
       <!--      <canvas id="myAreaChart" >-->
       <!--      </canvas>-->
@@ -9,3 +14,4 @@
     </div>
   </div>
 </div>
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/_services/alert.service';
 import { CodeStorageService } from 'src/app/_services/code-storage.service';
 import { ForgotPasswordService } from 'src/app/_services/forgot-password.service';
 
@@ -9,12 +10,12 @@ import { ForgotPasswordService } from 'src/app/_services/forgot-password.service
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {
-  errorMessage: string =""
   forgotEmail: string | undefined
   isLoading: boolean = false;
 
   constructor
   (
+    private alertService: AlertService,
     public forgotpasswordService: ForgotPasswordService,
     private router: Router,
     private codeStorageService: CodeStorageService) {
@@ -24,11 +25,12 @@ export class ForgotPasswordComponent {
     this.forgotpasswordService.getVerifyCode(this.forgotEmail)
     .subscribe(_ =>{
       this.isLoading = false;
+      this.alertService.setAlertModel("success","Get code from your email")
        this.router.navigate(['forgotPassword/confirmVerifyCode']);
     },
     (errorMsg: any) => {
       this.isLoading = false;
-      this.errorMessage =errorMsg;
+      this.alertService.setAlertModel("danger","Some thing went wrong")
       console.log(errorMsg)
     })
 
