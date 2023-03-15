@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { AlertModel } from 'src/app/models/alertModel';
 import { RegisterSong } from 'src/app/models/song';
 import { AlertService } from 'src/app/_services/alert.service';
 import { RegisterSongService } from 'src/app/_services/register-song.service';
@@ -18,27 +17,17 @@ export class RegisterFormComponent {
     
   }
   save(){
-    const alert: AlertModel ={
-        isAlert : false,
-        type : 'success',
-        text: 'Add song successed',
-    }
     this.isLoading = true;
     this.registerSongSer.addSongByPersonId(this.personId,this.registerSong)
     .subscribe(
       _ =>{
         this.registerSong = new RegisterSong();
-        alert.isAlert =true;
-        this.alertService.setAlertModel(alert);
+        this.alertService.setAlertModel(true,"success", 'Add song successed');
         this.isLoading =false;
       },
       (error) =>{
         this.isLoading =false;
-        alert.text="Add failed";
-        alert.type ="danger";
-        console.log("fefsf");
-        alert.isAlert =true;
-        this.alertService.setAlertModel(alert);
+        this.alertService.setAlertModel(true,'danger',"Add failed");
       }
     )
     

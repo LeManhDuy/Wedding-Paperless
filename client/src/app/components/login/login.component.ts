@@ -8,6 +8,7 @@ import { FormBuilder, FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { ContentService } from 'src/app/_services/content.service';
 import { Observable } from 'rxjs';
+import { AlertService } from 'src/app/_services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private contentService: ContentService
+    private contentService: ContentService,
+    private alertService : AlertService,
   ) {
     if (this.loginService.currentUserValue) {
       const payloadBase64 = this.loginService.currentUserValue.token?.split('.')[1];
@@ -85,7 +87,7 @@ export class LoginComponent implements OnInit {
       },
         (errorMsg: any) => {
           this.isLoading = false;
-          this.apiData = "*Credential Invalid"
+          this.alertService.setAlertModel(true,"danger", "*Credential Invalid")
         });
   }
 }
