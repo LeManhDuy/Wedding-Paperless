@@ -150,8 +150,8 @@ namespace WebApplication1.Repositories
                 // Check if email already exists and not yet confirmed
                 var currentPerson =
                     await _context.Persons.FirstOrDefaultAsync(p =>
-                        p.Email == authDto.Email && p.EmailConfirmed == false);
-                if (currentPerson != null)
+                        p.Email == authDto.Email);
+                if (!currentPerson.EmailConfirmed)
                 {
                     currentUser.UserName = authDto.UserName;
                     currentUser.PasswordHash = Encoding.UTF8.GetBytes(authDto.PassWord);
@@ -174,6 +174,10 @@ namespace WebApplication1.Repositories
                     await _emailRepository.SendEmail(message);
                     throw new Exception(
                         "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
+                }
+                else
+                {
+                    throw new Exception("Email is already registered");
                 }
 
                 // Hash the password and create new account
