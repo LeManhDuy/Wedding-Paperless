@@ -24,6 +24,8 @@ import { AccountComponent } from './components/account/account.component';
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 import { ShareComponent } from './components/share/share.component';
 import {ChartComponent} from "./components/chart/chart.component";
+import { FormNewTemplateComponent } from './components/form-new-template/form-new-template.component';
+
 
 const routes: Routes = [];
 
@@ -63,7 +65,12 @@ const routes: Routes = [];
     { path: 'chart', component: ChartComponent},
 
     { path: 'form', component: FormComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user',showHeader: true } },
+
+    { path: 'form-new-template', component: FormNewTemplateComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user',showHeader: true } },
+
+
     { path: '**', redirectTo: 'not-found' }
+
 
   ])],
   exports: [RouterModule]

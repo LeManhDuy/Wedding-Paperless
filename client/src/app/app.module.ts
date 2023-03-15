@@ -47,6 +47,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { StopPropagationDirectiveService } from 'src/assets/stop-propagation-directive.service';
 import { NgbModule,NgbAlertModule  } from '@ng-bootstrap/ng-bootstrap';
 import { AlertComponent } from './components/alert/alert.component';
+import { FormNewTemplateComponent } from './components/form-new-template/form-new-template.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { AlertComponent } from './components/alert/alert.component';
     RegisterFormComponent,
     StopPropagationDirectiveService,
     AlertComponent,
+    FormNewTemplateComponent,
   ],
   imports: [
     BrowserModule,

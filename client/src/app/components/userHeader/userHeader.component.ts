@@ -63,7 +63,7 @@ export class UserHeaderComponent implements OnInit {
   }
 
   showForm() {
-    this.router.navigate(['/form']);
+    this.router.navigate(['/form-new-template']);
   }
 
   logout() {

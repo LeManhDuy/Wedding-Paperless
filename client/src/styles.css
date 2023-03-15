@@ -45,3 +45,7 @@
     text-decoration: none;
     font-family: 'Playfair Display', serif;
 }
+
+html {
+    scroll-behavior: auto;
+}

@@ -441,6 +441,7 @@ img {
     z-index: 200;
     padding: 0px 80px;
     background-color: white;
+    top: 0px;
 }
 
 .navbar-container {}
