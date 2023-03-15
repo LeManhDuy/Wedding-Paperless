@@ -131,12 +131,8 @@
     height: 50px;
     width: 50px;
     border-radius: 50px;
-    margin-bottom: 2px;
 }
 
-.avatar-account {
-    line-height: 63px;
-}
 
 .avatar-account-child {
     display: none;
@@ -156,8 +152,12 @@
     transition: all 0.3s ease-in-out;
 }
 
-.avatar-account-child .account-item:hover .button-nav {
-    color: white;
+.avatar-account-child .account-item:hover .i-class{
+    color: white !important;
+}
+
+.i-class{
+    color: #000 !important;
 }
 
 .avatar-account-child:hover {
@@ -168,12 +168,34 @@
     color: black;
 }
 
+#account:hover .circle-external{
+    background-color: rgb(224 231 229); 
+}
+
+#account:hover .circle-internal{
+    background-color: white;
+}
+
+       
+.circle-external{
+     padding: 3px; border-radius: 50px; 
+}
+
+.circle-internal{
+    border-radius: 100px;
+    padding: 2px;
+}
+
+
+.avatar-account{
+    padding: 10px 0px;
+}
+
 .account-item {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
-    width: 150px;
     font-size: 16px;
 }
 
@@ -225,21 +247,24 @@
     transition: all 0.3s ease-in-out;
 }
 
+.button-nav{
+    padding: 0 10px;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+}
+
 .wedding-system {
     text-align: center;
     padding: 10px 15px;
 }
 
 .avatar-account img {
-    height: 37px;
-    width: 37px;
+    height: 41px;
+    width: 41px;
     border-radius: 50px;
-    margin-bottom: 2px;
 }
 
-.avatar-account {
-    line-height: 63px;
-}
 
 .avatar-account-child {
     border-radius: 5px;
@@ -256,7 +281,9 @@
 .avatar-account-child .account-item:hover {
     background-color: #378fbb;
     color: white;
+    cursor: pointer;
 }
+
 
 .avatar-account-child .account-item:hover .button-nav {
     color: white;
@@ -273,7 +300,7 @@
 .account-item {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 10px 10px;
 }
 
@@ -494,6 +521,7 @@ button {
 .logo {
     width: 25%;
     float: left;
+    font-weight: 600;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -544,6 +572,7 @@ button {
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 20px;
     padding-left: 20px;
+    font-weight: 600;
 }
 
 .nav-item {

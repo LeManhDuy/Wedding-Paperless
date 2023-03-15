@@ -69,27 +69,31 @@
                 <li id="account" class="nav-item">
                     <div class="avatar-account">
                         <app-loading [isLoading]="isLoadingAvartar"></app-loading>
-                        <div>
+                        <div class="circle-external">
+                          <div class="circle-internal">
                             <img *ngIf="!isLoadingAvartar" class="" src="{{avartar}}">
+                          </div>
+
                         </div>
                     </div>
                     <div class="avatar-account-child">
                         <div class="wedding-system">
                             <div style="font-size: 18px;
-              color: black;
+                     color: black;
               border-bottom: 2px solid #47758f;
-              font-weight: 600;">
+              font-weight: 600;
+                border-radius: 50px;">
                             </div>
                         </div>
-                        <div class="account-item">
-                            <i class="fas fa-user-edit"></i>
-                            <button class="button-nav" (click)="showEditAccount()">
+                        <div class="account-item" (click)="showEditAccount()">
+                            <i  class="fas fa-user-edit i-class"></i>
+                            <button class="button-nav">
               {{this.currentUser?.username}}
             </button>
                         </div>
-                        <div class="account-item">
-                            <i class="fas fa-sign-out-alt"></i>
-                            <button class="button-nav" (click)="logout()">Logout</button>
+                        <div class="account-item" (click)="logout()">
+                            <i class="fas fa-sign-out-alt i-class"></i>
+                            <button class="button-nav">Logout</button>
                         </div>
                     </div>
                 </li>
