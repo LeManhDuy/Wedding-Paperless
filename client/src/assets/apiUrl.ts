@@ -7,6 +7,6 @@ export const API_URL = {
     CONVERT_BASE64_TO_URL:() => `api/albumn/covertToUrl`,
     CONTET_IS_EXIST_BY_PERSON_ID:(personId: number) => `api/content/checkContentByPersonId/${personId}`,
     GET_CONTENT_BY_ID_ATTACH_ALBUMS:(contentId: number) => `api/content/getContentAttachAlbums/${contentId}`,
-    GET_CONTENT_BY_PERSON_ID_ATTACH_ALBUMS :(personId: number) =>`api/content/get-content-by-person/${personId}`,
+    GET_CONTENT_BY_PERSON_ID_ATTACH_ALBUMS :(personId: number) =>`api/content/getContentAttachAlbums/${personId}`,
     REGISTER_SONG_BY_PERSON_ID:(personId :number) =>`api/register-song/register-song-by-person-id/${personId}`
 };

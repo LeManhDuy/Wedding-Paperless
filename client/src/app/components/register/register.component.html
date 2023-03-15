@@ -20,7 +20,7 @@
     <br>
 
     <form #registerForm="ngForm" novalidate>
-        <div class="input-group mb-3" style="color: red;" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="input-group mb-3" style="color: red;"></div>
         <div class="input-group mb-3">
             <input class="form-control" placeholder="Full Name" type="text" id="fullname" name="fullname"
                 [(ngModel)]="registerUser.fullname" [required]="true" [minlength]="5">
