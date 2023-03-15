@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       },
         (errorMsg: any) => {
           this.isLoading = false;
-          this.alertService.setAlertModel(true,"danger", "*Credential Invalid")
+          this.alertService.setAlertModel("danger", "*Credential Invalid")
         });
   }
 }

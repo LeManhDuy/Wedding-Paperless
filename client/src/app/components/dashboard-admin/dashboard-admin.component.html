@@ -131,7 +131,7 @@
                 <div class="card border-left-primary shadow h-100 py-2" style="display: flex;
                 align-items: center;
                 justify-content: center;">
-                  <app-loading [isLoading]="isAccountLoading"></app-loading>
+                  <app-loading [isLoading]="isAccountLoading" [color] ="'var(--lightGreen_color)'"></app-loading>
                   <div *ngIf ="!isAccountLoading" class="card-body">
                     <div class="row no-gutters align-items-center" *ngIf="!isAccountLoading">
                       <div class="col mr-2">
@@ -151,7 +151,7 @@
                 <div class="card border-left-warning shadow h-100 py-2" style="display: flex;
                 align-items: center;
                 justify-content: center;">
-                  <app-loading [isLoading]="isContentLoading"></app-loading>
+                  <app-loading [isLoading]="isContentLoading" [color] ="'var(--lightGreen_color)'"></app-loading>
                   <div *ngIf ="!isContentLoading" class="card-body">
                     <div class="row no-gutters align-items-center" *ngIf="!isContentLoading">
                       <div class="col mr-2">

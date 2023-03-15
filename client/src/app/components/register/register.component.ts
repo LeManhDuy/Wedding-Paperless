@@ -26,19 +26,19 @@ export class RegisterComponent implements OnInit {
   register() {
     const aler : AlertModel ={};
     if (this.registerUser.password !== this.registerUser.confirmpassword) {
-      this.alertService.setAlertModel(true,"danger","Password don't match!");
+      this.alertService.setAlertModel("danger","Password don't match!");
       return;
     }
     this.isLoading = true;
     this.registerService.register(this.registerUser).subscribe(
       response => {
         this.isLoading = false;
-          this.alertService.setAlertModel(true,"success","Account successfully created, please comfirm your email");
+          this.alertService.setAlertModel("success","Account successfully created, please comfirm your email");
           this.router.navigate(['login']);
         
       },
       (error: HttpErrorResponse) => {
-        this.alertService.setAlertModel(true,"danger", "Some thing went wrong");
+        this.alertService.setAlertModel("danger", "Some thing went wrong");
         this.isLoading = false;
       }
     )
