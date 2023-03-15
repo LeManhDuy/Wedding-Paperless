@@ -13,12 +13,14 @@ import { Time } from 'highcharts';
   styleUrls: ['./form-new-template.component.css']
 })
 export class FormNewTemplateComponent {
+
   isLoading : boolean = false;
   contentRequest: Content = new Content();
   public hostControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   public datetimeControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   public addressControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
   public storyControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
+  imageUrl : String = "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80";
 
   constructor
   (

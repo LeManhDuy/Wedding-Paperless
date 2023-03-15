@@ -43,7 +43,8 @@
     margin: 0;
     list-style: none;
     text-decoration: none;
-    font-family: 'Playfair Display', serif;
+    font-family: "SF-Pro", serif;
+    src: local("SF-Pro"), url(./assets/fonts/SF-Pro.ttf) format("truetype");
 }
 
 html {

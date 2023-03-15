@@ -1,86 +1,80 @@
 <div class="create_Form_Content">
-        <form  #contentForm="ngForm" class="create_Form_Container" action="" method="post">
-            <div class="host_Name">
-                <h4 class="title">
-                    <input placeholder="Oliver & Sarrah" [(ngModel)]="contentRequest.hostName" type="text" name="host_Name" required="true">
-                        <div class="error" *ngIf="!contentRequest.hostName">
-                          host name is required.
-                        </div>
-                </h4>
-                's wedding ceremony
-            </div>
-            <div class="time_And_Place">
-                <div class="time">
-                    <input type="datetime-local" name="timeInput" [(ngModel)]="contentRequest.date" id="timeInput" required>
-                        <div class="error" *ngIf="!contentRequest.date">
-                          date time is required.
-                        </div>
+    <form #contentForm="ngForm" class="create_Form_Container" action="" method="post">
+        <div class="host_Name">
+            <h4 class="title">
+                <input placeholder="Oliver & Sarrah" [(ngModel)]="contentRequest.hostName" type="text" name="host_Name" required="true">
+                <div class="error" *ngIf="!contentRequest.hostName">
+                    host name is required.
                 </div>
-                <div class="place">
-                    <input placeholder="ForU, 23 2/9 street, Danang" [(ngModel)]="contentRequest.address" type="text" name="place" required>
-                        <div class="error" *ngIf="!contentRequest.address">
-                          address is required.
-                        </div>
+            </h4>
+            's wedding ceremony
+        </div>
+        <div class="time_And_Place">
+            <div class="time">
+                <input type="datetime-local" name="timeInput" [(ngModel)]="contentRequest.date" id="timeInput" required>
+                <div class="error" *ngIf="!contentRequest.date">
+                    date time is required.
                 </div>
             </div>
-            <app-image-input [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '1'}" />
-            <div class="container-content our_Stories">
-                <h4 class="title">
-                    <p name="our_Stories">Our Stories</p>
-                </h4>
-                <div class="text-area">
-                    <textarea name="our_Stories_Text" [(ngModel)]="contentRequest.story" id="" cols="30" rows="6" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
+            <div class="place">
+                <input placeholder="ForU, 23 2/9 street, Danang" [(ngModel)]="contentRequest.address" type="text" name="place" required>
+                <div class="error" *ngIf="!contentRequest.address">
+                    address is required.
+                </div>
+            </div>
+        </div>
+        <app-image-input [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '1'}" />
+        <div class="container-content our_Stories">
+            <h4 class="title">
+                <p name="our_Stories">Our Stories</p>
+            </h4>
+            <div class="text-area">
+                <textarea name="our_Stories_Text" [(ngModel)]="contentRequest.story" id="" cols="30" rows="6" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
                     I implement user interface design and solve user problems with HTML, CSS AND Javascript.
                                     "></textarea>
-                </div>
-                    <div class="error" *ngIf="!contentRequest.story">
-                        story is required.
-                    </div>
-                <app-image-input [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '2'}" />
             </div>
-            <!-- <div class="container-content schedule">
-                <h4 class="title">
-                    <p name="schedule">Schedule</p>
-                </h4>
-                <div class="time_Map">
-                    <ul class="time_Stamp">
-                        <li>
-                            <div class="time"><input placeholder="05:30 PM" type="time"></div>
-                            <p><input placeholder="Wellcome" type="text"></p>
-                        </li>
-                        <li>
-                            <div class="time"><input placeholder="06:00 PM" type="time"></div>
-                            <p><input placeholder="Ceremony" type="text"></p>
-                        </li>
-                        <li>
-                            <div class="time"><input placeholder="06:30 PM" type="time"></div>
-                            <p><input placeholder="Photo shoot" type="text"></p>
-                        </li>
-                        <li>
-                            <div class="time"><input placeholder="07:00 PM" type="time"></div>
-                            <p><input placeholder="Toast and dance" type="text"></p>
-                        </li>
-                        <li>
-                            <div class="time"><input placeholder="07:30 PM" type="time"></div>
-                            <p><input placeholder="Feast" type="text"></p>
-                        </li>
-                    </ul>
-                </div>
-                <input placeholder="Wanna sing a song ?" type="text">
+            <div class="error" *ngIf="!contentRequest.story">
+                story is required.
+            </div>
+            <app-image-input [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '2'}" />
+        </div>
 
-            </div> -->
-            <app-image-input [imageInputModel]="{title: 'Restaurant Map',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '3'}" />
-            <div class="container-content see_You">
-                <app-image-input [imageInputModel]="{title:'Our Memory' ,instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '4'}" />
+        <app-image-input [imageInputModel]="{title: 'Restaurant Map',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '3'}" />
+        <div class="container-content see_You">
+            <app-image-input [imageInputModel]="{title:'Our Memory' ,instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '4'}" />
             <app-image-input [imageInputModel]="{title: 'See you at the party',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '5'}" />
 
-                <div class="container-content hope_Join">
-                    <p class="hope_Join_Content" name="hope_Join_Content">Hope you join us</p>
-                    <p class="hope_Join_Sign" name="hope_Join_Sign">{{contentRequest.hostName}}</p>
-                </div>
+            <div class="container-content hope_Join">
+                <p class="hope_Join_Content" name="hope_Join_Content">Hope you join us</p>
+                <p class="hope_Join_Sign" name="hope_Join_Sign">{{contentRequest.hostName}}</p>
             </div>
-            <button  type="button" (click) = "saveContent()" [disabled]="contentForm.invalid || isLoading" id="saveButton">
+        </div>
+        <button type="button" (click)="saveContent()" [disabled]="contentForm.invalid || isLoading" id="saveButton">
               <app-loading [text] = "'Save'" [isLoading] = "isLoading"></app-loading>
             </button>
-        </form>
+    </form>
+</div>
+
+
+<div class="u-large-text u-text u-text-variant u-text-2">
+    <input placeholder="Oliver & Sarrah" [(ngModel)]="contentRequest.hostName" type="text" name="host_Name" required="true">
+    <!-- <div class="error" *ngIf="!contentRequest.hostName">
+  host name is required.
+</div> -->
+    <div class="error" *ngIf="!contentRequest.date">
+        date time is required.
+    </div>
+    <label for="timeInput" class="display-date">
+
+  <input type="datetime-local" name="timeInput" [(ngModel)]="contentRequest.date" id="timeInput" required>
+  <div id="day">{{contentRequest.date | date}}</div>
+  <div class="display-time">
+    {{contentRequest.date | date:'shortTime'}}</div>
+</label>
+    <div class="place">
+        <input placeholder="ForU, 23 2/9 street, Danang" [(ngModel)]="contentRequest.address" type="text" name="place" required>
+        <div class="error" *ngIf="!contentRequest.address">
+            address is required.
+        </div>
+    </div>
 </div>
