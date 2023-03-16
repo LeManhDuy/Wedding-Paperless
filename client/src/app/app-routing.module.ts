@@ -24,6 +24,10 @@ import { AccountComponent } from './components/account/account.component';
 import { EditAccountComponent } from './components/account/edit-account/edit-account.component';
 import { ShareComponent } from './components/share/share.component';
 import {ChartComponent} from "./components/chart/chart.component";
+import { FormNewTemplateComponent } from './components/form-new-template/form-new-template.component';
+import { NewInvitationComponent } from './components/new-invitation/new-invitation.component';
+import { NewShareComponent } from './components/new-share/new-share.component';
+
 
 const routes: Routes = [];
 
@@ -44,11 +48,13 @@ const routes: Routes = [];
 
     // { path: 'register-song', loadComponent: () => import('./components/register-song/register-song.component').then(c => c.RegisterSongComponent) },
 
-    { path: 'register-song', component: RegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
+    { path: 'register-song', component: RegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'user',showHeader: true  } },
     { path: 'register-song/edit/:id', component: EditRegisterSongComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
 
     { path: 'invitation/:id', component: InvitationComponent,  data: {showHeader: true  }  },
+    { path: 'new-invitation/:id', component: NewInvitationComponent,  data: {showHeader: true  }  },
     { path: 'share-invitation/:id', component: ShareComponent },
+    { path: 'new-share-invitation/:id', component: NewShareComponent },
 
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
     { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },
@@ -63,7 +69,12 @@ const routes: Routes = [];
     { path: 'chart', component: ChartComponent},
 
     { path: 'form', component: FormComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user',showHeader: true } },
+
+    { path: 'form-new-template', component: FormNewTemplateComponent, canActivate: [AuthGuard, IsExistContentGuard], data: { requiredRole: 'user',showHeader: true } },
+
+
     { path: '**', redirectTo: 'not-found' }
+
 
   ])],
   exports: [RouterModule]

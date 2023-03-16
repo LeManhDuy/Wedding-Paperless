@@ -42,29 +42,45 @@ namespace WebApplication1.Repositories
                 }).ToListAsync();
         }
 
+        public async Task<List<RegisterSongDto>> GetSongContentAsync(int id)
+        {
+            return await _context.RegisterSongs
+                .Where(s => s.Content.Id == id)
+                .OrderBy(s => s.Id)
+                .Include(s => s.Content)
+                .ThenInclude(c => c.Person)
+                .Select(s => new RegisterSongDto
+                {
+                    Id = s.Id,
+                    FullName = s.FullName,
+                    SongName = s.SongName,
+                    LinkBeat = s.LinkBeat,
+                }).ToListAsync();
+        }
+
         public async Task<DateTimeDto> CountContentsByDateTime()
         {
             var contents = await _context.Contents.ToListAsync();
-    
+
             var contentCountsByYear = contents
                 .GroupBy(c => c.Date.Year)
                 .Select(g => new { Year = g.Key.ToString(), Count = g.Count() })
                 .OrderBy(x => x.Year)
                 .ToDictionary(x => x.Year, x => x.Count);
-    
+
             var contentCountsByMonth = contents
                 .GroupBy(c => new { c.Date.Year, c.Date.Month })
                 .Select(g => new { Year = g.Key.Year.ToString(), Month = g.Key.Month.ToString(), Count = g.Count() })
                 .OrderBy(x => x.Year)
                 .ThenBy(x => x.Month)
                 .ToDictionary(x => x.Year + "-" + x.Month, x => x.Count);
-    
+
             var contentCountsByDay = contents
                 .GroupBy(c => c.Date.Date)
                 .Select(g => new { Day = g.Key.ToString("yyyy-MM-dd"), Count = g.Count() })
                 .OrderBy(x => x.Day)
                 .ToDictionary(x => x.Day, x => x.Count);
-    
+
             return new DateTimeDto
             {
                 NumbByDays = contentCountsByDay,
@@ -73,7 +89,7 @@ namespace WebApplication1.Repositories
             };
         }
 
-        
+
         // public async Task<DateTimeDto> CountContentsByDateTime()
         // {
         //     var contents = await _context.Contents.ToListAsync();
@@ -129,7 +145,7 @@ namespace WebApplication1.Repositories
 
         public async Task<Content> GetContentByIdPersonAsync(int personId)
         {
-            return await _context.Contents.Where( p => p.PersonId == personId).FirstOrDefaultAsync();
+            return await _context.Contents.Where(p => p.PersonId == personId).FirstOrDefaultAsync();
         }
 
         public async Task<Content> GetContentByIdPersonWithAlbumsAsync(int personId)

@@ -7,6 +7,7 @@ import { API_URL } from 'src/assets/apiUrl';
 import { LoginService } from './login.service';
 import { AuthService } from './auth.service';
 import {Albumn} from "../models/albumn";
+import { RegisterSong } from '../models/song';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,9 @@ export class ContentService {
   }
   getAlbumnsOfContent(id: string): Observable<Albumn[]> {
     return this.http.get<Albumn[]>(this.baseUrl + id + "/albumn");
+  }
+  getSongsOfContent(id: string): Observable<RegisterSong[]> {
+    return this.http.get<RegisterSong[]>(this.baseUrl + id + "/song");
   }
   getContent(contentId: string): Observable<Content> {
     return this.http.get<Content>(this.baseUrl + contentId);

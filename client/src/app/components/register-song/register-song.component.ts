@@ -6,6 +6,8 @@ import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {ContentService} from "../../_services/content.service";
 import {FormsModule} from "@angular/forms";
 import {CommonModule, NgFor} from "@angular/common";
+import { AuthService } from 'src/app/_services/auth.service';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-register-song',
@@ -25,23 +27,29 @@ export class RegisterSongComponent implements OnInit{
   id?:string
   constructor(
     private registerSongService: RegisterSongService,
+    private contentSerivce: ContentService,
     private router: Router,
-    private contentService: ContentService
+    private accountService: AccountService,
+    private auth: AuthService
   ) {
   }
-
+  idContent?: string;
   ngOnInit(): void {
-    this.registerSongService.getAllSongs().subscribe({
+    this.contentSerivce.getAllContents().subscribe({
       next: (response) => {
-        this.songs = response;
-      },
-      error: (error) => {
-        console.log(error )
-      }
-    })
-
-    this.contentService.getAllContents().subscribe({
-      next: (response) => {
+        response.forEach(item => {
+          if (item.personId == this.auth.getTokenId()) {
+            this.idContent = item.id;
+            this.contentSerivce.getSongsOfContent(item.id!).subscribe({
+              next: (response) => {
+                this.songs = response;
+              },
+              error: (error) => {
+                console.log(error )
+              }
+            })
+          }
+        })
         this.song.contentId = response[0].id
         this.contents = response
       },
@@ -58,17 +66,11 @@ export class RegisterSongComponent implements OnInit{
     this.isEditRegisterSongComponentVisible = true;
   }
 
-  onContentSelected(value: any) {
-    if (this.song) {
-      this.song.contentId = value.target.value;
-    }
-  }
-
   addSong() {
     if (this.song?.contentId) {
-      this.registerSongService.addSong(this.song.contentId, this.song).subscribe({
+      this.registerSongService.addSong(this.idContent!, this.song).subscribe({
         next: (song) => {
-          this.router.navigate(['dashboard-admin']);
+          location.reload()
         }
       })
     }

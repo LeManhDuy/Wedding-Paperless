@@ -133,7 +133,6 @@
     border-radius: 50px;
 }
 
-
 .avatar-account-child {
     display: none;
     position: absolute;
@@ -152,11 +151,11 @@
     transition: all 0.3s ease-in-out;
 }
 
-.avatar-account-child .account-item:hover .i-class{
+.avatar-account-child .account-item:hover .i-class {
     color: white !important;
 }
 
-.i-class{
+.i-class {
     color: #000 !important;
 }
 
@@ -168,26 +167,25 @@
     color: black;
 }
 
-#account:hover .circle-external{
-    background-color: rgb(224 231 229); 
+#account:hover .circle-external {
+    background-color: rgb(224 231 229);
 }
 
-#account:hover .circle-internal{
+#account:hover .circle-internal {
     background-color: white;
 }
 
-       
-.circle-external{
-     padding: 3px; border-radius: 50px; 
+.circle-external {
+    padding: 3px;
+    border-radius: 50px;
 }
 
-.circle-internal{
+.circle-internal {
     border-radius: 100px;
     padding: 2px;
 }
 
-
-.avatar-account{
+.avatar-account {
     padding: 10px 0px;
 }
 
@@ -247,7 +245,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.button-nav{
+.button-nav {
     padding: 0 10px;
     text-align: center;
     font-weight: 600;
@@ -264,7 +262,6 @@
     width: 41px;
     border-radius: 50px;
 }
-
 
 .avatar-account-child {
     border-radius: 5px;
@@ -283,7 +280,6 @@
     color: white;
     cursor: pointer;
 }
-
 
 .avatar-account-child .account-item:hover .button-nav {
     color: white;
@@ -468,6 +464,8 @@ img {
     z-index: 200;
     padding: 0px 80px;
     background-color: white;
+    top: 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .navbar-container {}
@@ -577,6 +575,7 @@ button {
 
 .nav-item {
     position: relative;
+    width: max-content;
 }
 
 .navbar-nav.mr-auto ul {

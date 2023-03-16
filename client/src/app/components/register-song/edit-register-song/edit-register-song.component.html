@@ -1,47 +1,47 @@
 <!-- (ngSubmit)="addSong()" -->
-<form #form="ngForm" >
-  <div class="container">
-    <div class="row">
-      <div class="col order-first">
+<form #form="ngForm">
+    <div class="container">
+        <div class="row">
+            <div class="col order-first">
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Song</th>
-              <th scope="col">Singer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <td>
-              <a target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Song</th>
+                            <th scope="col">Singer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td>
+                            <a target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}
               </a>
-            </td>
-            <td>{{ song.fullName }}</td>
-          </tbody>
-        </table>
-      </div>
-      <div class="col">
-        <div>
-          <a>Singer: </a>
-          <input type="text" class="form-control" id="fullname" [(ngModel)]="song.fullName" name="fullname">
-        </div>
-        <div>
-          <a>Song: </a>
-          <input type="text" class="form-control" id="songname" [(ngModel)]="song.songName" name="songname">
-        </div>
-        <div>
-          <a>Link Beat: </a>
-          <input type="text" class="form-control" id="linkbeat" name="linkbeat" [(ngModel)]="song.linkBeat">
-        </div>
-        <br>
-        <button class="btn btn-success btn-sm float-right" type="submit" (click)="updateRegisterSong(song.id)">
-          Update
-        </button>
+                        </td>
+                        <td>{{ song.fullName }}</td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div class="col" style="display: grid;">
+                    <div class="input-style">
+                        <input placeholder="Singer's Name" class="input" type="text" id="fullname" [(ngModel)]="song.fullName" name="fullname">
+                    </div>
+                    <div class="input-style">
+                        <input placeholder="Song's Name" class="input" type="text" id="songname" [(ngModel)]="song.songName" name="songname">
+                    </div>
+                    <div class="input-style">
+                        <input placeholder="Link Beat" class="input" type="text" id="linkbeat" [(ngModel)]="song.linkBeat" name="linkbeat">
+                    </div>
+                </div>
 
-        <button class="btn btn-warning btn-sm float-right" type="submit" (click)="deleteRegisterSong(song.id)">
-          Delete
-        </button>
-      </div>
+                <br>
+
+                <div style="display: flex; align-items:center; justify-content: start; text-align: center;">
+                    <div class="buttons">
+                        <button class="btn"><span></span><p data-start="good luck!" data-text="Confirm" data-title="Update" type="submit" (click)="updateRegisterSong(song.id)"></p></button>
+                    </div>
+                    <button class="noselect" type="submit" (click)="deleteRegisterSong(song.id)"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </form>

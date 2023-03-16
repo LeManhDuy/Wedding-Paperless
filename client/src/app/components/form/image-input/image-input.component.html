@@ -1,18 +1,20 @@
 <div class="container-content restaurant_Map">
-    <h4 class="title" *ngIf ="imageInputModel.title">
+    <h4 class="title" *ngIf="imageInputModel.title">
         <p name="restaurant_Map">{{imageInputModel.title}}</p>
     </h4>
-    <div class="container-content image_Center"  *ngIf ="imageInputModel.row !== '2' && imageInputModel.row !== '4'" app-create-form>
-        <div *ngIf ="isLoading" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
-            <app-loading [isLoading] ="isLoading" [color] ="'red'"></app-loading>
+    <div class="container-content image_Center" app-create-form>
+        <div *ngIf="isLoading" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
+            <app-loading [isLoading]="isLoading" [color]="'red'"></app-loading>
         </div>
-            <img *ngIf ="!isLoading" src="{{imageUrl}}" alt="">
-    </div>
-    <div class="container-content image_Center" *ngIf ="imageInputModel.row === '2'|| imageInputModel.row === '4'" app-create-form>
-        <ng-image-slider [images]="imageObjectOurStory" ></ng-image-slider>
-    </div>
-    <div class="image_Drop">
-            <input type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event)" required >
-            <label (click)="fileDropRef.click()" >Choose photo</label>
+        <div *ngIf="imageInputModel.row !== '2' && imageInputModel.row !== '4'">
+            <img *ngIf="!isLoading" src="{{imageUrl}}" alt="">
+        </div>
+        <div class="container-content image_Center" *ngIf="imageInputModel.row === '2'|| imageInputModel.row === '4'" app-create-form>
+            <ng-image-slider [images]="imageObjectOurStory"></ng-image-slider>
+        </div>
+        <div class="image_Drop">
+            <input type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event)" required>
+            <label (click)="fileDropRef.click()">Choose photo</label>
+        </div>
     </div>
 </div>

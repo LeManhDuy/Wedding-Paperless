@@ -59,11 +59,15 @@ export class UserHeaderComponent implements OnInit {
   }
 
   showInvitation() {
-    this.router.navigate(['/invitation/'+this.auth.getTokenId()]);
+    this.router.navigate(['/new-invitation/'+this.auth.getTokenId()]);
   }
 
   showForm() {
-    this.router.navigate(['/form']);
+    this.router.navigate(['/form-new-template']);
+  }
+
+  showRegisterSong() {
+    this.router.navigate(['/register-song']);
   }
 
   logout() {
