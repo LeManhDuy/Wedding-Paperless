@@ -33,6 +33,8 @@ import { EditAccountComponent } from './components/account/edit-account/edit-acc
 import { EditAlbumnComponent } from './components/albumn/edit-albumn/edit-albumn.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     CommonModule,
     RouterModule,
     NgImageSliderModule,
+    QRCodeModule,
+    ColorPickerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

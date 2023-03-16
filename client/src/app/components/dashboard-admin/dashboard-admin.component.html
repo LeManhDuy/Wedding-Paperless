@@ -12,21 +12,21 @@
   </div>
   <div class="landscape">
     <div class="card">
-      <div class="item item--1">
+      <div class="item item--1" (click)="showComponent('account')">
         <svg class="fa-solid fa-user"  height="24" width="24" viewBox="0 0 24 24" ></svg>
-        <span class="quantity"> 90+ </span>
+        <span class="quantity"  > {{ quantityAccount }} </span>
       </div>
-      <div class="item item--2">
-        <svg class="fa-solid fa-print"  height="24" width="24" viewBox="0 0 24 24" ></svg>
-        <span class="quantity"> 70+ </span>
-      </div>
-      <div class="item item--3">
+      <div class="item item--2" (click)="showComponent('albumn')" >
         <svg class="fa-regular fa-image"  height="24" width="24" viewBox="0 0 24 24" ></svg>
-        <span class="quantity"> 150+ </span>
+        <span class="quantity" > {{ quantityAlbumn }} </span>
       </div>
-      <div class="item item--4">
+      <div class="item item--3"  (click)="showComponent('content')">
+        <svg class="fa-solid fa-print"  height="24" width="24" viewBox="0 0 24 24" ></svg>
+        <span class="quantity" > {{ quantityContent }} </span>
+      </div>
+      <div class="item item--4" (click)="showComponent('register')">
         <svg class="fa-solid fa-music"  height="24" width="24" viewBox="0 0 24 24" ></svg>
-        <span class="quantity"> 30+ </span>
+        <span class="quantity"  > {{ quantityRegisterSong }} </span>
       </div>
     </div>
     <div class="nav-admin">
