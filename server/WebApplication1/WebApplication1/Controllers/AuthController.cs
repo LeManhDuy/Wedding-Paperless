@@ -124,6 +124,11 @@ namespace WebApplication1.Controllers
             }
             catch (Exception e)
             {
+                if (e.Message.Trim() ==
+                    "Failed to register user. Email is already registered but not yet confirmed. Please check your email for the confirmation link.")
+                {
+                    return Ok(authDto);
+                }
                 return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
             }
         }
