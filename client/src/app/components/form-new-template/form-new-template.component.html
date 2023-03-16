@@ -32,7 +32,7 @@
 
 
                             <div class="place">
-                                <input id="input-img-main" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="assignImageBg($event)" required>
+                                <input id="input-img-main" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,1)" required>
                             </div>
                         </div>
                     </div>
@@ -46,79 +46,92 @@
             </div>
 
         </section>
-        <!-- <section class="u-clearfix u-section-2" id="sec-0cbe">
-            <div class="u-palette-1-light-2 u-shape u-shape-rectangle u-shape-1"></div>
-            <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-2"></div>
-            <div class="u-container-style u-group u-image u-image-tiles u-image-1">
-                <div class="u-container-layout u-container-layout-1">
-                </div>
-            </div>
-            <app-image-input class="u-image u-image-default u-image-2" [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '2'}" />
-            <div class="u-align-right u-container-style u-group u-group-2">
-                <div class="u-container-layout u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-2">
-                    <h1 class="u-text u-text-1">Our <b>Stories</b>
-                        <br>
-                    </h1>
-                    <p class="u-large-text u-text u-text-variant u-text-2">
-                    </p>
-                    <textarea name="our_Stories_Text" [(ngModel)]="contentRequest.story" id="" cols="30" rows="6" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
-                I implement user interface design and solve user problems with HTML, CSS AND Javascript.
-                                "></textarea>
-                </div>
-            </div>
-        </section> -->
+
         <section class="u-clearfix u-palette-1-light-2 u-section-6" id="sec-a07a">
-
-            <div class="u-clearfix u-sheet u-valign-middle u-sheet-1" style="margin-top:40px">
+            <div class="u-clearfix u-sheet u-valign-middle u-sheet-1 ">
                 <h1 class="u-text u-text-1">Our <b>Stories</b></h1>
-                <textarea style="background-color: rgba(255, 255, 255, 0.5);" name="our_Stories_Text" [(ngModel)]="contentRequest.story" id="" cols="30" rows="6" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
-              I implement user interface design and solve user problems with HTML, CSS AND Javascript.
-                              "></textarea>
-            </div>
-            <div style="margin-top:40px">
+                <textarea name="our_Stories_Text" [(ngModel)]="contentRequest.story" id="" cols="30" rows="6" placeholder="I implement user interface design and solve user problems with HTML, CSS AND Javascript. I have 2 years of making products that solve user problems and implementing responsive website.
+                I implement user interface design and solve user problems with HTML, CSS AND Javascript."></textarea>
 
-                <app-image-input id="input-image-our-story" style="margin-top: 100px;" [imageInputModel]="{instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '2'}" (imageData)="onImageData($event)"></app-image-input>
+
+                <div class="u-border-10 u-border-white u-image u-image-circle u-image-1" style="background-image: url('{{this.imageObjectOurStory[0].image!}}');">
+                    <input id="input-image-our-story-1" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                    <label for="input-image-our-story-1"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label>
+                </div>
+
+                <div class="u-image u-image-circle u-image-2 " style="background-image: url('{{this.imageObjectOurStory[1].image!}}');">
+                    <input id="input-image-our-story-2" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                    <label for="input-image-our-story-2"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label></div>
+                <div class="u-border-20 u-border-white u-image u-image-circle u-image-3 " style="background-image: url('{{this.imageObjectOurStory[2].image!}}');" data-image-width="700 " data-image-height="1049 ">
+                    <input id="input-image-our-story-3" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                    <label for="input-image-our-story-3"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label></div>
+                <div class="u-shape u-shape-svg u-text-palette-1-base u-shape-1 ">
+                    <svg class="u-svg-link " preserveAspectRatio="none " viewBox="0 0 160 160 " style=" "><use xmlns:xlink="http://www.w3.org/1999/xlink " xlink:href="#svg-1186 "></use></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg " xmlns:xlink="http://www.w3.org/1999/xlink " version="1.1 " xml:space="preserve " class="u-svg-content " viewBox="0 0 160 160 " x="0px " y="0px " id="svg-1186 " style="enable-background:new 0 0
+                160 160; "><path d="M80,30c27.6,0,50,22.4,50,50s-22.4,50-50,50s-50-22.4-50-50S52.4,30,80,30 M80,0C35.8,0,0,35.8,0,80s35.8,80,80,80 s80-35.8,80-80S124.2,0,80,0L80,0z "></path></svg>
+                </div>
+                <div class="u-shape u-shape-svg u-text-palette-1-base u-shape-2 ">
+                    <svg class="u-svg-link " preserveAspectRatio="none " viewBox="0 0 160 160 " style=" "><use xmlns:xlink="http://www.w3.org/1999/xlink " xlink:href="#svg-525f "></use></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg " xmlns:xlink="http://www.w3.org/1999/xlink " version="1.1 " xml:space="preserve " class="u-svg-content " viewBox="0 0 160 160 " x="0px " y="0px " id="svg-525f " style="enable-background:new 0 0
+                160 160; "><path d="M80,30c27.6,0,50,22.4,50,50s-22.4,50-50,50s-50-22.4-50-50S52.4,30,80,30 M80,0C35.8,0,0,35.8,0,80s35.8,80,80,80 s80-35.8,80-80S124.2,0,80,0L80,0z "></path></svg>
+                </div>
             </div>
         </section>
-
-        <!-- <section class="u-clearfix u-section-4" id="carousel_4d37">
-            <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
-                <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1">
+        <section class="u-align-center u-clearfix u-section-5" id="carousel_4e04" >
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
                     <div class="u-gutter-0 u-layout">
-                        <div class="u-size-30">
-                            <app-image-input [imageInputModel]="{title: 'Restaurant Map',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '3'}" />
+                        <div class="u-layout-row">
+                            <div class="u-size-30 u-size-60-md">
+                                <div class="u-layout-col">
+                                    <div class="u-size-30">
+                                        <div class="u-layout-row">
+                                            <div class="u-align-left u-container-style u-layout-cell u-size-60 u-layout-cell-1">
+                                                <div class="u-container-layout u-container-layout-1">
+                                                    <h1 class="u-text u-text-1" style="display: flex; justify-content: center; margin-bottom:30px; font-size: 55px;"><b>Restaurant Map</b></h1>
+                                                    <blockquote class="u-text u-text-2">{{contentRequest.address}}</blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-size-30 u-size-60-md">
+                                <div class="u-layout-col">
+                                    <div style="background-image: url({{imageUrlMain}}); width:  500px;" class="u-container-style u-image u-layout-cell u-right-cell u-size-60 u-image-1" >
+                                        <div class="u-container-layout u-container-layout-3" >
+                                            
+                                        </div>
+                                        <input id="input-image-restaurant-map" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,3)"  required>
+                                            <label for="input-image-restaurant-map"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section> -->
-
-        <section class="u-clearfix u-section-4" id="carousel_4d37">
-            <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
-                <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1" style="display: flex; justify-content: center;">
-                    <div class="u-gutter-0 u-layout">
-                        <app-image-input [imageInputModel]="{title: 'Restaurant Map',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '3'}" />
-                    </div>
-                </div>
-            </div>
         </section>
 
-        <section class="u-clearfix u-section-4" id="carou sel_4d37">
+        <section class="u-clearfix u-section-4" id="carousel_4d37">
             <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
                 <div class="u-clearfix u-expanded-width u-gutter-30 u-layout-wrap u-layout-wrap-1">
                     <div class="u-gutter-0 u-layout">
                         <div class="u-layout-row">
                             <div class="u-size-30">
                                 <div class="u-layout-col">
-                                    <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-size-30 u-image-1">
-                                        <div class="u-container-layout u-container-layout-1"></div>
+                                    <div class="u-align-left u-container-style u-image u-layout-cell u-left-cell u-size-30 u-image-1" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba');">
+                                        <div class="u-container-layout u-container-layout-1">
+                                            <input id="input-image-our-memory-1" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                    <label for="input-image-our-story-1"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label>
+                                        </div>
                                     </div>
                                     <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-2">
                                         <div class="u-container-layout u-valign-middle u-container-layout-2">
                                             <h2 class="u-text u-text-1">Our <span style="font-weight: 700;">Memory</span>
                                             </h2>
-                                            <p class="u-text u-text-2">Weddings are one of the most memorable and joyous events in a person's life. It's a celebration of love, commitment, and the beginning of a new chapter in a couple's journey. The memories created on this day
-                                                are cherished for a lifetime by the couple and their loved ones.</p>
+                                            <p class="u-text u-text-2">Weddings are one of the most memorable and joyous events in a person's life. It's a celebration of love, commitment, and the beginning of a new chapter in a couple's journey. The memories created on this day are
+                                                cherished for a lifetime by the couple and their loved ones.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -127,10 +140,15 @@
                                 <div class="u-layout-row">
                                     <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-3">
                                         <div class="u-container-layout u-valign-middle-sm u-valign-middle-xs u-container-layout-3">
-                                            <div class="u-align-left u-palette-1-light-2 u-shape u-shape-1"></div>
-                                            <p class="u-text u-text-4">One of the most special memories of a wedding day is the moment the couple sees each other for the first time. This could be during the traditional first look or as the bride walks down the aisle. The look of
-                                                love and awe on the couple's faces as they see each other is a moment that is etched in their minds forever.</p>
-                                            <app-image-input [imageInputModel]="{title:'Our Memory' ,instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '4'}" />
+                                            <div class="u-align-left u-palette-1-light-2 u-shape u-shape-1">
+                                                
+                                            </div>
+                                            <p class="u-text u-text-4">One of the most special memories of a wedding day is the moment the couple sees each other for the first time. This could be during the traditional first look or as the bride walks down the aisle. The look of love
+                                                and awe on the couple's faces as they see each other is a moment that is etched in their minds forever.</p>
+                                            <div style="background-image: url('https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba');"  class="u-align-left u-image u-image-2">
+                                                <input id="input-image-our-memory-2" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                                                <label for="input-image-our-memory-2"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -141,19 +159,26 @@
             </div>
         </section>
 
+
         <section class="u-clearfix u-section-2" id="sec-0cbe">
             <div class="u-palette-1-light-2 u-shape u-shape-rectangle u-shape-1"></div>
             <div class="u-palette-1-base u-shape u-shape-rectangle u-shape-2"></div>
             <div class="u-container-style u-group u-image u-image-tiles u-image-1">
                 <div class="u-container-layout u-container-layout-1"></div>
             </div>
+            <div style="background-image: url('https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba');" alt="" class="u-image u-image-default u-image-2">
+                <input id="input-image-see-you" style="display: none;" type="file" accept=".png, .jpg, .jpeg" #fileDropRef class="fileDropRef" (change)="onFileSelected($event,2)"  required>
+                                                <label for="input-image-see-you"><i class="fa-solid fa-pen-to-square" style="font-size:48px; color: white;"></i></label>
+            </div>
             <div class="u-align-right u-container-style u-group u-group-2">
                 <div class="u-container-layout u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-2">
-                    <app-image-input [imageInputModel]="{title: 'See you at the party',instructionTitle: 'Drag and drop photo here', buttonName: 'Browse for file', row: '5'}" />
-                    <p class="u-large-text u-text u-text-variant u-text-2">We are eagerly looking forward to the opportunity to see you. </p>
+                    <h1 class="u-text u-text-1">See you at <b>party</b>
+                        <br>
+                    </h1>
+                    <p class="u-large-text u-text u-text-variant u-text-2">{{contentRequest.hostName}}</p>
                     <button class="btn btn-success" type="button" (click)="saveContent()" [disabled]="contentForm.invalid || isLoading" id="saveButton">
-                      <app-loading [text] = "'Save'" [isLoading] = "isLoading"></app-loading>
-                    </button>
+                        <app-loading [text] = "'Save'" [isLoading] = "isLoading"></app-loading>
+                      </button>
                 </div>
             </div>
         </section>

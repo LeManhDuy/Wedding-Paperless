@@ -36,7 +36,6 @@ export class ImageInputComponent {
         }
         this.imageData.emit(album);
         console.log(this.imageData);
-
         row === 2 || row === 4 ? this.addImageToMultipleStorge(album, row) : this.addImageToSingleStorge(album, row);
         this.isLoading =false;
     });

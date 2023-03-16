@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 .u-hidden-block {
     visibility: hidden!important;
@@ -47898,7 +47899,7 @@ textarea:focus {
 .u-section-1 {
     /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Fdfg-min.jpg?alt=media&token=ea57c0be-b720-4b64-843b-d1c0fd679381"); */
     background-position: 50% 50%;
-    padding: 80px 0px 80px 0px;
+    padding: 80px 0px 0px 0px;
 }
 
 .u-section-1 .u-group-1 {
@@ -48055,6 +48056,10 @@ textarea:focus {
     width: 621px;
     height: 640px;
     margin: -737px auto 0 calc(((100% - 1140px) / 2));
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .u-section-2 .u-group-2 {
@@ -48406,6 +48411,11 @@ textarea:focus {
     /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F29a8eb39-e12c-dede-638d-72e68685e642.jpg?alt=media&token=0b663275-498f-442e-88e1-3f33602c23b3"); */
     min-height: 562px;
     background-position: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
 }
 
 .u-section-4 .u-container-layout-1 {
@@ -48475,6 +48485,10 @@ textarea:focus {
     width: 457px;
     height: 375px;
     margin: 45px auto 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 @media (max-width: 1199px) {
@@ -48799,6 +48813,9 @@ textarea:focus {
     background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Frtettt-min.jpg?alt=media&token=a426691a-fee8-4976-a0cf-7a183b878fce");
     background-position: 50% 50%;
     margin: 60px 96px 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .u-section-6 .u-image-2 {
@@ -48807,6 +48824,9 @@ textarea:focus {
     background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Fbride-holds-beautiful-bridal-bouquet-close-up_8353-10474.jpg?alt=media&token=174fabbf-aad2-47ea-a9bb-b512684c8000");
     background-position: 50% 50%;
     margin: -596px auto 0 71px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .u-section-6 .u-image-3 {
@@ -48815,6 +48835,9 @@ textarea:focus {
     background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Frett.jpg?alt=media&token=8f22fc46-d7e5-4380-b643-5b119c08a647");
     background-position: 50% 50%;
     margin: 50px auto 0 156px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .u-section-6 .u-shape-1 {
