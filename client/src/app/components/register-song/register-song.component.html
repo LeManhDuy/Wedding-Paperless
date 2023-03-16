@@ -1,62 +1,54 @@
 <button *ngIf="isEditRegisterSongComponentVisible" class="btn btn-success" (click)="back()">BACK</button>
-
 <div *ngIf="isRegisterSongComponentVisible">
-<form #form="ngForm" >
-  <div class="container">
-    <div class="row">
-      <div class="col order-first">
+    <form #form="ngForm">
+        <div class="container">
+            <div class="row">
+                <div class="col order-first">
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Song</th>
-              <th scope="col">Singer</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let song of songs; let i = index">
-              <th hidden>{{ song.id }}</th>
-              <th scope="row">{{i + 1}}</th>
-              <!--          <td><input type="checkbox" [(ngModel)]="albumnDelete.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
-              <td>
-                <a class="tag" target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Song</th>
+                                <th scope="col">Singer</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let song of songs; let i = index">
+                                <th hidden>{{ song.id }}</th>
+                                <th scope="row">{{i + 1}}</th>
+                                <!--          <td><input type="checkbox" [(ngModel)]="albumnDelete.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
+                                <td>
+                                    <a class="tag" target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}
                 </a>
-              </td>
-              <td>{{ song.fullName }}</td>
-              <td><a class="tag" (click)="showComponent(song)">Update/Delete</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col">
-        <select class="btn btn-success dropdown-toggle" (change)="onContentSelected($event)">
-          <option *ngFor="let content of contents" [value]="content.id">{{content.hostName}}</option>
-        </select>
-        <br>
-        <br>
-        <div>
-          <a>Singer: </a>
-          <input type="text" class="form-control" id="fullname" [(ngModel)]="song.fullName" name="fullname">
+                                </td>
+                                <td>{{ song.fullName }}</td>
+                                <td><a class="tag" (click)="showComponent(song)">Update/Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <div class="col" style="display: grid;">
+                        <div class="input-style">
+                            <input placeholder="Singer's Name" class="input" type="text" id="fullname" [(ngModel)]="song.fullName" name="fullname">
+                        </div>
+                        <div class="input-style">
+                            <input placeholder="Song's Name" class="input" type="text" id="songname" [(ngModel)]="song.songName" name="songname">
+                        </div>
+                        <div class="input-style">
+                            <input placeholder="Link Beat" class="input" type="text" id="linkbeat" [(ngModel)]="song.linkBeat" name="linkbeat">
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn" (click)="addSong()"> Add New
+                    </button>
+                </div>
+            </div>
         </div>
-        <div>
-          <a>Song: </a>
-          <input type="text" class="form-control" id="songname" [(ngModel)]="song.songName" name="songname">
-        </div>
-        <div>
-          <a>Link Beat: </a>
-          <input type="text" class="form-control" id="linkbeat" name="linkbeat" [(ngModel)]="song.linkBeat">
-        </div>
-        <br>
-        <button class="btn btn-success btn-sm float-right" (click)="addSong()" routerLink="/register-song">
-          Upload
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
+    </form>
 </div>
 
-<app-edit-register-song *ngIf="isEditRegisterSongComponentVisible"  [id]="id" ></app-edit-register-song>
+<app-edit-register-song *ngIf="isEditRegisterSongComponentVisible" [id]="id"></app-edit-register-song>

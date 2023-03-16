@@ -1,0 +1,37 @@
+.register-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation-name: goToClearly;
+    animation-duration: 1.5s;
+}
+
+.anima {
+    top: 150px;
+    position: absolute;
+    animation-name: fromTopToMid;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+@keyframes goToClearly {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+@keyframes fromTopToMid {
+    from {
+        top: -420px;
+    }
+    to {
+        top: 150px;
+    }
+}

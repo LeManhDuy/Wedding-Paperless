@@ -53,8 +53,8 @@ export class DashboardUserComponent implements OnInit {
         this.isLoadingAvartar =false;
       })
   }
-  
+
   showForm() {
-    this.router.navigate(['/form']);
+    this.router.navigate(['/form-new-template']);
   }
 }

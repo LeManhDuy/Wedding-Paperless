@@ -1,11 +1,93 @@
-.tag{
-  cursor: pointer;
-  color:var(--lightGreen_color);
+.tag {
+    cursor: pointer;
+    color: var(--lightGreen_color);
 }
-.tag:hover{
-  color:var(--darkBlue_color);
+
+.tag:hover {
+    color: var(--darkBlue_color);
 }
-.container
-{
-  margin-left: 0px;
+
+.container {
+    margin: 100px auto;
+    padding: 20px 80px;
+    height: 70vh;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.btn {
+    --color: #00A97F;
+    --color2: rgb(10, 25, 30);
+    padding: 0.8em 1.75em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+}
+
+.btn::after,
+.btn::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+}
+
+.btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+}
+
+.btn:hover {
+    color: var(--color2);
+}
+
+.btn:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+}
+
+.input {
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    outline: none;
+    background: #e8e8e8;
+    box-shadow: 5px 5px 17px #c8c8c8, -5px -5px 17px #ffffff;
+    border: none;
+    border-radius: 10px;
+    transition: all .5s;
+    width: -webkit-fill-available;
+}
+
+.input:focus {
+    background: #e8e8e8;
+    box-shadow: inset 5px 5px 17px #c8c8c8, inset -5px -5px 17px #ffffff;
+}
+
+.input-style {
+    margin: 10px 0px 10px 0px;
 }

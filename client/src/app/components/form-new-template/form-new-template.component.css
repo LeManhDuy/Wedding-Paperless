@@ -87,7 +87,7 @@ h1 {
 }
 
 mark {
-    background-color: #ff0;
+    background-color: rgb(255, 255, 255);
     color: #000;
 }
 
@@ -32683,6 +32683,7 @@ section.u-palette-1-base:before,
 .u-table-alt-palette-1-base tr:nth-child(even) {
     color: #111111;
     background-color: #d4b6be;
+    opacity: 0.7;
 }
 
 .u-input.u-palette-1-base,
@@ -47799,7 +47800,7 @@ html {
     display: inline-block;
     font-size: 5rem;
     font-weight: 600;
-    border: 2px solid #ffd868;
+    border: 2px solid #f2e9e4;
     padding: 10px 20px;
     border-radius: 5px;
     transition: ease-in-out 0.1s;
@@ -47811,8 +47812,8 @@ html {
 }
 
 .display-time:hover {
-    background: #ffd868;
-    box-shadow: 0 0 30px#ffd868;
+    /* background: #fb6f92; */
+    box-shadow: 0 0 30px #ffd3dd;
     color: #ffffff;
     cursor: pointer;
 }
@@ -47894,12 +47895,9 @@ textarea:focus {
 }
 
 .u-section-1 {
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Fdfg-min.jpg?alt=media&token=ea57c0be-b720-4b64-843b-d1c0fd679381");
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Fdfg-min.jpg?alt=media&token=ea57c0be-b720-4b64-843b-d1c0fd679381"); */
     background-position: 50% 50%;
-}
-
-.u-section-1 .u-sheet-1 {
-    min-height: 893px;
+    padding: 80px 0px 80px 0px;
 }
 
 .u-section-1 .u-group-1 {
@@ -48044,7 +48042,7 @@ textarea:focus {
 .u-section-2 .u-image-1 {
     width: 428px;
     min-height: 376px;
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Ffg_150.png?alt=media&token=6c64cce6-d55c-450f-b85a-e8a19e2e575d");
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2Ffg_150.png?alt=media&token=6c64cce6-d55c-450f-b85a-e8a19e2e575d"); */
     margin: -339px auto 0 calc(((100% - 1140px) / 2) + 259px);
 }
 
@@ -48404,7 +48402,7 @@ textarea:focus {
 }
 
 .u-section-4 .u-image-1 {
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F29a8eb39-e12c-dede-638d-72e68685e642.jpg?alt=media&token=0b663275-498f-442e-88e1-3f33602c23b3");
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F29a8eb39-e12c-dede-638d-72e68685e642.jpg?alt=media&token=0b663275-498f-442e-88e1-3f33602c23b3"); */
     min-height: 562px;
     background-position: 50% 50%;
 }
@@ -48700,7 +48698,7 @@ textarea:focus {
 
 .u-section-5 .u-image-1 {
     min-height: 602px;
-    background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba");
+    /* background-image: url("https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba"); */
     background-position: 50% 50%;
 }
 
@@ -48785,10 +48783,13 @@ textarea:focus {
 
 .u-section-6 {
     background-image: none;
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 
 .u-section-6 .u-sheet-1 {
-    min-height: 1285px;
+    /* min-height: 1285px; */
+    margin-bottom: 100px;
 }
 
 .u-section-6 .u-image-1 {

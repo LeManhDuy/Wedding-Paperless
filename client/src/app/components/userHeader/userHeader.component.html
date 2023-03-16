@@ -62,7 +62,14 @@
                 <li class="nav-item" *ngIf="isExistContent === true">
                     <a class="nav-link" (click)="showInvitation()" style="cursor: pointer  ;">Review</a>
                 </li>
-
+                <li class="nav-item" *ngIf="isExistContent === false">
+                    <a class="nav-link" (click)="showForm()" style="cursor: pointer  ;">Create</a>
+                </li>
+                <li class="nav-item" *ngIf="isExistContent === true">
+                    <a class="nav-link" (click)="showRegisterSong()" style="cursor: pointer  ;">
+                        Register Song
+                    </a>
+                </li>
             </ul>
             <div class="search_icon">
                 <app-loading style="margin-right: 15px;" [isLoading]="isLoading"></app-loading>
