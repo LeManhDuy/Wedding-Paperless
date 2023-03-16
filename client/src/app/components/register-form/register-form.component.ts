@@ -14,9 +14,14 @@ export class RegisterFormComponent {
   isLoading: boolean =false;
 
   constructor(private registerSongSer:RegisterSongService, private alertService: AlertService) {
-    
+
   }
   save(){
+    const {fullName,songName, linkBeat } =this.registerSong;
+      if(fullName?.trim() === ""|| songName?.trim() ===""|| linkBeat?.trim() === "" ){
+        this.alertService.setAlertModel("danger", 'Some field is empty');
+        return;
+      };
     this.isLoading = true;
     this.registerSongSer.addSongByPersonId(this.personId,this.registerSong)
     .subscribe(
@@ -30,7 +35,7 @@ export class RegisterFormComponent {
         this.alertService.setAlertModel('danger',"Add failed");
       }
     )
-    
+
   }
   close(){
 
