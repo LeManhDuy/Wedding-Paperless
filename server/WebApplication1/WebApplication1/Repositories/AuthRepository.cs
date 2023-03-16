@@ -151,34 +151,77 @@ namespace WebApplication1.Repositories
                 var currentPerson =
                     await _context.Persons.FirstOrDefaultAsync(p =>
                         p.Email == authDto.Email);
-                if (!currentPerson.EmailConfirmed)
+                if (currentPerson!= null &&!await IsConfirmedEmail(currentPerson.Email))
                 {
-                    currentUser.UserName = authDto.UserName;
-                    currentUser.PasswordHash = Encoding.UTF8.GetBytes(authDto.PassWord);
-                    currentUser.PasswordSalt = hmac.Key;
-                    currentPerson.FullName = authDto.FullName;
-                    currentPerson.EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    _context.Persons.Update(currentPerson);
-                    _context.Accounts.Update(currentUser);
-                    await _context.SaveChangesAsync();
-                    
-                    var emailTk = _emailRepository.GenerateEmailConfirmToken(currentPerson);
-                    var confirmationLinkUrl = _config["Url"] + "api/email/confirm/" + emailTk;
-                    var message = new Message
+                    currentUser = await _context.Accounts.FirstOrDefaultAsync(a =>a.Person.Id == currentPerson.Id);
+                    if (!currentPerson.EmailConfirmed)
                     {
-                        To = currentPerson.Email,
-                        Subject = "Confirm your email address",
-                        Body =
-                            $"<p>Hello {currentPerson.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLinkUrl}'>{confirmationLinkUrl}</a></p>"
-                    };
-                    await _emailRepository.SendEmail(message);
-                    throw new Exception(
-                        "Email is already registered but not yet confirmed. Please check your email for the confirmation link.");
+                        currentUser.UserName = authDto.UserName;
+                        currentUser.PasswordHash = Encoding.UTF8.GetBytes(authDto.PassWord);
+                        currentUser.PasswordSalt = hmac.Key;
+                        currentPerson.FullName = authDto.FullName;
+                        currentPerson.EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        _context.Persons.Update(currentPerson);
+                        _context.Accounts.Update(currentUser);
+                        await _context.SaveChangesAsync();
+                    
+                        var emailTk = _emailRepository.GenerateEmailConfirmToken(currentPerson);
+                        var confirmationLinkUrl = _config["Url"] + "api/email/confirm/" + emailTk;
+                        var message = new Message
+                        {
+                            To = currentPerson.Email,
+                            Subject = "Confirm your email address",
+                            Body =
+                                $"<p>Hello {currentPerson.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLinkUrl}'>{confirmationLinkUrl}</a></p>"
+                        };
+                        await _emailRepository.SendEmail(message);
+                        throw new Exception(
+                            "Email is already registered but not yet confirmed. Please check your email for the confirmation link.", new Exception("Confirm Email"));
+                            ;
+                    }
+                    else
+                    {
+                        throw new Exception("Email is already registered");
+                    }
                 }
-                else
+                
+                
+                // Hash the password and create new account
+                var passwordBytes = Encoding.UTF8.GetBytes(authDto.PassWord);
+                var user = new Account
                 {
-                    throw new Exception("Email is already registered");
-                }
+                    UserName = authDto.UserName,
+                    PasswordHash = hmac.ComputeHash(passwordBytes),
+                    PasswordSalt = hmac.Key,
+                    Role = authDto.Role
+                };
+                await _context.Accounts.AddAsync(user);
+
+                // Create new person and associate with the account
+                var person = new Person
+                {
+                    FullName = authDto.FullName,
+                    Email = authDto.Email.Trim(),
+                    EmailConfirmed = false,
+                    EmailVerifiedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Account = user,
+                };
+                await _context.Persons.AddAsync(person);
+                await _context.SaveChangesAsync();
+
+                // Generate email confirmation token and send email
+                var emailToken = _emailRepository.GenerateEmailConfirmToken(person);
+                var confirmationLink = _config["Url"] + "api/email/confirm/" + emailToken;
+                var content = new Message
+                {
+                    To = person.Email,
+                    Subject = "Confirm y    our email address",
+                    Body =
+                        $"<p>Hello {person.FullName},</p><p><b>Please click the link below to confirm your email address:</b></p><p><a href='{confirmationLink}'>{confirmationLink}</a></p>"
+                };
+                await _emailRepository.SendEmail(content);
+
+                return authDto;
             }
             catch (Exception ex)
             {
