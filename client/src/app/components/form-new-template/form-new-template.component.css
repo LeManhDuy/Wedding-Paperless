@@ -32682,8 +32682,9 @@ section.u-palette-1-base:before,
 .u-container-layout.u-container-layout.u-palette-1-base:before,
 .u-table-alt-palette-1-base tr:nth-child(even) {
     color: #111111;
-    background-color: #d4b6be;
-    opacity: 0.7;
+    /* background-color: #d4b6be;
+    opacity: 0.7; */
+    background-color: rgba(212, 181, 189, 0.7);
 }
 
 .u-input.u-palette-1-base,

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Route, Router} from '@angular/router';
 import {Content, ContentRequest} from 'src/app/models/content';
 import {AlbumnService} from 'src/app/_services/albumn.service';
@@ -9,12 +9,14 @@ import { ColorPickerService } from 'ngx-color-picker/public-api';
 import { Time } from 'highcharts';
 import { UploadImageService } from 'src/app/_services/upload-image.service';
 import { AlbumnRequest } from 'src/app/models/albumn';
+import { ImageInputModel } from 'src/app/models/imageInputContent';
 @Component({
   selector: 'app-form-new-template',
   templateUrl: './form-new-template.component.html',
   styleUrls: ['./form-new-template.component.css']
 })
 export class FormNewTemplateComponent {
+
 
   isLoading : boolean = false;
   contentRequest: Content = new Content();
@@ -33,6 +35,14 @@ export class FormNewTemplateComponent {
   ) {
     this.contentRequest.date = new Date()
   }
+  // Update the type of imageData to match ImageInputModel
+
+// Update the onImageData() function to receive ImageInputModel instead of string
+onImageData(imageData: any) {
+  console.log('Image data received in parent component:', imageData);
+  // Handle the image data here
+}
+
 
   saveContent() {
     this.isLoading = true;

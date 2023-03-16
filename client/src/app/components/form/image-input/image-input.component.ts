@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Albumn, AlbumnRequest } from 'src/app/models/albumn';
 import { ImageInputModel } from 'src/app/models/imageInputContent';
 import { AlbumnService } from 'src/app/_services/albumn.service';
@@ -11,6 +11,8 @@ import { UploadImageService } from 'src/app/_services/upload-image.service';
 })
 export class ImageInputComponent {
   @Input() imageInputModel: ImageInputModel = new ImageInputModel();
+  @Output() imageData = new EventEmitter<AlbumnRequest>();
+
   public imageUrl : string = "https://www.chanchao.com.tw/VietnamPrintPack/images/default.jpg";
   imageObjectOurStory: Array<object> = [];
   imageObjectOurMemory: Array<object> = [];
@@ -32,6 +34,9 @@ export class ImageInputComponent {
           imageLink : response,
           row : row,
         }
+        this.imageData.emit(album);
+        console.log(this.imageData);
+
         row === 2 || row === 4 ? this.addImageToMultipleStorge(album, row) : this.addImageToSingleStorge(album, row);
         this.isLoading =false;
     });
@@ -48,7 +53,7 @@ export class ImageInputComponent {
         break;
       case 5:
         this.album.currentAlbumFifthPo = album;
-        break;  
+        break;
     }
   }
 

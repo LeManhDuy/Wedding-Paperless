@@ -1,74 +1,8 @@
-.tag {
-    cursor: pointer;
-    color: var(--lightGreen_color);
-}
-
-.tag:hover {
-    color: var(--darkBlue_color);
-}
-
-.container {
-    margin: 100px auto;
-    padding: 20px 80px;
-    height: 70vh;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-}
-
-.btn {
-    --color: #00A97F;
-    --color2: rgb(10, 25, 30);
-    padding: 0.8em 1.75em;
-    background-color: transparent;
-    border-radius: 6px;
-    border: .3px solid var(--color);
-    transition: .5s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    z-index: 1;
-    font-weight: 300;
-    font-size: 17px;
-    font-family: 'Roboto', 'Segoe UI', sans-serif;
-    text-transform: uppercase;
-    color: var(--color);
-}
-
-.btn::after,
-.btn::before {
-    content: '';
-    display: block;
-    height: 100%;
+.register-song-container {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    transform: skew(90deg) translate(-50%, -50%);
-    position: absolute;
-    inset: 50%;
-    left: 25%;
-    z-index: -1;
-    transition: .5s ease-out;
-    background-color: var(--color);
-}
-
-.btn::before {
-    top: -50%;
-    left: -25%;
-    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.btn:hover::before {
-    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
-}
-
-.btn:hover::after {
-    transform: skew(45deg) translate(-50%, -50%);
-}
-
-.btn:hover {
-    color: var(--color2);
-}
-
-.btn:active {
-    filter: brightness(.7);
-    transform: scale(.98);
+    margin: 80px auto;
 }
 
 .input {
@@ -76,7 +10,6 @@
     font-family: 'Courier New', Courier, monospace;
     outline: none;
     background: #e8e8e8;
-    box-shadow: 5px 5px 17px #c8c8c8, -5px -5px 17px #ffffff;
     border: none;
     border-radius: 10px;
     transition: all .5s;
@@ -85,9 +18,116 @@
 
 .input:focus {
     background: #e8e8e8;
-    box-shadow: inset 5px 5px 17px #c8c8c8, inset -5px -5px 17px #ffffff;
 }
 
 .input-style {
     margin: 10px 0px 10px 0px;
+}
+
+.form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 3em;
+    padding-left: 2.8em;
+    padding-right: 2.8em;
+    padding-bottom: 2.1em;
+    border: 2px dashed #DAA06D;
+    border-radius: 15px;
+    background-color: #EADDCA;
+    box-shadow: 0 0 0 4px #EADDCA, 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
+    transition: .4s ease-in-out;
+    margin: 80px auto;
+    width: 60%;
+}
+
+::placeholder {
+    color: #DAA06D;
+    text-align: center;
+}
+
+.register-container {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation-name: goToClearly;
+    animation-duration: 1.5s;
+}
+
+.anima {
+    top: 150px;
+    position: absolute;
+    animation-name: fromTopToMid;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+@keyframes goToClearly {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+@keyframes fromTopToMid {
+    from {
+        top: -420px;
+    }
+    to {
+        top: 150px;
+    }
+}
+
+.form .heading {
+    padding-left: 0.8em;
+    color: #DAA06D;
+    background-color: transparent;
+    letter-spacing: .5em;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 3em;
+    text-shadow: inset -1px -1px 1px #DAA06D;
+}
+
+.form .input {
+    outline: none;
+    padding: 0.5em;
+    border: 1px solid #DAA06D;
+    color: black;
+    width: 14em;
+    height: 3em;
+    border-radius: 10px;
+    background-color: #EADDCA;
+    text-align: center;
+}
+
+.form .btn {
+    align-self: center;
+    margin-top: 2em;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: #E5AA70;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    transition: .4s ease-in-out opacity, .1s ease-in-out active;
+    padding: 1em;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
+}
+
+.form .btn:hover {
+    opacity: 0.8;
+}
+
+.form .btn:active {
+    transform: translateX(0.1em) translateY(0.1em);
+    box-shadow: none;
 }
