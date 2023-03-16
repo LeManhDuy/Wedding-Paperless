@@ -114,6 +114,10 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
           <h4 class="m-0 font-weight-bold text-primary">{{title}}</h4>
+          <form *ngIf="isAccountComponentVisible" class="d-flex ms-auto">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
         </nav>
         <!-- End of Topbar -->
 
