@@ -8,6 +8,7 @@ namespace WebApplication1.Interfaces
         Task<List<Content>> GetContentsAsync();
         Task<Content> GetContentByIdAsync(int id);
         Task<List<AlbumnDto>> GetAlbumnContentAsync(int id);
+        Task<List<RegisterSongDto>> GetSongContentAsync(int id);
         Task<DateTimeDto> CountContentsByDateTime();
         Task<bool> CreateContentAsync(Content content);
         Task<bool> UpdateContentAsync(Content content);

@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
         /// Get all content.
         /// </summary>
         /// <returns>A list content</returns>
-        [Authorize(Roles = "admin")]
+        [Authorize]
         [HttpGet()]
         [ProducesResponseType(400)]
         [ProducesResponseType(200, Type = typeof(ICollection<ContentDto>))]
@@ -144,6 +144,37 @@ namespace WebApplication1.Controllers
 
 
             return Ok(albumns);
+        }
+
+        /// <summary>
+        /// Get song by content id.
+        /// </summary>
+        /// <param name="contentId">content id</param>
+        /// <returns> songs</returns>
+        [HttpGet("{contentId}/song")]
+        [Authorize]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(200, Type = typeof(ContentDto))]
+        public async Task<ActionResult<ContentDto>> GetSongContent(int contentId)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+
+            var songs = await _contentRepository.GetSongContentAsync(contentId);
+            if (songs == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            return Ok(songs);
         }
 
         /// <summary>
