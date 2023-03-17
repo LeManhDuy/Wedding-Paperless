@@ -116,7 +116,7 @@ export class UpdateInvitationComponent {
   }
   // Update the type of imageData to match ImageInputModel
 
-// Update the onImageData() function to receive ImageInputModel instead of string
+// Update the onImageData() function to receive ImageInputModel instead of string sdf
 // onImageData(imageData: any) {
 //   console.log('Image data received in parent component:', imageData);
 //   // Handle the image data here
