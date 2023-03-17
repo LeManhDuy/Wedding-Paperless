@@ -27,6 +27,7 @@ import {ChartComponent} from "./components/chart/chart.component";
 import { FormNewTemplateComponent } from './components/form-new-template/form-new-template.component';
 import { NewInvitationComponent } from './components/new-invitation/new-invitation.component';
 import { NewShareComponent } from './components/new-share/new-share.component';
+import { UpdateInvitationComponent } from './components/update-invitation/update-invitation.component';
 
 
 const routes: Routes = [];
@@ -55,6 +56,7 @@ const routes: Routes = [];
     { path: 'new-invitation/:id', component: NewInvitationComponent,  data: {showHeader: true  }  },
     { path: 'share-invitation/:id', component: ShareComponent },
     { path: 'new-share-invitation/:id', component: NewShareComponent },
+    { path: 'update-invitation/:id', component: UpdateInvitationComponent,data: {showHeader: true  } },
 
     { path: 'content', component: ContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin,user',showHeader: true  } },
     { path: 'content/edit/:id', component: EditContentComponent, canActivate: [AuthGuard], data: { requiredRole: 'admin' } },

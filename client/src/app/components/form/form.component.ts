@@ -40,9 +40,7 @@ export class FormComponent {
 
     var listRequest = [
       currentAlbumFirstPo,
-      ...currentAlbumSecondListPo,
       currentAlbumThirtPo,
-      ...currentAlbumFourthListPo,
       currentAlbumFifthPo
     ]
     this.contentService.creatContent(this.contentRequest)
