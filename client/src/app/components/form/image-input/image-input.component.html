@@ -3,9 +3,9 @@
         <p name="restaurant_Map">{{imageInputModel.title}}</p>
     </h4>
     <div class="container-content image_Center" app-create-form>
-        <div *ngIf="isLoading" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
+        <!-- <div *ngIf="isLoading" style="height: 50vh; display: flex; align-items: center; justify-content: center;">
             <app-loading [isLoading]="isLoading" [color]="'red'"></app-loading>
-        </div>
+        </div> -->
         <div *ngIf="imageInputModel.row !== '2' && imageInputModel.row !== '4'">
             <img *ngIf="!isLoading" src="{{imageUrl}}" alt="">
         </div>

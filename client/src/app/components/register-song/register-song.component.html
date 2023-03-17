@@ -1,6 +1,8 @@
-<button *ngIf="isEditRegisterSongComponentVisible" class="btn btn-success" (click)="back()">BACK</button>
-<div *ngIf="isRegisterSongComponentVisible">
-    <form #form="ngForm">
+<div class="register-container" [style.display]="state" (click)="existForm()">
+    <app-edit-register-song *ngIf="this.state == ''" class="anima" stopPropagation [id]="id"></app-edit-register-song>
+</div>
+<div class="register-song-container" *ngIf="isRegisterSongComponentVisible">
+    <form class="form">
         <div class="container">
             <div class="row">
                 <div class="col order-first">
@@ -20,11 +22,10 @@
                                 <th scope="row">{{i + 1}}</th>
                                 <!--          <td><input type="checkbox" [(ngModel)]="albumnDelete.selected"></td> &lt;!&ndash; Add Checkbox column &ndash;&gt;-->
                                 <td>
-                                    <a class="tag" target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}
-                </a>
+                                    <a class="tag" target="_blank" href="{{ song.linkBeat }}" id="bottle"> {{ song.songName }}</a>
                                 </td>
                                 <td>{{ song.fullName }}</td>
-                                <td><a class="tag" (click)="showComponent(song)">Update/Delete</a>
+                                <td><a class="tag" (click)="showComponent(song)">Change</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -43,12 +44,13 @@
                         </div>
                     </div>
                     <br>
-                    <button class="btn" (click)="addSong()"> Add New
-                    </button>
+                    <button class="btn" (click)="addSong()"> Add Singer To Party</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 
+
+<button *ngIf="isEditRegisterSongComponentVisible" class="btn btn-success" (click)="back()">BACK</button>
 <app-edit-register-song *ngIf="isEditRegisterSongComponentVisible" [id]="id"></app-edit-register-song>

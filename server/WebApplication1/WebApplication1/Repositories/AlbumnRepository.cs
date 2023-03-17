@@ -106,8 +106,7 @@ namespace WebApplication1.Repositories
 
         public async Task<bool> Save()
         {
-            var Saved = await _context.SaveChangesAsync();
-            return Saved > 0 ? true : false;
+            return await _context.SaveChangesAsync() > 0 ;
         }
 
         public async Task<bool> UpdateAlbumn(int contentId, int albumnId, int matrix, string imageLink)
@@ -141,13 +140,25 @@ namespace WebApplication1.Repositories
 
 
                 _context.Albumns.Update(albumn);
-                await _context.SaveChangesAsync();
                 return await Save();
             }
             catch (Exception ex)
             {
                 throw new Exception();
             }
+        }
+
+        public async Task<bool> UpdateListAlbumn(int contentId, List<AlbumnDto> albumnDtos)
+        {
+            var content = _context.Contents.Where(p => p.Id == contentId).FirstOrDefault();
+            foreach (var item in albumnDtos)
+            {
+                var album = _mapper.Map<Albumn>(item);
+                album.Content = content;
+                _context.Albumns.Update(album);
+            }
+
+            return await Save();
         }
     }
 }

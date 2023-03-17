@@ -1,86 +1,83 @@
 <div class="create_Form_Content">
-    <div *ngIf ="isLoading" style="height: 60vh; display: flex; align-items: center; justify-content: center;">
-        <app-loading  [isLoading]="true" [color]="'red'"></app-loading>
+    <div *ngIf="isLoading" style="height: 60vh; display: flex; align-items: center; justify-content: center;">
+        <app-loading [isLoading]="true" [color]="'red'"></app-loading>
     </div>
-    <div *ngIf ="!isLoading">
-    <div  class="create_Form_Container"  >
-        <div class="host_Name">
-            <h4 class="title">
-                {{this.content.hostName}}
-            </h4>'s wedding ceremony
-        </div>
-        <div class="time_And_Place">
-            <div class="time">
-                <p>{{ this.content.date | date : 'HH:mm' }}</p>
-                <p>{{ this.content.date | date }}</p>
+    <div *ngIf="!isLoading">
+        <div class="create_Form_Container">
+            <div class="host_Name">
+                <h4 class="title">
+                    {{this.content.hostName}}
+                </h4>'s wedding ceremony
             </div>
-            <div class="place">
-                <P style="color:blue;">{{this.content.address}}</P>
+            <div class="time_And_Place">
+                <div class="time">
+                    <p>{{ this.content.date | date : 'HH:mm' }}</p>
+                    <p>{{ this.content.date | date }}</p>
+                </div>
+                <div class="place">
+                    <P style="color:blue;">{{this.content.address}}</P>
+                </div>
             </div>
-        </div>
-        <div class="container-content image_Center" app-create-form>
-            <img src= {{hashMapContent.get(1).imageLink}} alt="">
-        </div>
-        <div class="container-content our_Stories">
-            <h4 class="title">
-                Our Stories
-            </h4>
-            <div class="text-area">
-                <p name="our_Stories_Text"
-                                >{{this.content.story}}</p>
-            </div>
-            <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
             <div class="container-content image_Center" app-create-form>
+                <img src="{{imageUrl1}}" alt="">
             </div>
-        </div>
-        <div class="container-content restaurant_Map">
-            <h4 class="title">
-                Restaurant Map
-            </h4>
-            <div class="image_Drop">
-                <div class="image_Center" app-create-form>
-                    <img src= {{hashMapContent.get(3).imageLink}} alt="">
-                </div>
-            </div>
-        </div>
-        <div class="container-content our_Memory">
-            <div class="our_Memory_Title">
+            <!-- <div class="container-content our_Stories">
                 <h4 class="title">
-                    Our memory
+                    Our Stories
                 </h4>
-                We 'll save our ceremony at here
-            </div>
-            <div class="image_Drop">
-                <div class="image_Center" app-create-form>
-                  <div class="img-slide">
-                    <ng-image-slider [images]="imageObjectOurMemory" #nav></ng-image-slider>
-                  </div>
+                <div class="text-area">
+                    <p name="our_Stories_Text">{{this.content.story}}</p>
+                </div>
+                <ng-image-slider [images]="imageObjectOurStory" #nav></ng-image-slider>
+                <div class="container-content image_Center" app-create-form>
                 </div>
             </div>
-        </div>
-        <div class="container-content see_You">
-            <div class="see_You_Title">
+            <div class="container-content restaurant_Map">
                 <h4 class="title">
-                    See you at the party
+                    Restaurant Map
                 </h4>
-            </div>
-            <div class="image_Drop">
-                <div class="image_Center" app-create-form>
-                    <img src= {{hashMapContent.get(5).imageLink}} alt="">
+                <div class="image_Drop">
+                    <div class="image_Center" app-create-form>
+                        <img src={ {hashMapContent.get(3).imageLink}} alt="">
+                    </div>
                 </div>
             </div>
-            <div class="container-content hope_Join">
-                <p class="hope_Join_Date"  name="hope_Join_Date">{{this.content.date}}</p>
-                <p class="hope_Join_Content"  name="hope_Join_Content">Hope you join us</p>
-                <p class="hope_Join_Sign" name="hope_Join_Sign"> {{this.content.hostName}}</p>
+            <div class="container-content our_Memory">
+                <div class="our_Memory_Title">
+                    <h4 class="title">
+                        Our memory
+                    </h4>
+                    We 'll save our ceremony at here
+                </div>
+                <div class="image_Drop">
+                    <div class="image_Center" app-create-form>
+                        <div class="img-slide">
+                            <ng-image-slider [images]="imageObjectOurMemory" #nav></ng-image-slider>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="container-content see_You">
+                <div class="see_You_Title">
+                    <h4 class="title">
+                        See you at the party
+                    </h4>
+                </div>
+                <div class="image_Drop">
+                    <div class="image_Center" app-create-form>
+                        <img src={ {hashMapContent.get(5).imageLink}} alt="">
+                    </div>
+                </div>
+                <div class="container-content hope_Join">
+                    <p class="hope_Join_Date" name="hope_Join_Date">{{this.content.date}}</p>
+                    <p class="hope_Join_Content" name="hope_Join_Content">Hope you join us</p>
+                    <p class="hope_Join_Sign" name="hope_Join_Sign"> {{this.content.hostName}}</p>
+                </div>
+            </div> -->
+        </div>
+        <div class="qr-code-container">
+            <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+            <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
         </div>
     </div>
-      <div class="qr-code-container">
-        <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myAngularxQrCode" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
-        <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
-      </div>
-</div>  
 </div>
-
-

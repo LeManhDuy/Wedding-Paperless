@@ -12,7 +12,6 @@ import {UserToken} from "./models/app-user";
 })
 export class AppComponent {
   currentUser?: UserToken;
-
   showHeader = false;
 
   constructor(

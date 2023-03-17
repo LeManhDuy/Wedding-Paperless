@@ -9,7 +9,7 @@ export class Content {
   story: string | undefined;
   wish: string | undefined;
   personName: string | undefined;
-  albumnDtos: AlbumnRequest[] | undefined;
+  albumnDtos: AlbumnRequest[] = [];
   registerSong: RegisterSong[] | undefined;
   personId?: string;
 }

@@ -6,6 +6,7 @@ using WebApplication1.Dto;
 using WebApplication1.Interfaces;
 using WebApplication1.Interfaces.IService;
 using WebApplication1.Models;
+using WebApplication1.Repositories;
 
 namespace WebApplication1.Controllers
 {
@@ -304,6 +305,32 @@ namespace WebApplication1.Controllers
             ;
             var content = await _contentRepository.GetContentByIdPersonAsync(personId);
             return Ok(_mapper.Map<ContentDto>(content));
+        }
+
+        /// <summary>
+        /// Update Content.
+        /// </summary>
+        [HttpPut("{contentId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ContentDto>> UpdateAsync([FromRoute] int contentId, [FromBody] ContentDto contentDto)
+        {
+            if (contentDto == null)
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var data = await _contentRepository.UpdateAsync(contentId, contentDto);
+               
+                return Ok(_mapper.Map<ContentDto>(data));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, e.Message);
+            }
         }
 
         /// <summary>

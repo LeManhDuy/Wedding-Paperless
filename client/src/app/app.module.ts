@@ -50,6 +50,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { FormNewTemplateComponent } from './components/form-new-template/form-new-template.component';
 import { NewInvitationComponent } from './components/new-invitation/new-invitation.component';
 import { NewShareComponent } from './components/new-share/new-share.component';
+import { UpdateInvitationComponent } from './components/update-invitation/update-invitation.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { NewShareComponent } from './components/new-share/new-share.component';
     FormNewTemplateComponent,
     NewInvitationComponent,
     NewShareComponent,
+    UpdateInvitationComponent,
   ],
   imports: [
     BrowserModule,

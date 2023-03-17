@@ -18,6 +18,7 @@ export class AlbumnDelete {
 }
 
 export class AlbumnRequest {
+  id?: number| undefined;
   imageLink: string ="";
   row: number = 0;
   personName?: string = "";
