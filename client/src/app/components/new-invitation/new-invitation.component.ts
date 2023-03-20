@@ -38,7 +38,13 @@ export class NewInvitationComponent {
   imageUrl8 : String = "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80";
 
 
-  constructor(private contentService: ContentService, private router: Router,private route: ActivatedRoute, private auth: AuthService,private albumService: AlbumnService) {
+  constructor(
+    private contentService: ContentService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private auth: AuthService,
+    private albumService: AlbumnService
+  ) {
     this.myAngularxQrCode =  environment.apiURLClient + 'new-share-invitation/' + auth.getTokenId();
   }
 
