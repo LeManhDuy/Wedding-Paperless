@@ -17,6 +17,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class RegisterSongComponent implements OnInit{
   songs?: RegisterSong[]
   contents?: Content[]
+  state:string = 'none';
   song: RegisterSong = {
     fullName: '',
     songName: '',
@@ -62,8 +63,7 @@ export class RegisterSongComponent implements OnInit{
 
   showComponent(song: RegisterSong){
     this.id = song.id
-    this.isRegisterSongComponentVisible = false;
-    this.isEditRegisterSongComponentVisible = true;
+    this.appearForm();
   }
 
   addSong() {
@@ -77,8 +77,14 @@ export class RegisterSongComponent implements OnInit{
   }
 
   back(){
-    this.isRegisterSongComponentVisible = true;
-    this.isEditRegisterSongComponentVisible = false;
+    this.existForm()
+  }
+  appearForm(){
+    this.state = '';
+  }
+
+  existForm(){
+    this.state = 'none';
   }
 
 }

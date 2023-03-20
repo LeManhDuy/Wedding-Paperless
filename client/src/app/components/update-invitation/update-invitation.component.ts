@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Route, Router} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Content, ContentRequest} from 'src/app/models/content';
 import {AlbumnService} from 'src/app/_services/albumn.service';
 import {ContentService} from 'src/app/_services/content.service';
@@ -11,25 +11,29 @@ import { UploadImageService } from 'src/app/_services/upload-image.service';
 import { AlbumnRequest } from 'src/app/models/albumn';
 import { ImageInputModel } from 'src/app/models/imageInputContent';
 import { AlertService } from 'src/app/_services/alert.service';
+import {AuthService} from "../../_services/auth.service";
 
 class IMG {
   image?: string;
   thumbImage?: string;
 }
+
 @Component({
-  selector: 'app-form-new-template',
-  templateUrl: './form-new-template.component.html',
-  styleUrls: ['./form-new-template.component.css']
+  selector: 'app-update-invitation',
+  templateUrl: './update-invitation.component.html',
+  styleUrls: ['./update-invitation.component.css']
 })
-export class FormNewTemplateComponent implements OnInit {
+export class UpdateInvitationComponent {
   @Input() imageInputModel: ImageInputModel = new ImageInputModel();
 
 
   backgroundUrl="https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba"
 
-
+  personId: string | undefined;
+  contentId: string | undefined;
   imageObjectOurStory: IMG[] = [];
   imageObjectOurMemory: IMG[] = [];
+  isDeleteLoading: boolean =false;
   isLoading : boolean = false;
   contentRequest: Content = new Content();
   public hostControl = new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]);
@@ -47,11 +51,67 @@ export class FormNewTemplateComponent implements OnInit {
   constructor
   (
     private contentService: ContentService,
-    private router: Router,
     private albumService: AlbumnService,
     private uploadImageService :UploadImageService,
-    private alerService : AlertService,
+    private route:ActivatedRoute,
+    private router : Router,
+    private alertService : AlertService,
+    private auth: AuthService
   ) {
+    this.personId = this.auth.decode(this.route.snapshot.params['id']!);
+    if(this.personId === undefined){
+      this.router.navigate(["dashboard-user"]);
+    }
+
+    this.contentService.getContentAttachAlbums(this.personId?.toString()!)
+    .subscribe(
+      respone =>{
+        console.log(respone);
+          this.contentId = respone.id
+          const albums = respone.albumnDtos;
+          this.contentRequest = respone;
+
+          albums?.forEach(item =>{
+              if(item.row === 1){
+                  this.imageUrl1 = item.imageLink;
+                  console.log(this.imageUrl1);
+
+                  this.albumService.currentAlbumFirstPo = item;
+              }
+              else if(item.row === 2){
+                this.imageUrl2 = item.imageLink;
+                this.albumService.currentAlbumSecondListPo = item;
+              }
+              else if(item.row === 3){
+                this.imageUrl3 = item.imageLink;
+                this.albumService.currentAlbumThirtPo = item;
+              }
+              else if(item.row === 4){
+                this.imageUrl4 = item.imageLink;
+                this.albumService.currentAlbumFourthListPo = item;
+              }
+              else if(item.row === 5){
+                this.imageUrl5 = item.imageLink;
+                this.albumService.currentAlbumFifthPo = item;
+              }
+              else if(item.row === 6){
+                this.imageUrl6 = item.imageLink;
+                this.albumService.currentAlbumSixthPo = item;
+              }
+              else if(item.row === 7){
+                this.imageUrl7 = item.imageLink;
+                this.albumService.currentAlbumSeventhPo = item;
+              }
+              else if(item.row === 8){
+                this.imageUrl8 = item.imageLink;
+                this.albumService.currentAlbumEightthPo = item;
+              }
+          })
+      },
+      error => {
+        this.router.navigate(["dashboard-user"]);
+      }
+    )
 
     this.contentRequest.date = new Date()
     this.contentRequest.address = 'For U, Hai Chau District, Danang City'
@@ -67,8 +127,20 @@ export class FormNewTemplateComponent implements OnInit {
 //   // Handle the image data here
 // }
 
+deleteContent(){
+  this.isDeleteLoading =true
+  this.contentService.deleteContent(this.contentId).subscribe(respone=>{
 
-  saveContent() {
+  this.isDeleteLoading =false
+
+    this.alertService.setAlertModel("success", "Delete successfully!")
+  })
+  this.contentService.setExistContent(false);
+  this.router.navigate(['/dashboard-user']);
+}
+
+
+editContent() {
     this.isLoading = true;
     var {
       currentAlbumFirstPo,
@@ -91,34 +163,29 @@ export class FormNewTemplateComponent implements OnInit {
       currentAlbumSeventhPo,
       currentAlbumEightthPo
     ]
-    this.contentService.creatContent(this.contentRequest)
-      .subscribe(respone => {
-          this.albumService.currentContentId = Number.parseInt(respone.id!);
-          this.albumService.createListOfAlbum(listRequest, this.albumService.currentContentId)
-            .subscribe(respone => {
-                this.contentService.setExistContent(true);
-                this.isLoading = false;
-                this.alerService.setAlertModel("success","Created")
-                location.reload()
 
-                // this.router.navigate(['dashboard-user'])
-              },
-              (errorMsg: any) => {
-                this.isLoading = false;
-                this.alerService.setAlertModel("danger","Some thing went wrong")
-                console.log(errorMsg)
-
-              })
+    this.contentService.updateContentById(Number.parseInt(this.contentRequest.id!),this.contentRequest)
+    .subscribe(response =>{
+        this.albumService.updateListAlbumn(response.id!, listRequest)
+        .subscribe(_ =>{
+              this.isLoading =false;
+              this.alertService.setAlertModel("success","Updated");
+              location.reload();
         },
-        (errorMsg: any) => {
-        this.isLoading = false;
-          console.log(errorMsg)
+        error =>{
+          this.isLoading =false;
+          this.alertService.setAlertModel("danger","Some thing went wrong");
+        })
 
-        }
+    },
+    error =>{
+      this.isLoading = false;
+      this.alertService.setAlertModel("danger","Some thing went wrong content")
+    }
 
-      )
-
+    )
   }
+
   async onFileSelected(event: any, row :any  ) {
     const roww = Number.parseInt(row!);
     const base64 = await this.uploadImageService.processFileToBase64(event.target);
@@ -138,19 +205,19 @@ export class FormNewTemplateComponent implements OnInit {
         }
         row === 1 || row === 2 || row === 3 || row === 4 || row === 5 || row === 6 || row === 7|| row === 8 ? this.addImageToSingleStorge(album, row) : null
         switch (row){
-          case 1:
+            case 1:
             this.imageUrl1 =album.imageLink;
             break;
-          case 2:
+            case 2:
             this.imageUrl2 =album.imageLink;
             break;
-          case 3:
+            case 3:
             this.imageUrl3 = album.imageLink;
             break;
             case 4:
               this.imageUrl4 =album.imageLink;
               break;
-          case 5:
+            case 5:
             this.imageUrl5 = album.imageLink;
             break;
             case 6:
@@ -170,30 +237,38 @@ export class FormNewTemplateComponent implements OnInit {
     // this.imageUrl = album.imageLink!;
     switch (row){
       case 1:
+        album.id = this.contentRequest.albumnDtos[0].id;
         this.albumService.currentAlbumFirstPo = album;
         break;
       case 2:
+        album.id = this.contentRequest.albumnDtos[1].id;
         this.albumService.currentAlbumSecondListPo = album;
         break;
 
       case 3:
+        album.id = this.contentRequest.albumnDtos[2].id;
         this.albumService.currentAlbumThirtPo = album;
         break;
 
         case 4:
+          album.id = this.contentRequest.albumnDtos[3].id;
           this.albumService.currentAlbumFourthListPo = album;
           break;
       case 5:
+        album.id = this.contentRequest.albumnDtos[4].id;
         this.albumService.currentAlbumFifthPo = album;
         break;
 
         case 6:
+          album.id = this.contentRequest.albumnDtos[5].id;
           this.albumService.currentAlbumSixthPo = album;
           break;
         case 7:
+          album.id = this.contentRequest.albumnDtos[6].id;
           this.albumService.currentAlbumSeventhPo = album;
           break;
         case 8:
+          album.id = this.contentRequest.albumnDtos[7].id;
           this.albumService.currentAlbumEightthPo = album;
           break;
     }

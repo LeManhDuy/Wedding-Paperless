@@ -1,17 +1,20 @@
 <div class="card shadow mb-4">
-  <div class="card border-left-danger shadow h-100 py-2">
-    <div class="card-body">
-      <select class="form-select" [(ngModel)]="month" (change)="onChangeSelection()">
-        <option *ngFor="let m of months" [value]="m" >{{m}}
-        </option>
-      </select>
+    <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card-body">
+            <div class="select-month" style="display: flex;justify-content: space-between;border-bottom: 0.5px solid #c3c3c3;padding-bottom: 10px;">
+                <h4 style="width: 50%;">Select month:</h4>
+                <select style="width: 30%;" class="form-select" [(ngModel)]="month" (change)="onChangeSelection()">
+          <option *ngFor="let m of months" [value]="m" >{{m}}
+          </option>
+        </select>
+            </div>
 
-      <!--    <div class="chart-area">-->
-      <!--      <canvas id="myAreaChart" >-->
-      <!--      </canvas>-->
-      <!--    </div>-->
-      <div class="chart-container" [chart]="chart"></div>
+
+            <!--    <div class="chart-area">-->
+            <!--      <canvas id="myAreaChart" >-->
+            <!--      </canvas>-->
+            <!--    </div>-->
+            <div class="chart-container" [chart]="chart"></div>
+        </div>
     </div>
-  </div>
 </div>
-

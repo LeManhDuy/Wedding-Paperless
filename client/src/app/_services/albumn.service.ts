@@ -11,10 +11,13 @@ import { API_URL } from 'src/assets/apiUrl';
 export class AlbumnService {
   public currentContentId : number| undefined;
   public currentAlbumFirstPo : AlbumnRequest = new AlbumnRequest() ;
-  public currentAlbumSecondListPo : AlbumnRequest[] = [];
+  public currentAlbumSecondListPo : AlbumnRequest = new AlbumnRequest() ;
   public currentAlbumThirtPo : AlbumnRequest = new AlbumnRequest() ;
-  public currentAlbumFourthListPo : AlbumnRequest [] = [];
+  public currentAlbumFourthListPo : AlbumnRequest = new AlbumnRequest() ;
   public currentAlbumFifthPo : AlbumnRequest = new AlbumnRequest() ;
+  public currentAlbumSixthPo : AlbumnRequest = new AlbumnRequest() ;
+  public currentAlbumSeventhPo : AlbumnRequest = new AlbumnRequest() ;
+  public currentAlbumEightthPo : AlbumnRequest = new AlbumnRequest() ;
 
   prefixUrl: string = environment.apiURL;
   baseUrl = this.prefixUrl + 'api/albumn/'
@@ -41,6 +44,18 @@ export class AlbumnService {
   updateAlbumn(contentId: string, albumnId: string, imageHandler: ImageHandler): Observable<ImageHandler> {
     return this.http.put<ImageHandler>(this.baseUrl + contentId + "&" + albumnId, imageHandler)
   }
+
+  updateAlbumnV1(contentId: string, albumnId: string, imageHandler: AlbumnRequest): Observable<ImageHandler> {
+    return this.http.put<ImageHandler>(this.baseUrl + contentId + "&" + albumnId, imageHandler)
+  }
+
+
+  updateListAlbumn(contentId: string,imageHandler: AlbumnRequest[]): Observable<any> {
+
+    const url = this.prefixUrl + API_URL.UPDATE_LIST_ALBUM_BY_CONTENT_ID(Number.parseInt(contentId));
+    return this.http.put<any>(url,imageHandler);
+  }
+
 
   createListOfAlbum(albumlist: AlbumnRequest[], contentId : number): Observable<ImageHandler[]> {
 

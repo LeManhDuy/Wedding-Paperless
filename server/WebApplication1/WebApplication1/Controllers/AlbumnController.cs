@@ -170,6 +170,41 @@ namespace WebApplication1.Controllers
         }
 
         /// <summary>
+        /// Update list albumn.
+        /// </summary>
+        [HttpPut("update-list-album/{contentId}")]
+        [Authorize(Roles = "admin,user")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdateListAlbumn([FromRoute] int contentId, [FromBody] List<AlbumnDto> albumnDtos)
+        {
+            if (!_authRepository.IsTokenValid())
+            {
+                return Unauthorized();
+            }
+            if (albumnDtos == null)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await _albumnRepository.UpdateListAlbumn(contentId, albumnDtos);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+
+        /// <summary>
         /// Delete albumn by Id.
         /// </summary>
         [HttpDelete("{albumnId}")]

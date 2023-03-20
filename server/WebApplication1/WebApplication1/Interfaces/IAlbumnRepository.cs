@@ -13,6 +13,8 @@ namespace WebApplication1.Interfaces
         Task<bool> CreateAlbumnWithoutColumnAsync(Albumn albumn);
         Task<Albumn> CreateAlbumnAsync(int contentId, int matrix, string imageLink);
         Task<bool> UpdateAlbumn(int contentId, int albumnId, int matrix, string imageLink);
+
+        Task<bool> UpdateListAlbumn(int contentId, List<AlbumnDto> albumnDtos);
         Task<bool> DeleteAlbumn(AlbumnDto albumn);
         Task<bool> AlbumnExist(int albumnId);
         Task<bool> Save();

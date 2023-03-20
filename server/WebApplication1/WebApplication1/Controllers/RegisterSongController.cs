@@ -128,6 +128,7 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<RegisterSongDto>> UpdateAsync([FromRoute] int registerSongId, [FromBody] RegisterSongDto registerSongDto)
         {
+            Console.WriteLine("DTO " + registerSongDto);
             if (registerSongDto == null)
                 return BadRequest();
 
