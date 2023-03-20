@@ -11,6 +11,7 @@ import { UploadImageService } from 'src/app/_services/upload-image.service';
 import { AlbumnRequest } from 'src/app/models/albumn';
 import { ImageInputModel } from 'src/app/models/imageInputContent';
 import { AlertService } from 'src/app/_services/alert.service';
+import {AuthService} from "../../_services/auth.service";
 
 class IMG {
   image?: string;
@@ -28,7 +29,7 @@ export class UpdateInvitationComponent {
 
   backgroundUrl="https://firebasestorage.googleapis.com/v0/b/marinerum.appspot.com/o/images_by_months%2Fimg%2F-min.jpg?alt=media&token=711d89c1-4249-4ba4-a39e-427aaecd8aba"
 
-  personId: number | undefined;
+  personId: string | undefined;
   contentId: string | undefined;
   imageObjectOurStory: IMG[] = [];
   imageObjectOurMemory: IMG[] = [];
@@ -55,8 +56,9 @@ export class UpdateInvitationComponent {
     private route:ActivatedRoute,
     private router : Router,
     private alertService : AlertService,
+    private auth: AuthService
   ) {
-    this.personId = this.route.snapshot.params['id'];
+    this.personId = this.auth.decode(this.route.snapshot.params['id']!);
     if(this.personId === undefined){
       this.router.navigate(["dashboard-user"]);
     }
@@ -106,6 +108,9 @@ export class UpdateInvitationComponent {
               }
           })
       },
+      error => {
+        this.router.navigate(["dashboard-user"]);
+      }
     )
 
     this.contentRequest.date = new Date()

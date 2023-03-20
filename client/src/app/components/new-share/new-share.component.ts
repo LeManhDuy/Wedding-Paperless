@@ -35,12 +35,16 @@ export class NewShareComponent {
 
 
   ngOnInit(): void {
-
-    const personId = this.route.snapshot.paramMap.get('id');
-    this.personId = personId!;
+    try {
+      this.personId = this.auth.decode(this.route.snapshot.paramMap.get('id')!);
+    }
+    catch (e) {
+      this.router.navigate(["not-found"]);
+    }
     this.isLoading = true;
-    this.contentService.getContentAttachAlbums(personId!)
+    this.contentService.getContentAttachAlbums(this.personId!)
       .subscribe(respone => {
+          console.log("FEATURE")
         this.content = respone
         this.imageUrl1 = this.content.albumnDtos[0].imageLink!
         this.imageUrl2 = this.content.albumnDtos[1].imageLink!
@@ -52,7 +56,11 @@ export class NewShareComponent {
         this.imageUrl8 = this.content.albumnDtos[7].imageLink!
 
         this.isLoading = false;
-      })
+      },
+        error => {
+          console.log("ERROR")
+          this.router.navigate(["not-found"]);
+        })
   }
 
   appearForm() {
