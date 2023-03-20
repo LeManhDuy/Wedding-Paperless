@@ -35,7 +35,6 @@ export class EditRegisterSongComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("DEBUG",this.id);
 
     this.route.paramMap.subscribe({
       next: (params) => {
@@ -76,7 +75,9 @@ export class EditRegisterSongComponent implements OnInit {
     if (id) {
       this.registerSongService.updateSong(id, this.song).subscribe({
         next: (song) => {
-          location.reload()
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
         }
       });
     }

@@ -1,13 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { elements } from 'chart.js';
-import { AlbumnRequest } from 'src/app/models/albumn';
-import { Content } from 'src/app/models/content';
-import { AlbumnService } from 'src/app/_services/albumn.service';
-import { AuthService } from 'src/app/_services/auth.service';
-import { ContentService } from 'src/app/_services/content.service';
-import { environment } from 'src/environments/environment';
+import {Component} from '@angular/core';
+import {SafeUrl} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AlbumnRequest} from 'src/app/models/albumn';
+import {Content} from 'src/app/models/content';
+import {AlbumnService} from 'src/app/_services/albumn.service';
+import {AuthService} from 'src/app/_services/auth.service';
+import {ContentService} from 'src/app/_services/content.service';
+import {environment} from 'src/environments/environment';
 
 class IMG {
   image?: string;
@@ -48,22 +47,12 @@ export class NewInvitationComponent {
     this.myAngularxQrCode =  environment.apiURLClient + 'new-share-invitation/' + auth.getTokenId();
   }
 
+
   onChangeURL(url: SafeUrl) {
     this.qrCodeDownloadLink = url;
   }
 
   ngOnInit(): void {
-
-    var {
-      currentAlbumFirstPo,
-      currentAlbumSecondListPo,
-      currentAlbumThirtPo,
-      currentAlbumFourthListPo,
-      currentAlbumFifthPo,
-      currentAlbumSixthPo,
-      currentAlbumSeventhPo,
-      currentAlbumEightthPo
-    } = this.albumService;
 
     const id = this.auth.getTokenId()
 
@@ -76,6 +65,7 @@ export class NewInvitationComponent {
           })
         })
     });
+
   }
 
   getContent(id : string): void{
