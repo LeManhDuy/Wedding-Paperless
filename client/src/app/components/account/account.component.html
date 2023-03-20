@@ -39,7 +39,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Avatar</th>
+                            <!-- <th scope="col">Avatar</th> -->
                             <th scope="col">Username</th>
                             <th scope="col">Account Name</th>
                             <th scope="col">Email</th>
@@ -48,20 +48,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let account of accounts; let i = index">
+                        <tr *ngFor="let account of accounts; let i = index" style="font-weight:300 ;">
                             <th hidden>{{ account?.id }}</th>
                             <th scope="row">{{i + 1}}</th>
-                            <th>
+                            <!-- <th>
                                 <a target="_blank" href="{{ account?.avatar }}" id="bottle">
                                     <img class="card-img-top" [src]="account.avatar" alt="Avatar" />
                                 </a>
-                            </th>
+                            </th> -->
                             <th>{{ account.username }}</th>
                             <th>{{ account.fullname }}</th>
                             <th>{{ account.email }}</th>
                             <th>{{ account.role }}</th>
                             <th><a class="tag" (click)="showComponent(account)">Update</a>
                             </th>
+
                         </tr>
                     </tbody>
                 </table>
