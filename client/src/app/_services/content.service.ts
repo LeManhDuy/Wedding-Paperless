@@ -92,4 +92,9 @@ export class ContentService {
       content.personId = user
       return this.http.post<Content>(url,content)
   }
+
+  updateContentById(contentId:number, content:  Content ) : Observable<Content> {
+    const url = this.prefixUrl + API_URL.UPDATE_CONTENT_BY_ID(contentId);
+    return this.http.put<Content>(url,content);
+  }
 }

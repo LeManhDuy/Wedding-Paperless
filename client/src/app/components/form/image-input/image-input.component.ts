@@ -63,10 +63,10 @@ export class ImageInputComponent {
       }
       switch (row){
         case 2:
-          this.pushToAlbumList(this.imageObjectOurStory,this.album.currentAlbumSecondListPo,album,imageObject);
+          // this.pushToAlbumList(this.imageObjectOurStory,this.album.currentAlbumSecondListPo,album,imageObject);
           break;
         case 4:
-          this.pushToAlbumList(this.imageObjectOurStory,this.album.currentAlbumFourthListPo,album,imageObject);
+          // this.pushToAlbumList(this.imageObjectOurStory,this.album.currentAlbumFourthListPo,album,imageObject);
           break;
       }
   }

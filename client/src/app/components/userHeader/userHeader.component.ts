@@ -62,6 +62,10 @@ export class UserHeaderComponent implements OnInit {
     this.router.navigate(['/new-invitation/'+this.auth.getTokenId()]);
   }
 
+  editForm(){
+    this.router.navigate(['/update-invitation/'+this.auth.getTokenId()]);
+  }
+
   showForm() {
     this.router.navigate(['/form-new-template']);
   }

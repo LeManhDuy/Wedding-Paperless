@@ -29,5 +29,10 @@ namespace WebApplication1.Models
         public List<Albumn> Albumns { get; set; }
 
         public List<RegisterSong> RegisterSongs { get; set; }
+
+        public static implicit operator Content(Albumn v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
