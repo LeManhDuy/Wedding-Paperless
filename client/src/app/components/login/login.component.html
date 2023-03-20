@@ -1,44 +1,44 @@
 <header>
-  <link rel="stylesheet" href="login.component.css">
-  <link rel="stylesheet" href="/client/src/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!--    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.component.css">
+    <link rel="stylesheet" href="/client/src/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
 </header>
 <script src="https://kit.fontawesome.com/f116b41309.js" crossorigin="anonymous"></script>
 
 <div class="content_Login">
 
-  <div class="slogan slogan_Brand">MyWedding</div>
-  <p class="slogan slogan_Content">create invitation card free</p>
+    <div class="slogan slogan_Brand">MyWedding</div>
+    <p class="slogan slogan_Content">create invitation card free</p>
 
-  <div class="login">Login</div>
-  <div class="login_Content">
-    Don't have an account?
-    <a class="link_To_Register" routerLink="/register">Create now</a>
-  </div>
-  <div class="login_Content">
-    <a class="link_To_ForgotPassword" routerLink="/forgotPassword">Forgot password</a>
-  </div>
-  <form action="" method="post" class="input_Login">
-    <div class="input_auth">
-      <div *ngIf="apiData" class="login_fail_annotation">*</div>
-      <input placeholder="User Name" type="text" [(ngModel)]="loginUser.username" name="username" id="username">
+    <div class="login">Login</div>
+    <div class="login_Content">
+        Don't have an account?
+        <a class="link_To_Register" routerLink="/register">Create now</a>
     </div>
-    <div class="input_auth">
-      <div *ngIf="apiData" class="login_fail_annotation">*</div>
-      <input placeholder="Password" type="password" [(ngModel)]="loginUser.password" name="password" id="password">
+    <div class="login_Content">
+        <a class="link_To_ForgotPassword" routerLink="/forgotPassword">Forgot password</a>
     </div>
-    <div class="login_fail" *ngIf="apiData">
-      <i><b>{{ apiData }}</b></i>
-    </div>
-    <button [disabled]="isLoading" class="submit_Login" routerLink="/login" type="submit" value="Login" (click)="login()">
+    <form action="" method="post" class="input_Login">
+        <div class="input_auth">
+            <div *ngIf="apiData" class="login_fail_annotation">*</div>
+            <input placeholder="User Name" type="text" [(ngModel)]="loginUser.username" name="username" id="username">
+        </div>
+        <div class="input_auth">
+            <div *ngIf="apiData" class="login_fail_annotation">*</div>
+            <input placeholder="Password" type="password" [(ngModel)]="loginUser.password" name="password" id="password">
+        </div>
+        <div class="login_fail" *ngIf="apiData">
+            <i><b>{{ apiData }}</b></i>
+        </div>
+        <button [disabled]="isLoading" class="submit_Login" routerLink="/login" type="submit" value="Login" (click)="login()">
       <div class="lds-dual-ring"  *ngIf="isLoading" ></div>
       <div *ngIf="!isLoading" >Login</div>
     </button>
-  </form>
-  <!-- <h3 class="other_Login">or</h3>
+    </form>
+    <!-- <h3 class="other_Login">or</h3>
   <div class="login_By">
       <div class="login_By_Google">
           <a href="http://">
@@ -47,8 +47,6 @@
       </div>
 
   </div> -->
-  <div class="policy">By clicking "Create account", I agree to MyWedding's TOS and Privacy Policy.</div>
-  
+    <div class="policy"></div>
+
 </div>
-
-
