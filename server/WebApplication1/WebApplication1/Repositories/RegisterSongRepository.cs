@@ -98,7 +98,7 @@ namespace WebApplication1.Repositories
                 throw new Exception("One or more registerSong not found!");
 
             registerSong.FullName = registerSongDto.FullName;
-            registerSong.SongName = registerSongDto.FullName;
+            registerSong.SongName = registerSongDto.SongName;
             registerSong.LinkBeat = registerSongDto.LinkBeat;
 
             _context.RegisterSongs.Update(registerSong);

@@ -34,6 +34,7 @@ export class RegisterSongService {
   }
 
   updateSong(registerSongId: string, registerSong: RegisterSong): Observable<RegisterSong> {
+    console.log(registerSong)
     return this.http.put<RegisterSong>(this.baseUrl + registerSongId, registerSong)
   }
 
