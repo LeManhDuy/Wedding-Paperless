@@ -54,16 +54,16 @@ export class UserHeaderComponent implements OnInit {
 
   }
     showEditAccount() {
-    this.router.navigate(['account/edit/' + this.auth.getTokenId()]);
+    this.router.navigate(['account/edit/' + this.auth.encode(this.auth.getTokenId())]);
 
   }
 
   showInvitation() {
-    this.router.navigate(['/new-invitation/'+this.auth.getTokenId()]);
+    this.router.navigate(['/new-invitation/'+this.auth.encode(this.auth.getTokenId())]);
   }
 
   editForm(){
-    this.router.navigate(['/update-invitation/'+this.auth.getTokenId()]);
+    this.router.navigate(['/update-invitation/'+this.auth.encode(this.auth.getTokenId())]);
   }
 
   showForm() {

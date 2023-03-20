@@ -44,8 +44,9 @@ export class NewInvitationComponent {
     private auth: AuthService,
     private albumService: AlbumnService
   ) {
-    this.myAngularxQrCode =  environment.apiURLClient + 'new-share-invitation/' + auth.getTokenId();
+    this.myAngularxQrCode =  environment.apiURLClient + 'new-share-invitation/' + this.auth.encode(this.auth.getTokenId());
   }
+
 
 
   onChangeURL(url: SafeUrl) {
@@ -53,6 +54,7 @@ export class NewInvitationComponent {
   }
 
   ngOnInit(): void {
+
 
     const id = this.auth.getTokenId()
 
